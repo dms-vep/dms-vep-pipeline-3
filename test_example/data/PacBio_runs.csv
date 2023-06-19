@@ -1,0 +1,5 @@
+﻿library,run,fastq
+LibA,LibA-211105,sequencing_data/211105_demultiplex.bc1001_BAK8A_OA--bc1001_BAK8A_OA.hifi_reads.fastq.gz
+LibB,LibB-211105,sequencing_data/211105_demultiplex.bc1003_BAK8A_OA--bc1003_BAK8A_OA.hifi_reads.fastq.gz
+LibA,LibA-220124,sequencing_data/220120_demultiplex.bc1001_BAK8A_OA--bc1001_BAK8A_OA.hifi_reads.fastq.gz
+LibB,LibB-220124,sequencing_data/220120_demultiplex.bc1003_BAK8A_OA--bc1003_BAK8A_OA.hifi_reads.fastq.gz

@@ -1,3 +1,7 @@
 *.ipynb filter=nbstripout
 *.zpln filter=nbstripout
 *.ipynb diff=ipynb
+test_example/sequencing_data/211105_demultiplex.bc1001_BAK8A_OA--bc1001_BAK8A_OA.hifi_reads.fastq.gz filter=lfs diff=lfs merge=lfs -text
+test_example/sequencing_data/211105_demultiplex.bc1003_BAK8A_OA--bc1003_BAK8A_OA.hifi_reads.fastq.gz filter=lfs diff=lfs merge=lfs -text
+test_example/sequencing_data/220120_demultiplex.bc1001_BAK8A_OA--bc1001_BAK8A_OA.hifi_reads.fastq.gz filter=lfs diff=lfs merge=lfs -text
+test_example/sequencing_data/220120_demultiplex.bc1003_BAK8A_OA--bc1003_BAK8A_OA.hifi_reads.fastq.gz filter=lfs diff=lfs merge=lfs -text

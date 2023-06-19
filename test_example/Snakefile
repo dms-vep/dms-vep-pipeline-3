@@ -1,0 +1,13 @@
+"""Top-level ``snakemake`` file that runs analysis."""
+
+
+configfile: "config.yaml"
+
+
+# include pipeline rules
+include: os.path.join(config["pipeline_path"], "build_variants.smk")
+
+
+rule all:
+    input:
+        config["codon_variants"],

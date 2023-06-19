@@ -1,0 +1,36 @@
+name: dms-vep-pipeline-3
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - altair=5.0.1
+  - biopython=1.81
+  - black-jupyter
+  - bs4=4.12
+  - entrez-direct=16.2
+  - git-lfs
+  - jupyterlab
+  - mafft=7.520
+  - markdown=3.4
+  - matplotlib=3.7
+  - minimap2=2.26
+  - nbdime
+  - nbstripout
+  - nbqa
+  - openpyxl
+  - pandas=2.0
+  - papermill=2.3
+  - pip
+  - plotnine=0.12
+  - python=3.11
+  - ruff
+  - snakefmt
+  - snakemake=7.28.2
+  - upsetplot=0.8
+  - pip:
+    - alignparse==0.6.2
+    - dms_variants==1.4.3
+    - polyclonal==6.2

@@ -1,0 +1,7 @@
+Copyright 2023, Fred Hutchinson Cancer Center
+
+Permission to use, copy, modify, and distribute this software for educational, academic research, and not-for-profit purposes, without fee and without a signed licensing agreement, is hereby granted, provided that the above copyright notice, this paragraph, and the following two paragraphs appear in all copies, modifications, and distributions. For for-profit uses of the software, contact the Fred Hutch Cancer Center Business Development and Strategy group at BDS@fredhutch.org.  
+
+This software was originally developed by the group of Jesse Bloom; for a full list of authors see https://github.com/dms-vep/dms-vep-pipeline-3/graphs/contributors
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

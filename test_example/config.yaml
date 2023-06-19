@@ -1,0 +1,56 @@
+# Config for analysis
+
+# ----------------------------------------------------------------------------
+# Relative paths from your top-level Snakefile to where you have the pipeline
+# submodule cloned, and where you build the docs. Typically your top-level
+# Snakefile will be in the root directory and paths will be `dms-vep-pipeline`
+# and `./`, but in this example they are upstream from this subdirectory.
+# ----------------------------------------------------------------------------
+pipeline_path: ../  # typically will be `dms-vep-pipeline` for real pipelines
+docs: ../docs  # typically will be `docs` for real pipelines
+
+# ----------------------------------------------------------------------------
+# Details on repo, used for docs. Change this to details for your project.
+# ----------------------------------------------------------------------------
+github_repo: dms-vep-pipeline-2
+github_user: dms-vep
+github_branch: main  # main branch for repo, assume renamed from master -> main
+description: Deep mutational scanning (DMS) pipeline for a viral entry protein (VEP)
+year: 2023
+authors: Jesse Bloom
+
+# ----------------------------------------------------------------------------
+# Parameters related to building barcode-variant lookup table
+# ----------------------------------------------------------------------------
+
+# There are two ways you can get the codon variants: download a pre-built codon
+# variant table, or build them from PacBio CCSs yourself. 
+# If using pre-built variants specify URL for pre-built codon-variant table and
+# gene (codon) sequence (beginning with "http" or "ftp") or just path to file.
+# If these next two variables are "null" instead, then the variants are built
+# from scratch using parameters below.
+prebuilt_variants: null
+prebuilt_geneseq: null
+
+# Parameters for building PacBio CCS consensuses
+max_ccs_error_rate: 1.0e-4  # only keep CCS if gene/barcode error rate <= this
+consensus_params:  # parameters for building PacBio consensus sequences
+  max_sub_diffs: null
+  max_indel_diffs: null
+  max_minor_sub_frac: 0.2
+  max_minor_indel_frac: 0.2
+  min_support: 2
+
+# PacBio sequencing
+pacbio_runs: data/PacBio_runs.csv  # PacBio sequencing data
+pacbio_amplicon: data/PacBio_amplicon.gb  # Genbank file with PacBio amplicon
+pacbio_amplicon_specs: data/PacBio_feature_parse_specs.yaml  # alignparse feature parsing
+variant_tags:  # variant tags in PacBio amplicon, or "null" if no tags
+  variant_tag5:
+    variant_1: G
+    variant_2: C
+    wildtype: A
+  variant_tag3:
+    variant_1: G
+    variant_2: C
+    wildtype: A

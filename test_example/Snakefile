@@ -1,13 +1,27 @@
 """Top-level ``snakemake`` file that runs analysis."""
 
 
+import flatdict
+
+
 configfile: "config.yaml"
 
 
-# include pipeline rules
+# `docs` is a nested dictionary used to build HTML documentation. At the bottom of the
+# nesting, keys should be short titles for files and values should be the path of the
+# file created by the pipeline. Files can be any of:
+#  - Jupyter notebooks (extension ".ipynb") which are converted to HTML for docs
+#  - HTML files (extension ".html") such as Altair plots
+#  - CSV files (extension ".csv") which are linked to on the GitHub repo
+# Higher levels of nesting can be keys that are headings (or subheadings) with values
+# being dictionaries that gives files and their paths.
+docs = {}
+
+
+# include pipeline rules, which also add to `docs` dictionary
 include: os.path.join(config["pipeline_path"], "build_variants.smk")
 
 
 rule all:
     input:
-        config["codon_variants"],
+        flatdict.FlatDict(docs).values(),  # all files specified in `docs`

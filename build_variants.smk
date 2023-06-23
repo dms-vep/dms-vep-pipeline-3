@@ -5,6 +5,13 @@ import os
 
 import pandas as pd
 
+
+# Names and values of files to add to docs
+build_variants_docs = {
+    "parental codon sequence": config["gene_sequence_codon"],
+    "parental protein sequence": config["gene_sequence_protein"],
+    "barcode to codon-variant lookup table": config["codon_variants"],
+}
     
 rule translate_geneseq:
     """Translate gene sequence into protein sequence."""
@@ -102,6 +109,8 @@ else:
         shell:
             "papermill {input.nb} {output.nb} &> {log}"
 
+    build_variants_docs["Analysis of PacBio CCSs"] = rules.analyze_pacbio_ccs.output.nb
+
 
     rule build_pacbio_consensus:
         """Build PacBio consensus sequences for barcodes."""
@@ -124,6 +133,10 @@ else:
         shell:
             "papermill {input.nb} {output.nb} &> {log}"
 
+    build_variants_docs[
+        "Building of consensus sequences for barcoded variants"
+    ] = rules.build_pacbio_consensus.output.nb
+
 
     rule build_codon_variants:
         """Build codon-variant table."""
@@ -144,3 +157,9 @@ else:
             "results/logs/build_codon_variants.txt"
         shell:
             "papermill {input.nb} {output.nb} &> {log}"
+
+    build_variants_docs[
+        "Building of codon-variant table"
+    ] = rules.build_codon_variants.output.nb
+
+docs.update(build_variants_docs)

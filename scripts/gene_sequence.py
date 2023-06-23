@@ -17,15 +17,6 @@ if len(gene_feature) != 1:
 geneseq = gene_feature[0].extract(amplicon).seq
 print(f"Found gene of length {len(geneseq)}")
 
-# first make sure gene can translate as CDS
-_ = geneseq.translate(cds=True)
-# now translate without cds flag to keep any stop codons
-protseq = geneseq.translate()
-
-for outfile, seq in [
-    (snakemake.output.codon, geneseq),
-    (snakemake.output.prot, protseq),
-]:
-    print(f"Writing to {outfile}")
-    with open(outfile, "w") as f:
-        f.write(f">gene\n{str(seq)}\n")
+print(f"Writing to {snakemake.output.codon}")
+with open(snakemake.output.codon, "w") as f:
+    f.write(f">gene\n{str(geneseq)}\n")

@@ -5,6 +5,20 @@ import os
 
 import pandas as pd
 
+    
+rule translate_geneseq:
+    """Translate gene sequence into protein sequence."""
+    input:
+        gene=config["gene_sequence_codon"],
+    output:
+        prot=config["gene_sequence_protein"],
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/translate_geneseq.txt",
+    script:
+        "scripts/translate_geneseq.py"
+
 
 if (config["prebuilt_variants"] is None) != (config["prebuilt_geneseq"] is None):
     raise ValueError("specify both or neither `prebuilt_geneseq` / `prebuilt_variants`")
@@ -29,19 +43,6 @@ elif config["prebuilt_variants"] and config["prebuilt_geneseq"]:
             curl -o {output.geneseq} {params.geneseq_url} &>> {log}
             """
 
-    rule translate_geneseq:
-        """Translate gene sequence into protein sequence."""
-        input:
-            gene=rules.get_prebuilt_variants.output.geneseq,
-        output:
-            prot=config["gene_sequence_protein"],
-        conda:
-            "environment.yml"
-        log:
-            "results/logs/translate_geneseq.txt",
-        script:
-            "scripts/translate_geneseq.py"
-
 else:
 
     pacbio_runs = pd.read_csv(config["pacbio_runs"])
@@ -57,7 +58,6 @@ else:
             gb=config["pacbio_amplicon"],
         output:
             codon=config["gene_sequence_codon"],
-            prot=config["gene_sequence_protein"],
         conda:
             "environment.yml"
         log:

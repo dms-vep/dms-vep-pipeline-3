@@ -36,7 +36,7 @@ jobs:
 
       - name: lint Jupyter notebooks with ruff
         shell: bash -el {0}
-        run: nbaq ruff .
+        run: nbqa ruff .
 
       - name: check code format with black
         shell: bash -el {0}
@@ -61,4 +61,4 @@ jobs:
       - name: run pipeline with prebuilt variants
         shell: bash -el {0}
 #        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/gene_sequence/codon.fasta prebuilt_muteffects=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/muteffects_functional/muteffects_observed.csv && cd ..
-        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/gene_sequence/codon.fasta
+        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/gene_sequence/codon.fasta

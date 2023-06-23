@@ -33,11 +33,14 @@ authors: Jesse Bloom
 site_numbering_map: data/site_numbering_map.csv
 
 # Classify mutations into different categories, such as which ones are
-# designed to be in the library. Should have columns "sequential_site",
-# "amino_acid", and "mutation_type". If you don't have different categories
-# of designed mutations, just include all of the intended mutations with
-# "mutation_type" as "designed"
-mutation_design_classification: data/mutation_design_classification.csv
+# designed to be in the library. If you don't have different categories of
+# designed mutations, just include all of the intended mutations with
+# mutation type as "designed". The CSV specified below must have columns
+# named "mutation_type", "amino_acid" or "mutant_aa", and either
+# "reference_site" or "sequential_site" as specified by `site_col` key.
+mutation_design_classification:
+  csv: data/mutation_design_classification.csv  # CSV with data
+  site_col: sequential_site  # site column, should be reference_site or sequential_site
 
 # Neutralization standard barcodes. Should have columns "barcode" and "name"
 # (giving name of this neutralization standard set). Can be empty CSV with

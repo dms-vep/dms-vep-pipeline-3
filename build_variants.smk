@@ -145,12 +145,14 @@ else:
             config["gene_sequence_codon"],
             config["gene_sequence_protein"],
             config["site_numbering_map"],
-            config["mutation_design_classification"],
+            config["mutation_design_classification"]["csv"],
             config["neut_standard_barcodes"],
             nb=os.path.join(config["pipeline_path"], "notebooks/build_codon_variants.ipynb"),
         output:
             config["codon_variants"],
             nb="results/notebooks/build_codon_variants.ipynb",
+        params:
+            config["mutation_design_classification"],
         conda:
             "environment.yml"
         log:

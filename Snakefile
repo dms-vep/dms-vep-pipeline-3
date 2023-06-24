@@ -30,6 +30,7 @@ assert len(barcode_runs) == barcode_runs["sample"].nunique()
 #  - Jupyter notebooks (extension ".ipynb") which are converted to HTML for docs
 #  - HTML files (extension ".html") such as Altair plots
 #  - CSV files (extension ".csv") which are linked to on the GitHub repo
+#  - FASTA files (extension ".fasta" or ".fa") which are linked to on the GitHub repo
 # Higher levels of nesting can be keys that are headings (or subheadings) with values
 # being dictionaries that gives files and their paths.
 # The pipeline rules included below automatically add to this dictionary. You can also
@@ -53,6 +54,12 @@ if os.path.isfile(custom_rules):
     include: os.path.join(os.path.relpath(".", config["pipeline_path"]), custom_rules)
 
 
+# this last rule builds HTML documentation from the `docs` dictionary
+include: "docs.smk"
+
+
+# target rule with everything specified in `docs` plus the actual docs directory
 rule all:
     input:
-        flatdict.FlatDict(docs).values(),  # all files specified in `docs`
+        rules.build_docs.input,
+        os.path.join(config["docs"], "index.html"),

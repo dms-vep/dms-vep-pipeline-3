@@ -70,5 +70,5 @@ jobs:
           rm -rf docs
           && cd test_example
           && rm -rf results
-          && snakemake -S ../Snakefile --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/gene_sequence/codon.fasta
+          && snakemake -s ../Snakefile --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/gene_sequence/codon.fasta
           && cd ..

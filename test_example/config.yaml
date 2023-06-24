@@ -14,9 +14,11 @@ docs: ../docs  # typically will be `docs` for real pipelines
 # Details on repo, used for docs. Change this to details for your project.
 # ----------------------------------------------------------------------------
 
-github_repo: dms-vep-pipeline-3
-github_user: dms-vep
-github_branch: main  # main branch for repo, assume renamed from master -> main
+# Name of GitHub repo
+github_repo_url: https://github.com/dms-vep/dms-vep-pipeline-3
+# GitHub blob path to where results files are stored. Typically "{repo}/blob/{branch}",
+# the "test_example" below is specific to this test example being within the pipeline.
+github_blob_url: https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example
 description: Deep mutational scanning (DMS) pipeline for a viral entry protein (VEP)
 year: 2023
 authors: Jesse Bloom

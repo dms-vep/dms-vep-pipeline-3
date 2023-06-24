@@ -1,0 +1,38 @@
+<h1>Deep mutational scanning (DMS) pipeline for a viral entry protein (VEP)</h1>
+<p>Analysis by Jesse Bloom (2023)</p>
+<p>See <a href="https://github.com/dms-vep/dms-vep-pipeline-3">https://github.com/dms-vep/dms-vep-pipeline-3</a> for full code.</p>
+<h2>Barcode to codon-variant lookup table</h2>
+<ul>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/gene_sequence/codon.fasta">parental codon sequence</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/gene_sequence/protein.fasta">parental protein sequence</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/variants/codon_variants.csv">barcode to codon-variant lookup table</a></li>
+<li><a href="notebooks/analyze_pacbio_ccs.html">Analysis of PacBio CCSs</a></li>
+<li><a href="notebooks/build_pacbio_consensus.html">Building of consensus sequences for barcoded variants</a></li>
+<li><a href="notebooks/build_codon_variants.html">Building of codon-variant table</a></li>
+</ul>
+<h2>Count variants</h2>
+<ul>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-0.15-LibA-1/counts.csv">barcode counts for REGN10933-0.15-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-1.39-LibA-1/counts.csv">barcode counts for REGN10933-1.39-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-5.58-LibA-1/counts.csv">barcode counts for REGN10933-5.58-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/no_antibody-LibA-1/counts.csv">barcode counts for no_antibody-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-0.15-LibA-2/counts.csv">barcode counts for REGN10933-0.15-LibA-2</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-1.39-LibA-2/counts.csv">barcode counts for REGN10933-1.39-LibA-2</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-5.58-LibA-2/counts.csv">barcode counts for REGN10933-5.58-LibA-2</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/no_antibody-LibA-2-221002/counts.csv">barcode counts for no_antibody-LibA-2-221002</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-0.15-LibB-1/counts.csv">barcode counts for REGN10933-0.15-LibB-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-1.39-LibB-1/counts.csv">barcode counts for REGN10933-1.39-LibB-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/REGN10933-5.58-LibB-1/counts.csv">barcode counts for REGN10933-5.58-LibB-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/no_antibody-LibB-1-221002/counts.csv">barcode counts for no_antibody-LibB-1-221002</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/S2M-11-0.3082-LibA-1/counts.csv">barcode counts for S2M-11-0.3082-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/S2M-11-1.2328-LibA-1/counts.csv">barcode counts for S2M-11-1.2328-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/S2M-11-4.9314-LibA-1/counts.csv">barcode counts for S2M-11-4.9314-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/S2M-11-0.3082-LibA-2/counts.csv">barcode counts for S2M-11-0.3082-LibA-2</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/S2M-11-1.2328-LibA-2/counts.csv">barcode counts for S2M-11-1.2328-LibA-2</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/S2M-11-4.9314-LibA-2/counts.csv">barcode counts for S2M-11-4.9314-LibA-2</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/no_antibody-LibA-2-220302/counts.csv">barcode counts for no_antibody-LibA-2-220302</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/no_antibody-LibA-1-220303/counts.csv">barcode counts for no_antibody-LibA-1-220303</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/VSVG-LibA-1/counts.csv">barcode counts for VSVG-LibA-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/VSVG-LibA-2/counts.csv">barcode counts for VSVG-LibA-2</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/barcode_counts/VSVG-LibB-1/counts.csv">barcode counts for VSVG-LibB-1</a></li>
+</ul>

@@ -25,14 +25,15 @@ rule count_barcodes:
     conda:
         "environment.yml"
     log:
-        "results/logs/count_barcodes_{sample}.txt"
+        "results/logs/count_barcodes_{sample}.txt",
     script:
         "scripts/count_barcodes.py"
+
 
 for sample in barcode_runs["sample"]:
     count_variants_docs[
         f"barcode counts for {sample}"
     ] = f"results/barcode_counts/{sample}/counts.csv"
-    
+
 
 docs["Count variants"] = count_variants_docs

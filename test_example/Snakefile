@@ -8,15 +8,15 @@ import pandas as pd
 
 configfile: "config.yaml"
 
+
 # Read the barcode runs
 barcode_run_req_cols = ["sample", "library", "date", "fastq_R1"]
 if config["barcode_runs"] is None:
     # just create empty data frame with required columns
     barcode_runs = pd.DataFrame(columns=barcode_run_req_cols)
 else:
-    barcode_runs = (
-        pd.read_csv(config["barcode_runs"], parse_dates=["date"])
-        .assign(fastq_R1=lambda x: x["fastq_R1"].str.split(";"))
+    barcode_runs = pd.read_csv(config["barcode_runs"], parse_dates=["date"]).assign(
+        fastq_R1=lambda x: x["fastq_R1"].str.split(";")
     )
     if not set(barcode_run_req_cols).issubset(barcode_runs.columns):
         raise ValueError(f"{barcode_runs.columns=} missing {barcode_run_req_cols=}")

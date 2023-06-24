@@ -48,11 +48,16 @@ jobs:
 
       - name: lint snakemake files with snakemake --lint
         shell: bash -el {0}
-        run: cd test_example && snakemake --lint && cd ..
+        run: cd test_example && snakemake -s ../Snakefile --lint && cd ..
 
       - name: run pipeline with default config
         shell: bash -el {0}
-        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 && cd ..
+        run: >
+          rm -rf docs
+          && cd test_example
+          && rm -rf results
+          && snakemake -s ../Snakefile --use-conda -j 2
+          && cd ..
 
 #      - name: run pipeline with no barcode runs
 #        shell: bash -el {0}
@@ -61,4 +66,9 @@ jobs:
       - name: run pipeline with prebuilt variants
         shell: bash -el {0}
 #        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/gene_sequence/codon.fasta prebuilt_muteffects=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline/main/test_example/results/muteffects_functional/muteffects_observed.csv && cd ..
-        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/gene_sequence/codon.fasta
+        run: >
+          rm -rf docs
+          && cd test_example
+          && rm -rf results
+          && snakemake -S ../Snakefile --use-conda -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/gene_sequence/codon.fasta
+          && cd ..

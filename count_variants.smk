@@ -1,11 +1,6 @@
 """``snakemake`` files with rules for counting variants from barcode sequencing."""
 
 
-import os
-
-import pandas as pd
-
-
 # Names and values of files to add to docs
 count_variants_docs = {}
 

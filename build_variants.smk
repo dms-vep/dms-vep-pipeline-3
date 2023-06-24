@@ -1,11 +1,6 @@
 """``snakemake`` files with rules for building variants."""
 
 
-import os
-
-import pandas as pd
-
-
 # Names and values of files to add to docs
 build_variants_docs = {
     "parental codon sequence": config["gene_sequence_codon"],

@@ -1,6 +1,8 @@
 """Top-level ``snakemake`` file that runs analysis."""
 
 
+import os
+
 import flatdict
 
 import pandas as pd
@@ -36,8 +38,19 @@ docs = {}
 
 
 # include pipeline rules, which also add to `docs` dictionary
-include: os.path.join(config["pipeline_path"], "build_variants.smk")
-include: os.path.join(config["pipeline_path"], "count_variants.smk")
+include: "build_variants.smk"
+
+
+if len(barcode_runs) > 0:
+
+    include: "count_variants.smk"
+
+
+# add any custom rules
+custom_rules = "custom_rules.smk"
+if os.path.isfile(custom_rules):
+
+    include: os.path.join(os.path.relpath(".", config["pipeline_path"]), custom_rules)
 
 
 rule all:

@@ -84,6 +84,20 @@ consensus_params:  # parameters for building PacBio consensus sequences
   min_support: 2
 
 # ----------------------------------------------------------------------------
+# Parameters related to counting the variants from barcode sequencing
+# ----------------------------------------------------------------------------
+
+barcode_runs: data/barcode_runs.csv  # Illumina barcode runs, set to null if no runs
+
+# keyword parameters for `dms_variants.illuminabarcodeparser.IlluminaBarcodeParser`
+# https://jbloomlab.github.io/dms_variants/dms_variants.illuminabarcodeparser.html#dms_variants.illuminabarcodeparser.IlluminaBarcodeParser
+illumina_barcode_parser_params:
+  upstream: AACTCCACTAGGAACATTTCTCTCTCGAATCTAGA
+  downstream: ''
+  minq: 20
+  upstream_mismatch: 2
+
+# ----------------------------------------------------------------------------
 # Names of key outputs used across pipeline
 # ----------------------------------------------------------------------------
 

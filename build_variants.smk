@@ -164,4 +164,4 @@ else:
         "Building of codon-variant table"
     ] = rules.build_codon_variants.output.nb
 
-docs.update(build_variants_docs)
+docs["Barcode to codon-variant lookup table"] = build_variants_docs

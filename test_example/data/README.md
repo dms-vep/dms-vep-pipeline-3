@@ -26,3 +26,12 @@ Should have columns *sequential_site*, *amino_acid*, and *mutation_type*.
 ## Neutralization standard barcodes
 [neutralization_standard_barcodes.csv](neutralization_standard_barcodes.csv) barcodes for the neutralization standards.
 Must have columns *barcode* and *name*, giving the barcode and name of this neutralization standard set.
+
+## Barcode runs
+[barcode_runs.csv](barcode_runs.csv) must contain the following columns (you can optionally include more):
+
+ - `sample`: sample name, must be unique among barcode runs
+ - `library`: name of library, must match a library in the barcode-variant table
+ - `date`: date of sequencing
+ - `fastq_R1`: path to one more FASTQ R1 sequencing files, multiple files should be semicolon-delimited
+

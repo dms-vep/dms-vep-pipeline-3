@@ -1,6 +1,7 @@
 """Top-level ``snakemake`` file that runs analysis."""
 
 
+import collections
 import os
 
 import flatdict

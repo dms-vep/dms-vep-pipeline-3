@@ -70,7 +70,7 @@ missing_valid_barcodes = list(valid_barcodes - set(counts_valid["barcode"]))
 counts_valid = counts_valid = pd.concat(
     [counts_valid, pd.DataFrame({"barcode": missing_valid_barcodes, "count": 0})]
 ).assign(library=library, sample=sample)
-counts_valid.to_csv(counts_csv, index=False)
+counts_valid[["barcode", "count"]].to_csv(counts_csv, index=False)
 
 print(f"Writing invalid barcode counts to {counts_invalid_csv}")
 counts_invalid = (
@@ -78,7 +78,7 @@ counts_invalid = (
     .drop(columns="valid")
     .assign(library=library, sample=sample)
 )
-counts_invalid.to_csv(counts_invalid_csv, index=False)
+counts_invalid[["barcode", "count"]].to_csv(counts_invalid_csv, index=False)
 
 print(f"Writing barcode fates to {fates_csv}")
 fates = pd.concat(
@@ -95,4 +95,4 @@ fates = pd.concat(
         ),
     ]
 ).assign(library=library, sample=sample)
-fates.to_csv(fates_csv, index=False)
+fates[["fate", "count"]].to_csv(fates_csv, index=False)

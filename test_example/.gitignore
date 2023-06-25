@@ -16,3 +16,7 @@ results/gene_sequence/*
 !results/variants
 results/variants/*
 !results/variants/codon_variants.csv
+
+!results/barcode_counts
+results/barcode_counts/*
+!results/barcode_counts/*_counts.csv

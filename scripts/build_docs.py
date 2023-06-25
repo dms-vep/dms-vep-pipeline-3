@@ -35,7 +35,7 @@ def process_docs(d, depth):
         if depth_diff <= 0:
             md_text.append(init_heading + "#" * (-depth_diff) + entry)
         else:
-            md_text.append(" " * depth_diff + f"- {entry}")
+            md_text.append("  " * depth_diff + f"- {entry}")
         if isinstance(val, dict):
             process_docs(val, depth)
 

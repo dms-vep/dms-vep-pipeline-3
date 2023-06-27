@@ -1,0 +1,51 @@
+# Configurations for determining functional effects of mutations
+
+# Define default parameters for functional selections.
+# Can be provided to individual selections using the merge operator <<
+func_effects_selection_defaults: &func_effects_selection_defaults
+  pseudocount: 0.5
+  # `min_wt_count` and `min_wt_frac` are designed to raise errors if a selection
+  # experiment has such low wildtype variant counts that the functional score
+  # estimates will be inaccurate.
+  min_wt_count: 1000  # error if not at least this many wildtype counts
+  min_wt_frac: 0.001  # error if not at least this fraction of counts for wildtype
+  # `min_pre_selection_count` and `min_pre_selection_frac` are designed to drop variants
+  # with very low counts of frequencies that may not have sufficient statistics for
+  # good estimates.
+  min_pre_selection_count: 10  # drop variants < this many pre-selection counts
+  # !!! Make min_pre_selection_frac LARGER for larger libraries, such 0.1 / (library size) !!!
+  min_pre_selection_frac: 0.00005  # drop variants that are < this fraction of all counts
+
+# Define the functional selections under `func_scores_selection`. Each key is a
+# different selection condition (eg, different cell type).
+func_effects_selections:
+  293T-ACE2 infections:
+    # For each condition, `selections` has keys defining each selection experiment.
+    selections:
+      # Each selection experiment is defined by the following keys:
+      #  - `post_selection_sample`: sample after selection (eg, infection of cells)
+      #  - `pre_selection_sample`: sample pre selection (eg, initial variant frequencies)
+      # Note how below most of these are provided using a merge key (<<) from
+      # pre-specified defaults, although optionally you could specify distinct
+      # values for each selection.
+      2022-02-10_LibA_1:
+        <<: *func_effects_selection_defaults
+        post_selection_sample: no_antibody-LibA-1-221002
+        pre_selection_sample: VSVG-LibA-1
+      2022-02-10_LibA_2:
+        <<: *func_effects_selection_defaults
+        post_selection_sample: no_antibody-LibA-2-221002
+        pre_selection_sample: VSVG-LibA-2
+      2022-03-02_LibA_1:
+        <<: *func_effects_selection_defaults
+        post_selection_sample: no_antibody-LibA-1-220302
+        pre_selection_sample: VSVG-LibA-1
+      2022-03-02_LibA_2:
+        <<: *func_effects_selection_defaults
+        post_selection_sample: no_antibody-LibA-2-220302
+        pre_selection_sample: VSVG-LibA-2
+      2022-03-03_LibB_1:
+        <<: *func_effects_selection_defaults
+        post_selection_sample: no_antibody-LibB-1-220302
+        pre_selection_sample: VSVG-LibB-1
+      

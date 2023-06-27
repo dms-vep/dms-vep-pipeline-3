@@ -86,6 +86,13 @@ consensus_params:  # parameters for building PacBio consensus sequences
   max_minor_indel_frac: 0.2
   min_support: 2
 
+# created files with sequences of parental protein
+gene_sequence_codon: results/gene_sequence/codon.fasta
+gene_sequence_protein: results/gene_sequence/protein.fasta
+
+# created file with barcode-variant lookup table
+codon_variants: results/variants/codon_variants.csv
+
 # ----------------------------------------------------------------------------
 # Parameters related to counting the variants from barcode sequencing
 # ----------------------------------------------------------------------------
@@ -101,12 +108,10 @@ illumina_barcode_parser_params:
   upstream_mismatch: 2
 
 # ----------------------------------------------------------------------------
-# Names of key outputs used across pipeline
+# Configuration related to other analyses
 # ----------------------------------------------------------------------------
 
-# sequence of parental gene
-gene_sequence_codon: results/gene_sequence/codon.fasta
-gene_sequence_protein: results/gene_sequence/protein.fasta
+# For each variable, set to "null" or just don't provide if you aren't doing that type
+# of analysis. Otherwise provide path to configuration for that analysis.
 
-# barcode-variant lookup table
-codon_variants: results/variants/codon_variants.csv
+func_effects_config: data/func_effects_config.yml  # Functional effects of mutations

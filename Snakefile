@@ -8,6 +8,8 @@ import flatdict
 
 import pandas as pd
 
+import ruamel.yaml as yaml
+
 
 configfile: "config.yaml"
 
@@ -47,6 +49,11 @@ include: "build_variants.smk"
 if len(barcode_runs) > 0:
 
     include: "count_variants.smk"
+
+
+if ("func_effects_config" in config) and config["func_effects_config"] is not None:
+
+    include: "func_effects.smk"
 
 
 # add any custom rules

@@ -12,7 +12,7 @@ rule count_barcodes:
         variants=config["codon_variants"],
     output:
         counts="results/barcode_counts/{sample}_counts.csv",
-        counts_invalid="results/barcode_counts/{sample}_invalid.csv",
+        invalid="results/barcode_counts/{sample}_invalid.csv",
         fates="results/barcode_counts/{sample}_fates.csv",
     params:
         parser_params=config["illumina_barcode_parser_params"],
@@ -30,6 +30,35 @@ for sample in barcode_runs["sample"]:
         "results/barcode_counts",
         f"{sample}_counts.csv",
     )
+
+
+rule analyze_variant_counts:
+    """Analysis of the counts of variants."""
+    input:
+        expand(rules.count_barcodes.output.counts, sample=barcode_runs["sample"]),
+        expand(rules.count_barcodes.output.invalid, sample=barcode_runs["sample"]),
+        expand(rules.count_barcodes.output.fates, sample=barcode_runs["sample"]),
+        config["gene_sequence_codon"],
+        config["codon_variants"],
+        config["site_numbering_map"],
+        config["barcode_runs"],
+        nb=os.path.join(
+            config["pipeline_path"],
+            "notebooks/analyze_variant_counts.ipynb",
+        ),
+    output:
+        nb="results/notebooks/analyze_variant_counts.ipynb",
+    conda:
+        "environment.yml"
+    log:
+        "results/analyze_variant_counts.txt",
+    shell:
+        "papermill {input.nb} {output.nb} &> {log}"
+
+
+count_variants_docs[
+    "Analysis of variant counts"
+] = rules.analyze_variant_counts.output.nb
 
 
 docs["Count variants"] = count_variants_docs

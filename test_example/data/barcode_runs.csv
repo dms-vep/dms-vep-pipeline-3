@@ -20,5 +20,5 @@ S2M-11-4.9314-LibA-2,LibA,3/2/22,sequencing_data/A51_S2M11_3_Rep2_IC99_S30_R1_00
 no_antibody-LibA-2-220302,LibA,3/2/22,sequencing_data/A51_S2M11_NA_Rep2_NA_S24_R1_001.fastq.gz,
 no_antibody-LibA-1-220303,LibA,3/2/22,sequencing_data/A51_S2M11_NA_Rep1_NA_S23_R1_001.fastq.gz,
 VSVG-LibA-1,LibA,10/28/21,sequencing_data/Library_A51_1_S1_R1_001.fastq.gz,
-VSVG-LibA-2,LibA,10/29/21,sequencing_data/Library_A51_2_S2_R1_001.fastq.gz,
-VSVG-LibB-1,LibB,10/30/21,sequencing_data/Library_B1_1_S5_R1_001.fastq.gz,
+VSVG-LibA-2,LibA,10/28/21,sequencing_data/Library_A51_2_S2_R1_001.fastq.gz,
+VSVG-LibB-1,LibB,10/28/21,sequencing_data/Library_B1_1_S5_R1_001.fastq.gz,

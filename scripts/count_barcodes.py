@@ -15,7 +15,7 @@ sys.stderr = sys.stdout = log = open(snakemake.log[0], "w")
 fastq_R1 = snakemake.input.fastq_R1
 variants_csv = snakemake.input.variants
 counts_csv = snakemake.output.counts
-counts_invalid_csv = snakemake.output.counts_invalid
+counts_invalid_csv = snakemake.output.invalid
 fates_csv = snakemake.output.fates
 sample = snakemake.wildcards.sample
 library = snakemake.params.library
@@ -65,12 +65,15 @@ print(
 
 print(f"Writing valid barcode counts to {counts_csv}")
 counts_valid = counts.query("valid").drop(columns="valid")
-missing_valid_barcodes = list(valid_barcodes - set(counts_valid["barcode"]))
+missing_valid_barcodes = sorted(list(valid_barcodes - set(counts_valid["barcode"])))
 # add zero counts for missing valid barcodes
 counts_valid = counts_valid = pd.concat(
-    [counts_valid, pd.DataFrame({"barcode": missing_valid_barcodes, "count": 0})]
-).assign(library=library, sample=sample)
-counts_valid[["barcode", "count"]].to_csv(counts_csv, index=False)
+    [
+        counts_valid[["barcode", "count"]],
+        pd.DataFrame({"barcode": missing_valid_barcodes, "count": 0}),
+    ]
+)
+counts_valid.to_csv(counts_csv, index=False)
 
 print(f"Writing invalid barcode counts to {counts_invalid_csv}")
 counts_invalid = (

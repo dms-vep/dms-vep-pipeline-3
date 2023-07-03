@@ -16,7 +16,7 @@ rule count_barcodes:
         fates="results/barcode_counts/{sample}_fates.csv",
     params:
         parser_params=config["illumina_barcode_parser_params"],
-        library=lambda wc: barcode_runs.set_index("sample").at[wc.sample, "library"],
+        library=lambda wc: sample_to_library[wc.sample],
     conda:
         "environment.yml"
     log:

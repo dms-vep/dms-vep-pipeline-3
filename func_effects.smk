@@ -24,12 +24,23 @@ rule func_scores:
                 for s in ["post_selection_sample", "pre_selection_sample"]
             }
         ),
+        codon_variants=config["codon_variants"],
+        gene_sequence_codon=config["gene_sequence_codon"],
     output:
         csv="results/func_scores/{condition}/{selection}.csv",
     params:
-        lambda wc: func_effects_config["func_effects_selections"][wc.condition][
-            "selections"
-        ][wc.selection],
+        func_score_params=lambda wc: func_effects_config["func_effects_selections"][
+            wc.condition
+        ]["selections"][wc.selection],
+        # script will throw error if pre_library and post_library differ
+        libraries=lambda wc: {
+            s: sample_to_library[
+                func_effects_config["func_effects_selections"][wc.condition][
+                    "selections"
+                ][wc.selection][s]
+            ]
+            for s in ["post_selection_sample", "pre_selection_sample"]
+        },
     conda:
         "environment.yml"
     log:

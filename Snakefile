@@ -27,6 +27,7 @@ else:
         raise ValueError(f"{barcode_runs.columns=} missing {barcode_run_req_cols=}")
 assert len(barcode_runs) == barcode_runs["sample"].nunique()
 assert barcode_runs[barcode_run_req_cols].notnull().all().all()
+sample_to_library = barcode_runs.set_index("sample")["library"].to_dict()
 
 # `docs` is a nested dictionary used to build HTML documentation. At the bottom of the
 # nesting, keys should be short titles for files and values should be the path of the

@@ -30,8 +30,8 @@ Must have columns *barcode* and *name*, giving the barcode and name of this neut
 ## Barcode runs
 [barcode_runs.csv](barcode_runs.csv) must contain the following columns (you can optionally include more):
 
- - `sample`: sample name, must be unique among barcode runs
+ - `sample`: sample name, must be unique among barcode runs. Sample name must begin with `<library>-<YYMMDD>` where `<library>` is the library and `<YYMMDD>` is the date. It is recommended (but not enforced) that the full format be `<library>-<YYMMDD>-<description>-<replicate>` where `<description>` is a string description with underscores but no dashes, and `<replicate>` is a number.
  - `library`: name of library, must match a library in the barcode-variant table
- - `date`: date of sequencing
+ - `date`: date of sequencing, specified in a format parseable to a date by `pandas`.
  - `fastq_R1`: path to one more FASTQ R1 sequencing files, multiple files should be semicolon-delimited
 

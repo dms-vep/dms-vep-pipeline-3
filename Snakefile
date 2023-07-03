@@ -29,22 +29,15 @@ assert len(barcode_runs) == barcode_runs["sample"].nunique()
 assert barcode_runs[barcode_run_req_cols].notnull().all().all()
 
 # make sure barcode run samples start with <library>-<YYMMDD>-
-sample_prefix = (
-    barcode_runs
-    .assign(
-        prefix=lambda x: (
-            x["library"].astype(str)
-            + "-"
-            + x["date"].dt.strftime("%y%m%d")
-            + "-"
-        ),
-        has_prefix=lambda x: x.apply(
-            lambda r: r["sample"].startswith(r["prefix"]),
-            axis=1,
-        ),
-    )
-    .query("not has_prefix")
-)
+sample_prefix = barcode_runs.assign(
+    prefix=lambda x: (
+        x["library"].astype(str) + "-" + x["date"].dt.strftime("%y%m%d") + "-"
+    ),
+    has_prefix=lambda x: x.apply(
+        lambda r: r["sample"].startswith(r["prefix"]),
+        axis=1,
+    ),
+).query("not has_prefix")
 if len(sample_prefix):
     raise ValueError(f"Some barcode run samples lack correct prefix:\n{sample_prefix}")
 
@@ -74,9 +67,9 @@ if len(barcode_runs) > 0:
     include: "count_variants.smk"
 
 
-#if ("func_effects_config" in config) and config["func_effects_config"] is not None:
+if ("func_effects_config" in config) and config["func_effects_config"] is not None:
 
-#    include: "func_effects.smk"
+    include: "func_effects.smk"
 
 
 # add any custom rules

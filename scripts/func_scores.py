@@ -11,10 +11,7 @@ import pandas as pd
 
 sys.stderr = sys.stdout = open(snakemake.log[0], "w")
 
-print(
-    f"Computing functional scores for condition={snakemake.wildcards.condition}, "
-    f"selection={snakemake.wildcards.selection}\n"
-)
+print(f"Computing functional scores for selection={snakemake.wildcards.selection}\n")
 
 if len(set(snakemake.params.libraries.values())) != 1:
     raise ValueError(f"samples not from same library: {snakemake.params.libraries}")

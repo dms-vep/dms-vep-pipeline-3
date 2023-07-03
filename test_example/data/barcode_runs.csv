@@ -2,7 +2,7 @@ sample,library,date,fastq_R1,notes
 LibA-220210-REGN10933-0.15-1,LibA,2/10/22,sequencing_data/A51_REG10933_Rep1_IC95_S17_R1_001.fastq.gz,
 LibA-220210-REGN10933-1.39-1,LibA,2/10/22,sequencing_data/A51_REG10933_Rep1_IC97_S19_R1_001.fastq.gz,
 LibA-220210-REGN10933-5.58-1,LibA,2/10/22,sequencing_data/A51_REG10933_Rep1_IC99_S21_R1_001.fastq.gz,
-LibA-220210-no_antibody-1-221002,LibA,2/10/22,sequencing_data/A51_REG10933_Rep1_NA_S15_R1_001.fastq.gz,
+LibA-220210-no_antibody-1,LibA,2/10/22,sequencing_data/A51_REG10933_Rep1_NA_S15_R1_001.fastq.gz,
 LibA-220210-REGN10933-0.15-2,LibA,2/10/22,sequencing_data/A51_REG10933_Rep2_IC95_S18_R1_001.fastq.gz,
 LibA-220210-REGN10933-1.39-2,LibA,2/10/22,sequencing_data/A51_REG10933_Rep2_IC97_S20_R1_001.fastq.gz,
 LibA-220210-REGN10933-5.58-2,LibA,2/10/22,sequencing_data/A51_REG10933_Rep2_IC99_S22_R1_001.fastq.gz,

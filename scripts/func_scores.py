@@ -3,6 +3,8 @@
 
 import sys
 
+import alignparse.utils
+
 import Bio.SeqIO
 
 import dms_variants.codonvarianttable
@@ -79,6 +81,33 @@ print(
 
 func_scores = func_scores.query("pre_count >= @min_pre")
 
+# renumber aa_substitutions into reference numbering, also keep original numbering
+# as aa_subsitutions_sequential
+renumber = alignparse.utils.MutationRenumber(
+    number_mapping=pd.read_csv(snakemake.input.site_numbering_map),
+    old_num_col="sequential_site",
+    new_num_col="reference_site",
+    wt_nt_col=None,
+    allow_letter_suffixed_numbers=True,
+)
+
+func_scores = (
+    func_scores.query("target == 'gene'")
+    .rename(
+        columns={
+            "aa_substitutions": "aa_substitutions_sequential",
+            "codon_substitutions": "codon_substitutions_sequential",
+        }
+    )
+    .assign(
+        aa_substitutions=lambda x: x["aa_substitutions_sequential"].apply(
+            renumber.renumber_muts,
+            allow_gaps=True,
+            allow_stop=True,
+        )
+    )
+)
+
 print(f"\nWriting functional scores to {snakemake.output.csv}")
 
 (
@@ -86,10 +115,12 @@ print(f"\nWriting functional scores to {snakemake.output.csv}")
         [
             "func_score",
             "func_score_var",
+            "barcode",
             "aa_substitutions",
+            "aa_substitutions_sequential",
             "n_aa_substitutions",
-            "codon_substitutions",
             "n_codon_substitutions",
+            "codon_substitutions_sequential",
         ]
     ].to_csv(snakemake.output.csv, float_format="%.4g", index=False)
 )

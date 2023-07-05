@@ -24,18 +24,25 @@ def process_nested_docs_dict(d, github_blob_url):
     for key, val in d.items():
         if isinstance(val, str):
             path, ext = os.path.splitext(val)
+            if ext == ".gz":
+                gz = True
+                path, ext = os.path.splitext(path)
+            else:
+                gz = False
             base = os.path.basename(path)
             processed_f = None
-            if ext == ".ipynb":
+            if ext == ".ipynb" and not gz:
                 d_links[key] = f"notebooks/{base}.html"
                 processed_f = os.path.join(config["docs"], d_links[key])
-            elif ext == ".html":
+            elif ext == ".html" and not gz:
                 d_links[key] = f"htmls/{base}.html"
                 processed_f = os.path.join(config["docs"], d_links[key])
             elif ext in [".csv", ".fasta", ".fa"]:
                 d_links[key] = os.path.join(github_blob_url, val)
             else:
-                raise ValueError(f"cannot handle file extension {ext} as for {val}")
+                raise ValueError(
+                    f"cannot handle file extension {ext=} and {gz=} as for {val=}"
+                )
             if processed_f is not None:
                 assert processed_f not in processed_files, f"duplicate {processed_name}"
                 processed_files[processed_f] = val

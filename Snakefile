@@ -44,10 +44,8 @@ if len(sample_prefix):
 # dicts mapping sample to library or date as string
 sample_to_library = barcode_runs.set_index("sample")["library"].to_dict()
 sample_to_date = (
-    barcode_runs
-    .assign(date_str=lambda x: x["date"].dt.strftime("%Y-%m-%d"))
-    .set_index("sample")
-    ["date_str"]
+    barcode_runs.assign(date_str=lambda x: x["date"].dt.strftime("%Y-%m-%d"))
+    .set_index("sample")["date_str"]
     .to_dict()
 )
 

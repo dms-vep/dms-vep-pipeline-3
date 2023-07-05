@@ -35,7 +35,7 @@ rule func_scores:
         count_summary="results/func_scores/{selection}_count_summary.csv",
     params:
         func_score_params=lambda wc: func_scores[wc.selection]["func_score_params"],
-        samples = lambda wc: {
+        samples=lambda wc: {
             s: func_scores[wc.selection][s]
             for s in ["post_selection_sample", "pre_selection_sample"]
         },
@@ -70,10 +70,10 @@ rule analyze_func_scores:
             rules.func_scores.output.count_summary,
             selection=func_scores,
         ),
-#        nb=os.path.join(
-#            config["pipeline_path"],
-#            "notebooks/analyze_func_scores.ipynb",
-#        ),
+        nb=os.path.join(
+            config["pipeline_path"],
+            "notebooks/analyze_func_scores.ipynb",
+        ),
     output:
         nb="results/notebooks/analyze_func_scores.ipynb",
     conda:

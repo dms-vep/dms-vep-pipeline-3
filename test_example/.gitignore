@@ -20,3 +20,7 @@ results/variants/*
 !results/barcode_counts
 results/barcode_counts/*
 !results/barcode_counts/*_counts.csv
+
+!results/func_scores
+results/func_scores/*
+!results/func_scores/*_func_scores.csv.gz

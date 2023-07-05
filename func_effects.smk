@@ -31,7 +31,8 @@ rule func_scores:
         gene_sequence_codon=config["gene_sequence_codon"],
         site_numbering_map=config["site_numbering_map"],
     output:
-        csv="results/func_scores/{selection}_func_scores.csv.gz",
+        func_scores="results/func_scores/{selection}_func_scores.csv.gz",
+        count_summary="results/func_scores/{selection}_count_summary.csv",
     params:
         func_score_params=lambda wc: func_scores[wc.selection]["func_score_params"],
         # script will throw error if pre_library and post_library differ
@@ -48,7 +49,9 @@ rule func_scores:
 
 
 for s in func_scores:
-    func_effects_docs["Functional scores"][s] = f"results/func_scores/{s}_func_scores.csv.gz"
+    func_effects_docs["Functional scores"][
+        s
+    ] = f"results/func_scores/{s}_func_scores.csv.gz"
 
 
 docs["Functional effects of mutations"] = func_effects_docs

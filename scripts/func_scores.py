@@ -79,6 +79,26 @@ print(
     .aggregate(n_variants=pd.NamedAgg("aa_substitutions", "count"))
 )
 
+print(f"\nWriting summary counts to {snakemake.output.count_summary}")
+counts_summary_d = {
+    "selection": snakemake.wildcards.selection,
+    "pre_selection_sample": snakemake.input.pre_selection_sample,
+    "post_selection_sample": snakemake.input.pre_selection_sample,
+    "min_pre_selection_count": func_score_params["min_pre_selection_count"],
+}
+for ctype in ["pre_count", "post_count"]:
+    counts_summary_d[f"{ctype}_median"] = func_scores[ctype].median()
+    counts_summary_d[f"{ctype}_q1"] = func_scores[ctype].quantile(0.25)
+    counts_summary_d[f"{ctype}_q3"] = func_scores[ctype].quantile(0.75)
+    counts_summary_d[f"{ctype}_min"] = func_scores[ctype].min()
+    counts_summary_d[f"{ctype}_max"] = func_scores[ctype].max()
+(
+    pd.Series(counts_summary_d)
+    .to_frame()
+    .transpose()
+    .to_csv(snakemake.output.count_summary, index=False, float_format="%.4g")
+)
+
 func_scores = func_scores.query("pre_count >= @min_pre")
 
 # renumber aa_substitutions into reference numbering, also keep original numbering
@@ -108,7 +128,7 @@ func_scores = (
     )
 )
 
-print(f"\nWriting functional scores to {snakemake.output.csv}")
+print(f"\nWriting functional scores to {snakemake.output.func_scores}")
 
 (
     func_scores[
@@ -122,5 +142,5 @@ print(f"\nWriting functional scores to {snakemake.output.csv}")
             "n_codon_substitutions",
             "codon_substitutions_sequential",
         ]
-    ].to_csv(snakemake.output.csv, float_format="%.4g", index=False)
+    ].to_csv(snakemake.output.func_scores, float_format="%.4g", index=False)
 )

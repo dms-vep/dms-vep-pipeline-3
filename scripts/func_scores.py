@@ -82,8 +82,11 @@ print(
 print(f"\nWriting summary counts to {snakemake.output.count_summary}")
 counts_summary_d = {
     "selection": snakemake.wildcards.selection,
-    "pre_selection_sample": snakemake.input.pre_selection_sample,
-    "post_selection_sample": snakemake.input.pre_selection_sample,
+    "library": library,
+    "pre_selection_sample": snakemake.params.samples["pre_selection_sample"],
+    "post_selection_sample": snakemake.params.samples["post_selection_sample"],
+    "pre_selection_date": snakemake.params.dates["pre_selection_sample"],
+    "post_selection_date": snakemake.params.dates["post_selection_sample"],
     "min_pre_selection_count": func_score_params["min_pre_selection_count"],
 }
 for ctype in ["pre_count", "post_count"]:
@@ -131,16 +134,14 @@ func_scores = (
 print(f"\nWriting functional scores to {snakemake.output.func_scores}")
 
 (
-    func_scores[
+    func_scores.sort_values("func_score", ascending=False)[
         [
             "func_score",
             "func_score_var",
             "barcode",
             "aa_substitutions",
-            "aa_substitutions_sequential",
             "n_aa_substitutions",
             "n_codon_substitutions",
-            "codon_substitutions_sequential",
         ]
     ].to_csv(snakemake.output.func_scores, float_format="%.4g", index=False)
 )

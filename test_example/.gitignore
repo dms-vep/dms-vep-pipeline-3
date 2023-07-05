@@ -23,4 +23,4 @@ results/barcode_counts/*
 
 !results/func_scores
 results/func_scores/*
-!results/func_scores/*_func_scores.csv.gz
+!results/func_scores/*_func_scores.csv

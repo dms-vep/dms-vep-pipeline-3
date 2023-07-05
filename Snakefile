@@ -41,8 +41,15 @@ sample_prefix = barcode_runs.assign(
 if len(sample_prefix):
     raise ValueError(f"Some barcode run samples lack correct prefix:\n{sample_prefix}")
 
-# dict mapping sample to library
+# dicts mapping sample to library or date as string
 sample_to_library = barcode_runs.set_index("sample")["library"].to_dict()
+sample_to_date = (
+    barcode_runs
+    .assign(date_str=lambda x: x["date"].dt.strftime("%Y-%m-%d"))
+    .set_index("sample")
+    ["date_str"]
+    .to_dict()
+)
 
 # `docs` is a nested dictionary used to build HTML documentation. At the bottom of the
 # nesting, keys should be short titles for files and values should be the path of the

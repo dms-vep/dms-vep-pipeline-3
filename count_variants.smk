@@ -51,7 +51,7 @@ rule analyze_variant_counts:
     conda:
         "environment.yml"
     log:
-        "results/analyze_variant_counts.txt",
+        "results/logs/analyze_variant_counts.txt",
     shell:
         "papermill {input.nb} {output.nb} &> {log}"
 

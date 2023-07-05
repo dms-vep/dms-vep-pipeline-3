@@ -31,10 +31,18 @@ rule func_scores:
         gene_sequence_codon=config["gene_sequence_codon"],
         site_numbering_map=config["site_numbering_map"],
     output:
-        func_scores="results/func_scores/{selection}_func_scores.csv.gz",
+        func_scores="results/func_scores/{selection}_func_scores.csv",
         count_summary="results/func_scores/{selection}_count_summary.csv",
     params:
         func_score_params=lambda wc: func_scores[wc.selection]["func_score_params"],
+        samples = lambda wc: {
+            s: func_scores[wc.selection][s]
+            for s in ["post_selection_sample", "pre_selection_sample"]
+        },
+        dates=lambda wc: {
+            s: sample_to_date[func_scores[wc.selection][s]]
+            for s in ["post_selection_sample", "pre_selection_sample"]
+        },
         # script will throw error if pre_library and post_library differ
         libraries=lambda wc: {
             s: sample_to_library[func_scores[wc.selection][s]]
@@ -51,7 +59,32 @@ rule func_scores:
 for s in func_scores:
     func_effects_docs["Functional scores"][
         s
-    ] = f"results/func_scores/{s}_func_scores.csv.gz"
+    ] = f"results/func_scores/{s}_func_scores.csv"
+
+
+rule analyze_func_scores:
+    """Analyze functional scores."""
+    input:
+        func_scores=expand(rules.func_scores.output.func_scores, selection=func_scores),
+        count_summaries=expand(
+            rules.func_scores.output.count_summary,
+            selection=func_scores,
+        ),
+#        nb=os.path.join(
+#            config["pipeline_path"],
+#            "notebooks/analyze_func_scores.ipynb",
+#        ),
+    output:
+        nb="results/notebooks/analyze_func_scores.ipynb",
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/analyze_func_scores.txt",
+    shell:
+        "papermill {input.nb} {output.nb} &> {log}"
+
+
+func_effects_docs["Analysis of functional scores"] = rules.analyze_func_scores.output.nb
 
 
 docs["Functional effects of mutations"] = func_effects_docs

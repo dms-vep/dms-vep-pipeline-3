@@ -56,7 +56,7 @@ process_docs(snakemake.params.docs_links, 0)
 
 md_text = "\n".join(md_text)
 
-print(f"Rendering the following markdown text:\n\n{md_text}")
+print(f"Rendering the following markdown text:\n\n{md_text}\n\n")
 
 html = markdown.markdown(
     md_text,
@@ -91,8 +91,8 @@ if collapse_nested_lists:
             + to_collapse[len(start) : -len(end)]
             + "</details>\n</ul>"
         )
-    assert html.count(to_collapse) == 1
-    html = html.replace(to_collapse, collapsed)
+        assert html.count(to_collapse) == 1
+        html = html.replace(to_collapse, collapsed)
 
 with open(snakemake.output.html, "w") as f:
     f.write(html)

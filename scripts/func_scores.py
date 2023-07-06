@@ -134,7 +134,7 @@ func_scores = (
 print(f"\nWriting functional scores to {snakemake.output.func_scores}")
 
 (
-    func_scores.sort_values("func_score", ascending=False)[
+    func_scores.sort_values(["func_score", "barcode"], ascending=[False, True])[
         [
             "func_score",
             "func_score_var",

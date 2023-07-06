@@ -13,6 +13,7 @@ dependencies:
   - entrez-direct=16.2
   - flatdict=4.0
   - git-lfs
+  - jupyter_contrib_nbextensions
   - jupyterlab
   - mafft=7.520
   - markdown=3.4

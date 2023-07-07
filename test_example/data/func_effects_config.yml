@@ -1,7 +1,8 @@
 # Configurations for determining functional effects of mutations
 
 # --------------------------------------------------------------------------------------
-# Configuration for how to compute functional scores for each selection experiment
+# Configuration for computing functional scores and fitting global epistasis models
+# to each individual selection experiment
 # --------------------------------------------------------------------------------------
 
 # Define default parameters for computing functional scores.
@@ -18,6 +19,18 @@ func_scores_params_default: &func_scores_params_default
   # !!! Make min_pre_selection_frac LARGER for larger libraries, such 0.1 / (library size) !!!
   min_pre_selection_frac: 0.00005  # drop variants that are < this fraction of all counts
 
+# Define default parameters for fitting global epistasis models to each
+# individual selection to get mutationo effects.
+global_epistasis_params: &global_epistasis_params
+  # How to clip functional scores at upper / lower bounds. Allowable values:
+  #  - median_stop: median func score of all variants with stop codons
+  #  - null: no clipping
+  #  - a number: clip at this number
+  clip_lower: median_stop
+  clip_upper: null
+  # Do we collapse barcodes with same variant?
+  collapse_identical_variants: false  # {false, mean, median}
+
 # Define how to compute functional scores. Each key is a selection experiment.
 # Recommended naming of selection experiments is:
 #   <library>-<post-selection sample date as YYMMDD>-<description>-<replicate>
@@ -25,24 +38,30 @@ func_scores_params_default: &func_scores_params_default
 #  - `post_selection_sample`: sample after selection (eg, infection of cells)
 #  - `pre_selection_sample`: sample pre selection (eg, initial variant frequencies)
 #  - `func_score_params`: parameters for computing functional scores
+#  - `global_epistasis_params`: parameters for fitting global epistasis model
 func_scores:
   LibA-220210-293T_ACE2-1:
     post_selection_sample: LibA-220210-no_antibody-1
     pre_selection_sample: LibA-211028-VSVG-1
     func_score_params: *func_scores_params_default
+    global_epistasis_params: *global_epistasis_params
   LibA-220210-293T_ACE2-2:
     post_selection_sample: LibA-220210-no_antibody-2
     pre_selection_sample: LibA-211028-VSVG-2
     func_score_params: *func_scores_params_default
+    global_epistasis_params: *global_epistasis_params
   LibA-220302-293T_ACE2-1:
     post_selection_sample: LibA-220302-no_antibody-1
     pre_selection_sample: LibA-211028-VSVG-1
     func_score_params: *func_scores_params_default
+    global_epistasis_params: *global_epistasis_params
   LibA-220302-293T_ACE2-2:
     post_selection_sample: LibA-220302-no_antibody-2
     pre_selection_sample: LibA-211028-VSVG-2
     func_score_params: *func_scores_params_default
+    global_epistasis_params: *global_epistasis_params
   LibB-220302-293T_ACE2-1:
     post_selection_sample: LibB-220302-no_antibody-1
     pre_selection_sample: LibB-211028-VSVG-1
     func_score_params: *func_scores_params_default
+    global_epistasis_params: *global_epistasis_params

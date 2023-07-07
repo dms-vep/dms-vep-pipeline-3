@@ -87,4 +87,44 @@ rule analyze_func_scores:
 func_effects_docs["Analysis of functional scores"] = rules.analyze_func_scores.output.nb
 
 
+rule func_effects_global_epistasis:
+    """Fit global epistasis model to func scores to get mutation functional effects."""
+    input:
+        func_scores="results/func_scores/{selection}_func_scores.csv",
+        nb=os.path.join(
+            config["pipeline_path"],
+            "notebooks/func_effects_global_epistasis.ipynb",
+        ),
+    output:
+        func_effects="results/func_effects/by_selection/{selection}_func_effects.csv",
+        nb="results/notebooks/func_effects_global_epistasis_{selection}.ipynb",
+    params:
+        global_epistasis_params_yaml=lambda wc: yaml.dump(
+            {
+                "global_epistasis_params": 
+                    func_scores[wc.selection]["global_epistasis_params"],
+            }
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/func_effects_global_epistasis_{selection}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -p selection {wildcards.selection} \
+            -p func_scores {input.func_scores} \
+            -y global_epistasis_params {params.global_epistasis_params_yaml} \
+            &> {log}
+        """
+
+for s in func_scores:
+    func_effects_docs["Per-selection global epistasis fitting"][
+        s
+    ] = f"results/notebooks/func_effects_global_epistasis_{s}.ipynb"
+    func_effects_docs["Per-selection mutation functional effects"][
+        s
+    ] = f"results/func_effects/by_selection/{s}_func_effects.csv"
+
+
 docs["Functional effects of mutations"] = func_effects_docs

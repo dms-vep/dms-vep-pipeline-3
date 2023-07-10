@@ -78,7 +78,8 @@ if collapse_nested_lists:
         to_collapse = [
             tag for tag in tags if tag.startswith(f"<ul>\n<li>{list_heading}<ul>")
         ]
-        assert len(to_collapse) == 1, f"multiple list headings for {list_heading}"
+        if len(to_collapse) != 1:
+            raise ValueError(f"not 1 head for {list_heading}\n{to_collapse=}\n{tags=}")
         to_collapse = to_collapse[0]
         start = f"<ul>\n<li>{list_heading}<ul>\n"
         end = "\n</ul>"

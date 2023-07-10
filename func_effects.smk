@@ -105,6 +105,7 @@ rule func_effects_global_epistasis:
                     func_scores[wc.selection]["global_epistasis_params"],
             }
         ),
+    threads: 1
     conda:
         "environment.yml"
     log:
@@ -114,6 +115,7 @@ rule func_effects_global_epistasis:
         papermill {input.nb} {output.nb} \
             -p selection {wildcards.selection} \
             -p func_scores {input.func_scores} \
+            -p threads {threads} \
             -y "{params.global_epistasis_params_yaml}" \
             &> {log}
         """

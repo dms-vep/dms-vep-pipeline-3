@@ -24,3 +24,9 @@ results/barcode_counts/*
 !results/func_scores
 results/func_scores/*
 !results/func_scores/*_func_scores.csv
+
+!results/func_effects
+results/func_effects/*
+!results/func_effects/by_selection
+results/func_effects/by_selection/*
+!results/func_effects/by_selection/*_func_effects.csv

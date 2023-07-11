@@ -96,7 +96,7 @@ rule func_effects_global_epistasis:
             "notebooks/func_effects_global_epistasis.ipynb",
         ),
     output:
-#        func_effects="results/func_effects/by_selection/{selection}_func_effects.csv",
+        func_effects="results/func_effects/by_selection/{selection}_func_effects.csv",
         nb="results/notebooks/func_effects_global_epistasis_{selection}.ipynb",
     params:
         global_epistasis_params_yaml=lambda wc: yaml.dump(
@@ -115,6 +115,7 @@ rule func_effects_global_epistasis:
         papermill {input.nb} {output.nb} \
             -p selection {wildcards.selection} \
             -p func_scores {input.func_scores} \
+            -p func_effects {output.func_effects} \
             -p threads {threads} \
             -y "{params.global_epistasis_params_yaml}" \
             &> {log}
@@ -124,9 +125,9 @@ for s in func_scores:
     func_effects_docs["Per-selection global epistasis fitting"][
         s
     ] = f"results/notebooks/func_effects_global_epistasis_{s}.ipynb"
-#    func_effects_docs["Per-selection mutation functional effects"][
-#        s
-#    ] = f"results/func_effects/by_selection/{s}_func_effects.csv"
+    func_effects_docs["Per-selection mutation functional effects"][
+        s
+    ] = f"results/func_effects/by_selection/{s}_func_effects.csv"
 
 
 docs["Functional effects of mutations"] = func_effects_docs

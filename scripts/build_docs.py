@@ -3,8 +3,6 @@
 
 import sys
 
-import bs4
-
 import markdown
 import markdown.extensions.toc
 
@@ -53,7 +51,7 @@ def process_docs(d, depth):
                     # in order to handle larger list depths, the code to find
                     # `end_index` below would need to find the first matching </ul>
                     # rather than just the first one
-                    raise ValueError(f"currently cannot handle list depth > 1")
+                    raise ValueError("currently cannot handle list depth > 1")
                 collapse_list.append(key)
 
 
@@ -82,17 +80,17 @@ collapse_nested_lists = True
 if collapse_nested_lists:
     print(f"Collapsing the following nested lists:\n{collapse_list}")
     for list_heading in collapse_list:
-        
         list_start = f"<li>{list_heading}<ul>"
         if html.count(list_start) != 1:
             raise ValueError(f"{html.count(list_start)} occurrences of {list_start}")
         # if list depth gets greater than one, need to start finding matching end
         end_index = (
-            html[html.index(list_start) + len(list_start): ].index("</ul>")
-            + html.index(list_start) + len(list_start)
+            html[html.index(list_start) + len(list_start) :].index("</ul>")
+            + html.index(list_start)
+            + len(list_start)
         )
 
-        to_replace = html[html.index(list_start): end_index + len("</ul>")]
+        to_replace = html[html.index(list_start) : end_index + len("</ul>")]
         assert html.count(to_replace) == 1
         assert to_replace.startswith("<li>")
         assert to_replace.endswith("</ul>"), to_replace
@@ -101,7 +99,7 @@ if collapse_nested_lists:
             "<li><details><summary>"
             + list_heading
             + " (click triangle to expand/collapse)</summary><ul>\n"
-            + to_replace[len(list_start): ]
+            + to_replace[len(list_start) :]
             + "</details>\n"
         )
         html = html.replace(to_replace, replace_with)

@@ -76,12 +76,14 @@ func_scores:
 # Each key is a condition which has the following values:
 #  - `selections`: list of selections for which we average mutation functional effects
 #  - `avg_method`: how to average across the selections, options are "median" and "mean"
+#  - `per_selection_tooltips`: whether to show per-selection effects via tooltips
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
 #  - `title`: title of plot
 #  - `legend`: legend added to plot
 # Define some defaults for each condition, used via the merge (<<) operator.
 avg_func_effects_default: &avg_func_effects_default
   avg_method: median
+  per_selection_tooltips: true
   plot_kwargs:
     addtl_slider_stats:
       times_seen: 3

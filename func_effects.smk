@@ -101,8 +101,9 @@ rule func_effects_global_epistasis:
     params:
         global_epistasis_params_yaml=lambda wc: yaml.dump(
             {
-                "global_epistasis_params": 
-                    func_scores[wc.selection]["global_epistasis_params"],
+                "global_epistasis_params": func_scores[wc.selection][
+                "global_epistasis_params"
+                ],
             }
         ),
     threads: 1
@@ -121,6 +122,7 @@ rule func_effects_global_epistasis:
             &> {log}
         """
 
+
 for s in func_scores:
     func_effects_docs["Per-selection global epistasis fitting"][
         s
@@ -136,17 +138,20 @@ rule avg_func_effects:
         site_numbering_map_csv=config["site_numbering_map"],
         selections=lambda wc: [
             f"results/func_effects/by_selection/{s}_func_effects.csv"
-            for s in func_effects_config["avg_func_effects"][wc.condition]["selections"]
+            for s in func_effects_config["avg_func_effects"][wc.condition][
+                "selections"
+            ]
         ],
         nb=os.path.join(config["pipeline_path"], "notebooks/avg_func_effects.ipynb"),
     output:
         nb="results/notebooks/avg_func_effects_{condition}.ipynb",
         func_effects_csv="results/func_effects/averages/{condition}_func_effects.csv",
-        html="results/func_effects/averages/{condition}_func_effects_unformatted.html",
+        functional_html="results/func_effects/averages/{condition}_func_effects_nolegend.html",
+        latent_html="results/func_effects/averages/{condition}_latent_effects_nolegend.html",
     params:
         params_yaml=lambda wc: yaml.dump(
             {"params": func_effects_config["avg_func_effects"][wc.condition]}
-        )
+        ),
     conda:
         "environment.yml"
     log:
@@ -154,18 +159,23 @@ rule avg_func_effects:
     shell:
         """
         papermill {input.nb} {output.nb} \
-            -p condition {wildcards.condition} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p func_effects_csv {output.func_effects_csv} \
-            -p html {output.html} \
+            -p functional_html {output.functional_html} \
+            -p latent_html {output.latent_html} \
             -y '{params.params_yaml}' \
             &> {log}
         """
 
-func_effects_docs["Averaging mutation functional effects for each condition"] = {
+
+func_effects_docs["Notebooks averaging mutation functional effects for conditions"] = {
     c: f"results/notebooks/avg_func_effects_{c}.ipynb"
     for c in func_effects_config["avg_func_effects"]
 }
 
+func_effects_docs["Average mutation functional effects for each condition"] = {
+    c: f"results/func_effects/averages/{c}_func_effects.csv"
+    for c in func_effects_config["avg_func_effects"]
+}
 
 docs["Functional effects of mutations"] = func_effects_docs

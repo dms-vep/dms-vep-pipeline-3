@@ -30,3 +30,6 @@ results/func_effects/*
 !results/func_effects/by_selection
 results/func_effects/by_selection/*
 !results/func_effects/by_selection/*_func_effects.csv
+!results/func_effects/averages
+results/func_effects/averages/*
+!results/func_effects/averages/*_func_effects.csv

@@ -49,6 +49,11 @@ def process_docs(d, depth):
         if isinstance(val, dict):
             process_docs(val, depth)
             if depth_diff > 0:
+                if depth_diff > 1:
+                    # in order to handle larger list depths, the code to find
+                    # `end_index` below would need to find the first matching </ul>
+                    # rather than just the first one
+                    raise ValueError(f"currently cannot handle list depth > 1")
                 collapse_list.append(key)
 
 
@@ -68,32 +73,38 @@ html = markdown.markdown(
     ],
 )
 
+with open("../docs/_temp.html", "w") as f:
+    f.write(html)
+
 # edit HTML to make deeply nested list items collapsible:
 # https://gist.github.com/dotiful/0bd3516f42c6ca68479e64ad2942ac90
 collapse_nested_lists = True
 if collapse_nested_lists:
     print(f"Collapsing the following nested lists:\n{collapse_list}")
     for list_heading in collapse_list:
-        tags = [str(tag) for tag in bs4.BeautifulSoup(html, "html.parser")]
-        to_collapse = [
-            tag for tag in tags if tag.startswith(f"<ul>\n<li>{list_heading}<ul>")
-        ]
-        if len(to_collapse) != 1:
-            raise ValueError(f"not 1 head for {list_heading}\n{to_collapse=}\n{tags=}")
-        to_collapse = to_collapse[0]
-        start = f"<ul>\n<li>{list_heading}<ul>\n"
-        end = "\n</ul>"
-        assert to_collapse.startswith(start)
-        assert to_collapse.endswith(end)
-        collapsed = (
-            "<ul>\n<li><details><summary>"
+        
+        list_start = f"<li>{list_heading}<ul>"
+        if html.count(list_start) != 1:
+            raise ValueError(f"{html.count(list_start)} occurrences of {list_start}")
+        # if list depth gets greater than one, need to start finding matching end
+        end_index = (
+            html[html.index(list_start) + len(list_start): ].index("</ul>")
+            + html.index(list_start) + len(list_start)
+        )
+
+        to_replace = html[html.index(list_start): end_index + len("</ul>")]
+        assert html.count(to_replace) == 1
+        assert to_replace.startswith("<li>")
+        assert to_replace.endswith("</ul>"), to_replace
+
+        replace_with = (
+            "<li><details><summary>"
             + list_heading
             + " (click triangle to expand/collapse)</summary><ul>\n"
-            + to_collapse[len(start) : -len(end)]
-            + "</details>\n</ul>"
+            + to_replace[len(list_start): ]
+            + "</details>\n"
         )
-        assert html.count(to_collapse) == 1
-        html = html.replace(to_collapse, collapsed)
+        html = html.replace(to_replace, replace_with)
 
 with open(snakemake.output.html, "w") as f:
     f.write(html)

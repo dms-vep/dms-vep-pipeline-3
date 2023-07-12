@@ -57,7 +57,7 @@ rule func_scores:
 
 
 for s in func_scores:
-    func_effects_docs["Functional scores"][
+    func_effects_docs["Per-variant functional scores"][
         s
     ] = f"results/func_scores/{s}_func_scores.csv"
 

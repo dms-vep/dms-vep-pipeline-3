@@ -130,4 +130,42 @@ for s in func_scores:
     ] = f"results/func_effects/by_selection/{s}_func_effects.csv"
 
 
+rule avg_func_effects:
+    """Average and plot the functional effects for a condition."""
+    input:
+        site_numbering_map_csv=config["site_numbering_map"],
+        selections=lambda wc: [
+            f"results/func_effects/by_selection/{s}_func_effects.csv"
+            for s in func_effects_config["avg_func_effects"][wc.condition]["selections"]
+        ],
+        nb=os.path.join(config["pipeline_path"], "notebooks/avg_func_effects.ipynb"),
+    output:
+        nb="results/notebooks/avg_func_effects_{condition}.ipynb",
+        func_effects_csv="results/func_effects/averages/{condition}_func_effects.csv",
+        html="results/func_effects/averages/{condition}_func_effects_unformatted.html",
+    params:
+        params_yaml=lambda wc: yaml.dump(
+            {"params": func_effects_config["avg_func_effects"][wc.condition]}
+        )
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/avg_func_effects_{condition}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -p condition {wildcards.condition} \
+            -p site_numbering_map_csv {input.site_numbering_map_csv} \
+            -p func_effects_csv {output.func_effects_csv} \
+            -p html {output.html} \
+            -y '{params.params_yaml}' \
+            &> {log}
+        """
+
+func_effects_docs["Averaging mutation functional effects for each condition"] = {
+    c: f"results/notebooks/avg_func_effects_{c}.ipynb"
+    for c in func_effects_config["avg_func_effects"]
+}
+
+
 docs["Functional effects of mutations"] = func_effects_docs

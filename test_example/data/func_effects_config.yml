@@ -32,6 +32,7 @@ global_epistasis_params: &global_epistasis_params
   collapse_identical_variants: false  # {false, mean, median}
 
 # Define how to compute functional scores. Each key is a selection experiment.
+# A global epistasis model is used to get mutational effects for each selection.
 # Recommended naming of selection experiments is:
 #   <library>-<post-selection sample date as YYMMDD>-<description>-<replicate>
 # Each selection experiment should in turn provide the following keys:
@@ -65,3 +66,39 @@ func_scores:
     pre_selection_sample: LibB-211028-VSVG-1
     func_score_params: *func_scores_params_default
     global_epistasis_params: *global_epistasis_params
+
+# --------------------------------------------------------------------------------------
+# Configuration for averaging mutation functional effects across selections and plotting
+# them.
+# --------------------------------------------------------------------------------------
+
+# Average/plot mutation functional effects from different selections w `avg_func_effects`
+# Each key is a condition which has the following values:
+#  - `selections`: list of selections for which we average mutation functional effects
+#  - `avg_method`: how to average across the selections, options are "median" and "mean"
+#  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
+#  - `title`: title of plot
+#  - `legend`: legend added to plot
+# Define some defaults for each condition, used via the merge (<<) operator.
+avg_func_effects_default: &avg_func_effects_default
+  avg_method: median
+  plot_kwargs:
+    addtl_slider_stats:
+      times_seen: 3
+    heatmap_max_at_least: 1
+    heatmap_min_at_least: -1
+    init_floor_at_zero: false
+    init_site_statistic: mean
+    site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`
+  legend: |
+    Some text
+avg_func_effects:
+  293T_ACE2_entry:
+    <<: *avg_func_effects_default
+    title: Mutation effects on entry into 293T-ACE2 cells
+    selections:
+      - LibA-220210-293T_ACE2-1
+      - LibA-220210-293T_ACE2-2
+      - LibA-220302-293T_ACE2-1
+      - LibA-220302-293T_ACE2-2
+      - LibB-220302-293T_ACE2-1

@@ -168,14 +168,67 @@ rule avg_func_effects:
         """
 
 
-func_effects_docs["Notebooks averaging mutation functional effects for conditions"] = {
+func_effects_docs["Notebooks averaging mutation functional effects"] = {
     c: f"results/notebooks/avg_func_effects_{c}.ipynb"
     for c in func_effects_config["avg_func_effects"]
 }
 
-func_effects_docs["Average mutation functional effects for each condition"] = {
+func_effects_docs["Average mutation functional effects (CSV files)"] = {
     c: f"results/func_effects/averages/{c}_func_effects.csv"
     for c in func_effects_config["avg_func_effects"]
 }
+
+
+rule format_avg_func_effects_chart:
+    """Format ``altair`` average functional effects chart."""
+    input:
+        html="results/func_effects/averages/{condition}_{pheno}_effects_nolegend.html",
+        pyscript=os.path.join(config["pipeline_path"], "scripts/format_altair_html.py"),
+    output:
+        html="results/func_effects/averages/{condition}_{pheno}_effects.html",
+        legend=temp("results/func_effects/averages/{condition}_{pheno}_effects.md"),
+    wildcard_constraints:
+        pheno="func|latent",
+    params:
+        title=lambda wc: (
+            func_effects_config["avg_func_effects"][wc.condition]["title"]
+            + {"func": " (functional score)", "latent": " (latent phenotype)"}[
+                wc.pheno
+            ]
+        ),
+        legend=lambda wc: func_effects_config["avg_func_effects"][wc.condition][
+            "legend"
+        ],
+        suffix=(
+            f"Analysis by {config['authors']} ({config['year']}).\n\n See "
+            f"[{config['github_repo_url']}]({config['github_repo_url']}) for code/data."
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/format_avg_func_effects_chart_{condition}_{pheno}.txt",
+    shell:
+        """
+        echo "## {params.title}\n" > {output.legend}
+        echo "{params.legend}\n\n" >> {output.legend}
+        echo "{params.suffix}" >> {output.legend}
+        python {input.pyscript} \
+            --chart {input.html} \
+            --markdown {output.legend} \
+            --title "{params.title}" \
+            --output {output.html}
+        """
+
+
+func_effects_docs["Interactive plots of average mutation functional effects"] = {
+    c: f"results/func_effects/averages/{c}_func_effects.html"
+    for c in func_effects_config["avg_func_effects"]
+}
+
+func_effects_docs["Interactive plots of average mutation latent-phenotype effects"] = {
+    c: f"results/func_effects/averages/{c}_latent_effects.html"
+    for c in func_effects_config["avg_func_effects"]
+}
+
 
 docs["Functional effects of mutations"] = func_effects_docs

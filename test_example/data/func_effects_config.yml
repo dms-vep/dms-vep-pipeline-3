@@ -78,7 +78,7 @@ func_scores:
 #  - `avg_method`: how to average across the selections, options are "median" and "mean"
 #  - `per_selection_tooltips`: whether to show per-selection effects via tooltips
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
-#  - `title`: title of plot
+#  - `title`: title of plot. Will be suffixed with "(latent phenotype)" or ("functional score)"
 #  - `legend`: legend added to plot
 # Define some defaults for each condition, used via the merge (<<) operator.
 avg_func_effects_default: &avg_func_effects_default
@@ -93,7 +93,24 @@ avg_func_effects_default: &avg_func_effects_default
     init_site_statistic: mean
     site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`
   legend: |
-    Some text
+    Interactive plot of the effects of mutations. Negative values indicated deleterious mutations,
+    positive values indicate beneficial mutations for the measured phenotype.
+
+    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary
+    statistic indicating the effects of mutations at each site. The heat map shows the effects of
+    individual mutations, with parental amino-acid identities indicated by x and gray
+    indicating non-measured mutations.
+
+    You can mouse over points to get details about individual measurements, include measurements
+    in individual selection experiments.
+
+    The options at the bottom of the plot let you modify the display, such as by selecting how
+    many different variants a mutation must be seen in to be shown (*minimum times_seen*),
+    how many different experimental selections the mutation was measured in
+    (*minimum n_selections*), what site summary statistic to show, etc.
+
+    The *minimum max of effect* at site is useful to select the sites where mutations have
+    the most positive functional effects.
 avg_func_effects:
   293T_ACE2_entry:
     <<: *avg_func_effects_default

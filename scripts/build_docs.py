@@ -25,6 +25,7 @@ md_text = [
 subheading_depth = 1  # keys this deep are subheadings
 init_subheading = "##"  # first subheading level is this in markdown
 collapse_list = []  # nested list headings to collapse
+min_collapse_length = 2  # only collapse if at least this many entries
 
 
 def process_docs(d, depth):
@@ -46,7 +47,7 @@ def process_docs(d, depth):
             md_text.append("  " * depth_diff + f"-{entry}")
         if isinstance(val, dict):
             process_docs(val, depth)
-            if depth_diff > 0:
+            if depth_diff > 0 and len(val) >= min_collapse_length:
                 if depth_diff > 1:
                     # in order to handle larger list depths, the code to find
                     # `end_index` below would need to find the first matching </ul>

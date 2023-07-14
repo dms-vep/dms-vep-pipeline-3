@@ -35,3 +35,10 @@ Must have columns *barcode* and *name*, giving the barcode and name of this neut
  - `date`: date of sequencing, specified in a format parseable to a date by `pandas`.
  - `fastq_R1`: path to one more FASTQ R1 sequencing files, multiple files should be semicolon-delimited
 
+## Configuration for analyzing functional effects of mutations
+[func_effects_config.yml](func_effects_config.yml) has the configuration for analyzing functional effects of mutations.
+The format is explained within the file.
+
+## Configuration for analyzing antibody escape
+[antibody_escape_config.yml](antibody_escape_config.yml) has the configuration for analyzing effects of mutations on escape from antibodies or sera.
+The format is explained within the file.

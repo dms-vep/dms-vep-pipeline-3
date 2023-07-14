@@ -1,0 +1,33 @@
+# Configurations for determining effects of mutations on antibody/sera escape
+
+# --------------------------------------------------------------------------------------
+# Configuration for each antibody selection experiment.
+# --------------------------------------------------------------------------------------
+
+# `antibody_selections` is keyed by name of each selection experiment, which includes a
+# no-antibody control samples and one or more antibody samples. These should typically
+# be from the same library and run on same date. Selection experiments are recommended
+# to be named as <Library>-<date as YYMMDD>-<description (eg, antibody)>-<replicate>.
+# Each selection experiment should in turn provide the following keys:
+#  - `neut_standard_name`: name of neutralization standard in `neut_standard_barcodes`
+#  - `no_antibody_sample`: name of the no-antibody sample
+#  - `antibody_samples`: a dict keyed by sample name with values of:
+#    * `concentration`: the concentration of the antibody
+#    * `use_in_fit`: whether to use this sample in the `polyclonal` fit
+# The `use_in_fit` option exists because you may decide that some samples are outside
+# the preferred neutralization range to include in the fit, so if `use_in_fit: false`
+# then functional scores are computed and plotted but it is not included in the fit.
+antibody_selections:
+  LibA-220210-REGN10933-1:
+    neut_standard_name: neut_standard
+    no_antibody_sample: LibA-220210-no_antibody-1
+    antibody_samples:
+     LibA-220210-REGN10933-0.15-1:
+      concentration: 0.15
+      use_in_fit: true
+     LibA-220210-REGN10933-1.39-1:
+      concentration: 1.39
+      use_in_fit: true
+     LibA-220210-REGN10933-5.58-1:
+      concentration: 5.58
+      use_in_fit: true

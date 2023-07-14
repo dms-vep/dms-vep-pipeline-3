@@ -77,6 +77,13 @@ if ("func_effects_config" in config) and config["func_effects_config"] is not No
     include: "func_effects.smk"
 
 
+if ("antibody_escape_config") in config and config[
+    "antibody_escape_config"
+] is not None:
+
+    include: "antibody_escape.smk"
+
+
 # add any custom rules
 custom_rules = "custom_rules.smk"
 if os.path.isfile(custom_rules):

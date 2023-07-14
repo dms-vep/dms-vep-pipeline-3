@@ -70,10 +70,7 @@ rule analyze_func_scores:
             rules.func_scores.output.count_summary,
             selection=func_scores,
         ),
-        nb=os.path.join(
-            config["pipeline_path"],
-            "notebooks/analyze_func_scores.ipynb",
-        ),
+        nb=os.path.join(config["pipeline_path"], "notebooks/analyze_func_scores.ipynb"),
     output:
         nb="results/notebooks/analyze_func_scores.ipynb",
     conda:

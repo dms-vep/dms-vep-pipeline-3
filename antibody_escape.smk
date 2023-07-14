@@ -19,7 +19,7 @@ for selection_name, selection_d in antibody_selections.items():
 antibody_escape_docs = collections.defaultdict(dict)
 
 
-rule prob_escape:
+rule prob_escape_antibody:
     """Compute probability (fraction) antibody escape for each variant."""
     input:
         no_antibody_sample=lambda wc: os.path.join(
@@ -63,6 +63,41 @@ for sel in antibody_selections:
         antibody_escape_docs[
             "Probability (fraction) antibody escape for each variant (CSVs)"
         ][f"{sel} {sample}"] = f"results/antibody_escape/{sel}/{sample}_prob_escape.csv"
+
+
+rule fit_antibody:
+    """Fit a ``polyclonal`` model to an antibody selection."""
+    input:
+        prob_escapes=lambda wc: [
+            f"results/antibody_escape/{wc.selection}/{sample}_prob_escape.csv"
+            for sample in antibody_selections[wc.selection]["antibody_samples"]
+        ],
+        neut_standard_fracs=lambda wc: [
+            f"results/antibody_escape/{wc.selection}/{sample}_neut_standard_fracs.csv"
+            for sample in antibody_selections[wc.selection]["antibody_samples"]
+        ],
+        nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
+    output:
+        nb="results/antibody_escape/{selection}/fit_antibody_escape_{selection}.ipynb",
+    params:
+        params_yaml=lambda wc: yaml.dump({"params": antibody_selections[wc.selection]}),
+    conda:
+        "environment.yml"
+    log:
+        "results/fit_antibody_escape_{selection}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -p selection {wildcards.selection} \
+            -y "{params.params_yaml}" \
+            &> {log}
+        """
+
+
+antibody_escape_docs["Fits of polyclonal models to antibody escape selections"] = {
+    s: f"results/antibody_escape/{s}/fit_antibody_escape_{s}.ipynb"
+    for s in antibody_selections
+}
 
 
 docs["Antibody/serum escape"] = antibody_escape_docs

@@ -14,9 +14,26 @@
 #  - `antibody_samples`: a dict keyed by sample name with values of:
 #    * `concentration`: the concentration of the antibody
 #    * `use_in_fit`: whether to use this sample in the `polyclonal` fit
+#  - `prob_escape_filters`: dict giving filters of prob_escape values to use for fitting:
 # The `use_in_fit` option exists because you may decide that some samples are outside
 # the preferred neutralization range to include in the fit, so if `use_in_fit: false`
 # then functional scores are computed and plotted but it is not included in the fit.
+
+# default prob_escape filters
+prob_escape_filters_default: &prob_escape_filters_default
+  # error if sample used in fit doesn't have >= this many neut standard counts and
+  # >= this fraction of all counts from neut standard.
+  min_neut_standard_count: 1000
+  min_neut_standard_frac: 0.001
+  # Only retain for fitting variants with at least this many counts and this fraction
+  # of total counts in the no-antibody sample **OR** the indicated counts and fraction
+  # of total counts in the antibody sample.
+  min_no_antibody_counts: 5  # make bigger for real experiments, say 20
+  min_no_antibody_frac: 0.00005  # make smaller for large libraries, say ~0.1 / (library size)
+  min_antibody_counts: 10  # make bigger for real experiments, say 100
+  min_antibody_frac: 0.005  # make smaller for large libraries, say ~10 / (library size)
+
+# define the antibody selections
 antibody_selections:
   LibA-220210-REGN10933-1:
     neut_standard_name: neut_standard
@@ -31,3 +48,4 @@ antibody_selections:
      LibA-220210-REGN10933-5.58-1:
       concentration: 5.58
       use_in_fit: true
+    prob_escape_filters: *prob_escape_filters_default

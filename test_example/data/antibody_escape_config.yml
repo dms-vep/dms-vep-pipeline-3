@@ -14,7 +14,11 @@
 #  - `antibody_samples`: a dict keyed by sample name with values of:
 #    * `concentration`: the concentration of the antibody
 #    * `use_in_fit`: whether to use this sample in the `polyclonal` fit
-#  - `prob_escape_filters`: dict giving filters of prob_escape values to use for fitting:
+#  - `prob_escape_filters`: dict giving filters of prob_escape values to use for fitting
+#  - `polyclonal_params`: dict giving parameters for `polyclonal` model fitting.
+#  - `escape_plot_kwargs`: dict giving parameters for `polyclonal` escape plot
+#  - `icXX_plot_kwargs`: dict giving parameters for `polyclonal` ICXX plot
+#  - `plot_hide_stats`: dict giving data frames with stats for slider to hide mutations
 # The `use_in_fit` option exists because you may decide that some samples are outside
 # the preferred neutralization range to include in the fit, so if `use_in_fit: false`
 # then functional scores are computed and plotted but it is not included in the fit.
@@ -37,10 +41,53 @@ prob_escape_filters_default: &prob_escape_filters_default
   max_aa_subs: 3  # group variants with >= this many substitutions
   clip_uncensored_prob_escape: 5  # clip uncensored prob escape values at this max
 
+# default parameters for `polyclonal` model fitting
+polyclonal_params_default: &polyclonal_params_default
+  n_epitopes: 1  # fit this many epitopes, also fit all numbers less than this and plot
+  spatial_distances: null  # CSV with residue distances for spatial regularization, or null
+  fit_kwargs:  # keyword arguments to `Polyclonal.fit`
+    reg_escape_weight: 0.1
+    reg_spread_weight: 0.25
+    reg_activity_weight: 1.0
+
+# keyword arguments to `Polyclonal.mut_escape_plot`
+escape_plot_kwargs_default: &escape_plot_kwargs_default
+  addtl_slider_stats:
+    times_seen: 3
+  heatmap_max_at_least: 2
+  heatmap_min_at_least: -2
+  init_floor_at_zero: false
+  init_site_statistic: sum
+  site_zoom_bar_color_col: region  # supplied in `site_numbering_map`
+
+# Specify any statistics (usually functional effects) for which you want to enable
+# sliders that hide data. Keyed by statistic name, then next dict gives:
+#   - `csv`: CSV file with the data
+#   - `csv_col`: column in the CSV with the data
+#   - `init`: initial value of slider
+plot_hide_stats_default: &plot_hide_stats_default
+  functional effect:
+    csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv
+    csv_col: median_effect
+    init: -3
+
+# keyword arguments to `Polyclonal.mut_icXX_plot`
+icXX_plot_kwargs_default: &icXX_plot_kwargs_default
+  <<: *escape_plot_kwargs_default
+  x: 0.9
+  icXX_col: IC90
+  log_fold_change_icXX_col: log2 fold change IC90
+
 # define the antibody selections
 antibody_selections:
+
   LibA-220210-REGN10933-1:
     neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    icXX_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
     no_antibody_sample: LibA-220210-no_antibody-1
     antibody_samples:
      LibA-220210-REGN10933-0.15-1:
@@ -52,4 +99,3 @@ antibody_selections:
      LibA-220210-REGN10933-5.58-1:
       concentration: 5.58
       use_in_fit: true
-    prob_escape_filters: *prob_escape_filters_default

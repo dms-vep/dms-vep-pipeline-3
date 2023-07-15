@@ -68,6 +68,14 @@ for sel in antibody_selections:
 rule fit_antibody_escape:
     """Fit a ``polyclonal`` model to an antibody selection."""
     input:
+        spatial_distances=lambda wc: ( 
+            [antibody_selections[wc.selection]["polyclonal_params"]["spatial_distances"]]
+            if antibody_selections[wc.selection]["polyclonal_params"]["spatial_distances"]
+            else []
+        ),
+        plot_hide_stats=lambda wc: [
+            d["csv"] for d in antibody_selections[wc.selection]["plot_hide_stats"].values()
+        ],
         prob_escapes=lambda wc: [
             f"results/antibody_escape/{wc.selection}/{sample}_prob_escape.csv"
             for sample in antibody_selections[wc.selection]["antibody_samples"]
@@ -76,6 +84,7 @@ rule fit_antibody_escape:
             f"results/antibody_escape/{wc.selection}/{sample}_neut_standard_fracs.csv"
             for sample in antibody_selections[wc.selection]["antibody_samples"]
         ],
+        site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
     output:
         prob_escape_mean="results/antibody_escape/{selection}/prob_escape_mean.csv",
@@ -89,6 +98,7 @@ rule fit_antibody_escape:
     shell:
         """
         papermill {input.nb} {output.nb} \
+            -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p prob_escape_mean_csv {output.prob_escape_mean} \
             -p selection {wildcards.selection} \
             -y "{params.params_yaml}" \

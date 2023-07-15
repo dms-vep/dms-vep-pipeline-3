@@ -92,6 +92,13 @@ avg_func_effects_default: &avg_func_effects_default
     init_floor_at_zero: false
     init_site_statistic: mean
     site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`
+    slider_binding_range_kwargs:
+      times_seen:
+        step: 1
+        min: 1
+        max: 25
+      n_selections:
+        step: 1
   legend: |
     Interactive plot of the effects of mutations. Negative values indicated deleterious mutations,
     positive values indicate beneficial mutations for the measured phenotype.

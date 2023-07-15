@@ -33,7 +33,7 @@ rule prob_escape_antibody:
     output:
         **{
             metric: f"results/antibody_escape/{{selection}}/{{sample}}_{metric}.csv"
-            for metric in ["prob_escape", "neut_standard_fracs", "neutralization"]
+            for metric in ["prob_escape", "neut_standard_fracs"]
         },
     params:
         neut_standard=lambda wc: antibody_selections[wc.selection]["neut_standard_name"],
@@ -65,7 +65,7 @@ for sel in antibody_selections:
         ][f"{sel} {sample}"] = f"results/antibody_escape/{sel}/{sample}_prob_escape.csv"
 
 
-rule fit_antibody:
+rule fit_antibody_escape:
     """Fit a ``polyclonal`` model to an antibody selection."""
     input:
         prob_escapes=lambda wc: [
@@ -78,6 +78,7 @@ rule fit_antibody:
         ],
         nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
     output:
+        prob_escape_mean="results/antibody_escape/{selection}/prob_escape_mean.csv",
         nb="results/notebooks/fit_antibody_escape_{selection}.ipynb",
     params:
         params_yaml=lambda wc: yaml.dump({"params": antibody_selections[wc.selection]}),
@@ -88,6 +89,7 @@ rule fit_antibody:
     shell:
         """
         papermill {input.nb} {output.nb} \
+            -p prob_escape_mean_csv {output.prob_escape_mean} \
             -p selection {wildcards.selection} \
             -y "{params.params_yaml}" \
             &> {log}

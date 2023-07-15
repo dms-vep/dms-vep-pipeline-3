@@ -43,7 +43,7 @@ variant_counts = pd.concat(
 
 variants.add_sample_counts_df(variant_counts)
 
-prob_escape, neut_standard_fracs, neutralization = variants.prob_escape(
+prob_escape, neut_standard_fracs, _ = variants.prob_escape(
     selections_df=pd.DataFrame(
         {
             "library": [library],
@@ -84,9 +84,7 @@ prob_escape[
         "no-antibody_count",
     ]
 ].to_csv(snakemake.output.prob_escape, index=False, float_format="%.4f", na_rep="nan")
+
 neut_standard_fracs[
     ["antibody_count", "antibody_frac", "no-antibody_count", "no-antibody_frac"]
 ].to_csv(snakemake.output.neut_standard_fracs, index=False, float_format="%.4g")
-neutralization[["n_aa_substitutions", "prob_escape", "prob_escape_uncensored"]].to_csv(
-    snakemake.output.neutralization, index=False, float_format="%.4g"
-)

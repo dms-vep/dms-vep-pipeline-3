@@ -28,10 +28,14 @@ prob_escape_filters_default: &prob_escape_filters_default
   # Only retain for fitting variants with at least this many counts and this fraction
   # of total counts in the no-antibody sample **OR** the indicated counts and fraction
   # of total counts in the antibody sample.
-  min_no_antibody_counts: 5  # make bigger for real experiments, say 20
+  min_no_antibody_count: 5  # make bigger for real experiments, say 20
   min_no_antibody_frac: 0.00005  # make smaller for large libraries, say ~0.1 / (library size)
-  min_antibody_counts: 10  # make bigger for real experiments, say 100
+  min_antibody_count: 10  # make bigger for real experiments, say 100
   min_antibody_frac: 0.005  # make smaller for large libraries, say ~10 / (library size)
+  # For averaging and plotting the mean probability (fraction) escape across variants, use
+  # these cutoffs:
+  max_aa_subs: 3  # group variants with >= this many substitutions
+  clip_uncensored_prob_escape: 5  # clip uncensored prob escape values at this max
 
 # define the antibody selections
 antibody_selections:

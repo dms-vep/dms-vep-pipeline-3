@@ -143,6 +143,7 @@ rule avg_func_effects:
     output:
         nb="results/notebooks/avg_func_effects_{condition}.ipynb",
         func_effects_csv="results/func_effects/averages/{condition}_func_effects.csv",
+        latent_effects_csv="results/func_effects/averages/{condition}_latent_effects.csv",
         functional_html="results/func_effects/averages/{condition}_func_effects_nolegend.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects_nolegend.html",
     params:
@@ -158,6 +159,7 @@ rule avg_func_effects:
         papermill {input.nb} {output.nb} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p func_effects_csv {output.func_effects_csv} \
+            -p latent_effects_csv {output.latent_effects_csv} \
             -p functional_html {output.functional_html} \
             -p latent_html {output.latent_html} \
             -y '{params.params_yaml}' \
@@ -171,6 +173,11 @@ func_effects_docs["Notebooks averaging mutation functional effects"] = {
 }
 
 func_effects_docs["Average mutation functional effects (CSV files)"] = {
+    c: f"results/func_effects/averages/{c}_func_effects.csv"
+    for c in func_effects_config["avg_func_effects"]
+}
+
+func_effects_docs["Average mutation latent-phenotype effects (CSV files)"] = {
     c: f"results/func_effects/averages/{c}_func_effects.csv"
     for c in func_effects_config["avg_func_effects"]
 }

@@ -49,11 +49,14 @@ polyclonal_params_default: &polyclonal_params_default
     reg_escape_weight: 0.1
     reg_spread_weight: 0.25
     reg_activity_weight: 1.0
+    logfreq: 200
 
 # keyword arguments to `Polyclonal.mut_escape_plot`
 escape_plot_kwargs_default: &escape_plot_kwargs_default
   addtl_slider_stats:
     times_seen: 3
+  addtl_tooltip_stats:
+    - sequential_site
   heatmap_max_at_least: 2
   heatmap_min_at_least: -2
   init_floor_at_zero: false
@@ -62,13 +65,13 @@ escape_plot_kwargs_default: &escape_plot_kwargs_default
 
 # Specify any statistics (usually functional effects) for which you want to enable
 # sliders that hide data. Keyed by statistic name, then next dict gives:
-#   - `csv`: CSV file with the data
+#   - `csv`: CSV file with the data, should have columns "site" and "mutant"
 #   - `csv_col`: column in the CSV with the data
 #   - `init`: initial value of slider
 plot_hide_stats_default: &plot_hide_stats_default
   functional effect:
     csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv
-    csv_col: median_effect
+    csv_col: effect
     init: -3
 
 # keyword arguments to `Polyclonal.mut_icXX_plot`

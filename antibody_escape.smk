@@ -32,7 +32,7 @@ rule prob_escape_antibody:
         site_numbering_map=config["site_numbering_map"],
     output:
         **{
-            metric: f"results/antibody_escape/{{selection}}/{{sample}}_{metric}.csv"
+            metric: f"results/antibody_escape/by_selection/{{selection}}/{{sample}}_{metric}.csv"
             for metric in ["prob_escape", "neut_standard_fracs"]
         },
     params:
@@ -62,32 +62,42 @@ for sel in antibody_selections:
     for sample in antibody_selections[sel]["antibody_samples"]:
         antibody_escape_docs[
             "Probability (fraction) antibody escape for each variant (CSVs)"
-        ][f"{sel} {sample}"] = f"results/antibody_escape/{sel}/{sample}_prob_escape.csv"
+        ][
+            f"{sel} {sample}"
+        ] = f"results/antibody_escape/by_selection/{sel}/{sample}_prob_escape.csv"
 
 
 rule fit_antibody_escape:
     """Fit a ``polyclonal`` model to an antibody selection."""
     input:
-        spatial_distances=lambda wc: ( 
-            [antibody_selections[wc.selection]["polyclonal_params"]["spatial_distances"]]
-            if antibody_selections[wc.selection]["polyclonal_params"]["spatial_distances"]
+        spatial_distances=lambda wc: (
+            [
+                antibody_selections[wc.selection]["polyclonal_params"][
+                    "spatial_distances"
+                ]
+            ]
+            if antibody_selections[wc.selection]["polyclonal_params"][
+                "spatial_distances"
+            ]
             else []
         ),
         plot_hide_stats=lambda wc: [
-            d["csv"] for d in antibody_selections[wc.selection]["plot_hide_stats"].values()
+            d["csv"]
+            for d in antibody_selections[wc.selection]["plot_hide_stats"].values()
         ],
         prob_escapes=lambda wc: [
-            f"results/antibody_escape/{wc.selection}/{sample}_prob_escape.csv"
+            f"results/antibody_escape/by_selection/{wc.selection}/{sample}_prob_escape.csv"
             for sample in antibody_selections[wc.selection]["antibody_samples"]
         ],
         neut_standard_fracs=lambda wc: [
-            f"results/antibody_escape/{wc.selection}/{sample}_neut_standard_fracs.csv"
+            f"results/antibody_escape/by_selection/{wc.selection}/{sample}_neut_standard_fracs.csv"
             for sample in antibody_selections[wc.selection]["antibody_samples"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
     output:
-        prob_escape_mean="results/antibody_escape/{selection}/prob_escape_mean.csv",
+        prob_escape_mean="results/antibody_escape/by_selection/{selection}/prob_escape_mean.csv",
+        pickle="results/antibody_escape/by_selection/{selection}/polyclonal_model.pickle",
         nb="results/notebooks/fit_antibody_escape_{selection}.ipynb",
     params:
         params_yaml=lambda wc: yaml.dump({"params": antibody_selections[wc.selection]}),
@@ -100,6 +110,7 @@ rule fit_antibody_escape:
         papermill {input.nb} {output.nb} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p prob_escape_mean_csv {output.prob_escape_mean} \
+            -p pickle_file {output.pickle} \
             -p selection {wildcards.selection} \
             -y "{params.params_yaml}" \
             &> {log}

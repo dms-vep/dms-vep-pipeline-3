@@ -33,6 +33,7 @@ results/func_effects/by_selection/*
 !results/func_effects/averages
 results/func_effects/averages/*
 !results/func_effects/averages/*_func_effects.csv
+!results/func_effects/averages/*_latent_effects.csv
 
 !results/antibody_escape
 results/antibody_escape/*/*

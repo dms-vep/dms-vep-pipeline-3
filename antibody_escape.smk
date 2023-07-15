@@ -78,7 +78,7 @@ rule fit_antibody:
         ],
         nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
     output:
-        nb="results/antibody_escape/{selection}/fit_antibody_escape_{selection}.ipynb",
+        nb="results/notebooks/fit_antibody_escape_{selection}.ipynb",
     params:
         params_yaml=lambda wc: yaml.dump({"params": antibody_selections[wc.selection]}),
     conda:
@@ -95,8 +95,7 @@ rule fit_antibody:
 
 
 antibody_escape_docs["Fits of polyclonal models to antibody escape selections"] = {
-    s: f"results/antibody_escape/{s}/fit_antibody_escape_{s}.ipynb"
-    for s in antibody_selections
+    s: f"results/notebooks/fit_antibody_escape_{s}.ipynb" for s in antibody_selections
 }
 
 

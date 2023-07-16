@@ -7,7 +7,7 @@
 ## Overview
 This repository contains a [snakemake](https://snakemake.readthedocs.io/) pipeline for analysis of deep mutational scanning of barcoded viral entry proteins.
 
-Note that this is version 3 of the pipeline (see the [CHANGELOG](CHANGELOG.md) for details on older version).
+Note that this is version 3 of the pipeline (see the [CHANGELOG](CHANGELOG.md) for details); older versions are hosted on the no-longer maintained [https://github.com/dms-vep/dms-vep-pipeline](https://github.com/dms-vep/dms-vep-pipeline) repo.
 
 In order to use the pipeline, you can include this repository as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) in your own repo
 Your own repo containing this submodule will have the project-specific data and code.

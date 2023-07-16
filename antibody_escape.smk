@@ -176,6 +176,40 @@ rule avg_antibody_escape:
         """
 
 
+rule format_avg_antibody_escape_charts:
+    """Format ``altair`` antibody escape charts."""
+    input:
+        html="results/antibody_escape/averages/{antibody}_mut_{metric}_nolegend.html",
+        pyscript=os.path.join(config["pipeline_path"], "scripts/format_altair_html.py"),
+    output:
+        html="results/antibody_escape/averages/{antibody}_mut_{metric}.html",
+        legend=temp("results/antibody_escape/averages/{antibody}_mut_{metric}.md"),
+    wildcard_constraints:
+        metric="escape|icXX",
+    params:
+        title=lambda wc: avg_antibody_escape_config[wc.antibody]["title"],
+        legend=lambda wc: avg_antibody_escape_config[wc.antibody]["legend"],
+        suffix=(
+            f"Analysis by {config['authors']} ({config['year']}).\n\n See "
+            f"[{config['github_repo_url']}]({config['github_repo_url']}) for code/data."
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/format_avg_antibody_escape_charts_{antibody}_mut_{metric}.txt",
+    shell:
+        """
+        echo "## {params.title}\n" > {output.legend}
+        echo "{params.legend}\n\n" >> {output.legend}
+        echo "{params.suffix}" >> {output.legend}
+        python {input.pyscript} \
+            --chart {input.html} \
+            --markdown {output.legend} \
+            --title "{params.title}" \
+            --output {output.html}
+        """
+
+
 for heading, fname in [
     ("Average selections for antibody/serum", rules.avg_antibody_escape.output.nb),
     (
@@ -185,9 +219,12 @@ for heading, fname in [
     ("Antibody/serum mutation ICXX CSVs", rules.avg_antibody_escape.output.icXX_csv),
     (
         "Antibody/serum mutation escape plots",
-        rules.avg_antibody_escape.output.escape_html,
+        "results/antibody_escape/averages/{antibody}_mut_escape.html",
     ),
-    ("Antibody/serum mutation ICXX plots", rules.avg_antibody_escape.output.icXX_html),
+    (
+        "Antibody/serum mutation ICXX plots",
+        "results/antibody_escape/averages/{antibody}_mut_icXX.html",
+    ),
 ]:
     for antibody in avg_antibody_escape_config:
         antibody_escape_docs[heading][antibody] = fname.format(antibody=antibody)

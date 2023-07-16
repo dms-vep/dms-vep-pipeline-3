@@ -61,7 +61,7 @@ rule prob_escape_antibody:
 for sel in antibody_selections:
     for sample in antibody_selections[sel]["antibody_samples"]:
         antibody_escape_docs[
-            "Probability (fraction) antibody escape for each variant (CSVs)"
+            "Probability (fraction) escape for each variant (CSVs) in each selection"
         ][
             f"{sel} {sample}"
         ] = f"results/antibody_escape/by_selection/{sel}/{sample}_prob_escape.csv"
@@ -121,5 +121,67 @@ antibody_escape_docs["Fits of polyclonal models to antibody escape selections"] 
     s: f"results/notebooks/fit_antibody_escape_{s}.ipynb" for s in antibody_selections
 }
 
+avg_antibody_escape_config = antibody_escape_config["avg_antibody_escape"]
+
+
+rule avg_antibody_escape:
+    """Average antibody escape across several selections for the same antibody/serum."""
+    input:
+        plot_hide_stats=lambda wc: [
+            d["csv"]
+            for d in avg_antibody_escape_config[wc.antibody][
+                "plot_hide_stats"
+            ].values()
+        ],
+        prob_escape_means=lambda wc: [
+            f"results/antibody_escape/by_selection/{sel}/prob_escape_mean.csv"
+            for sel in avg_antibody_escape_config[wc.antibody]["selections"]
+        ],
+        pickles=lambda wc: [
+            f"results/antibody_escape/by_selection/{sel}/polyclonal_model.pickle"
+            for sel in avg_antibody_escape_config[wc.antibody]["selections"]
+        ],
+        site_numbering_map_csv=config["site_numbering_map"],
+        nb=os.path.join(config["pipeline_path"], "notebooks/avg_antibody_escape.ipynb"),
+    output:
+        pickle="results/antibody_escape/averages/{antibody}/polyclonal_model.pickle",
+        escape_csv="results/antibody_escape/averages/{antibody}/mut_escape.csv",
+        icXX_csv="results/antibody_escape/averages/{antibody}/mut_icXX.csv",
+        escape_html="results/antibody_escape/averages/{antibody}/{antibody}_mut_escape_nolegend.html",
+        icXX_html="results/antibody_escape/averages/{antibody}/{antibody}_mut_icXX_nolegend.html",
+        nb="results/notebooks/avg_antibody_escape_{antibody}.ipynb",
+    params:
+        params_yaml=lambda wc: yaml.dump(
+            {"params": avg_antibody_escape_config[wc.antibody]}
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/avg_antibody_escape_{antibody}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -p site_numbering_map_csv {input.site_numbering_map_csv} \
+            -p avg_pickle_file {output.pickle} \
+            -y '{params.params_yaml}' \
+            &> {log}
+        """
+
+
+for heading, fname in [
+    ("Average selections for antibody/serum", rules.avg_antibody_escape.output.nb),
+    (
+        "Antibody/serum mutation escape CSVs",
+        rules.avg_antibody_escape.output.escape_csv,
+    ),
+    ("Antibody/serum mutation ICXX CSVs", rules.avg_antibody_escape.output.icXX_csv),
+    (
+        "Antibody/serum mutation escape plots",
+        rules.avg_antibody_escape.output.escape_html,
+    ),
+    ("Antibody/serum mutation ICXX plots", rules.avg_antibody_escape.output.icXX_html),
+]:
+    for antibody in avg_antibody_escape_config:
+        antibody_escape_docs[heading][antibody] = fname.format(antibody=antibody)
 
 docs["Antibody/serum escape"] = antibody_escape_docs

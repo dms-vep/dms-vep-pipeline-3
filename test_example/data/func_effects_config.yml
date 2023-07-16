@@ -80,6 +80,7 @@ func_scores:
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
 #  - `title`: title of plot. Will be suffixed with "(latent phenotype)" or ("functional score)"
 #  - `legend`: legend added to plot
+
 # Define some defaults for each condition, used via the merge (<<) operator.
 avg_func_effects_default: &avg_func_effects_default
   avg_method: median
@@ -118,6 +119,8 @@ avg_func_effects_default: &avg_func_effects_default
 
     The *minimum max of effect* at site is useful to select the sites where mutations have
     the most positive functional effects.
+
+# Define the functional effect conditions to average
 avg_func_effects:
   293T_ACE2_entry:
     <<: *avg_func_effects_default

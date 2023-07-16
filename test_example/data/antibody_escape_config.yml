@@ -17,7 +17,6 @@
 #  - `prob_escape_filters`: dict giving filters of prob_escape values to use for fitting
 #  - `polyclonal_params`: dict giving parameters for `polyclonal` model fitting.
 #  - `escape_plot_kwargs`: dict giving parameters for `polyclonal` escape plot
-#  - `icXX_plot_kwargs`: dict giving parameters for `polyclonal` ICXX plot
 #  - `plot_hide_stats`: dict giving data frames with stats for slider to hide mutations
 # The `use_in_fit` option exists because you may decide that some samples are outside
 # the preferred neutralization range to include in the fit, so if `use_in_fit: false`
@@ -74,13 +73,6 @@ plot_hide_stats_default: &plot_hide_stats_default
     csv_col: effect
     init: -3
 
-# keyword arguments to `Polyclonal.mut_icXX_plot`
-icXX_plot_kwargs_default: &icXX_plot_kwargs_default
-  <<: *escape_plot_kwargs_default
-  x: 0.9
-  icXX_col: IC90
-  log_fold_change_icXX_col: log2 fold change IC90
-
 # define the antibody selections
 antibody_selections:
 
@@ -89,7 +81,6 @@ antibody_selections:
     prob_escape_filters: *prob_escape_filters_default
     polyclonal_params: *polyclonal_params_default
     escape_plot_kwargs: *escape_plot_kwargs_default
-    icXX_plot_kwargs: *escape_plot_kwargs_default
     plot_hide_stats: *plot_hide_stats_default
     no_antibody_sample: LibA-220210-no_antibody-1
     antibody_samples:
@@ -108,7 +99,6 @@ antibody_selections:
     prob_escape_filters: *prob_escape_filters_default
     polyclonal_params: *polyclonal_params_default
     escape_plot_kwargs: *escape_plot_kwargs_default
-    icXX_plot_kwargs: *escape_plot_kwargs_default
     plot_hide_stats: *plot_hide_stats_default
     no_antibody_sample: LibA-220210-no_antibody-2
     antibody_samples:
@@ -127,7 +117,6 @@ antibody_selections:
     prob_escape_filters: *prob_escape_filters_default
     polyclonal_params: *polyclonal_params_default
     escape_plot_kwargs: *escape_plot_kwargs_default
-    icXX_plot_kwargs: *escape_plot_kwargs_default
     plot_hide_stats: *plot_hide_stats_default
     no_antibody_sample: LibB-220302-no_antibody-1
     antibody_samples:
@@ -146,7 +135,6 @@ antibody_selections:
     prob_escape_filters: *prob_escape_filters_default
     polyclonal_params: *polyclonal_params_default
     escape_plot_kwargs: *escape_plot_kwargs_default
-    icXX_plot_kwargs: *escape_plot_kwargs_default
     plot_hide_stats: *plot_hide_stats_default
     no_antibody_sample: LibA-220302-no_antibody-1
     antibody_samples:
@@ -165,7 +153,6 @@ antibody_selections:
     prob_escape_filters: *prob_escape_filters_default
     polyclonal_params: *polyclonal_params_default
     escape_plot_kwargs: *escape_plot_kwargs_default
-    icXX_plot_kwargs: *escape_plot_kwargs_default
     plot_hide_stats: *plot_hide_stats_default
     no_antibody_sample: LibA-220302-no_antibody-2
     antibody_samples:
@@ -178,3 +165,51 @@ antibody_selections:
      LibA-220302-S2M11-4.9314-2:
       concentration: 4.9314
       use_in_fit: true
+
+# --------------------------------------------------------------------------------------
+# Configuration for averaging and plotting selections for the same antibody
+# --------------------------------------------------------------------------------------
+
+# Average/plot escape values from different selections with the same antibody/serum using
+# `avg_antibody_escape`. Each key is the name of an antibody/serum that has the following values:
+#   - `selections`: list of antibody selections for which we average escape
+#   - `icXX`: for the plot showing fold-change in ICXX (eg, IC90), what is XX (eg, 90)
+#   - `escape_plot_kwargs`: keyword arguments for `PolyclonalAverage.mut_escape_plot`
+#   - `plot_hide_stats`: dict giving data frames with stats for slider to hide mutations
+#   - `title`: title of plots
+#   - `legend`: legend added to plots
+
+# Define defaults for each antibody/serum, used via the merge (<<) operator
+avg_antibody_escape_default: &avg_antibody_escape_default
+  icXX: 90
+  escape_plot_kwargs:
+    <<: *escape_plot_kwargs_default
+    avg_type: median
+    per_model_tooltip: true
+  plot_hide_stats: *plot_hide_stats_default
+  legend: |
+    Interactive plot of how mutations affect antibody escape.
+
+    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary statistic indicating escape at each site. The heat map shows escape for individual mutations, with parental amino-acid identities indicated by x and gray indicating non-measured mutations. Mouse over points for details.
+
+    Options at the bottom of the plot let you modify the display, such as by selecting how many different variants a mutation must be seen in to be shown (`minimum times_seen`), how many different experimental selections the mutation was measured in (`minimum n_models`), what site summary statistic to show, etc.
+
+    You can filter by the functional effects of mutations. Mutations removed by this filter are shown as dark gray squares in the heat map to distinguish unmeasured mutations from ones measured to be deleterious.
+
+    The minimum max of escape at site is useful to select the sites where mutations confer the most escape.
+
+# Define the antibodies/sera to average
+avg_antibody_escape:
+  REGN10933:
+    <<: *avg_antibody_escape_default
+    title: Escape map for antibody REGN10933
+    selections:
+      - LibA-220210-REGN10933-1
+      - LibA-220210-REGN10933-2
+      - LibB-220302-REGN10933-1
+  S2M11:
+    <<: *avg_antibody_escape_default
+    title: Escape map for antibody S2M11
+    selections:
+      - LibA-220302-S2M11-1
+      - LibA-220302-S2M11-2

@@ -102,3 +102,79 @@ antibody_selections:
      LibA-220210-REGN10933-5.58-1:
       concentration: 5.58
       use_in_fit: true
+
+  LibA-220210-REGN10933-2:
+    neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    icXX_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
+    no_antibody_sample: LibA-220210-no_antibody-2
+    antibody_samples:
+     LibA-220210-REGN10933-0.15-2:
+      concentration: 0.15
+      use_in_fit: false
+     LibA-220210-REGN10933-1.39-2:
+      concentration: 1.39
+      use_in_fit: true
+     LibA-220210-REGN10933-5.58-2:
+      concentration: 5.58
+      use_in_fit: true
+
+  LibB-220302-REGN10933-1:
+    neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    icXX_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
+    no_antibody_sample: LibB-220302-no_antibody-1
+    antibody_samples:
+     LibB-220302-REGN10933-0.15-1:
+      concentration: 0.15
+      use_in_fit: true
+     LibB-220302-REGN10933-1.39-1:
+      concentration: 1.39
+      use_in_fit: true
+     LibB-220302-REGN10933-5.58-1:
+      concentration: 5.58
+      use_in_fit: true
+
+  LibA-220302-S2M11-1:
+    neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    icXX_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
+    no_antibody_sample: LibA-220302-no_antibody-1
+    antibody_samples:
+     LibA-220302-S2M11-0.3082-1:
+      concentration: 0.3082
+      use_in_fit: true
+     LibA-220302-S2M11-1.2328-1:
+      concentration: 1.2328
+      use_in_fit: true
+     LibA-220302-S2M11-4.9314-1:
+      concentration: 4.9314
+      use_in_fit: true
+
+  LibA-220302-S2M11-2:
+    neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    icXX_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
+    no_antibody_sample: LibA-220302-no_antibody-2
+    antibody_samples:
+     LibA-220302-S2M11-0.3082-2:
+      concentration: 0.3082
+      use_in_fit: true
+     LibA-220302-S2M11-1.2328-2:
+      concentration: 1.2328
+      use_in_fit: true
+     LibA-220302-S2M11-4.9314-2:
+      concentration: 4.9314
+      use_in_fit: true

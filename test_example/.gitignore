@@ -36,5 +36,11 @@ results/func_effects/averages/*
 !results/func_effects/averages/*_latent_effects.csv
 
 !results/antibody_escape
-results/antibody_escape/*/*
-!results/antibody_escape/*/*_prob_escape.csv
+results/antibody_escape/*
+!results/antibody_escape/by_selection
+results/antibody_escape/by_selection/*
+!results/antibody_escape/by_selection/*/*_prob_escape.csv
+!results/antibody_escape/averages
+results/antibody_escape/averages/*
+!results/antibody_escape/averages/*/mut_icXX.csv
+!results/antibody_escape/averages/*/mut_escape.csv

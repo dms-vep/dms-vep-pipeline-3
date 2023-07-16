@@ -104,7 +104,7 @@ rule fit_antibody_escape:
     conda:
         "environment.yml"
     log:
-        "results/fit_antibody_escape_{selection}.txt",
+        "results/logs/fit_antibody_escape_{selection}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -157,12 +157,16 @@ rule avg_antibody_escape:
     conda:
         "environment.yml"
     log:
-        "results/avg_antibody_escape_{antibody}.txt",
+        "results/logs/avg_antibody_escape_{antibody}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p avg_pickle_file {output.pickle} \
+            -p escape_csv {output.escape_csv} \
+            -p icXX_csv {output.icXX_csv} \
+            -p escape_html {output.escape_html} \
+            -p icXX_html {output.icXX_html} \
             -y '{params.params_yaml}' \
             &> {log}
         """

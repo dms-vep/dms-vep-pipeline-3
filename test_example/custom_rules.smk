@@ -22,3 +22,9 @@ rule spatial_distances:
         os.path.join(config["pipeline_path"], "environment.yml")
     script:
         "scripts/spatial_distances.py"
+
+# Files (Jupyter notebooks, HTML plots, or CSVs) that you want included in
+# the HTML docs should be added to the nested dict `docs`:
+docs["Additional analysis-specific files"] = {
+    "Reference to sequential site-numbering map": config["site_numbering_map"],
+}

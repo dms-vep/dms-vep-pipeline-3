@@ -28,6 +28,19 @@ else:
 assert len(barcode_runs) == barcode_runs["sample"].nunique()
 assert barcode_runs[barcode_run_req_cols].notnull().all().all()
 
+# check no FASTQ assigned to multiple samples
+dup_fastq_R1 = (
+    barcode_runs.explode("fastq_R1")
+    .groupby("fastq_R1")
+    .aggregate(
+        samples=pd.NamedAgg("sample", "unique"),
+        n_samples=pd.NamedAgg("sample", "count"),
+    )
+    .query("n_samples > 1")
+)
+if len(dup_fastq_R1):
+    raise ValueError(f"Some FASTQs assigned to multiple samples:\n{dup_fastq_R1}")
+
 # make sure barcode run samples start with <library>-<YYMMDD>-
 sample_prefix = barcode_runs.assign(
     prefix=lambda x: (

@@ -32,7 +32,7 @@ rule prob_escape_antibody:
         site_numbering_map=config["site_numbering_map"],
     output:
         **{
-            metric: f"results/antibody_escape/by_selection/{{selection}}/{{sample}}_{metric}.csv"
+            metric: f"results/antibody_escape/by_selection/{{selection}}_{{sample}}_{metric}.csv"
             for metric in ["prob_escape", "neut_standard_fracs"]
         },
     params:
@@ -62,9 +62,9 @@ for sel in antibody_selections:
     for sample in antibody_selections[sel]["antibody_samples"]:
         antibody_escape_docs[
             "Probability (fraction) escape for each variant (CSVs) in each selection"
-        ][
-            f"{sel} {sample}"
-        ] = f"results/antibody_escape/by_selection/{sel}/{sample}_prob_escape.csv"
+        ][f"{sel} {sample}"] = rules.prob_escape_antibody.output.prob_escape.format(
+            selection=sel, sample=sample
+        )
 
 
 rule fit_antibody_escape:
@@ -86,18 +86,22 @@ rule fit_antibody_escape:
             for d in antibody_selections[wc.selection]["plot_hide_stats"].values()
         ],
         prob_escapes=lambda wc: [
-            f"results/antibody_escape/by_selection/{wc.selection}/{sample}_prob_escape.csv"
+            rules.prob_escape_antibody.output.prob_escape.format(
+                selection=wc.selection, sample=sample
+            )
             for sample in antibody_selections[wc.selection]["antibody_samples"]
         ],
         neut_standard_fracs=lambda wc: [
-            f"results/antibody_escape/by_selection/{wc.selection}/{sample}_neut_standard_fracs.csv"
+            rules.prob_escape_antibody.output.neut_standard_fracs.format(
+                selection=wc.selection, sample=sample
+            )
             for sample in antibody_selections[wc.selection]["antibody_samples"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
     output:
-        prob_escape_mean="results/antibody_escape/by_selection/{selection}/prob_escape_mean.csv",
-        pickle="results/antibody_escape/by_selection/{selection}/polyclonal_model.pickle",
+        prob_escape_mean="results/antibody_escape/by_selection/{selection}_prob_escape_mean.csv",
+        pickle="results/antibody_escape/by_selection/{selection}_polyclonal_model.pickle",
         nb="results/notebooks/fit_antibody_escape_{selection}.ipynb",
     params:
         params_yaml=lambda wc: yaml.dump({"params": antibody_selections[wc.selection]}),
@@ -134,21 +138,21 @@ rule avg_antibody_escape:
             ].values()
         ],
         prob_escape_means=lambda wc: [
-            f"results/antibody_escape/by_selection/{sel}/prob_escape_mean.csv"
+            rules.fit_antibody_escape.output.prob_escape_mean.format(selection=sel)
             for sel in avg_antibody_escape_config[wc.antibody]["selections"]
         ],
         pickles=lambda wc: [
-            f"results/antibody_escape/by_selection/{sel}/polyclonal_model.pickle"
+            rules.fit_antibody_escape.output.pickle.format(selection=sel)
             for sel in avg_antibody_escape_config[wc.antibody]["selections"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/avg_antibody_escape.ipynb"),
     output:
-        pickle="results/antibody_escape/averages/{antibody}/polyclonal_model.pickle",
-        escape_csv="results/antibody_escape/averages/{antibody}/mut_escape.csv",
-        icXX_csv="results/antibody_escape/averages/{antibody}/mut_icXX.csv",
-        escape_html="results/antibody_escape/averages/{antibody}/{antibody}_mut_escape_nolegend.html",
-        icXX_html="results/antibody_escape/averages/{antibody}/{antibody}_mut_icXX_nolegend.html",
+        pickle="results/antibody_escape/averages/{antibody}_polyclonal_model.pickle",
+        escape_csv="results/antibody_escape/averages/{antibody}_mut_escape.csv",
+        icXX_csv="results/antibody_escape/averages/{antibody}_mut_icXX.csv",
+        escape_html="results/antibody_escape/averages/{antibody}_mut_escape_nolegend.html",
+        icXX_html="results/antibody_escape/averages/{antibody}_mut_icXX_nolegend.html",
         nb="results/notebooks/avg_antibody_escape_{antibody}.ipynb",
     params:
         params_yaml=lambda wc: yaml.dump(

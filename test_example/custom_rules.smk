@@ -23,6 +23,7 @@ rule spatial_distances:
     script:
         "scripts/spatial_distances.py"
 
+
 # Files (Jupyter notebooks, HTML plots, or CSVs) that you want included in
 # the HTML docs should be added to the nested dict `docs`:
 docs["Additional analysis-specific files"] = {

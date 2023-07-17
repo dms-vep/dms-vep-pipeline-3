@@ -13,13 +13,11 @@ dependencies:
   - entrez-direct=16.2
   - flatdict=4.0
   - git-lfs
-  - jupyter_contrib_nbextensions
   - jupyterlab
   - mafft=7.520
   - markdown=3.4
   - matplotlib=3.7
   - minimap2=2.26
-  - nbdime
   - nbstripout
   - nbqa
   - openpyxl
@@ -31,7 +29,7 @@ dependencies:
   - ruamel.yaml=0.17
   - ruff
   - snakefmt
-  - snakemake=7.28.2
+  - snakemake=7.30
   - upsetplot=0.8
   - pip:
     - alignparse==0.6.2

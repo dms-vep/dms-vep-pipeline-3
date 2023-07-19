@@ -1,6 +1,7 @@
 """Implements ``snakemake`` rule to translate gene sequence."""
 
 
+import os
 import sys
 
 import markdown
@@ -72,9 +73,6 @@ html = markdown.markdown(
     ],
 )
 
-with open("../docs/_temp.html", "w") as f:
-    f.write(html)
-
 # edit HTML to make deeply nested list items collapsible:
 # https://gist.github.com/dotiful/0bd3516f42c6ca68479e64ad2942ac90
 collapse_nested_lists = True
@@ -105,5 +103,7 @@ if collapse_nested_lists:
         )
         html = html.replace(to_replace, replace_with)
 
+if os.path.dirname(snakemake.output.html):
+    os.makedirs(os.path.dirname(snakemake.output.html), exist_ok=True)
 with open(snakemake.output.html, "w") as f:
     f.write(html)

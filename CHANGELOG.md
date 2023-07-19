@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.0.2
+- Fix error causing crashing of `build_docs` due to leftover line from earlier debugging.
+
 #### version 3.0.1
 - Upgrade ``multidms`` to version 0.1.6, which fixes error with letter-suffixed site numbers.
 

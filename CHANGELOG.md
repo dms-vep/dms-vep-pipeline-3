@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.0.4
+- Allow the parent gene sequence to not start with ATG (start codon) if it fully translates otherwise.
+
 #### version 3.0.3
 - Update to ``polyclonal`` 6.4
 

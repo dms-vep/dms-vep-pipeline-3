@@ -35,4 +35,4 @@ dependencies:
     - alignparse==0.6.2
     - dms_variants==1.4.3
     - multidms==0.1.9
-    - polyclonal==6.3
+    - polyclonal==6.4

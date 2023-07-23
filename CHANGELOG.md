@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.0.6
+- Added plot of diversity indices in `analyze_variant_counts`
+
 #### version 3.0.5
 - Fix x-axis range of line plots in `avg_antibody_escape`
 - Plot x-axis using reference rather than sequential site in `build_codon_variants` and `analyze_variant_counts`

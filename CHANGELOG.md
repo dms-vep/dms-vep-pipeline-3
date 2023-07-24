@@ -1,5 +1,9 @@
 # CHANGELOG
 
+#### version 3.0.7
+- Add tooltips to plot in `avg_antibody_escape`
+- Use log-scale in neutralization vs concentration plots for concentration.
+
 #### version 3.0.6
 - Added plot of diversity indices in `analyze_variant_counts`
 

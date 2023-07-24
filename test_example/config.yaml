@@ -7,7 +7,7 @@
 # Snakefile will be in the root directory and paths will be `dms-vep-pipeline`
 # and `./`, but in this example they are upstream from this subdirectory.
 # ----------------------------------------------------------------------------
-pipeline_path: ../  # typically will be `dms-vep-pipeline` for real pipelines
+pipeline_path: ../  # typically will be `dms-vep-pipeline-3` for real pipelines
 docs: ../docs  # typically will be `docs` for real pipelines
 
 # ----------------------------------------------------------------------------

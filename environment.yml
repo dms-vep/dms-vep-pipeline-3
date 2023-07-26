@@ -34,5 +34,5 @@ dependencies:
   - pip:
     - alignparse==0.6.2
     - dms_variants==1.4.3
-    - multidms==0.1.9
+    - multidms==0.2.0
     - polyclonal==6.4

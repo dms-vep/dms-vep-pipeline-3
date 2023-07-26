@@ -131,3 +131,47 @@ avg_func_effects:
       - LibA-220302-293T_ACE2-1
       - LibA-220302-293T_ACE2-2
       - LibB-220302-293T_ACE2-1
+
+# --------------------------------------------------------------------------------------
+# Configuration for func effect shifts from `multidms` models comparing conditions.
+# --------------------------------------------------------------------------------------
+
+# Define `func_effect_shifts` comparisons of different conditions. Each key is a comparison.
+# Each comparison should have the following keys:
+#  - `conditions` : dict keyed by condition names with values func scores from above.
+#  - `reference` : name of the reference condition, must be in `conditions`
+#  - `clip_lower` : how to clip functional scores at lower bound
+#  - `clip_upper` : how to clip functional scores at upper bound
+#  - `collapse_identical_barcodes` : do we collapse identical barcodes?
+#  - `latent_offset` : is there a condition specific offset in latent effects
+#  - `lasso_shift` : strength of lasso regularization on shifts
+# If you are not doing comparisons, just set `func_effect_shifts` to `null` or
+# leave it out altogether.
+
+# default settings for `func_effect_shifts` comparisons
+func_effect_shifts_default: &func_effect_shifts_default
+  reference: 220210
+  # How to clip functional scores at upper / lower bounds. Allowable values:
+  #  - median_stop: median func score of all variants with stop codons
+  #  - null: no clipping
+  #  - a number: clip at this number
+  clip_lower: median_stop
+  clip_upper: null
+  # Do we collapse barcodes with same variant?
+  collapse_identical_variants: false  # {false, mean, median}
+  # Do we have offset in latent effects for different conditions? `alpha_d` in `multidms`
+  latent_offset: true
+  # Strength of lasso regularization on shifts in `multidms`
+  lasso_shift: 0.0002
+
+func_effect_shifts:
+ LibA-date_comparison-1:
+  <<: *func_effect_shifts_default
+  conditions:
+    220210: LibA-220210-293T_ACE2-1
+    220302: LibA-220302-293T_ACE2-1
+ LibA-date_comparison-2:
+  <<: *func_effect_shifts_default
+  conditions:
+    220210: LibA-220210-293T_ACE2-2
+    220302: LibA-220302-293T_ACE2-2

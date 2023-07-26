@@ -234,5 +234,47 @@ func_effects_docs["Interactive plots of average mutation latent-phenotype effect
     for c in func_effects_config["avg_func_effects"]
 }
 
+# are we doing func_effect_shifts comparisons?
+if (
+    ("func_effect_shifts" in func_effects_config)
+    and (func_effects_config["func_effect_shifts"] is not None)
+):
+    func_effect_shifts = func_effects_config["func_effect_shifts"]
+else:
+    func_effect_shifts = {}
+
+
+rule func_effect_shifts:
+    """``multidms`` comparison of conditions to get shifts in functional effects."""
+    input:
+        lambda wc: [
+            rules.func_scores.output.func_scores.format(selection=sel)
+            for sel in func_effect_shifts[wc.comparison]["conditions"].values()
+        ],
+        nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_shifts.ipynb"),
+    output:
+        shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
+        nb="results/notebooks/func_effect_shifts_{comparison}.ipynb",
+    params:
+        params_yaml=lambda wc: yaml.dump({"params": func_effect_shifts[wc.comparison]}),
+    threads: 1
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/func_effect_shifts_{comparison}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -y {params.params_yaml} \
+            -p shifts_csv {output.shifts} \
+            -p threads {threads} \
+            &> {log}
+        """
+
+if func_effect_shifts:
+    func_effects_docs["Notebooks fitting shifts in functional effects"] = {
+        c: rules.func_effect_shifts.output.nb.format(comparison=c)
+        for c in func_effect_shifts
+    }
 
 docs["Functional effects of mutations"] = func_effects_docs

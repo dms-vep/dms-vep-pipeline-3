@@ -57,7 +57,7 @@ rule func_scores:
 
 
 for s in func_scores:
-    func_effects_docs["Per-variant functional scores"][
+    func_effects_docs["Per-variant functional score CSVs"][
         s
     ] = f"results/func_scores/{s}_func_scores.csv"
 
@@ -121,10 +121,10 @@ rule func_effects_global_epistasis:
 
 
 for s in func_scores:
-    func_effects_docs["Per-selection global epistasis fitting"][
+    func_effects_docs["Notebooks with per-selection global epistasis fitting"][
         s
     ] = f"results/notebooks/func_effects_global_epistasis_{s}.ipynb"
-    func_effects_docs["Per-selection mutation functional effects"][
+    func_effects_docs["Per-selection mutation functional effect CSVs"][
         s
     ] = f"results/func_effects/by_selection/{s}_func_effects.csv"
 
@@ -235,9 +235,8 @@ func_effects_docs["Interactive plots of average mutation latent-phenotype effect
 }
 
 # are we doing func_effect_shifts comparisons?
-if (
-    ("func_effect_shifts" in func_effects_config)
-    and (func_effects_config["func_effect_shifts"] is not None)
+if ("func_effect_shifts" in func_effects_config) and (
+    func_effects_config["func_effect_shifts"] is not None
 ):
     func_effect_shifts = func_effects_config["func_effect_shifts"]
 else:
@@ -265,15 +264,20 @@ rule func_effect_shifts:
     shell:
         """
         papermill {input.nb} {output.nb} \
-            -y {params.params_yaml} \
+            -y "{params.params_yaml}" \
             -p shifts_csv {output.shifts} \
             -p threads {threads} \
             &> {log}
         """
 
+
 if func_effect_shifts:
     func_effects_docs["Notebooks fitting shifts in functional effects"] = {
         c: rules.func_effect_shifts.output.nb.format(comparison=c)
+        for c in func_effect_shifts
+    }
+    func_effects_docs["Per-condition functional effect shifts CSVs"] = {
+        c: rules.func_effect_shifts.output.shifts.format(comparison=c)
         for c in func_effect_shifts
     }
 

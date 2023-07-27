@@ -1,7 +1,9 @@
 # CHANGELOG
 
 ### version 3.1.0
+- Compute and analyze shifts in functional effects between different conditions computed using `multidms`. This adds the `func_effect_shifts` rule.
 - Update `multidms` to version 0.2.0
+- Add `seaborn` to environment
 
 #### version 3.0.8
 - Allow underscores in antibody selection names. (Note this changes paths for prob escape files).

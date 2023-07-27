@@ -28,6 +28,7 @@ dependencies:
   - python=3.11
   - ruamel.yaml=0.17
   - ruff
+  - seaborn=0.12
   - snakefmt
   - snakemake=7.30
   - upsetplot=0.8

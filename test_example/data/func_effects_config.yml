@@ -144,7 +144,7 @@ avg_func_effects:
 #  - `clip_upper` : how to clip functional scores at upper bound
 #  - `collapse_identical_barcodes` : do we collapse identical barcodes?
 #  - `latent_offset` : is there a condition specific offset in latent effects
-#  - `lasso_shift` : strength of lasso regularization on shifts
+#  - `lasso_shifts` : list of strength of lasso regularization on shifts
 # If you are not doing comparisons, just set `func_effect_shifts` to `null` or
 # leave it out altogether.
 
@@ -161,8 +161,9 @@ func_effect_shifts_default: &func_effect_shifts_default
   collapse_identical_variants: false  # {false, mean, median}
   # Do we have offset in latent effects for different conditions? `alpha_d` in `multidms`
   latent_offset: true
-  # Strength of lasso regularization on shifts in `multidms`
-  lasso_shift: 0.0002
+  # Strength of lasso regularization on shifts in `multidms`. You can try a range of
+  # values and then pick a best one at the averaging step. 
+  lasso_shifts: [0.00001, 0.00005, 0.0001, 0.0002, 0.001]
 
 func_effect_shifts:
  LibA-date_comparison-1:

@@ -150,7 +150,6 @@ avg_func_effects:
 
 # default settings for `func_effect_shifts` comparisons
 func_effect_shifts_default: &func_effect_shifts_default
-  reference: 220210
   # How to clip functional scores at upper / lower bounds. Allowable values:
   #  - median_stop: median func score of all variants with stop codons
   #  - null: no clipping
@@ -168,11 +167,32 @@ func_effect_shifts_default: &func_effect_shifts_default
 func_effect_shifts:
  LibA-date_comparison-1:
   <<: *func_effect_shifts_default
+  reference: 220210
   conditions:
     220210: LibA-220210-293T_ACE2-1
     220302: LibA-220302-293T_ACE2-1
  LibA-date_comparison-2:
   <<: *func_effect_shifts_default
+  reference: 220210
   conditions:
     220210: LibA-220210-293T_ACE2-2
     220302: LibA-220302-293T_ACE2-2
+
+# --------------------------------------------------------------------------------------
+# Configuration for averaging func effect shifts from multiple comparisons.
+# --------------------------------------------------------------------------------------
+
+# Define `func_effect_shifts` comparisons to average. `avg_func_effect_shifts` is keyed
+# by name of averaged comparisons. Keys within that are:
+#  - `title`: title of comparisons being averaged
+#  - `comparisons`: list of comparisons from `func_effect_shifts`, must have same
+#                   condition names, lasso shifts, and reference.
+#  - `lasso_shift`: the single lasso shift to use for the final averaged values.
+
+avg_func_effect_shifts:
+  date_comparison:
+    title: Comparison of functional effects from different dates (just a toy example)
+    comparisons:
+      - LibA-date_comparison-1
+      - LibA-date_comparison-2
+    lasso_shift: 0.0001

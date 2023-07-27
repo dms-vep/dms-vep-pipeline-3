@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.0.8
+- Allow underscores in antibody selection names. (Note this changes paths for prob escape files).
+
 #### version 3.0.7
 - Add tooltips to plot in `avg_antibody_escape`
 - Use log-scale in neutralization vs concentration plots for concentration.

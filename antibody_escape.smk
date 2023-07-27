@@ -32,7 +32,7 @@ rule prob_escape_antibody:
         site_numbering_map=config["site_numbering_map"],
     output:
         **{
-            metric: f"results/antibody_escape/by_selection/{{selection}}_{{sample}}_{metric}.csv"
+            metric: f"results/antibody_escape/by_selection/{{selection}}/{{sample}}_{metric}.csv"
             for metric in ["prob_escape", "neut_standard_fracs"]
         },
     params:
@@ -53,7 +53,7 @@ rule prob_escape_antibody:
     conda:
         "environment.yml"
     log:
-        "results/logs/prob_escape_{selection}_{sample}.txt",
+        "results/logs/prob_escape_{selection}/{sample}.txt",
     script:
         "scripts/prob_escape.py"
 

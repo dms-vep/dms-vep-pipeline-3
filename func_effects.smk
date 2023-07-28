@@ -240,14 +240,14 @@ if ("func_effect_shifts" in func_effects_config) and (
 ):
     func_effect_shifts = func_effects_config["func_effect_shifts"]
     if ("avg_func_effect_shifts" in func_effects_config) and (
-        (func_effects_config["avg_func_effect_shifts"] is not None
+        func_effects_config["avg_func_effect_shifts"] is not None
     ):
-        avg_func_effect_shifts_config = func_effects_config["avg_func_effect_shifts"]
+        avg_func_effect_shifts = func_effects_config["avg_func_effect_shifts"]
     else:
-        avg_func_effect_shifts_config = {}
+        avg_func_effect_shifts = {}
 else:
     func_effect_shifts = {}
-    avg_func_effect_shifts_config = {}
+    avg_func_effect_shifts = {}
 
 
 rule func_effect_shifts:
@@ -293,12 +293,13 @@ rule avg_func_effect_shifts:
     """Average and plot the functional effects shifts for a comparison."""
     input:
         lambda wc: [
-            rules.func_effect_shfits.output.shifts.format(comparison=c)
-            for c in avg_func_effect_shifts_config[wc.comparison]["comparisons"]
+            rules.func_effect_shifts.output.shifts.format(comparison=c)
+            for c in avg_func_effect_shifts[wc.comparison]["comparisons"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(
-            config["pipeline_path"], "notebooks/avg_func_effect_shifts.ipynb",
+            config["pipeline_path"],
+            "notebooks/avg_func_effect_shifts.ipynb",
         ),
     output:
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
@@ -306,7 +307,7 @@ rule avg_func_effect_shifts:
         params_yaml=lambda wc: yaml.dump(
             {"params": avg_func_effect_shifts[wc.comparison]}
         ),
-    environment:
+    conda:
         "environment.yml"
     log:
         "results/logs/avg_func_effect_shifts_{comparison}.txt",
@@ -317,6 +318,7 @@ rule avg_func_effect_shifts:
             -y '{params.params_yaml}' \
             &> {log}
         """
+
 
 if avg_func_effect_shifts:
     func_effects_docs["Notebooks averaging shifts in functional effects"] = {

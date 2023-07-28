@@ -302,6 +302,8 @@ rule avg_func_effect_shifts:
             "notebooks/avg_func_effect_shifts.ipynb",
         ),
     output:
+        shifts_csv="results/func_effect_shifts/averages/{comparison}_shifts.csv",
+        shifts_html="results/func_effect_shifts/averages/{comparison}_shifts_nolegend.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
     params:
         params_yaml=lambda wc: yaml.dump(
@@ -315,6 +317,8 @@ rule avg_func_effect_shifts:
         """
         papermill {input.nb} {output.nb} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
+            -p shifts_csv {output.shifts_csv} \
+            -p shifts_html {output.shifts_html} \
             -y '{params.params_yaml}' \
             &> {log}
         """

@@ -324,10 +324,51 @@ rule avg_func_effect_shifts:
         """
 
 
+rule format_avg_func_effect_shifts_chart:
+    """Format ``altair`` average functional effect shifts chart."""
+    input:
+        html=rules.avg_func_effect_shifts.output.shifts_html,
+        pyscript=os.path.join(config["pipeline_path"], "scripts/format_altair_html.py"),
+    output:
+        html="results/func_effect_shifts/averages/{comparison}_shifts.html",
+        legend=temp("results/func_effect_shifts/averages/{comparison}_shifts.md"),
+    params:
+        title=lambda wc: avg_func_effect_shifts[wc.comparison]["title"],
+        legend=lambda wc: avg_func_effect_shifts[wc.comparison]["legend"],
+        suffix=(
+            f"Analysis by {config['authors']} ({config['year']}).\n\n See "
+            f"[{config['github_repo_url']}]({config['github_repo_url']}) for code/data."
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/format_avg_func_effect_shifts_chart_{comparison}.txt",
+    shell:
+        """
+        echo "## {params.title}\n" > {output.legend}
+        echo "{params.legend}\n\n" >> {output.legend}
+        echo "{params.suffix}" >> {output.legend}
+        python {input.pyscript} \
+            --chart {input.html} \
+            --markdown {output.legend} \
+            --title "{params.title}" \
+            --output {output.html}
+        """
+
+
 if avg_func_effect_shifts:
     func_effects_docs["Notebooks averaging shifts in functional effects"] = {
         c: rules.avg_func_effect_shifts.output.nb.format(comparison=c)
         for c in avg_func_effect_shifts
     }
+    func_effects_docs["Average shifts in functional effects (CSV files)"] = {
+        c: rules.avg_func_effect_shifts.output.shifts_csv.format(comparison=c)
+        for c in avg_func_effect_shifts
+    }
+    func_effects_docs["Interactive plots of average shifts in functional effects"] = {
+        c: rules.format_avg_func_effect_shifts_chart.output.html.format(comparison=c)
+        for c in avg_func_effect_shifts
+    }
+
 
 docs["Functional effects of mutations"] = func_effects_docs

@@ -200,8 +200,8 @@ avg_func_effect_shifts_default: &avg_func_effect_shifts_default
   plot_kwargs:
     addtl_slider_stats:
       times_seen: 3
-    heatmap_max_at_least: 1
-    heatmap_min_at_least: -1
+    heatmap_max_at_least: 0.5
+    heatmap_min_at_least: -0.5
     init_floor_at_zero: false
     init_site_statistic: mean
     site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`

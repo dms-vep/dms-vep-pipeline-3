@@ -53,7 +53,7 @@ rule analyze_variant_counts:
     log:
         "results/logs/analyze_variant_counts.txt",
     shell:
-        "papermill --no-progress-bar {input.nb} {output.nb} &> {log}"
+        "papermill {input.nb} {output.nb} &> {log}"
 
 
 count_variants_docs[

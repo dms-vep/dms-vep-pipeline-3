@@ -78,7 +78,7 @@ rule analyze_func_scores:
     log:
         "results/logs/analyze_func_scores.txt",
     shell:
-        "papermill {input.nb} {output.nb} &> {log}"
+        "papermill --no-progress-bar {input.nb} {output.nb} &> {log}"
 
 
 func_effects_docs["Analysis of functional scores"] = rules.analyze_func_scores.output.nb
@@ -116,6 +116,7 @@ rule func_effects_global_epistasis:
             -p func_effects {output.func_effects} \
             -p threads {threads} \
             -y "{params.global_epistasis_params_yaml}" \
+            --no-progress-bar \
             &> {log}
         """
 
@@ -163,6 +164,7 @@ rule avg_func_effects:
             -p functional_html {output.functional_html} \
             -p latent_html {output.latent_html} \
             -y '{params.params_yaml}' \
+            --no-progress-bar \
             &> {log}
         """
 
@@ -274,6 +276,7 @@ rule func_effect_shifts:
             -y "{params.params_yaml}" \
             -p shifts_csv {output.shifts} \
             -p threads {threads} \
+            --no-progress-bar \
             &> {log}
         """
 
@@ -320,6 +323,7 @@ rule avg_func_effect_shifts:
             -p shifts_csv {output.shifts_csv} \
             -p shifts_html {output.shifts_html} \
             -y '{params.params_yaml}' \
+            --no-progress-bar \
             &> {log}
         """
 

@@ -102,7 +102,7 @@ else:
         log:
             "results/logs/analyze_pacbio_ccs.txt"
         shell:
-            "papermill {input.nb} {output.nb} &> {log}"
+            "papermill --no-progress-bar {input.nb} {output.nb} &> {log}"
 
     build_variants_docs["Analysis of PacBio CCSs"] = rules.analyze_pacbio_ccs.output.nb
 
@@ -126,7 +126,7 @@ else:
         log:
             "results/logs/build_pacbio_consensus.txt"
         shell:
-            "papermill {input.nb} {output.nb} &> {log}"
+            "papermill --no-progress-bar {input.nb} {output.nb} &> {log}"
 
     build_variants_docs[
         "Building of consensus sequences for barcoded variants"
@@ -153,7 +153,7 @@ else:
         log:
             "results/logs/build_codon_variants.txt"
         shell:
-            "papermill {input.nb} {output.nb} &> {log}"
+            "papermill --no-progress-bar {input.nb} {output.nb} &> {log}"
 
     build_variants_docs[
         "Building of codon-variant table"

@@ -117,6 +117,7 @@ rule fit_antibody_escape:
             -p pickle_file {output.pickle} \
             -p selection {wildcards.selection} \
             -y "{params.params_yaml}" \
+            --no-progress-bar \
             &> {log}
         """
 
@@ -172,6 +173,7 @@ rule avg_antibody_escape:
             -p escape_html {output.escape_html} \
             -p icXX_html {output.icXX_html} \
             -y '{params.params_yaml}' \
+            --no-progress-bar \
             &> {log}
         """
 

@@ -80,4 +80,3 @@ jobs:
           name: log-files
           path: test_example/results/logs
           retention-days: 7
-          name: 

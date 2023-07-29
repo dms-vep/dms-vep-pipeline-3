@@ -4,6 +4,7 @@
 - Compute and analyze shifts in functional effects between different conditions computed using `multidms`. This adds the `func_effect_shifts`, `avg_func_effect_shifts`, and `format_avg_func_effect_shifts_chart` rules.
 - Update `multidms` to version 0.2.0
 - Add `seaborn` to environment
+- Improvements to GitHub actions testing: save log files on failure, and don't build `conda` environment twice.
 
 #### version 3.0.8
 - Allow underscores in antibody selection names. (Note this changes paths for prob escape files).

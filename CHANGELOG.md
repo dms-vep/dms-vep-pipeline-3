@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### version 3.1.0
+- Compute and analyze shifts in functional effects between different conditions computed using `multidms`. This adds the `func_effect_shifts`, `avg_func_effect_shifts`, and `format_avg_func_effect_shifts_chart` rules.
+- Update `multidms` to version 0.2.1
+- Add `ipywidgets` and `seaborn` to environment
+- Improvements to GitHub actions testing: save log files on failure, and don't build `conda` environment twice.
+
 #### version 3.0.8
 - Allow underscores in antibody selection names. (Note this changes paths for prob escape files).
 
@@ -18,15 +24,15 @@
 - Allow the parent gene sequence to not start with ATG (start codon) if it fully translates otherwise.
 
 #### version 3.0.3
-- Update to ``polyclonal`` 6.4
+- Update to `polyclonal` 6.4
 
 #### version 3.0.2
 - Fix error causing crashing of `build_docs` due to leftover line from earlier debugging.
-- Update to ``polyclonal`` 6.3
-- Updated to ``multidms`` 0.1.9
+- Update to `polyclonal` 6.3
+- Updated to `multidms` 0.1.9
 
 #### version 3.0.1
-- Upgrade ``multidms`` to version 0.1.6, which fixes error with letter-suffixed site numbers.
+- Upgrade `multidms` to version 0.1.6, which fixes error with letter-suffixed site numbers.
 
 ## version 3.0.0
 This is a total re-write of the pipeline in a new repository, replacing versions 1 and 2 that are still available at [https://github.com/dms-vep/dms-vep-pipeline](https://github.com/dms-vep/dms-vep-pipeline).

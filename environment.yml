@@ -13,6 +13,7 @@ dependencies:
   - entrez-direct=16.2
   - flatdict=4.0
   - git-lfs
+  - ipywidgets  # required because of https://github.com/matsengrp/multidms/issues/114
   - jupyterlab
   - mafft=7.520
   - markdown=3.4
@@ -28,11 +29,12 @@ dependencies:
   - python=3.11
   - ruamel.yaml=0.17
   - ruff
+  - seaborn=0.12
   - snakefmt
   - snakemake=7.30
   - upsetplot=0.8
   - pip:
     - alignparse==0.6.2
     - dms_variants==1.4.3
-    - multidms==0.1.9
+    - multidms==0.2.1
     - polyclonal==6.4

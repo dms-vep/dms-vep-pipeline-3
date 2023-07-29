@@ -57,7 +57,7 @@ rule func_scores:
 
 
 for s in func_scores:
-    func_effects_docs["Per-variant functional scores"][
+    func_effects_docs["Per-variant functional score CSVs"][
         s
     ] = f"results/func_scores/{s}_func_scores.csv"
 
@@ -121,10 +121,10 @@ rule func_effects_global_epistasis:
 
 
 for s in func_scores:
-    func_effects_docs["Per-selection global epistasis fitting"][
+    func_effects_docs["Notebooks with per-selection global epistasis fitting"][
         s
     ] = f"results/notebooks/func_effects_global_epistasis_{s}.ipynb"
-    func_effects_docs["Per-selection mutation functional effects"][
+    func_effects_docs["Per-selection mutation functional effect CSVs"][
         s
     ] = f"results/func_effects/by_selection/{s}_func_effects.csv"
 
@@ -233,6 +233,142 @@ func_effects_docs["Interactive plots of average mutation latent-phenotype effect
     c: f"results/func_effects/averages/{c}_latent_effects.html"
     for c in func_effects_config["avg_func_effects"]
 }
+
+# are we doing func_effect_shifts comparisons?
+if ("func_effect_shifts" in func_effects_config) and (
+    func_effects_config["func_effect_shifts"] is not None
+):
+    func_effect_shifts = func_effects_config["func_effect_shifts"]
+    if ("avg_func_effect_shifts" in func_effects_config) and (
+        func_effects_config["avg_func_effect_shifts"] is not None
+    ):
+        avg_func_effect_shifts = func_effects_config["avg_func_effect_shifts"]
+    else:
+        avg_func_effect_shifts = {}
+else:
+    func_effect_shifts = {}
+    avg_func_effect_shifts = {}
+
+
+rule func_effect_shifts:
+    """``multidms`` comparison of conditions to get shifts in functional effects."""
+    input:
+        lambda wc: [
+            rules.func_scores.output.func_scores.format(selection=sel)
+            for sel in func_effect_shifts[wc.comparison]["conditions"].values()
+        ],
+        nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_shifts.ipynb"),
+    output:
+        shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
+        nb="results/notebooks/func_effect_shifts_{comparison}.ipynb",
+    params:
+        params_yaml=lambda wc: yaml.dump({"params": func_effect_shifts[wc.comparison]}),
+    threads: 1
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/func_effect_shifts_{comparison}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -y "{params.params_yaml}" \
+            -p shifts_csv {output.shifts} \
+            -p threads {threads} \
+            &> {log}
+        """
+
+
+if func_effect_shifts:
+    func_effects_docs["Notebooks fitting shifts in functional effects"] = {
+        c: rules.func_effect_shifts.output.nb.format(comparison=c)
+        for c in func_effect_shifts
+    }
+    func_effects_docs["Per-condition functional effect shifts CSVs"] = {
+        c: rules.func_effect_shifts.output.shifts.format(comparison=c)
+        for c in func_effect_shifts
+    }
+
+
+rule avg_func_effect_shifts:
+    """Average and plot the functional effects shifts for a comparison."""
+    input:
+        lambda wc: [
+            rules.func_effect_shifts.output.shifts.format(comparison=c)
+            for c in avg_func_effect_shifts[wc.comparison]["comparisons"]
+        ],
+        site_numbering_map_csv=config["site_numbering_map"],
+        nb=os.path.join(
+            config["pipeline_path"],
+            "notebooks/avg_func_effect_shifts.ipynb",
+        ),
+    output:
+        shifts_csv="results/func_effect_shifts/averages/{comparison}_shifts.csv",
+        shifts_html="results/func_effect_shifts/averages/{comparison}_shifts_nolegend.html",
+        nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
+    params:
+        params_yaml=lambda wc: yaml.dump(
+            {"params": avg_func_effect_shifts[wc.comparison]}
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/avg_func_effect_shifts_{comparison}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -p site_numbering_map_csv {input.site_numbering_map_csv} \
+            -p shifts_csv {output.shifts_csv} \
+            -p shifts_html {output.shifts_html} \
+            -y '{params.params_yaml}' \
+            &> {log}
+        """
+
+
+rule format_avg_func_effect_shifts_chart:
+    """Format ``altair`` average functional effect shifts chart."""
+    input:
+        html=rules.avg_func_effect_shifts.output.shifts_html,
+        pyscript=os.path.join(config["pipeline_path"], "scripts/format_altair_html.py"),
+    output:
+        html="results/func_effect_shifts/averages/{comparison}_shifts.html",
+        legend=temp("results/func_effect_shifts/averages/{comparison}_shifts.md"),
+    params:
+        title=lambda wc: avg_func_effect_shifts[wc.comparison]["title"],
+        legend=lambda wc: avg_func_effect_shifts[wc.comparison]["legend"],
+        suffix=(
+            f"Analysis by {config['authors']} ({config['year']}).\n\n See "
+            f"[{config['github_repo_url']}]({config['github_repo_url']}) for code/data."
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/format_avg_func_effect_shifts_chart_{comparison}.txt",
+    shell:
+        """
+        echo "## {params.title}\n" > {output.legend}
+        echo "{params.legend}\n\n" >> {output.legend}
+        echo "{params.suffix}" >> {output.legend}
+        python {input.pyscript} \
+            --chart {input.html} \
+            --markdown {output.legend} \
+            --title "{params.title}" \
+            --output {output.html}
+        """
+
+
+if avg_func_effect_shifts:
+    func_effects_docs["Notebooks averaging shifts in functional effects"] = {
+        c: rules.avg_func_effect_shifts.output.nb.format(comparison=c)
+        for c in avg_func_effect_shifts
+    }
+    func_effects_docs["Average shifts in functional effects (CSV files)"] = {
+        c: rules.avg_func_effect_shifts.output.shifts_csv.format(comparison=c)
+        for c in avg_func_effect_shifts
+    }
+    func_effects_docs["Interactive plots of average shifts in functional effects"] = {
+        c: rules.format_avg_func_effect_shifts_chart.output.html.format(comparison=c)
+        for c in avg_func_effect_shifts
+    }
 
 
 docs["Functional effects of mutations"] = func_effects_docs

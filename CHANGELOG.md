@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.1.2
+- Upgrade to `polyclonal` 6.5.
+
 #### version 3.1.1
 - For average plots, change default to only show mutations if present in one more than half of all models / selections / comparisons. This reduces showing of mutations found in a minority of replicates.
 

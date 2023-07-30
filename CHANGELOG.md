@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.1.1
+- For average plots, change default to only show mutations if present in one more than half of all models / selections / comparisons. This reduces showing of mutations found in a minority of replicates.
+
 ### version 3.1.0
 - Compute and analyze shifts in functional effects between different conditions computed using `multidms`. This adds the `func_effect_shifts`, `avg_func_effect_shifts`, and `format_avg_func_effect_shifts_chart` rules.
 - Update `multidms` to version 0.2.1

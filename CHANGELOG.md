@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.1.3
+- Fixed a bug in `avg_func_effect_shifts` when lasso penalty is in scientific notation.
+
 #### version 3.1.2
 - Upgrade to `polyclonal` 6.5.
 

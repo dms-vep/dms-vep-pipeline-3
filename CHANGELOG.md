@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.2.0
+- Internally restructured to re-use a single rule for formatting altair plots by creating `common.smk` and then putting the `format_altair_html` rule there and removing plot-specific versions of that rule.
+
 #### version 3.1.3
 - Fixed a bug in `avg_func_effect_shifts` when lasso penalty is in scientific notation.
 

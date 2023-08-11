@@ -176,40 +176,6 @@ rule avg_antibody_escape:
         """
 
 
-rule format_avg_antibody_escape_charts:
-    """Format ``altair`` antibody escape charts."""
-    input:
-        html="results/antibody_escape/averages/{antibody}_mut_{metric}_nolegend.html",
-        pyscript=os.path.join(config["pipeline_path"], "scripts/format_altair_html.py"),
-    output:
-        html="results/antibody_escape/averages/{antibody}_mut_{metric}.html",
-        legend=temp("results/antibody_escape/averages/{antibody}_mut_{metric}.md"),
-    wildcard_constraints:
-        metric="escape|icXX",
-    params:
-        title=lambda wc: avg_antibody_escape_config[wc.antibody]["title"],
-        legend=lambda wc: avg_antibody_escape_config[wc.antibody]["legend"],
-        suffix=(
-            f"Analysis by {config['authors']} ({config['year']}).\n\n See "
-            f"[{config['github_repo_url']}]({config['github_repo_url']}) for code/data."
-        ),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/format_avg_antibody_escape_charts_{antibody}_mut_{metric}.txt",
-    shell:
-        """
-        echo "## {params.title}\n" > {output.legend}
-        echo "{params.legend}\n\n" >> {output.legend}
-        echo "{params.suffix}" >> {output.legend}
-        python {input.pyscript} \
-            --chart {input.html} \
-            --markdown {output.legend} \
-            --title "{params.title}" \
-            --output {output.html}
-        """
-
-
 for heading, fname in [
     ("Average selections for antibody/serum", rules.avg_antibody_escape.output.nb),
     (

@@ -3,6 +3,7 @@
 
 import collections
 import os
+import re
 
 import flatdict
 
@@ -78,6 +79,7 @@ docs = {}
 
 # include pipeline rules, which also add to `docs` dictionary
 include: "build_variants.smk"
+include: "common.smk"
 
 
 if len(barcode_runs) > 0:

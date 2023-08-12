@@ -115,7 +115,7 @@ rule fit_escape:
             for sample in assay_selections[wc.assay][wc.selection]["antibody_samples"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
-        nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
+        nb=os.path.join(config["pipeline_path"], "notebooks/fit_escape.ipynb"),
     output:
         prob_escape_mean="results/{assay}/by_selection/{selection}_prob_escape_mean.csv",
         pickle="results/{assay}/by_selection/{selection}_polyclonal_model.pickle",
@@ -138,6 +138,7 @@ rule fit_escape:
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p prob_escape_mean_csv {output.prob_escape_mean} \
             -p pickle_file {output.pickle} \
+            -p assay {wildcards.assay} \
             -p selection {wildcards.selection} \
             -y "{params.params_yaml}" \
             &> {log}

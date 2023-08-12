@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ### version 3.2.0
+- Generalize `antibody_escape` to also allow receptor affinity selections with soluble receptor.
 - Internally restructured to re-use a single rule for formatting altair plots by creating `common.smk` and then putting the `format_altair_html` rule there and removing plot-specific versions of that rule.
 
 #### version 3.1.3

@@ -1,4 +1,6 @@
-# Configurations for determining effects of mutations on antibody/sera escape
+# Configurations for determining effects of mutations on antibody/sera escape,
+# or escape from neutralization by soluble receptor (which can be used to determine
+# receptor affinity).
 
 # --------------------------------------------------------------------------------------
 # Configuration for each antibody selection experiment.
@@ -21,6 +23,10 @@
 # The `use_in_fit` option exists because you may decide that some samples are outside
 # the preferred neutralization range to include in the fit, so if `use_in_fit: false`
 # then functional scores are computed and plotted but it is not included in the fit.
+
+# Note that for soluble receptor affinity selections, you define selection experiments
+# exactly analogously to `antibody_selections` in `receptor_selections`, using `antibody`
+# as a synonym for the soluble receptor.
 
 # default prob_escape filters
 prob_escape_filters_default: &prob_escape_filters_default
@@ -163,6 +169,27 @@ antibody_selections:
       concentration: 1.2328
       use_in_fit: true
      LibA-220302-S2M11-4.9314-2:
+      concentration: 4.9314
+      use_in_fit: true
+
+# define the soluble receptor selections
+receptor_selections:
+
+  LibA-220302-pretending_S2M11_is_receptor-1:
+    neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
+    no_antibody_sample: LibA-220302-no_antibody-1
+    antibody_samples:
+     LibA-220302-S2M11-0.3082-1:
+      concentration: 0.3082
+      use_in_fit: true
+     LibA-220302-S2M11-1.2328-1:
+      concentration: 1.2328
+      use_in_fit: false
+     LibA-220302-S2M11-4.9314-1:
       concentration: 4.9314
       use_in_fit: true
 

@@ -6,6 +6,7 @@
 <li><a href="#count-variants">Count variants</a></li>
 <li><a href="#functional-effects-of-mutations">Functional effects of mutations</a></li>
 <li><a href="#antibodyserum-escape">Antibody/serum escape</a></li>
+<li><a href="#receptor-affinity">Receptor affinity</a></li>
 <li><a href="#additional-analysis-specific-files">Additional analysis-specific files</a></li>
 </ul>
 </div>
@@ -132,7 +133,7 @@
 </ul>
 <h2 id="antibodyserum-escape">Antibody/serum escape</h2>
 <ul>
-<li><details><summary>Probability (fraction) escape for each variant (CSVs) in each selection (click triangle to expand/collapse)</summary><ul>
+<li><details><summary>Probability (fraction) escape for each variant in each antibody escape selection (CSVs) (click triangle to expand/collapse)</summary><ul>
 
 <li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/antibody_escape/by_selection/LibA-220210-REGN10933-1/LibA-220210-REGN10933-0.15-1_prob_escape.csv">LibA-220210-REGN10933-1 LibA-220210-REGN10933-0.15-1</a></li>
 <li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/antibody_escape/by_selection/LibA-220210-REGN10933-1/LibA-220210-REGN10933-1.39-1_prob_escape.csv">LibA-220210-REGN10933-1 LibA-220210-REGN10933-1.39-1</a></li>
@@ -152,13 +153,13 @@
 </ul></details>
 
 </li>
-<li><details><summary>Fits of polyclonal models to antibody escape selections (click triangle to expand/collapse)</summary><ul>
+<li><details><summary>Fits of polyclonal models to individual antibody escape selections (click triangle to expand/collapse)</summary><ul>
 
-<li><a href="notebooks/fit_antibody_escape_LibA-220210-REGN10933-1.html">LibA-220210-REGN10933-1</a></li>
-<li><a href="notebooks/fit_antibody_escape_LibA-220210-REGN10933-2.html">LibA-220210-REGN10933-2</a></li>
-<li><a href="notebooks/fit_antibody_escape_LibB-220302-REGN10933-1.html">LibB-220302-REGN10933-1</a></li>
-<li><a href="notebooks/fit_antibody_escape_LibA-220302-S2M11-1.html">LibA-220302-S2M11-1</a></li>
-<li><a href="notebooks/fit_antibody_escape_LibA-220302-S2M11-2.html">LibA-220302-S2M11-2</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_LibA-220210-REGN10933-1.html">LibA-220210-REGN10933-1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_LibA-220210-REGN10933-2.html">LibA-220210-REGN10933-2</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_LibB-220302-REGN10933-1.html">LibB-220302-REGN10933-1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_LibA-220302-S2M11-1.html">LibA-220302-S2M11-1</a></li>
+<li><a href="notebooks/fit_escape_antibody_escape_LibA-220302-S2M11-2.html">LibA-220302-S2M11-2</a></li>
 </ul></details>
 
 </li>
@@ -196,6 +197,21 @@
 <li><a href="htmls/S2M11_mut_icXX.html">S2M11</a></li>
 </ul></details>
 
+</li>
+</ul>
+<h2 id="receptor-affinity">Receptor affinity</h2>
+<ul>
+<li><details><summary>Probability (fraction) escape for each variant in each receptor affinity selection (CSVs) (click triangle to expand/collapse)</summary><ul>
+
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/receptor_affinity/by_selection/LibA-220302-pretending_S2M11_is_receptor-1/LibA-220302-S2M11-0.3082-1_prob_escape.csv">LibA-220302-pretending_S2M11_is_receptor-1 LibA-220302-S2M11-0.3082-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/receptor_affinity/by_selection/LibA-220302-pretending_S2M11_is_receptor-1/LibA-220302-S2M11-1.2328-1_prob_escape.csv">LibA-220302-pretending_S2M11_is_receptor-1 LibA-220302-S2M11-1.2328-1</a></li>
+<li><a href="https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/results/receptor_affinity/by_selection/LibA-220302-pretending_S2M11_is_receptor-1/LibA-220302-S2M11-4.9314-1_prob_escape.csv">LibA-220302-pretending_S2M11_is_receptor-1 LibA-220302-S2M11-4.9314-1</a></li>
+</ul></details>
+
+</li>
+<li>Fits of polyclonal models to individual receptor affinity selections<ul>
+<li><a href="notebooks/fit_escape_receptor_affinity_LibA-220302-pretending_S2M11_is_receptor-1.html">LibA-220302-pretending_S2M11_is_receptor-1</a></li>
+</ul>
 </li>
 </ul>
 <h2 id="additional-analysis-specific-files">Additional analysis-specific files</h2>

@@ -27,7 +27,7 @@ def format_altair_html_chart_params(wc):
         legend = avg_func_effect_shifts[comparison]["legend"]
     elif m := re.fullmatch(
         "results/(?P<assay>antibody_escape|receptor_affinity)/"
-        + "averages/(?P<antibody>.+)_mut_(?:escape|icXX)",
+        + "averages/(?P<antibody>.+)_mut_(?:effect|icXX)",
         chart,
     ):
         assay = m.group("assay")

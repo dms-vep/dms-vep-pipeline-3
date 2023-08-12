@@ -190,9 +190,9 @@ rule avg_escape:
         nb=os.path.join(config["pipeline_path"], "notebooks/avg_escape.ipynb"),
     output:
         pickle="results/{assay}/averages/{antibody}_polyclonal_model.pickle",
-        escape_csv="results/{assay}/averages/{antibody}_mut_escape.csv",
+        effect_csv="results/{assay}/averages/{antibody}_mut_effect.csv",
         icXX_csv="results/{assay}/averages/{antibody}_mut_icXX.csv",
-        escape_html="results/{assay}/averages/{antibody}_mut_escape_nolegend.html",
+        effect_html="results/{assay}/averages/{antibody}_mut_effect_nolegend.html",
         icXX_html="results/{assay}/averages/{antibody}_mut_icXX_nolegend.html",
         nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
     params:
@@ -213,9 +213,9 @@ rule avg_escape:
             -p assay {wildcards.assay} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p avg_pickle_file {output.pickle} \
-            -p escape_csv {output.escape_csv} \
+            -p effect_csv {output.effect_csv} \
             -p icXX_csv {output.icXX_csv} \
-            -p escape_html {output.escape_html} \
+            -p effect_html {output.effect_html} \
             -p icXX_html {output.icXX_html} \
             -y '{params.params_yaml}' \
             &> {log}
@@ -226,11 +226,11 @@ for assay in avg_assay_config:
     assay_str = assay.replace("_", " ")
     for heading, fname in [
         (f"Average selections for {assay_str}", rules.avg_escape.output.nb),
-        (f"{assay_str} CSVs", rules.avg_escape.output.escape_csv),
+        (f"{assay_str} CSVs", rules.avg_escape.output.effect_csv),
         (f"{assay_str} ICXX CSVs", rules.avg_escape.output.icXX_csv),
         (
             f"{assay_str} mutation effect plots",
-            "results/{assay}/averages/{antibody}_mut_escape.html",
+            "results/{assay}/averages/{antibody}_mut_effect.html",
         ),
         (
             f"{assay_str} mutation ICXX plots",

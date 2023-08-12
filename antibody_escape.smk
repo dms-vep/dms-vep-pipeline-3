@@ -210,6 +210,7 @@ rule avg_escape:
     shell:
         """
         papermill {input.nb} {output.nb} \
+            -p assay {wildcards.assay} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p avg_pickle_file {output.pickle} \
             -p escape_csv {output.escape_csv} \

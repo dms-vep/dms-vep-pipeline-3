@@ -236,13 +236,13 @@ avg_antibody_escape_default: &avg_antibody_escape_default
     per_model_tooltip: true
   plot_hide_stats: *plot_hide_stats_default
   legend: |
-    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary statistic indicating escape at each site. The heat map shows escape for individual mutations, with parental amino-acid identities indicated by x and gray indicating non-measured mutations. Mouse over points for details.
+    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary statistic indicating a summary of the mutation effects at site. The heat map shows effects for individual mutations, with parental amino-acid identities indicated by x and gray indicating non-measured mutations. Mouse over points for details.
 
     Options at the bottom of the plot let you modify the display, such as by selecting how many different variants a mutation must be seen in to be shown (*minimum times_seen*), how many different experimental selections the mutation was measured in (*minimum n_models*), what site summary statistic to show, etc.
 
     You can filter by the functional effects of mutations. Mutations removed by this filter are shown as dark gray squares in the heat map to distinguish unmeasured mutations from ones measured to be deleterious.
 
-    The minimum max of escape at site is useful to select the sites where mutations have the largest effect
+    The *minimum max* slider is useful to select the sites where mutations have the largest effect
 
 # Define the antibodies/sera escapes to average
 avg_antibody_escape:

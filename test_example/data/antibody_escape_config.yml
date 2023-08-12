@@ -270,5 +270,5 @@ avg_receptor_affinity:
     <<: *avg_receptor_affinity_default
     title: Receptor-affinity map pretending S2M11 is receptor
     selections:
-      - LibA-220302-pretending_S2M11_is_receptor-1:
-      - LibA-220302-pretending_S2M11_is_receptor-2:
+      - LibA-220302-pretending_S2M11_is_receptor-1
+      - LibA-220302-pretending_S2M11_is_receptor-2

@@ -26,12 +26,14 @@ def format_altair_html_chart_params(wc):
         title = avg_func_effect_shifts[comparison]["title"]
         legend = avg_func_effect_shifts[comparison]["legend"]
     elif m := re.fullmatch(
-        "results/antibody_escape/averages/(?P<antibody>.+)_mut_(?:escape|icXX)",
+        "results/(?P<assay>antibody_escape|receptor_affinity)/"
+        + "averages/(?P<antibody>.+)_mut_(?:escape|icXX)",
         chart,
     ):
+        assay = m.group("assay")
         antibody = m.group("antibody")
-        title = avg_antibody_escape_config[antibody]["title"]
-        legend = avg_antibody_escape_config[antibody]["legend"]
+        title = avg_assay_config[assay][antibody]["title"]
+        legend = avg_assay_config[assay][antibody]["legend"]
     else:
         raise ValueError(f"could not get formatting params for {chart=}")
     return {"title": title, "legend": legend}

@@ -16,11 +16,16 @@ with open(config["antibody_escape_config"]) as f:
 # get configuration for any antibody escape or receptor affinity selections
 assays = ["antibody_escape", "receptor_affinity"]
 assay_selections = {}
+avg_assay_config = {}
 for assay in assays:
     if (sel_key := assay.split("_")[0] + "_selections") in antibody_escape_config:
         assay_selections[assay] = antibody_escape_config[sel_key]
     else:
         assay_selections[assay] = {}
+    if f"avg_{assay}" in antibody_escape_config:
+        avg_assay_config[assay] = antibody_escape_config[f"avg_{assay}"]
+    else:
+        avg_assay_config[assay] = {}
 
 #  make sure all samples defined
 for sel_name, sel_d in itertools.chain.from_iterable(
@@ -162,47 +167,46 @@ for assay, sels in assay_selections.items():
             ][sel] = rules.fit_escape.output.nb.format(assay=assay, selection=sel)
 
 
-avg_antibody_escape_config = antibody_escape_config["avg_antibody_escape"]
-
-
-rule avg_antibody_escape:
-    """Average antibody escape across several selections for the same antibody/serum."""
+rule avg_escape:
+    """Average antibody escape or receptor affinity across several selections."""
     input:
         plot_hide_stats=lambda wc: [
             d["csv"]
-            for d in avg_antibody_escape_config[wc.antibody][
+            for d in avg_assay_config[wc.assay][wc.antibody][
                 "plot_hide_stats"
             ].values()
         ],
         prob_escape_means=lambda wc: [
             rules.fit_escape.output.prob_escape_mean.format(
-                assay="antibody_escape", selection=sel
+                assay=wc.assay, selection=sel
             )
-            for sel in avg_antibody_escape_config[wc.antibody]["selections"]
+            for sel in avg_assay_config[wc.assay][wc.antibody]["selections"]
         ],
         pickles=lambda wc: [
-            rules.fit_escape.output.pickle.format(
-                assay="antibody_escape", selection=sel
-            )
-            for sel in avg_antibody_escape_config[wc.antibody]["selections"]
+            rules.fit_escape.output.pickle.format(assay=wc.assay, selection=sel)
+            for sel in avg_assay_config[wc.assay][wc.antibody]["selections"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
-        nb=os.path.join(config["pipeline_path"], "notebooks/avg_antibody_escape.ipynb"),
+        nb=os.path.join(config["pipeline_path"], "notebooks/avg_escape.ipynb"),
     output:
-        pickle="results/antibody_escape/averages/{antibody}_polyclonal_model.pickle",
-        escape_csv="results/antibody_escape/averages/{antibody}_mut_escape.csv",
-        icXX_csv="results/antibody_escape/averages/{antibody}_mut_icXX.csv",
-        escape_html="results/antibody_escape/averages/{antibody}_mut_escape_nolegend.html",
-        icXX_html="results/antibody_escape/averages/{antibody}_mut_icXX_nolegend.html",
-        nb="results/notebooks/avg_antibody_escape_{antibody}.ipynb",
+        pickle="results/{assay}/averages/{antibody}_polyclonal_model.pickle",
+        escape_csv="results/{assay}/averages/{antibody}_mut_escape.csv",
+        icXX_csv="results/{assay}/averages/{antibody}_mut_icXX.csv",
+        escape_html="results/{assay}/averages/{antibody}_mut_escape_nolegend.html",
+        icXX_html="results/{assay}/averages/{antibody}_mut_icXX_nolegend.html",
+        nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.dump(
-            {"params": avg_antibody_escape_config[wc.antibody]}
+        params_yaml=lambda wc, input: yaml.dump(
+            {
+                "params": avg_assay_config[wc.assay][wc.antibody],
+                "prob_escape_mean_csvs": list(input.prob_escape_means),
+                "pickles": list(input.pickles),
+            }
         ),
     conda:
         "environment.yml"
     log:
-        "results/logs/avg_antibody_escape_{antibody}.txt",
+        "results/logs/avg_escape_{assay}_{antibody}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -217,26 +221,25 @@ rule avg_antibody_escape:
         """
 
 
-for heading, fname in [
-    ("Average selections for antibody/serum", rules.avg_antibody_escape.output.nb),
-    (
-        "Antibody/serum mutation escape CSVs",
-        rules.avg_antibody_escape.output.escape_csv,
-    ),
-    ("Antibody/serum mutation ICXX CSVs", rules.avg_antibody_escape.output.icXX_csv),
-    (
-        "Antibody/serum mutation escape plots",
-        "results/antibody_escape/averages/{antibody}_mut_escape.html",
-    ),
-    (
-        "Antibody/serum mutation ICXX plots",
-        "results/antibody_escape/averages/{antibody}_mut_icXX.html",
-    ),
-]:
-    for antibody in avg_antibody_escape_config:
-        assay_docs["antibody_escape"][heading][antibody] = fname.format(
-            antibody=antibody
-        )
+for assay in avg_assay_config:
+    assay_str = assay.replace("_", " ")
+    for heading, fname in [
+        (f"Average selections for {assay_str}", rules.avg_escape.output.nb),
+        (f"{assay_str} CSVs", rules.avg_escape.output.escape_csv),
+        (f"{assay_str} ICXX CSVs", rules.avg_escape.output.icXX_csv),
+        (
+            f"{assay_str} mutation effect plots",
+            "results/{assay}/averages/{antibody}_mut_escape.html",
+        ),
+        (
+            f"{assay_str} mutation ICXX plots",
+            "results/{assay}/averages/{antibody}_mut_icXX.html",
+        ),
+    ]:
+        for antibody in avg_assay_config[assay]:
+            assay_docs[assay][heading][antibody] = fname.format(
+                assay=assay, antibody=antibody
+            )
 
 for assay, assay_doc in assay_docs.items():
     if assay_doc:

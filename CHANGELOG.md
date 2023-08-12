@@ -3,6 +3,7 @@
 ### version 3.2.0
 - Generalize `antibody_escape` to also allow receptor affinity selections with soluble receptor.
 - Changed output of `avg_escape` rules for antibodies to be `mut_effect` rather than `mut_escape`. This is because `effect` can generally refer to other phenotypes too.
+- For the average mutation effects and ICXX values, also report the per-model values.
 - Internally restructured to re-use a single rule for formatting altair plots by creating `common.smk` and then putting the `format_altair_html` rule there and removing plot-specific versions of that rule.
 
 #### version 3.1.3

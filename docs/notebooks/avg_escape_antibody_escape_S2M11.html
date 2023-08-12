@@ -7442,7 +7442,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Average-mutational-escape-for-an-antibody/serum,-or-receptor-affinity-from-soluble-receptor-neutralization">Average mutational escape for an antibody/serum, or receptor affinity from soluble receptor neutralization<a class="anchor-link" href="#Average-mutational-escape-for-an-antibody/serum,-or-receptor-affinity-from-soluble-receptor-neutralization">¶</a></h1><p>This notebook averages selections that measure escape from neutralization by an antibody or serum, or receptor-affinity from neutralization by soluble receptor.
+<h1 id="Average-mutational-effects-for-an-antibody/serum,-or-receptor-affinity-from-soluble-receptor-neutralization">Average mutational effects for an antibody/serum, or receptor affinity from soluble receptor neutralization<a class="anchor-link" href="#Average-mutational-effects-for-an-antibody/serum,-or-receptor-affinity-from-soluble-receptor-neutralization">¶</a></h1><p>This notebook averages selections that measure escape from neutralization by an antibody or serum, or receptor-affinity from neutralization by soluble receptor.
 In</p>
 <p>Import Python modules.
 We use <code>polyclonal</code> for the averaging and plotting:</p>
@@ -7497,9 +7497,9 @@ The next cell is tagged as <code>parameters</code> to get the passed parameters.
 <span class="n">prob_escape_mean_csvs</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">pickles</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">avg_pickle_file</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">escape_csv</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">effect_csv</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">icXX_csv</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">escape_html</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">effect_html</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">icXX_html</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">params</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
@@ -7507,7 +7507,7 @@ The next cell is tagged as <code>parameters</code> to get the passed parameters.
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=44c851d9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=0a85efc9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7551,9 +7551,9 @@ The next cell is tagged as <code>parameters</code> to get the passed parameters.
 <span class="n">assay</span> <span class="o">=</span> <span class="s2">"antibody_escape"</span>
 <span class="n">site_numbering_map_csv</span> <span class="o">=</span> <span class="s2">"data/site_numbering_map.csv"</span>
 <span class="n">avg_pickle_file</span> <span class="o">=</span> <span class="s2">"results/antibody_escape/averages/S2M11_polyclonal_model.pickle"</span>
-<span class="n">escape_csv</span> <span class="o">=</span> <span class="s2">"results/antibody_escape/averages/S2M11_mut_escape.csv"</span>
+<span class="n">effect_csv</span> <span class="o">=</span> <span class="s2">"results/antibody_escape/averages/S2M11_mut_effect.csv"</span>
 <span class="n">icXX_csv</span> <span class="o">=</span> <span class="s2">"results/antibody_escape/averages/S2M11_mut_icXX.csv"</span>
-<span class="n">escape_html</span> <span class="o">=</span> <span class="s2">"results/antibody_escape/averages/S2M11_mut_escape_nolegend.html"</span>
+<span class="n">effect_html</span> <span class="o">=</span> <span class="s2">"results/antibody_escape/averages/S2M11_mut_effect_nolegend.html"</span>
 <span class="n">icXX_html</span> <span class="o">=</span> <span class="s2">"results/antibody_escape/averages/S2M11_mut_icXX_nolegend.html"</span>
 </pre></div>
 </div>
@@ -7706,23 +7706,23 @@ Note the concentrations <strong>not</strong> used in the model fits are shown fa
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-72ad3fa3647d46378f7dd0e2f63b2288.vega-embed {
+  #altair-viz-5878f0dda8884f46a8e546c38645096c.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-72ad3fa3647d46378f7dd0e2f63b2288.vega-embed details,
-  #altair-viz-72ad3fa3647d46378f7dd0e2f63b2288.vega-embed details summary {
+  #altair-viz-5878f0dda8884f46a8e546c38645096c.vega-embed details,
+  #altair-viz-5878f0dda8884f46a8e546c38645096c.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-72ad3fa3647d46378f7dd0e2f63b2288"></div>
+<div id="altair-viz-5878f0dda8884f46a8e546c38645096c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-72ad3fa3647d46378f7dd0e2f63b2288") {
-      outputDiv = document.getElementById("altair-viz-72ad3fa3647d46378f7dd0e2f63b2288");
+    if (outputDiv.id !== "altair-viz-5878f0dda8884f46a8e546c38645096c") {
+      outputDiv = document.getElementById("altair-viz-5878f0dda8884f46a8e546c38645096c");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -7849,23 +7849,23 @@ Note the concentrations <strong>not</strong> used in the model fits are shown fa
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-6597cb4e57d24939955fc126195571b8.vega-embed {
+  #altair-viz-71324a12ee43491aae57df8a6dd0b385.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6597cb4e57d24939955fc126195571b8.vega-embed details,
-  #altair-viz-6597cb4e57d24939955fc126195571b8.vega-embed details summary {
+  #altair-viz-71324a12ee43491aae57df8a6dd0b385.vega-embed details,
+  #altair-viz-71324a12ee43491aae57df8a6dd0b385.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6597cb4e57d24939955fc126195571b8"></div>
+<div id="altair-viz-71324a12ee43491aae57df8a6dd0b385"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6597cb4e57d24939955fc126195571b8") {
-      outputDiv = document.getElementById("altair-viz-6597cb4e57d24939955fc126195571b8");
+    if (outputDiv.id !== "altair-viz-71324a12ee43491aae57df8a6dd0b385") {
+      outputDiv = document.getElementById("altair-viz-71324a12ee43491aae57df8a6dd0b385");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -7950,23 +7950,23 @@ Note the concentrations <strong>not</strong> used in the model fits are shown fa
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-3e5d7828f03e4196bd99e813436e513d.vega-embed {
+  #altair-viz-e1f168200dd4449394c80feae295aa88.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-3e5d7828f03e4196bd99e813436e513d.vega-embed details,
-  #altair-viz-3e5d7828f03e4196bd99e813436e513d.vega-embed details summary {
+  #altair-viz-e1f168200dd4449394c80feae295aa88.vega-embed details,
+  #altair-viz-e1f168200dd4449394c80feae295aa88.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-3e5d7828f03e4196bd99e813436e513d"></div>
+<div id="altair-viz-e1f168200dd4449394c80feae295aa88"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3e5d7828f03e4196bd99e813436e513d") {
-      outputDiv = document.getElementById("altair-viz-3e5d7828f03e4196bd99e813436e513d");
+    if (outputDiv.id !== "altair-viz-e1f168200dd4449394c80feae295aa88") {
+      outputDiv = document.getElementById("altair-viz-e1f168200dd4449394c80feae295aa88");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8138,23 +8138,23 @@ Note the plot is interactive: you can mouseover points and change the site metri
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-6883c9d8c01340bd8e208780e3c2bc11.vega-embed {
+  #altair-viz-444956987e7647dc995fe393dcd6014e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-6883c9d8c01340bd8e208780e3c2bc11.vega-embed details,
-  #altair-viz-6883c9d8c01340bd8e208780e3c2bc11.vega-embed details summary {
+  #altair-viz-444956987e7647dc995fe393dcd6014e.vega-embed details,
+  #altair-viz-444956987e7647dc995fe393dcd6014e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-6883c9d8c01340bd8e208780e3c2bc11"></div>
+<div id="altair-viz-444956987e7647dc995fe393dcd6014e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-6883c9d8c01340bd8e208780e3c2bc11") {
-      outputDiv = document.getElementById("altair-viz-6883c9d8c01340bd8e208780e3c2bc11");
+    if (outputDiv.id !== "altair-viz-444956987e7647dc995fe393dcd6014e") {
+      outputDiv = document.getElementById("altair-viz-444956987e7647dc995fe393dcd6014e");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8254,12 +8254,23 @@ Note the plot is interactive: you can mouseover points and change the site metri
     <span class="n">escape_plot_kwargs</span><span class="p">[</span><span class="s2">"scale_stat_col"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="n">escape_plot_kwargs</span><span class="p">[</span><span class="s2">"rename_stat_col"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"receptor affinity"</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Writing mutation values to </span><span class="si">{</span><span class="n">escape_csv</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">avg_model</span><span class="o">.</span><span class="n">mut_escape_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">escape_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s2">"</span><span class="si">%.4g</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Writing mutation values to </span><span class="si">{</span><span class="n">effect_csv</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">effects_for_csv</span> <span class="o">=</span> <span class="n">avg_model</span><span class="o">.</span><span class="n">mut_escape_df_w_model_values</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"escape_std"</span><span class="p">,</span> <span class="s2">"escape_min_magnitude"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"escape_mean"</span><span class="p">,</span> <span class="s2">"escape_median"</span><span class="p">]</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span><span class="s2">"selections"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">assay</span> <span class="o">==</span> <span class="s2">"receptor_affinity"</span><span class="p">:</span>
+        <span class="c1"># invert as negative means more affinity, and rename</span>
+        <span class="n">effects_for_csv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">effects_for_csv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"escape_mean"</span><span class="p">,</span> <span class="s2">"escape_median"</span><span class="p">}:</span>
+            <span class="n">effects_for_csv</span> <span class="o">=</span> <span class="n">effects_for_csv</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+                <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"escape_"</span><span class="p">,</span> <span class="s2">"affinity_"</span><span class="p">)}</span>
+            <span class="p">)</span>
+<span class="n">effects_for_csv</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">effect_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s2">"</span><span class="si">%.4g</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">escape_chart</span> <span class="o">=</span> <span class="n">avg_model</span><span class="o">.</span><span class="n">mut_escape_plot</span><span class="p">(</span><span class="o">**</span><span class="n">escape_plot_kwargs</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Writing chart to </span><span class="si">{</span><span class="n">escape_html</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">escape_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">escape_html</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Writing chart to </span><span class="si">{</span><span class="n">effect_html</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">escape_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">effect_html</span><span class="p">)</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">escape_chart</span><span class="p">)</span>
 </pre></div>
@@ -8274,8 +8285,8 @@ Note the plot is interactive: you can mouseover points and change the site metri
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Writing mutation values to results/antibody_escape/averages/S2M11_mut_escape.csv
-Writing chart to results/antibody_escape/averages/S2M11_mut_escape_nolegend.html
+<pre>Writing mutation values to results/antibody_escape/averages/S2M11_mut_effect.csv
+Writing chart to results/antibody_escape/averages/S2M11_mut_effect_nolegend.html
 </pre>
 </div>
 </div>
@@ -8283,23 +8294,23 @@ Writing chart to results/antibody_escape/averages/S2M11_mut_escape_nolegend.html
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-8f51830248b0460c90bc6bf1863b485f.vega-embed {
+  #altair-viz-67e541cc7e2d409e9475a3a7127167eb.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8f51830248b0460c90bc6bf1863b485f.vega-embed details,
-  #altair-viz-8f51830248b0460c90bc6bf1863b485f.vega-embed details summary {
+  #altair-viz-67e541cc7e2d409e9475a3a7127167eb.vega-embed details,
+  #altair-viz-67e541cc7e2d409e9475a3a7127167eb.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8f51830248b0460c90bc6bf1863b485f"></div>
+<div id="altair-viz-67e541cc7e2d409e9475a3a7127167eb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8f51830248b0460c90bc6bf1863b485f") {
-      outputDiv = document.getElementById("altair-viz-8f51830248b0460c90bc6bf1863b485f");
+    if (outputDiv.id !== "altair-viz-67e541cc7e2d409e9475a3a7127167eb") {
+      outputDiv = document.getElementById("altair-viz-67e541cc7e2d409e9475a3a7127167eb");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8377,14 +8388,21 @@ Writing chart to results/antibody_escape/averages/S2M11_mut_escape_nolegend.html
 <span class="n">log_fold_change_icXX_col</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"log2 fold change </span><span class="si">{</span><span class="n">icXX_col</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Writing changes in ICXX to </span><span class="si">{</span><span class="n">icXX_csv</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">avg_model</span><span class="o">.</span><span class="n">mut_icXX_df</span><span class="p">(</span>
+<span class="n">icXX_for_csv</span> <span class="o">=</span> <span class="n">avg_model</span><span class="o">.</span><span class="n">mut_icXX_df_w_model_values</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="n">icXX</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">,</span>
     <span class="n">icXX_col</span><span class="o">=</span><span class="n">icXX_col</span><span class="p">,</span>
     <span class="n">log_fold_change_icXX_col</span><span class="o">=</span><span class="n">log_fold_change_icXX_col</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">icXX_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s2">"</span><span class="si">%.4g</span><span class="s2">"</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">log_fold_change_icXX_col</span> <span class="o">+</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">" min_magnitude"</span><span class="p">,</span> <span class="s2">" std"</span><span class="p">]])</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="n">log_fold_change_icXX_col</span> <span class="o">+</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">" mean"</span><span class="p">,</span> <span class="s2">" median"</span><span class="p">]]</span> <span class="o">+</span> <span class="n">params</span><span class="p">[</span>
+    <span class="s2">"selections"</span>
+<span class="p">]:</span>
+    <span class="k">if</span> <span class="n">assay</span> <span class="o">==</span> <span class="s2">"receptor_affinity"</span><span class="p">:</span>
+        <span class="c1"># invert as negative means more affinity</span>
+        <span class="n">icXX_for_csv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">icXX_for_csv</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+<span class="n">icXX_for_csv</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">icXX_csv</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s2">"</span><span class="si">%.4g</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">assay</span> <span class="o">==</span> <span class="s2">"receptor_affinity"</span><span class="p">:</span>
-    <span class="n">escape_plot_kwargs</span><span class="p">[</span><span class="s2">"rename_stat_col"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"-</span><span class="si">{</span><span class="n">log_fold_change_icXX_col</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">if</span> <span class="n">assay</span> <span class="o">==</span> <span class="s2">"receptor_affinity"</span> <span class="ow">and</span> <span class="s2">"rename_stat_col"</span> <span class="ow">in</span> <span class="n">escape_plot_kwargs</span><span class="p">:</span>
+    <span class="k">del</span> <span class="n">escape_plot_kwargs</span><span class="p">[</span><span class="s2">"rename_stat_col"</span><span class="p">]</span>
 
 <span class="n">icXX_chart</span> <span class="o">=</span> <span class="n">avg_model</span><span class="o">.</span><span class="n">mut_icXX_plot</span><span class="p">(</span>
     <span class="n">x</span><span class="o">=</span><span class="n">icXX</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">,</span>
@@ -8418,23 +8436,23 @@ Writing ICXX chart to results/antibody_escape/averages/S2M11_mut_icXX_nolegend.h
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-542858e9cccf4b5786545ab0b886ad88.vega-embed {
+  #altair-viz-29e014ada2814b2aa55454f4d51d2a22.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-542858e9cccf4b5786545ab0b886ad88.vega-embed details,
-  #altair-viz-542858e9cccf4b5786545ab0b886ad88.vega-embed details summary {
+  #altair-viz-29e014ada2814b2aa55454f4d51d2a22.vega-embed details,
+  #altair-viz-29e014ada2814b2aa55454f4d51d2a22.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-542858e9cccf4b5786545ab0b886ad88"></div>
+<div id="altair-viz-29e014ada2814b2aa55454f4d51d2a22"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-542858e9cccf4b5786545ab0b886ad88") {
-      outputDiv = document.getElementById("altair-viz-542858e9cccf4b5786545ab0b886ad88");
+    if (outputDiv.id !== "altair-viz-29e014ada2814b2aa55454f4d51d2a22") {
+      outputDiv = document.getElementById("altair-viz-29e014ada2814b2aa55454f4d51d2a22");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",

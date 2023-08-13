@@ -6,6 +6,7 @@
 - For the average mutation effects and ICXX values, also report the per-model values.
 - Upgrade to `polyclonal` 6.6, which now shows (hidden) mutations w deleterious functional effects of other hiding metrics.
 - Collapse lists in docs index even if just one entry
+- Apply `times_seen` filter when computing correlations in `avg_escape`.
 - Internally restructured to re-use a single rule for formatting altair plots by creating `common.smk` and then putting the `format_altair_html` rule there and removing plot-specific versions of that rule.
 
 #### version 3.1.3

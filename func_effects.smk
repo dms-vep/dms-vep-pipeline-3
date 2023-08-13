@@ -96,7 +96,7 @@ rule func_effects_global_epistasis:
         func_effects="results/func_effects/by_selection/{selection}_func_effects.csv",
         nb="results/notebooks/func_effects_global_epistasis_{selection}.ipynb",
     params:
-        global_epistasis_params_yaml=lambda wc: yaml.dump(
+        global_epistasis_params_yaml=lambda wc: yaml.round_trip_dump(
             {
                 "global_epistasis_params": func_scores[wc.selection][
                 "global_epistasis_params"
@@ -147,7 +147,7 @@ rule avg_func_effects:
         functional_html="results/func_effects/averages/{condition}_func_effects_nolegend.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects_nolegend.html",
     params:
-        params_yaml=lambda wc: yaml.dump(
+        params_yaml=lambda wc: yaml.round_trip_dump(
             {"params": func_effects_config["avg_func_effects"][wc.condition]}
         ),
     conda:
@@ -220,7 +220,9 @@ rule func_effect_shifts:
         shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
         nb="results/notebooks/func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.dump({"params": func_effect_shifts[wc.comparison]}),
+        params_yaml=lambda wc: yaml.round_trip_dump(
+            {"params": func_effect_shifts[wc.comparison]}
+        ),
     threads: 1
     conda:
         "environment.yml"
@@ -264,7 +266,7 @@ rule avg_func_effect_shifts:
         shifts_html="results/func_effect_shifts/averages/{comparison}_shifts_nolegend.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.dump(
+        params_yaml=lambda wc: yaml.round_trip_dump(
             {"params": avg_func_effect_shifts[wc.comparison]}
         ),
     conda:

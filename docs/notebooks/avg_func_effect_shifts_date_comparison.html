@@ -7496,7 +7496,7 @@ The next cell is tagged as <code>parameters</code> to get the passed parameters.
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=7c98d2ca">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=ca07bd18">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7507,9 +7507,6 @@ The next cell is tagged as <code>parameters</code> to get the passed parameters.
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Parameters</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"avg_method"</span><span class="p">:</span> <span class="s2">"median"</span><span class="p">,</span>
-    <span class="s2">"comparisons"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"LibA-date_comparison-1"</span><span class="p">,</span> <span class="s2">"LibA-date_comparison-2"</span><span class="p">],</span>
-    <span class="s2">"lasso_shift"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
-    <span class="s2">"legend"</span><span class="p">:</span> <span class="s2">"Interactive plot of shifts in effects of mutations. Negative values indicate mutations that</span><span class="se">\n</span><span class="s2">have shifted to become more deleterious; positive values indicate mutations shifted to</span><span class="se">\n</span><span class="s2">be more beneficial.</span><span class="se">\n\n</span><span class="s2">Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary</span><span class="se">\n</span><span class="s2">statistic indicating the effects of mutations at each site. The heat map shows the effects of</span><span class="se">\n</span><span class="s2">individual mutations, with parental amino-acid identities indicated by x and gray</span><span class="se">\n</span><span class="s2">indicating non-measured mutations.</span><span class="se">\n\n</span><span class="s2">You can mouse over points to get details about individual measurements, including measurements</span><span class="se">\n</span><span class="s2">in individual comparisons.</span><span class="se">\n\n</span><span class="s2">The options at the bottom of the plot let you modify the display, such as by selecting how</span><span class="se">\n</span><span class="s2"> many different variants a mutation must be seen in to be shown (*minimum times_seen*),</span><span class="se">\n</span><span class="s2"> how many different experimental comparisons the mutation was measured in</span><span class="se">\n</span><span class="s2">(*minimum n_comparisons*), what site summary statistic to show, etc.</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
     <span class="s2">"per_comparison_tooltips"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="s2">"plot_kwargs"</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">"addtl_slider_stats"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"times_seen"</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
@@ -7519,11 +7516,14 @@ The next cell is tagged as <code>parameters</code> to get the passed parameters.
         <span class="s2">"init_site_statistic"</span><span class="p">:</span> <span class="s2">"mean"</span><span class="p">,</span>
         <span class="s2">"site_zoom_bar_color_col"</span><span class="p">:</span> <span class="s2">"region"</span><span class="p">,</span>
         <span class="s2">"slider_binding_range_kwargs"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"times_seen"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"step"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"min"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
             <span class="s2">"n_comparisons"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"step"</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
-            <span class="s2">"times_seen"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"max"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">"min"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"step"</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
         <span class="p">},</span>
     <span class="p">},</span>
+    <span class="s2">"legend"</span><span class="p">:</span> <span class="s2">"Interactive plot of shifts in effects of mutations. Negative values indicate mutations that</span><span class="se">\n</span><span class="s2">have shifted to become more deleterious; positive values indicate mutations shifted to</span><span class="se">\n</span><span class="s2">be more beneficial.</span><span class="se">\n\n</span><span class="s2">Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary</span><span class="se">\n</span><span class="s2">statistic indicating the effects of mutations at each site. The heat map shows the effects of</span><span class="se">\n</span><span class="s2">individual mutations, with parental amino-acid identities indicated by x and gray</span><span class="se">\n</span><span class="s2">indicating non-measured mutations.</span><span class="se">\n\n</span><span class="s2">You can mouse over points to get details about individual measurements, including measurements</span><span class="se">\n</span><span class="s2">in individual comparisons.</span><span class="se">\n\n</span><span class="s2">The options at the bottom of the plot let you modify the display, such as by selecting how</span><span class="se">\n</span><span class="s2"> many different variants a mutation must be seen in to be shown (*minimum times_seen*),</span><span class="se">\n</span><span class="s2"> how many different experimental comparisons the mutation was measured in</span><span class="se">\n</span><span class="s2">(*minimum n_comparisons*), what site summary statistic to show, etc.</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
     <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Comparison of functional effects from different dates (just a toy example)"</span><span class="p">,</span>
+    <span class="s2">"comparisons"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"LibA-date_comparison-1"</span><span class="p">,</span> <span class="s2">"LibA-date_comparison-2"</span><span class="p">],</span>
+    <span class="s2">"lasso_shift"</span><span class="p">:</span> <span class="mf">0.0001</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="n">site_numbering_map_csv</span> <span class="o">=</span> <span class="s2">"data/site_numbering_map.csv"</span>
 <span class="n">shifts_csv</span> <span class="o">=</span> <span class="s2">"results/func_effect_shifts/averages/date_comparison_shifts.csv"</span>
@@ -7683,23 +7683,23 @@ In general, you might hope to find a lasso shift that has relatively few non-zer
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>/home/jbloom/.local/lib/python3.11/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
-/tmp/ipykernel_13854/2343172652.py:20: UserWarning: The figure layout has changed to tight
+/tmp/ipykernel_7460/2343172652.py:20: UserWarning: The figure layout has changed to tight
   grid.fig.tight_layout()
 /home/jbloom/.local/lib/python3.11/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
-/tmp/ipykernel_13854/2343172652.py:20: UserWarning: The figure layout has changed to tight
+/tmp/ipykernel_7460/2343172652.py:20: UserWarning: The figure layout has changed to tight
   grid.fig.tight_layout()
 /home/jbloom/.local/lib/python3.11/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
-/tmp/ipykernel_13854/2343172652.py:20: UserWarning: The figure layout has changed to tight
+/tmp/ipykernel_7460/2343172652.py:20: UserWarning: The figure layout has changed to tight
   grid.fig.tight_layout()
 /home/jbloom/.local/lib/python3.11/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
-/tmp/ipykernel_13854/2343172652.py:20: UserWarning: The figure layout has changed to tight
+/tmp/ipykernel_7460/2343172652.py:20: UserWarning: The figure layout has changed to tight
   grid.fig.tight_layout()
 /home/jbloom/.local/lib/python3.11/site-packages/seaborn/axisgrid.py:118: UserWarning: The figure layout has changed to tight
   self._figure.tight_layout(*args, **kwargs)
-/tmp/ipykernel_13854/2343172652.py:20: UserWarning: The figure layout has changed to tight
+/tmp/ipykernel_7460/2343172652.py:20: UserWarning: The figure layout has changed to tight
   grid.fig.tight_layout()
 </pre>
 </div>
@@ -7895,23 +7895,23 @@ First, get the data to plot:</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-8d09020cd5c541f180689c9422a61a63.vega-embed {
+  #altair-viz-ac266fc993ea4d3ca2f3e37d595d7c32.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8d09020cd5c541f180689c9422a61a63.vega-embed details,
-  #altair-viz-8d09020cd5c541f180689c9422a61a63.vega-embed details summary {
+  #altair-viz-ac266fc993ea4d3ca2f3e37d595d7c32.vega-embed details,
+  #altair-viz-ac266fc993ea4d3ca2f3e37d595d7c32.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8d09020cd5c541f180689c9422a61a63"></div>
+<div id="altair-viz-ac266fc993ea4d3ca2f3e37d595d7c32"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8d09020cd5c541f180689c9422a61a63") {
-      outputDiv = document.getElementById("altair-viz-8d09020cd5c541f180689c9422a61a63");
+    if (outputDiv.id !== "altair-viz-ac266fc993ea4d3ca2f3e37d595d7c32") {
+      outputDiv = document.getElementById("altair-viz-ac266fc993ea4d3ca2f3e37d595d7c32");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",

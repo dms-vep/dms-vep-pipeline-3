@@ -126,7 +126,7 @@ rule fit_escape:
         pickle="results/{assay}/by_selection/{selection}_polyclonal_model.pickle",
         nb="results/notebooks/fit_escape_{assay}_{selection}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml.dump(
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
             {
                 "params": assay_selections[wc.assay][wc.selection],
                 "neut_standard_frac_csvs": list(input.neut_standard_fracs),
@@ -196,7 +196,7 @@ rule avg_escape:
         icXX_html="results/{assay}/averages/{antibody}_mut_icXX_nolegend.html",
         nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml.dump(
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
             {
                 "params": avg_assay_config[wc.assay][wc.antibody],
                 "prob_escape_mean_csvs": list(input.prob_escape_means),

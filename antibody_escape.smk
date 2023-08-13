@@ -1,30 +1,55 @@
-"""``snakemake`` files with rules for calculating antibody/sera escape."""
+"""``snakemake`` rules for calculating antibody/sera escape or receptor affinity.
+
+Note that this analyzes data for two assay types: 'antibody_escape' and
+'receptor_affinity', corresponding to escape from antibody / sera or escape
+from soluble receptor used to estimate affinity. The workflow is basically the
+same, so 'antibody' is used as a synonym in some of the definitions of the
+receptor affinity selections.
+
+"""
 
 
 # read the config for antibody escape
 with open(config["antibody_escape_config"]) as f:
     antibody_escape_config = yaml.safe_load(f)
 
-# get configuration for antibody escape and make sure all samples defined
-antibody_selections = antibody_escape_config["antibody_selections"]
-for selection_name, selection_d in antibody_selections.items():
-    for s in [
-        selection_d["no_antibody_sample"],
-        *list(selection_d["antibody_samples"]),
-    ]:
+# get configuration for any antibody escape or receptor affinity selections
+assays = ["antibody_escape", "receptor_affinity"]
+assay_selections = {}
+avg_assay_config = {}
+for assay in assays:
+    if (sel_key := assay.split("_")[0] + "_selections") in antibody_escape_config:
+        assay_selections[assay] = antibody_escape_config[sel_key]
+    else:
+        assay_selections[assay] = {}
+    if f"avg_{assay}" in antibody_escape_config:
+        avg_assay_config[assay] = antibody_escape_config[f"avg_{assay}"]
+    else:
+        avg_assay_config[assay] = {}
+
+#  make sure all samples defined
+for sel_name, sel_d in itertools.chain.from_iterable(
+    assay_selections[assay].items() for assay in assays
+):
+    for s in [sel_d["no_antibody_sample"], *list(sel_d["antibody_samples"])]:
         if s not in sample_to_library:
             raise ValueError(f"sample {s} for {selection_name} not in barcode_runs")
 
 # Names and values of files to add to docs
-antibody_escape_docs = collections.defaultdict(dict)
+assay_docs = {assay: collections.defaultdict(dict) for assay in assays}
 
 
-rule prob_escape_antibody:
-    """Compute probability (fraction) antibody escape for each variant."""
+wildcard_constraints:
+    assay="|".join(assays),
+
+
+rule prob_escape:
+    """Compute probability (fraction) escape for each variant."""
     input:
         no_antibody_sample=lambda wc: os.path.join(
             "results/barcode_counts",
-            f"{antibody_selections[wc.selection]['no_antibody_sample']}_counts.csv",
+            assay_selections[wc.assay][wc.selection]["no_antibody_sample"]
+            + "_counts.csv",
         ),
         antibody_sample="results/barcode_counts/{sample}_counts.csv",
         codon_variants=config["codon_variants"],
@@ -32,167 +57,196 @@ rule prob_escape_antibody:
         site_numbering_map=config["site_numbering_map"],
     output:
         **{
-            metric: f"results/antibody_escape/by_selection/{{selection}}/{{sample}}_{metric}.csv"
+            metric: "results/{assay}/by_selection/{selection}/{sample}_"
+            + metric
+            + ".csv"
             for metric in ["prob_escape", "neut_standard_fracs"]
         },
     params:
-        neut_standard=lambda wc: antibody_selections[wc.selection]["neut_standard_name"],
+        neut_standard=lambda wc: assay_selections[wc.assay][wc.selection][
+            "neut_standard_name"
+        ],
         # script checks that dates and libraries match for all samples
         dates=lambda wc: {
             "no_antibody_sample": sample_to_date[
-                antibody_selections[wc.selection]["no_antibody_sample"]
+                assay_selections[wc.assay][wc.selection]["no_antibody_sample"]
             ],
             "antibody_sample": sample_to_date[wc.sample],
         },
         libraries=lambda wc: {
             "no_antibody_sample": sample_to_library[
-                antibody_selections[wc.selection]["no_antibody_sample"]
+                assay_selections[wc.assay][wc.selection]["no_antibody_sample"]
             ],
             "antibody_sample": sample_to_library[wc.sample],
         },
     conda:
         "environment.yml"
     log:
-        "results/logs/prob_escape_{selection}/{sample}.txt",
+        "results/logs/prob_escape_{assay}_{selection}/{sample}.txt",
     script:
         "scripts/prob_escape.py"
 
 
-for sel in antibody_selections:
-    for sample in antibody_selections[sel]["antibody_samples"]:
-        antibody_escape_docs[
-            "Probability (fraction) escape for each variant (CSVs) in each selection"
-        ][f"{sel} {sample}"] = rules.prob_escape_antibody.output.prob_escape.format(
-            selection=sel, sample=sample
-        )
-
-
-rule fit_antibody_escape:
-    """Fit a ``polyclonal`` model to an antibody selection."""
+rule fit_escape:
+    """Fit a ``polyclonal`` model to a selection."""
     input:
         spatial_distances=lambda wc: (
             [
-                antibody_selections[wc.selection]["polyclonal_params"][
+                assay_selections[wc.assay][wc.selection]["polyclonal_params"][
                     "spatial_distances"
                 ]
             ]
-            if antibody_selections[wc.selection]["polyclonal_params"][
+            if assay_selections[wc.assay][wc.selection]["polyclonal_params"][
                 "spatial_distances"
             ]
             else []
         ),
         plot_hide_stats=lambda wc: [
             d["csv"]
-            for d in antibody_selections[wc.selection]["plot_hide_stats"].values()
+            for d in assay_selections[wc.assay][wc.selection][
+                "plot_hide_stats"
+            ].values()
         ],
         prob_escapes=lambda wc: [
-            rules.prob_escape_antibody.output.prob_escape.format(
-                selection=wc.selection, sample=sample
+            rules.prob_escape.output.prob_escape.format(
+                assay=wc.assay, selection=wc.selection, sample=sample
             )
-            for sample in antibody_selections[wc.selection]["antibody_samples"]
+            for sample in assay_selections[wc.assay][wc.selection]["antibody_samples"]
         ],
         neut_standard_fracs=lambda wc: [
-            rules.prob_escape_antibody.output.neut_standard_fracs.format(
-                selection=wc.selection, sample=sample
+            rules.prob_escape.output.neut_standard_fracs.format(
+                assay=wc.assay, selection=wc.selection, sample=sample
             )
-            for sample in antibody_selections[wc.selection]["antibody_samples"]
+            for sample in assay_selections[wc.assay][wc.selection]["antibody_samples"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
-        nb=os.path.join(config["pipeline_path"], "notebooks/fit_antibody_escape.ipynb"),
+        nb=os.path.join(config["pipeline_path"], "notebooks/fit_escape.ipynb"),
     output:
-        prob_escape_mean="results/antibody_escape/by_selection/{selection}_prob_escape_mean.csv",
-        pickle="results/antibody_escape/by_selection/{selection}_polyclonal_model.pickle",
-        nb="results/notebooks/fit_antibody_escape_{selection}.ipynb",
+        prob_escape_mean="results/{assay}/by_selection/{selection}_prob_escape_mean.csv",
+        pickle="results/{assay}/by_selection/{selection}_polyclonal_model.pickle",
+        nb="results/notebooks/fit_escape_{assay}_{selection}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.dump({"params": antibody_selections[wc.selection]}),
+        params_yaml=lambda wc, input: yaml.dump(
+            {
+                "params": assay_selections[wc.assay][wc.selection],
+                "neut_standard_frac_csvs": list(input.neut_standard_fracs),
+                "prob_escape_csvs": list(input.prob_escapes),
+            }
+        ),
     conda:
         "environment.yml"
     log:
-        "results/logs/fit_antibody_escape_{selection}.txt",
+        "results/logs/fit_escape_{assay}_{selection}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p prob_escape_mean_csv {output.prob_escape_mean} \
             -p pickle_file {output.pickle} \
+            -p assay {wildcards.assay} \
             -p selection {wildcards.selection} \
             -y "{params.params_yaml}" \
             &> {log}
         """
 
 
-antibody_escape_docs["Fits of polyclonal models to antibody escape selections"] = {
-    s: f"results/notebooks/fit_antibody_escape_{s}.ipynb" for s in antibody_selections
-}
+for assay, sels in assay_selections.items():
+    for sel in sels:
+        for sample in sels[sel]["antibody_samples"]:
+            assay_docs[assay][
+                "Probability (fraction) escape for each variant in each "
+                + assay.replace("_", " ")
+                + " selection (CSVs)"
+            ][f"{sel} {sample}"] = rules.prob_escape.output.prob_escape.format(
+                assay=assay, selection=sel, sample=sample
+            )
+            assay_docs[assay][
+                "Fits of polyclonal models to individual "
+                + assay.replace("_", " ")
+                + " selections"
+            ][sel] = rules.fit_escape.output.nb.format(assay=assay, selection=sel)
 
-avg_antibody_escape_config = antibody_escape_config["avg_antibody_escape"]
 
-
-rule avg_antibody_escape:
-    """Average antibody escape across several selections for the same antibody/serum."""
+rule avg_escape:
+    """Average antibody escape or receptor affinity across several selections."""
     input:
         plot_hide_stats=lambda wc: [
             d["csv"]
-            for d in avg_antibody_escape_config[wc.antibody][
+            for d in avg_assay_config[wc.assay][wc.antibody][
                 "plot_hide_stats"
             ].values()
         ],
         prob_escape_means=lambda wc: [
-            rules.fit_antibody_escape.output.prob_escape_mean.format(selection=sel)
-            for sel in avg_antibody_escape_config[wc.antibody]["selections"]
+            rules.fit_escape.output.prob_escape_mean.format(
+                assay=wc.assay, selection=sel
+            )
+            for sel in avg_assay_config[wc.assay][wc.antibody]["selections"]
         ],
         pickles=lambda wc: [
-            rules.fit_antibody_escape.output.pickle.format(selection=sel)
-            for sel in avg_antibody_escape_config[wc.antibody]["selections"]
+            rules.fit_escape.output.pickle.format(assay=wc.assay, selection=sel)
+            for sel in avg_assay_config[wc.assay][wc.antibody]["selections"]
         ],
         site_numbering_map_csv=config["site_numbering_map"],
-        nb=os.path.join(config["pipeline_path"], "notebooks/avg_antibody_escape.ipynb"),
+        nb=os.path.join(config["pipeline_path"], "notebooks/avg_escape.ipynb"),
     output:
-        pickle="results/antibody_escape/averages/{antibody}_polyclonal_model.pickle",
-        escape_csv="results/antibody_escape/averages/{antibody}_mut_escape.csv",
-        icXX_csv="results/antibody_escape/averages/{antibody}_mut_icXX.csv",
-        escape_html="results/antibody_escape/averages/{antibody}_mut_escape_nolegend.html",
-        icXX_html="results/antibody_escape/averages/{antibody}_mut_icXX_nolegend.html",
-        nb="results/notebooks/avg_antibody_escape_{antibody}.ipynb",
+        pickle="results/{assay}/averages/{antibody}_polyclonal_model.pickle",
+        effect_csv="results/{assay}/averages/{antibody}_mut_effect.csv",
+        icXX_csv="results/{assay}/averages/{antibody}_mut_icXX.csv",
+        effect_html="results/{assay}/averages/{antibody}_mut_effect_nolegend.html",
+        icXX_html="results/{assay}/averages/{antibody}_mut_icXX_nolegend.html",
+        nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.dump(
-            {"params": avg_antibody_escape_config[wc.antibody]}
+        params_yaml=lambda wc, input: yaml.dump(
+            {
+                "params": avg_assay_config[wc.assay][wc.antibody],
+                "prob_escape_mean_csvs": list(input.prob_escape_means),
+                "pickles": list(input.pickles),
+            }
         ),
     conda:
         "environment.yml"
     log:
-        "results/logs/avg_antibody_escape_{antibody}.txt",
+        "results/logs/avg_escape_{assay}_{antibody}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
+            -p assay {wildcards.assay} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p avg_pickle_file {output.pickle} \
-            -p escape_csv {output.escape_csv} \
+            -p effect_csv {output.effect_csv} \
             -p icXX_csv {output.icXX_csv} \
-            -p escape_html {output.escape_html} \
+            -p effect_html {output.effect_html} \
             -p icXX_html {output.icXX_html} \
             -y '{params.params_yaml}' \
             &> {log}
         """
 
 
-for heading, fname in [
-    ("Average selections for antibody/serum", rules.avg_antibody_escape.output.nb),
-    (
-        "Antibody/serum mutation escape CSVs",
-        rules.avg_antibody_escape.output.escape_csv,
-    ),
-    ("Antibody/serum mutation ICXX CSVs", rules.avg_antibody_escape.output.icXX_csv),
-    (
-        "Antibody/serum mutation escape plots",
-        "results/antibody_escape/averages/{antibody}_mut_escape.html",
-    ),
-    (
-        "Antibody/serum mutation ICXX plots",
-        "results/antibody_escape/averages/{antibody}_mut_icXX.html",
-    ),
-]:
-    for antibody in avg_antibody_escape_config:
-        antibody_escape_docs[heading][antibody] = fname.format(antibody=antibody)
+for assay in avg_assay_config:
+    assay_str = assay.replace("_", " ")
+    for heading, fname in [
+        (f"Average selections for {assay_str}", rules.avg_escape.output.nb),
+        (f"{assay_str} CSVs", rules.avg_escape.output.effect_csv),
+        (f"{assay_str} ICXX CSVs", rules.avg_escape.output.icXX_csv),
+        (
+            f"{assay_str} mutation effect plots",
+            "results/{assay}/averages/{antibody}_mut_effect.html",
+        ),
+        (
+            f"{assay_str} mutation ICXX plots",
+            "results/{assay}/averages/{antibody}_mut_icXX.html",
+        ),
+    ]:
+        for antibody in avg_assay_config[assay]:
+            assay_docs[assay][heading][antibody] = fname.format(
+                assay=assay, antibody=antibody
+            )
 
-docs["Antibody/serum escape"] = antibody_escape_docs
+for assay, assay_doc in assay_docs.items():
+    if assay_doc:
+        docs[
+            {
+                "antibody_escape": "Antibody/serum escape",
+                "receptor_affinity": "Receptor affinity",
+            }[assay]
+        ] = assay_doc

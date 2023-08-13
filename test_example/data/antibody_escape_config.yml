@@ -1,7 +1,9 @@
-# Configurations for determining effects of mutations on antibody/sera escape
+# Configurations for determining effects of mutations on antibody/sera escape,
+# or escape from neutralization by soluble receptor (which can be used to determine
+# receptor affinity).
 
 # --------------------------------------------------------------------------------------
-# Configuration for each antibody selection experiment.
+# Configuration for each antibody or soluble receptor selection experiment.
 # --------------------------------------------------------------------------------------
 
 # `antibody_selections` is keyed by name of each selection experiment, which includes a
@@ -21,6 +23,10 @@
 # The `use_in_fit` option exists because you may decide that some samples are outside
 # the preferred neutralization range to include in the fit, so if `use_in_fit: false`
 # then functional scores are computed and plotted but it is not included in the fit.
+
+# Note that for soluble receptor affinity selections, you define selection experiments
+# exactly analogously to `antibody_selections` in `receptor_selections`, using `antibody`
+# as a synonym for the soluble receptor.
 
 # default prob_escape filters
 prob_escape_filters_default: &prob_escape_filters_default
@@ -166,8 +172,47 @@ antibody_selections:
       concentration: 4.9314
       use_in_fit: true
 
+# define the soluble receptor selections
+receptor_selections:
+
+  LibA-220302-pretending_S2M11_is_receptor-1:
+    neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
+    no_antibody_sample: LibA-220302-no_antibody-1
+    antibody_samples:
+     LibA-220302-S2M11-0.3082-1:
+      concentration: 0.3082
+      use_in_fit: true
+     LibA-220302-S2M11-1.2328-1:
+      concentration: 1.2328
+      use_in_fit: false
+     LibA-220302-S2M11-4.9314-1:
+      concentration: 4.9314
+      use_in_fit: true
+
+  LibA-220302-pretending_S2M11_is_receptor-2:
+    neut_standard_name: neut_standard
+    prob_escape_filters: *prob_escape_filters_default
+    polyclonal_params: *polyclonal_params_default
+    escape_plot_kwargs: *escape_plot_kwargs_default
+    plot_hide_stats: *plot_hide_stats_default
+    no_antibody_sample: LibA-220302-no_antibody-2
+    antibody_samples:
+     LibA-220302-S2M11-0.3082-2:
+      concentration: 0.3082
+      use_in_fit: true
+     LibA-220302-S2M11-1.2328-2:
+      concentration: 1.2328
+      use_in_fit: false
+     LibA-220302-S2M11-4.9314-2:
+      concentration: 4.9314
+      use_in_fit: true
+
 # --------------------------------------------------------------------------------------
-# Configuration for averaging and plotting selections for the same antibody
+# Configuration for averaging/plotting selections for same antibody or soluble receptor
 # --------------------------------------------------------------------------------------
 
 # Average/plot escape values from different selections with the same antibody/serum using
@@ -179,26 +224,27 @@ antibody_selections:
 #   - `title`: title of plots
 #   - `legend`: legend added to plots
 
+# For soluble receptor experiments used to measure receptor affinity, do exactly the same
+# except under the key `avg_receptor_affinity` rather than `avg_antibody_escape`.
+
 # Define defaults for each antibody/serum, used via the merge (<<) operator
 avg_antibody_escape_default: &avg_antibody_escape_default
-  icXX: 90
+  icXX: 90  # IC90
   escape_plot_kwargs:
     <<: *escape_plot_kwargs_default
     avg_type: median
     per_model_tooltip: true
   plot_hide_stats: *plot_hide_stats_default
   legend: |
-    Interactive plot of how mutations affect antibody escape.
-
-    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary statistic indicating escape at each site. The heat map shows escape for individual mutations, with parental amino-acid identities indicated by x and gray indicating non-measured mutations. Mouse over points for details.
+    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary statistic indicating a summary of the mutation effects at site. The heat map shows effects for individual mutations, with parental amino-acid identities indicated by x and gray indicating non-measured mutations. Mouse over points for details.
 
     Options at the bottom of the plot let you modify the display, such as by selecting how many different variants a mutation must be seen in to be shown (*minimum times_seen*), how many different experimental selections the mutation was measured in (*minimum n_models*), what site summary statistic to show, etc.
 
     You can filter by the functional effects of mutations. Mutations removed by this filter are shown as dark gray squares in the heat map to distinguish unmeasured mutations from ones measured to be deleterious.
 
-    The minimum max of escape at site is useful to select the sites where mutations confer the most escape.
+    The *minimum max* slider is useful to select the sites where mutations have the largest effect
 
-# Define the antibodies/sera to average
+# Define the antibodies/sera escapes to average
 avg_antibody_escape:
   REGN10933:
     <<: *avg_antibody_escape_default
@@ -213,3 +259,16 @@ avg_antibody_escape:
     selections:
       - LibA-220302-S2M11-1
       - LibA-220302-S2M11-2
+
+# Define the receptor affinity experiments to average
+avg_receptor_affinity_default: &avg_receptor_affinity_default
+  <<: *avg_antibody_escape_default
+  icXX: 50  # IC50
+
+avg_receptor_affinity:
+  pretending_S2M11_is_receptor: 
+    <<: *avg_receptor_affinity_default
+    title: Receptor-affinity map pretending S2M11 is receptor
+    selections:
+      - LibA-220302-pretending_S2M11_is_receptor-1
+      - LibA-220302-pretending_S2M11_is_receptor-2

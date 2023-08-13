@@ -26,7 +26,7 @@ md_text = [
 subheading_depth = 1  # keys this deep are subheadings
 init_subheading = "##"  # first subheading level is this in markdown
 collapse_list = []  # nested list headings to collapse
-min_collapse_length = 2  # only collapse if at least this many entries
+min_collapse_length = 1  # only collapse if at least this many entries
 
 
 def process_docs(d, depth):

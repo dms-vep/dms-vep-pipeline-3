@@ -7,11 +7,11 @@ include: "common_funcs.smk"
 rule format_altair_html:
     """Format ``altair`` charts by adding title, legend, etc."""
     input:
-        html="{chart}_nolegend.html",
+        html="results/{chart}_nolegend.html",
         pyscript=os.path.join(config["pipeline_path"], "scripts/format_altair_html.py"),
     output:
-        html="{chart}.html",
-        legend=temp("{chart}.md"),
+        html="results/{chart}.html",
+        legend=temp("results/{chart}.md"),
     params:
         chart_params=format_altair_html_chart_params,
         suffix=(

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.2.1
+- Constrain wildcards in `format_altair_html` to better enable custom rules
+
 ### version 3.2.0
 - Generalize `antibody_escape` to also allow receptor affinity selections with soluble receptor.
 - Changed output of `avg_escape` rules for antibodies to be `mut_effect` rather than `mut_escape`. This is because `effect` can generally refer to other phenotypes too.

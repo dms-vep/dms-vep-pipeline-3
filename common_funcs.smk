@@ -5,7 +5,7 @@ def format_altair_html_chart_params(wc):
     """Get parameters used in ``format_altair_html``."""
     chart = wc.chart
     if m := re.fullmatch(
-        "results/func_effects/averages/(?P<condition>.+)_(?P<pheno>func|latent)_effects",
+        "func_effects/averages/(?P<condition>.+)_(?P<pheno>func|latent)_effects",
         chart,
     ):
         condition = m.group("condition")
@@ -19,14 +19,14 @@ def format_altair_html_chart_params(wc):
         )
         legend = (func_effects_config["avg_func_effects"][condition]["legend"],)
     elif m := re.fullmatch(
-        "results/func_effect_shifts/averages/(?P<comparison>.+)_shifts",
+        "func_effect_shifts/averages/(?P<comparison>.+)_shifts",
         chart,
     ):
         comparison = m.group("comparison")
         title = avg_func_effect_shifts[comparison]["title"]
         legend = avg_func_effect_shifts[comparison]["legend"]
     elif m := re.fullmatch(
-        "results/(?P<assay>antibody_escape|receptor_affinity)/"
+        "(?P<assay>antibody_escape|receptor_affinity)/"
         + "averages/(?P<antibody>.+)_mut_(?:effect|icXX)",
         chart,
     ):

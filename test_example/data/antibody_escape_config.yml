@@ -73,11 +73,14 @@ escape_plot_kwargs_default: &escape_plot_kwargs_default
 #   - `csv`: CSV file with the data, should have columns "site" and "mutant"
 #   - `csv_col`: column in the CSV with the data
 #   - `init`: initial value of slider
+#   - `min_filters` (optional): dict keyed by other columns and only keep if value is >= this
 plot_hide_stats_default: &plot_hide_stats_default
   functional effect:
     csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv
     csv_col: effect
     init: -3
+    min_filters:
+      times_seen: 3
 
 # define the antibody selections
 antibody_selections:

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.2.2
+- Add `min_filters` to `plot_hide_stats` in `antibody_escape_config.yaml` to only hide/filter robustly measured values.
+
 #### version 3.2.1
 - Constrain wildcards in `format_altair_html` to better enable custom rules
 

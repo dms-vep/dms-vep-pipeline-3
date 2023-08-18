@@ -80,6 +80,7 @@ docs = {}
 # other output target files
 other_target_files = []
 
+
 # include pipeline rules, which also add to `docs` dictionary
 include: "build_variants.smk"
 include: "common.smk"

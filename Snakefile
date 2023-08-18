@@ -77,6 +77,9 @@ sample_to_date = (
 # make further additions of course.
 docs = {}
 
+# other output target files
+other_target_files = []
+
 
 # include pipeline rules, which also add to `docs` dictionary
 include: "build_variants.smk"
@@ -116,3 +119,4 @@ rule all:
     input:
         rules.build_docs.input,
         os.path.join(config["docs"], "index.html"),
+        *other_target_files,

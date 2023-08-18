@@ -29,3 +29,7 @@ rule spatial_distances:
 docs["Additional analysis-specific files"] = {
     "Reference to sequential site-numbering map": config["site_numbering_map"],
 }
+
+# If you want to make other output files from your rules target files for
+# the pipeline, add them to `other_target_files` list
+other_target_files.append(rules.spatial_distances.output.pdb)

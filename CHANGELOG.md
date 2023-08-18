@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.2.3
+- Add `other_target_files` variable: files can be added to this (eg, in `custom_rules.smk`) and then the pipeline will ensure these files are also created. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/39).
+
 #### version 3.2.2
 - Add `min_filters` to `plot_hide_stats` in `antibody_escape_config.yaml` to only hide/filter robustly measured values.
 

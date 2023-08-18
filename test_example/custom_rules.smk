@@ -27,7 +27,9 @@ rule spatial_distances:
 # Files (Jupyter notebooks, HTML plots, or CSVs) that you want included in
 # the HTML docs should be added to the nested dict `docs`:
 docs["Additional analysis-specific files"] = {
-    "Reference to sequential site-numbering map": config["site_numbering_map"],
+    "Data files": {
+        "Reference to sequential site-numbering map": config["site_numbering_map"],
+    },
 }
 
 # If you want to make other output files from your rules target files for

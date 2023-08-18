@@ -2,7 +2,10 @@
 
 
 # Names and values of files to add to docs
-count_variants_docs = collections.defaultdict(dict)
+count_variants_docs = {
+    "Analysis notebooks": collections.defaultdict(dict),
+    "Data files": collections.defaultdict(dict),
+}
 
 
 rule count_barcodes:
@@ -26,7 +29,7 @@ rule count_barcodes:
 
 
 for sample in barcode_runs["sample"]:
-    count_variants_docs["Barcode counts"][sample] = os.path.join(
+    count_variants_docs["Data files"]["Barcode count CSVs"][sample] = os.path.join(
         "results/barcode_counts",
         f"{sample}_counts.csv",
     )
@@ -56,9 +59,9 @@ rule analyze_variant_counts:
         "papermill {input.nb} {output.nb} &> {log}"
 
 
-count_variants_docs[
+count_variants_docs["Analysis notebooks"][
     "Analysis of variant counts"
 ] = rules.analyze_variant_counts.output.nb
 
 
-docs["Count variants"] = count_variants_docs
+docs["Count barcodes for variants"] = count_variants_docs

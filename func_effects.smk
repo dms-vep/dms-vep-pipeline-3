@@ -15,7 +15,11 @@ for selection_name, selection_d in func_scores.items():
             )
 
 # Names and values of files to add to docs
-func_effects_docs = collections.defaultdict(dict)
+func_effects_docs = {
+    "Final summary plots": collections.defaultdict(dict),
+    "Analysis notebooks": collections.defaultdict(dict),
+    "Data files": collections.defaultdict(dict),
+}
 
 
 rule func_scores:
@@ -57,7 +61,7 @@ rule func_scores:
 
 
 for s in func_scores:
-    func_effects_docs["Per-variant functional score CSVs"][
+    func_effects_docs["Data files"]["Per-variant functional score CSVs"][
         s
     ] = f"results/func_scores/{s}_func_scores.csv"
 
@@ -81,7 +85,9 @@ rule analyze_func_scores:
         "papermill {input.nb} {output.nb} &> {log}"
 
 
-func_effects_docs["Analysis of functional scores"] = rules.analyze_func_scores.output.nb
+func_effects_docs["Analysis notebooks"][
+    "Analysis of functional scores"
+] = rules.analyze_func_scores.output.nb
 
 
 rule func_effects_global_epistasis:
@@ -121,10 +127,10 @@ rule func_effects_global_epistasis:
 
 
 for s in func_scores:
-    func_effects_docs["Notebooks with per-selection global epistasis fitting"][
-        s
-    ] = f"results/notebooks/func_effects_global_epistasis_{s}.ipynb"
-    func_effects_docs["Per-selection mutation functional effect CSVs"][
+    func_effects_docs["Analysis notebooks"][
+        "Notebooks with per-selection global epistasis fitting"
+    ][s] = f"results/notebooks/func_effects_global_epistasis_{s}.ipynb"
+    func_effects_docs["Data files"]["Per-selection mutation functional effect CSVs"][
         s
     ] = f"results/func_effects/by_selection/{s}_func_effects.csv"
 
@@ -167,27 +173,35 @@ rule avg_func_effects:
         """
 
 
-func_effects_docs["Notebooks averaging mutation functional effects"] = {
+func_effects_docs["Analysis notebooks"][
+    "Notebooks averaging mutation functional effects"
+] = {
     c: f"results/notebooks/avg_func_effects_{c}.ipynb"
     for c in func_effects_config["avg_func_effects"]
 }
 
-func_effects_docs["Average mutation functional effects (CSV files)"] = {
+func_effects_docs["Data files"]["Average mutation functional effects (CSV files)"] = {
     c: f"results/func_effects/averages/{c}_func_effects.csv"
     for c in func_effects_config["avg_func_effects"]
 }
 
-func_effects_docs["Average mutation latent-phenotype effects (CSV files)"] = {
+func_effects_docs["Data files"][
+    "Average mutation latent-phenotype effects (CSV files)"
+] = {
     c: f"results/func_effects/averages/{c}_func_effects.csv"
     for c in func_effects_config["avg_func_effects"]
 }
 
-func_effects_docs["Interactive plots of average mutation functional effects"] = {
+func_effects_docs["Final summary plots"][
+    "Interactive plots of average mutation functional effects"
+] = {
     c: f"results/func_effects/averages/{c}_func_effects.html"
     for c in func_effects_config["avg_func_effects"]
 }
 
-func_effects_docs["Interactive plots of average mutation latent-phenotype effects"] = {
+func_effects_docs["Final summary plots"][
+    "Interactive plots of average mutation latent-phenotype effects"
+] = {
     c: f"results/func_effects/averages/{c}_latent_effects.html"
     for c in func_effects_config["avg_func_effects"]
 }
@@ -239,11 +253,13 @@ rule func_effect_shifts:
 
 
 if func_effect_shifts:
-    func_effects_docs["Notebooks fitting shifts in functional effects"] = {
+    func_effects_docs["Analysis notebooks"][
+        "Notebooks fitting shifts in functional effects"
+    ] = {
         c: rules.func_effect_shifts.output.nb.format(comparison=c)
         for c in func_effect_shifts
     }
-    func_effects_docs["Per-condition functional effect shifts CSVs"] = {
+    func_effects_docs["Data files"]["Per-condition functional effect shifts CSVs"] = {
         c: rules.func_effect_shifts.output.shifts.format(comparison=c)
         for c in func_effect_shifts
     }
@@ -285,15 +301,21 @@ rule avg_func_effect_shifts:
 
 
 if avg_func_effect_shifts:
-    func_effects_docs["Notebooks averaging shifts in functional effects"] = {
+    func_effects_docs["Analysis notebooks"][
+        "Notebooks averaging shifts in functional effects"
+    ] = {
         c: rules.avg_func_effect_shifts.output.nb.format(comparison=c)
         for c in avg_func_effect_shifts
     }
-    func_effects_docs["Average shifts in functional effects (CSV files)"] = {
+    func_effects_docs["Data files"][
+        "Average shifts in functional effects (CSV files)"
+    ] = {
         c: rules.avg_func_effect_shifts.output.shifts_csv.format(comparison=c)
         for c in avg_func_effect_shifts
     }
-    func_effects_docs["Interactive plots of average shifts in functional effects"] = {
+    func_effects_docs["Final summary plots"][
+        "Interactive plots of average shifts in functional effects"
+    ] = {
         c: "results/func_effect_shifts/averages/{comparison}_shifts.html".format(
             comparison=c
         )

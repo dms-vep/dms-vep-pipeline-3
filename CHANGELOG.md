@@ -1,6 +1,7 @@
 # CHANGELOG
 
 #### version 3.2.3
+- De-clutter the HTML docs by creating subsections that separate the "Final summary plots", "Analysis notebooks", and "Data files". Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/41).
 - Add `other_target_files` variable: files can be added to this (eg, in `custom_rules.smk`) and then the pipeline will ensure these files are also created. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/39).
 - Updated to `polyclonal` 6.7, which addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/40) and [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/43).
 

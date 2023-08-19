@@ -36,7 +36,14 @@ for sel_name, sel_d in itertools.chain.from_iterable(
             raise ValueError(f"sample {s} for {selection_name} not in barcode_runs")
 
 # Names and values of files to add to docs
-assay_docs = {assay: collections.defaultdict(dict) for assay in assays}
+assay_docs = {
+    assay: {
+        "Final summary plots": collections.defaultdict(dict),
+        "Analysis notebooks": collections.defaultdict(dict),
+        "Data files": collections.defaultdict(dict),
+    }
+    for assay in assays
+}
 
 
 wildcard_constraints:
@@ -153,14 +160,14 @@ rule fit_escape:
 for assay, sels in assay_selections.items():
     for sel in sels:
         for sample in sels[sel]["antibody_samples"]:
-            assay_docs[assay][
+            assay_docs[assay]["Data files"][
                 "Probability (fraction) escape for each variant in each "
                 + assay.replace("_", " ")
                 + " selection (CSVs)"
             ][f"{sel} {sample}"] = rules.prob_escape.output.prob_escape.format(
                 assay=assay, selection=sel, sample=sample
             )
-            assay_docs[assay][
+            assay_docs[assay]["Analysis notebooks"][
                 "Fits of polyclonal models to individual "
                 + assay.replace("_", " ")
                 + " selections"
@@ -224,21 +231,27 @@ rule avg_escape:
 
 for assay in avg_assay_config:
     assay_str = assay.replace("_", " ")
-    for heading, fname in [
-        (f"Average selections for {assay_str}", rules.avg_escape.output.nb),
-        (f"{assay_str} CSVs", rules.avg_escape.output.effect_csv),
-        (f"{assay_str} ICXX CSVs", rules.avg_escape.output.icXX_csv),
+    for heading, sec, fname in [
+        (
+            f"Average selections for {assay_str}",
+            "Analysis notebooks",
+            rules.avg_escape.output.nb,
+        ),
+        (f"{assay_str} CSVs", "Data files", rules.avg_escape.output.effect_csv),
+        (f"{assay_str} ICXX CSVs", "Data files", rules.avg_escape.output.icXX_csv),
         (
             f"{assay_str} mutation effect plots",
+            "Final summary plots",
             "results/{assay}/averages/{antibody}_mut_effect.html",
         ),
         (
             f"{assay_str} mutation ICXX plots",
+            "Final summary plots",
             "results/{assay}/averages/{antibody}_mut_icXX.html",
         ),
     ]:
         for antibody in avg_assay_config[assay]:
-            assay_docs[assay][heading][antibody] = fname.format(
+            assay_docs[assay][sec][heading][antibody] = fname.format(
                 assay=assay, antibody=antibody
             )
 

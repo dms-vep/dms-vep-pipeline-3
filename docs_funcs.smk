@@ -44,7 +44,9 @@ def process_nested_docs_dict(d, github_blob_url):
                     f"cannot handle file extension {ext=} and {gz=} as for {val=}"
                 )
             if processed_f is not None:
-                assert processed_f not in processed_files, f"duplicate {processed_name}"
+                assert (
+                    processed_f not in processed_files
+                ), f"duplicate {processed_f}\n{d}"
                 processed_files[processed_f] = val
         elif isinstance(val, dict):
             d_links[key], pfiles = process_nested_docs_dict(val, github_blob_url)

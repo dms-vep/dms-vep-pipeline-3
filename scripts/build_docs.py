@@ -42,7 +42,7 @@ def process_docs(d, depth):
             raise ValueError(f"{key=} has invalid value type {type(val)}\n{val}")
         if depth_diff <= 0:
             md_text.append(
-                init_subheading + "#" * (subheading_depth + depth_diff - 1) + entry
+                init_subheading + "##" * (subheading_depth + depth_diff - 1) + entry
             )
         else:
             md_text.append("  " * depth_diff + f"-{entry}")
@@ -68,7 +68,7 @@ html = markdown.markdown(
     extensions=[
         markdown.extensions.toc.TocExtension(
             title="Contents",
-            toc_depth="2-4",
+            toc_depth="2-2",
         ),
     ],
 )

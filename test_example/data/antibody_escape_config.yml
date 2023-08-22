@@ -60,8 +60,6 @@ polyclonal_params_default: &polyclonal_params_default
 escape_plot_kwargs_default: &escape_plot_kwargs_default
   addtl_slider_stats:
     times_seen: 3
-  addtl_tooltip_stats:
-    - sequential_site
   heatmap_max_at_least: 2
   heatmap_min_at_least: -2
   init_floor_at_zero: false

@@ -1,7 +1,7 @@
 # CHANGELOG
 
 #### version 3.2.4
-- Allow additional site numbering schemes to be defined in addition to `reference_site` and `sequential_site` by retaining as a tooltip any column in `site_numbering_map` that ends in `site`.
+- Allow additional site numbering schemes to be defined in addition to `reference_site` and `sequential_site` by retaining as a tooltip any column in `site_numbering_map` that ends in `site`. This change also means you no longer need to specify `sequential_site` under `addtl_tooltip_stats` in `antibody_escape_config.yml`.
 
 #### version 3.2.3
 - De-clutter the HTML docs by creating subsections that separate the "Final summary plots", "Analysis notebooks", and "Data files". Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/41).

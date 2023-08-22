@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.2.5
+- Do not show assays in the docs if no samples for that assay.
+
 #### version 3.2.4
 - Allow additional site numbering schemes to be defined in addition to `reference_site` and `sequential_site` by retaining as a tooltip any column in `site_numbering_map` that ends in `site`. This change also means you no longer need to specify `sequential_site` under `addtl_tooltip_stats` in `antibody_escape_config.yml`.
 

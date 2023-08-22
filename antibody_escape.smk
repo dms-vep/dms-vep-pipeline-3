@@ -42,7 +42,8 @@ assay_docs = {
         "Analysis notebooks": collections.defaultdict(dict),
         "Data files": collections.defaultdict(dict),
     }
-    for assay in assays
+    for assay in assay_selections
+    if len(assay_selections[assay])
 }
 
 

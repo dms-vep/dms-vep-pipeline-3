@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.2.4
+- Allow additional site numbering schemes to be defined in addition to `reference_site` and `sequential_site` by retaining as a tooltip any column in `site_numbering_map` that ends in `site`.
+
 #### version 3.2.3
 - De-clutter the HTML docs by creating subsections that separate the "Final summary plots", "Analysis notebooks", and "Data files". Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/41).
 - Add `other_target_files` variable: files can be added to this (eg, in `custom_rules.smk`) and then the pipeline will ensure these files are also created. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/39).

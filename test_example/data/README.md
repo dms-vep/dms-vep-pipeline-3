@@ -18,6 +18,7 @@ It must have the following columns:
 [site_numbering_map.csv](site_numbering_map.csv): Maps sequential 1, 2, ... numbering of the gene to a "reference" numbering scheme that represents the standard naming of sites for this gene.
 Also assigns each site to a region (domain) of the protein.
 So must have columns *sequential_site*, *reference_site*, and *region*.
+Any additional columns ending in "site" are retained as tooltips as well.
 
 ## Mutation-type classification
 [data/mutation_design_classification.csv](data/mutation_design_classification.csv) classifies mutations into the different categories of designed mutations.

@@ -14,18 +14,13 @@ with open(config["antibody_escape_config"]) as f:
     antibody_escape_config = yaml.safe_load(f)
 
 # get configuration for any antibody escape or receptor affinity selections
-assays = ["antibody_escape", "receptor_affinity"]
+assays = antibody_escape_config["assays"]
 assay_selections = {}
 avg_assay_config = {}
-for assay in assays:
-    if (sel_key := assay.split("_")[0] + "_selections") in antibody_escape_config:
-        assay_selections[assay] = antibody_escape_config[sel_key]
-    else:
-        assay_selections[assay] = {}
-    if f"avg_{assay}" in antibody_escape_config:
-        avg_assay_config[assay] = antibody_escape_config[f"avg_{assay}"]
-    else:
-        avg_assay_config[assay] = {}
+for assay, assay_d in assays.items():
+    assay_selections[assay] = antibody_escape_config[assay_d["selections"]]
+    if "averages" in assay_d:
+        avg_assay_config[assay] = antibody_escape_config[assay_d["averages"]]
 
 #  make sure all samples defined
 for sel_name, sel_d in itertools.chain.from_iterable(
@@ -139,6 +134,7 @@ rule fit_escape:
                 "params": assay_selections[wc.assay][wc.selection],
                 "neut_standard_frac_csvs": list(input.neut_standard_fracs),
                 "prob_escape_csvs": list(input.prob_escapes),
+                "assay_config": assays[wc.assay],
             }
         ),
     conda:
@@ -209,6 +205,7 @@ rule avg_escape:
                 "params": avg_assay_config[wc.assay][wc.antibody],
                 "prob_escape_mean_csvs": list(input.prob_escape_means),
                 "pickles": list(input.pickles),
+                "assay_config": assays[wc.assay],
             }
         ),
     conda:

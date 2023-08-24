@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.3.0
+- Restructure to allow arbitrary assays in `antibody_escape_config.yml`, not just antibody escape and receptor affinity. **Backwards incompatible**: This restructuring requires you to add a new `assays` key to `antibody_escape_config.yml` that defines the assays being used.
+
 #### version 3.2.5
 - Do not show assays in the docs if no samples for that assay.
 

@@ -83,7 +83,6 @@ other_target_files = []
 
 # include pipeline rules, which also add to `docs` dictionary
 include: "build_variants.smk"
-include: "common.smk"
 
 
 if len(barcode_runs) > 0:
@@ -101,6 +100,10 @@ if ("antibody_escape_config") in config and config[
 ] is not None:
 
     include: "antibody_escape.smk"
+
+
+# common rules
+include: "common.smk"
 
 
 # add any custom rules

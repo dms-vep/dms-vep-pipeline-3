@@ -255,9 +255,4 @@ for assay in avg_assay_config:
 
 for assay, assay_doc in assay_docs.items():
     if assay_doc:
-        docs[
-            {
-                "antibody_escape": "Antibody/serum escape",
-                "receptor_affinity": "Receptor affinity",
-            }[assay]
-        ] = assay_doc
+        docs[assays[assay]["title"]] = assay_doc

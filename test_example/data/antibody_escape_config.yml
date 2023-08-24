@@ -9,6 +9,7 @@
 # --------------------------------------------------------------------------------------
 
 # `assays` is keyed by assay (eg, "antibody_escape", "receptor_affinity", etc). Values are:
+#    - `title`: title used for selection in docs
 #    - `selections`: name of key used to define all selections for this assay
 #    - `averages`: name of key used to define averages across selections for this assay.
 #       Leave out this key if not taking averages.
@@ -22,6 +23,7 @@
 
 assays:
   antibody_escape:
+    title: Antibody/serum escape
     selections: antibody_selections
     averages: avg_antibody_escape
     prob_escape_scale:
@@ -30,6 +32,7 @@ assays:
     scale_stat: 1
     stat_name: escape
   receptor_affinity:
+    title: Receptor affinity
     selections: receptor_selections
     averages: avg_receptor_affinity
     prob_escape_scale:

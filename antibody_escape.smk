@@ -229,29 +229,41 @@ rule avg_escape:
 
 for assay in avg_assay_config:
     assay_str = assay.replace("_", " ")
-    for heading, sec, fname in [
+    for heading, sec, fname, is_icXX in [
         (
             f"Average selections for {assay_str}",
             "Analysis notebooks",
             rules.avg_escape.output.nb,
+            False,
         ),
-        (f"{assay_str} CSVs", "Data files", rules.avg_escape.output.effect_csv),
-        (f"{assay_str} ICXX CSVs", "Data files", rules.avg_escape.output.icXX_csv),
+        (f"{assay_str} CSVs", "Data files", rules.avg_escape.output.effect_csv, False),
+        (
+            f"{assay_str} ICXX CSVs",
+            "Data files",
+            rules.avg_escape.output.icXX_csv,
+            True,
+        ),
         (
             f"{assay_str} mutation effect plots",
             "Final summary plots",
             "results/{assay}/averages/{antibody}_mut_effect.html",
+            False,
         ),
         (
             f"{assay_str} mutation ICXX plots",
             "Final summary plots",
             "results/{assay}/averages/{antibody}_mut_icXX.html",
+            True,
         ),
     ]:
-        for antibody in avg_assay_config[assay]:
-            assay_docs[assay][sec][heading][antibody] = fname.format(
-                assay=assay, antibody=antibody
-            )
+        for antibody, antibody_config in avg_assay_config[assay].items():
+            if (not is_icXX) or (
+                ("show_icXX_in_docs" in antibody_config)
+                and antibody_config["show_icXX_in_docs"]
+            ):
+                assay_docs[assay][sec][heading][antibody] = fname.format(
+                    assay=assay, antibody=antibody
+                )
 
 for assay, assay_doc in assay_docs.items():
     if assay_doc:

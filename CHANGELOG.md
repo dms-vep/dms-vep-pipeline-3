@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.4.0
+- Add `show_icXX_in_docs` key to `antibody_escape_config.yml` under `avg_assay`, and then do **not** show ICXX values in final docs if this is `False` or missing. The reason is that these values seem to be highly correlated with the escape values themselves, so there is often not much advantage showing them additionally. Furthermore, they sometime seem to be linearly correlated with validation assays but not with slope 1, making the unit-less escape value perhaps better (and so giving a reason not to show ICXX). This change is **backward incompatible** with respect to how the final HTML docs look: unless you add `show_icXX_in_docs: true` for a given assay average, it will not be shown in docs. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/52).
+
 #### version 3.3.1
 - Improve visual appearance of some site plots by making x-axis labels less crowded.
 - In `avg_escape`, plot the correlations using the same filters and metric that is being used for the final average plot. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/46).

@@ -262,6 +262,7 @@ receptor_selections:
 # Define defaults for each antibody/serum, used via the merge (<<) operator
 avg_antibody_escape_default: &avg_antibody_escape_default
   icXX: 90  # IC90
+  show_icXX_in_docs: false  # Do we link ICXX plots/CSVs in docs? Missing equates to false.
   escape_plot_kwargs:
     <<: *escape_plot_kwargs_default
     avg_type: median

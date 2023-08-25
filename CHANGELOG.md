@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.3.1
+- Improve visual appearance of some site plots by making x-axis labels less crowded.
+
 ### version 3.3.0
 - Restructure to allow arbitrary assays in `antibody_escape_config.yml`, not just antibody escape and receptor affinity. **Backwards incompatible**: This restructuring requires you to add a new `assays` key to `antibody_escape_config.yml` that defines the assays being used.
 

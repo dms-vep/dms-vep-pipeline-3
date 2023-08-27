@@ -1,0 +1,16 @@
+# Configuration for creating summary plots across assays.
+
+# --------------------------------------------------------------------------------------
+# Define how to create an integrated set of line plots and heat maps that summarizes
+# antibody escape alongside other assays (eg, functional effects of mutations).
+# --------------------------------------------------------------------------------------
+
+summary:
+  antibody_escape:
+    monoclonal_antibodies:
+      ?
+  func_effects:
+    ?
+  other_assays:
+    receptor_affinity:
+      ?

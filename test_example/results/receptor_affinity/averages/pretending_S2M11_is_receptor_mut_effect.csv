@@ -1,4 +1,4 @@
-epitope,site,wildtype,mutant,mutation,affinity_mean,affinity_median,n_models,times_seen,frac_models,LibA-220302-pretending_S2M11_is_receptor-1,LibA-220302-pretending_S2M11_is_receptor-2
+epitope,site,wildtype,mutant,mutation,receptor affinity_mean,receptor affinity_median,n_models,times_seen,frac_models,LibA-220302-pretending_S2M11_is_receptor-1,LibA-220302-pretending_S2M11_is_receptor-2
 1,2,F,L,F2L,0.005593,0.005593,2,2,1,0.00639,0.004796
 1,2,F,S,F2S,0.0001768,0.0001768,2,1,1,-0.004124,0.004478
 1,3,V,A,V3A,0.005905,0.005905,2,1.5,1,0.004615,0.007196

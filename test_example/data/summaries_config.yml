@@ -11,7 +11,7 @@ summary:
   alphabet: [A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y, -]  # amino acids to include
   init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
   init_site_escape_stat: mean  # initially show site escape as this statistic
-  antibody_escape:  # show effects on antibody escape
+  antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # statistic to use for escape
       negative_color: "#0072B2"  # french blue, negative heatmap color
@@ -29,7 +29,7 @@ summary:
       negative_color: "#CC79A7"  # wild orchid
       max_at_least: 1
       min_at_least: 0
-  other_assays:  # other assays that we show
+  other_assays:  # other assays that we show, empty dict if no assays being shown
     receptor_affinity:  # assay type
       mock receptor affinity:  # name of particular assay condition
         condition: pretending_S2M11_is_receptor  # condition specified in `avg_escape`

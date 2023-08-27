@@ -18,9 +18,9 @@ summary:
       positive_color: "#E69F00"  # orange, positive heatmap color
       max_at_least: 1  # make heatmap max at least
       min_at_least: -1  # make heatmap min at least this
-      antibody_list:  # list antibodies to include, with name used for `avg_escape`
-        - REGN10933
-        - S2M11
+      antibody_list:  # antibodies to include: keys name used for `avg_escape`, values name for plot
+        REGN10933: REGN10933
+        S2M11: S2M-11
   func_effects:  # effects of mutations on function
     spike-mediated infection:  # name of functional selection
       condition: 293T_ACE2_entry  # condition specified in `avg_func_effects`

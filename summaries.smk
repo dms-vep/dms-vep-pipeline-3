@@ -52,7 +52,7 @@ rule summary:
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p chart_faceted {output.chart_faceted} \
             -p chart_overlaid {output.chart_overlaid} \
-            -p csv_file {output.csv} \
+            -p output_csv_file {output.csv} \
             -y "{params.yaml}" \
             &> {log}
         """

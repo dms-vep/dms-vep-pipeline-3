@@ -22,13 +22,14 @@ summary:
         REGN10933: REGN10933
         S2M11: S2M-11
   func_effects:  # effects of mutations on function
-    spike-mediated infection:  # name of functional selection
+    spike mediated entry:  # name of functional selection
       condition: 293T_ACE2_entry  # condition specified in `avg_func_effects`
       effect_type: func_effects  # "func_effects" or "latent_effects"
       positive_color: "#009E73"  # green
       negative_color: "#CC79A7"  # wild orchid
       max_at_least: 1
       min_at_least: 0
+      init_min_value: -3  # initial min value in slider
   other_assays:  # other assays that we show, empty dict if no assays being shown
     receptor_affinity:  # assay type
       mock receptor affinity:  # name of particular assay condition
@@ -38,3 +39,4 @@ summary:
         negative_color: "#F3C13A"  # yellow
         max_at_least: 1
         min_at_least: 0
+        init_min_value: -10  # initial min value in slider

@@ -63,3 +63,7 @@ results/receptor_affinity/by_selection/*.csv
 results/receptor_affinity/averages/*
 !results/receptor_affinity/averages/*_mut_effect.csv
 !results/receptor_affinity/averages/*_mut_icXX.csv
+
+!results/summaries
+results/summaries/*
+!results/summaries/summary.csv

@@ -90,16 +90,12 @@ if len(barcode_runs) > 0:
     include: "count_variants.smk"
 
 
-if ("func_effects_config" in config) and config["func_effects_config"] is not None:
+# include additional rule sets if they have configs defined
+for rule_set in ["func_effects", "antibody_escape", "summaries"]:
+    rule_set_config = f"{rule_set}_config"
+    if (rule_set_config in config) and (config[rule_set_config] is not None):
 
-    include: "func_effects.smk"
-
-
-if ("antibody_escape_config") in config and config[
-    "antibody_escape_config"
-] is not None:
-
-    include: "antibody_escape.smk"
+        include: f"{rule_set}.smk"
 
 
 # common rules

@@ -40,8 +40,9 @@ Must have columns *barcode* and *name*, giving the barcode and name of this neut
 [func_effects_config.yml](func_effects_config.yml) has the configuration for analyzing functional effects of mutations.
 The format is explained within the file.
 
-## Configuration for analyzing antibody escape and receptor affinity
-[antibody_escape_config.yml](antibody_escape_config.yml) has the configuration for analyzing effects of mutations on escape from antibodies or sera.
-This same configuration can also be used to analyze escape from soluble receptor that inhibits entry to estimate how mutations affect receptor affinity.
-The configuration for such receptor-inhibition experiments are also specified in this configuration as conceptually the experiments and analysis are basically the same, with just how the results are plotted and described different.
+## Configuration for escape assays (eg, antibody escape)
+[antibody_escape_config.yml](antibody_escape_config.yml) has the configuration for analyzing effects of mutations on escape, such as from antibodies, sera, soluble receptor, or a stability decreasing agent.
 The format is explained within the file.
+
+## Configuration for summary plots across assays
+[summary_config.yml](summary_config.yml) has the configuration for creating summaries across multiple assays.

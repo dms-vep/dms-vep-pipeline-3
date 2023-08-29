@@ -1,10 +1,7 @@
-"""``snakemake`` rules for calculating antibody/sera escape or receptor affinity.
+"""``snakemake`` rules for escape from some agent in assays (eg, antibody escape).
 
-Note that this analyzes data for two assay types: 'antibody_escape' and
-'receptor_affinity', corresponding to escape from antibody / sera or escape
-from soluble receptor used to estimate affinity. The workflow is basically the
-same, so 'antibody' is used as a synonym in some of the definitions of the
-receptor affinity selections.
+Note that these rules can analyze arbitrary assays. Throughout the workflow, the term
+'antibody' is used as a synonym for the agent that is being used to select for escape.
 
 """
 
@@ -15,6 +12,7 @@ with open(config["antibody_escape_config"]) as f:
 
 # get configuration for any antibody escape or receptor affinity selections
 assays = antibody_escape_config["assays"]
+assert "func_effects" not in assays, "cannot have assay called 'func_effects'"
 assay_selections = {}
 avg_assay_config = {}
 for assay, assay_d in assays.items():

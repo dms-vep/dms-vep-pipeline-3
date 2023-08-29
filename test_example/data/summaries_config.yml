@@ -40,3 +40,12 @@ summary:
         max_at_least: 1
         min_at_least: 0
         init_min_value: -10  # initial min value in slider
+  title: Mutation effects across assays
+  legend: |
+    This is is an interactive chart. Mouseover points on the top line plots that
+    summarize the per-site escape averaged across all sera and for individual sera.
+    You can use the top zoom-bar or the line plots to zoom in on specific sites to
+    show in the heatmaps that give per-mutation effects on serum escape or protein
+    function. The options at the bottom let you only show escape for sites with some
+    minimal functional effect (more deleterious mutations are grayed out in heatmap),
+    choose the site summary metric, or floor the escape at zero.

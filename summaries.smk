@@ -12,7 +12,8 @@ rule summary:
     input:
         **{
             f"antibody_escape {antibody}": rules.avg_escape.output.effect_csv.format(
-                assay="antibody_escape", antibody=antibody,
+                assay="antibody_escape",
+                antibody=antibody,
             )
             for antibody_set_d in summary_config["antibody_escape"].values()
             for antibody in antibody_set_d["antibody_list"]
@@ -26,7 +27,8 @@ rule summary:
         },
         **{
             f"{assay} {condition_d['condition']}": rules.avg_escape.output.effect_csv.format(
-                assay=assay, antibody=condition_d["condition"],
+                assay=assay,
+                antibody=condition_d["condition"],
             )
             for (assay, assay_d) in summary_config["other_assays"].items()
             for condition_d in assay_d.values()
@@ -40,8 +42,15 @@ rule summary:
         nb="results/notebooks/summary.ipynb",
     params:
         yaml=lambda _, input: yaml.round_trip_dump(
-            {"config": summary_config, "input_csvs": dict(input)}
-        )
+            {
+                "config": {
+                    key: val
+                    for (key, val) in summary_config.items()
+                    if key not in ["title", "legend"]
+                },
+                "input_csvs": dict(input),
+            }
+        ),
     conda:
         "environment.yml"
     log:
@@ -60,10 +69,10 @@ rule summary:
 
 # Add files to docs
 docs["Summary of results across assays"] = {
-    "Final summary plots": ( 
+    "Final summary plots": (
         {
-            "Summary of assays (escape overlaid)": rules.summary.output.chart_overlaid,
-            "Summary of assays (escape faceted)": rules.summary.output.chart_faceted,
+            "Summary of assays (escape overlaid)": "results/summaries/summary_overlaid.html",
+            "Summary of assays (escape faceted)": "results/summaries/summary_faceted.html",
         }
         if summary_config["antibody_escape"]
         else {"Summary of assays": rules.summary.output.chart_overlaid}

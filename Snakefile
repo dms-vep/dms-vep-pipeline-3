@@ -94,6 +94,7 @@ if len(barcode_runs) > 0:
 for rule_set in ["func_effects", "antibody_escape", "summaries"]:
     rule_set_config = f"{rule_set}_config"
     if (rule_set_config in config) and (config[rule_set_config] is not None):
+
         include: f"{rule_set}.smk"
 
 

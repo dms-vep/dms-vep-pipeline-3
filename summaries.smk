@@ -21,7 +21,7 @@ rule summary:
         **{
             f"func_effects {condition_d['condition']}": os.path.join(
                 "results/func_effects/averages",
-                condition_d["condition"] + "_" + condition_d["effect_type"] + ".csv",
+                f"{condition_d['condition']}_{condition_d['effect_type']}.csv",
             )
             for condition_d in summary_config["func_effects"].values()
         },

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.4.3
+- Antibody names passed to `summary` cannot have non-alphanumeric characters. Before this led to a silent and hard to diagnose failure. Now there is an explicit check that throws an interpretable error if any antibodies are assigned for `summary` non-alphanumeric names (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/58)).
+
 #### version 3.4.2
 - Fix bug so `summary` works even if no antibody escape data.
 - Include legend in `summary` plot when no antibody escape data.

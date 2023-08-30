@@ -2,6 +2,7 @@
 
 #### version 3.4.2
 - Fix bug so `summary` works even if no antibody escape data.
+- Include legend in `summary` plot when no antibody escape data.
 
 #### version 3.4.1
 - Fix bug in site sorting in line plots in `summary.ipynb`

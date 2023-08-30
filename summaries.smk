@@ -75,7 +75,7 @@ docs["Summary of results across assays"] = {
             "Summary of assays (escape faceted)": "results/summaries/summary_faceted.html",
         }
         if summary_config["antibody_escape"]
-        else {"Summary of assays": rules.summary.output.chart_overlaid}
+        else {"Summary of assays": "results/summaries/summary_overlaid.html"}
     ),
     "Data files": {
         "CSV summarizing results": rules.summary.output.csv,

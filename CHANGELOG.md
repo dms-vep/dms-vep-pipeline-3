@@ -1,6 +1,6 @@
 # CHANGELOG
 
-#### version 3.4.3
+#### version 3.4.4
 - Fix bug in `summary` when no `other_assays`; also fix filtering on heatmaps sliders when more than two other properties. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/62).
 
 #### version 3.4.3

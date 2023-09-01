@@ -55,7 +55,9 @@ if len(barcode_runs) > 0:
         ),
     ).query("not has_prefix")
     if len(sample_prefix):
-        raise ValueError(f"Some barcode run samples lack correct prefix:\n{sample_prefix}")
+        raise ValueError(
+            f"Some barcode run samples lack correct prefix:\n{sample_prefix}"
+        )
 
     # dicts mapping sample to library or date as string
     sample_to_library = barcode_runs.set_index("sample")["library"].to_dict()

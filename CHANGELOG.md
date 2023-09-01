@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.4.5
+- Fix bug that occurs when `barcode_runs` is set to `null` in the `config.yaml`. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/64).
+
 #### version 3.4.4
 - Fix bug in `summary` when no `other_assays`; also fix filtering on heatmaps sliders when more than two other properties. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/62).
 

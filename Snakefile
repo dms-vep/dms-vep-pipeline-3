@@ -43,26 +43,29 @@ dup_fastq_R1 = (
 if len(dup_fastq_R1):
     raise ValueError(f"Some FASTQs assigned to multiple samples:\n{dup_fastq_R1}")
 
-# make sure barcode run samples start with <library>-<YYMMDD>-
-sample_prefix = barcode_runs.assign(
-    prefix=lambda x: (
-        x["library"].astype(str) + "-" + x["date"].dt.strftime("%y%m%d") + "-"
-    ),
-    has_prefix=lambda x: x.apply(
-        lambda r: r["sample"].startswith(r["prefix"]),
-        axis=1,
-    ),
-).query("not has_prefix")
-if len(sample_prefix):
-    raise ValueError(f"Some barcode run samples lack correct prefix:\n{sample_prefix}")
+if len(barcode_runs) > 0:
+    # make sure barcode run samples start with <library>-<YYMMDD>-
+    sample_prefix = barcode_runs.assign(
+        prefix=lambda x: (
+            x["library"].astype(str) + "-" + x["date"].dt.strftime("%y%m%d") + "-"
+        ),
+        has_prefix=lambda x: x.apply(
+            lambda r: r["sample"].startswith(r["prefix"]),
+            axis=1,
+        ),
+    ).query("not has_prefix")
+    if len(sample_prefix):
+        raise ValueError(
+            f"Some barcode run samples lack correct prefix:\n{sample_prefix}"
+        )
 
-# dicts mapping sample to library or date as string
-sample_to_library = barcode_runs.set_index("sample")["library"].to_dict()
-sample_to_date = (
-    barcode_runs.assign(date_str=lambda x: x["date"].dt.strftime("%Y-%m-%d"))
-    .set_index("sample")["date_str"]
-    .to_dict()
-)
+    # dicts mapping sample to library or date as string
+    sample_to_library = barcode_runs.set_index("sample")["library"].to_dict()
+    sample_to_date = (
+        barcode_runs.assign(date_str=lambda x: x["date"].dt.strftime("%Y-%m-%d"))
+        .set_index("sample")["date_str"]
+        .to_dict()
+    )
 
 # `docs` is a nested dictionary used to build HTML documentation. At the bottom of the
 # nesting, keys should be short titles for files and values should be the path of the
@@ -89,13 +92,12 @@ if len(barcode_runs) > 0:
 
     include: "count_variants.smk"
 
+    # include additional rule sets if they have configs defined
+    for rule_set in ["func_effects", "antibody_escape", "summaries"]:
+        rule_set_config = f"{rule_set}_config"
+        if (rule_set_config in config) and (config[rule_set_config] is not None):
 
-# include additional rule sets if they have configs defined
-for rule_set in ["func_effects", "antibody_escape", "summaries"]:
-    rule_set_config = f"{rule_set}_config"
-    if (rule_set_config in config) and (config[rule_set_config] is not None):
-
-        include: f"{rule_set}.smk"
+            include: f"{rule_set}.smk"
 
 
 # common rules

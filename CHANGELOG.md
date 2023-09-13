@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.4.6
+- Order antibodies in `summary` plots as ordered in config. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/66).
+
 #### version 3.4.5
 - Fix bug that occurs when `barcode_runs` is set to `null` in the `config.yaml`. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/64).
 

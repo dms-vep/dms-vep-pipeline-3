@@ -27,7 +27,7 @@ summary:
       effect_type: func_effects  # "func_effects" or "latent_effects"
       positive_color: "#009E73"  # green
       negative_color: "#F0E442"  # yellow
-      max_at_least: 1
+      fixed_max: 2  # specify either `max_at_least` or `fixed_max`
       min_at_least: 0
       init_min_value: -3  # initial min value in slider
   other_assays:  # other assays that we show, empty dict if no assays being shown
@@ -38,7 +38,7 @@ summary:
         positive_color: "#0072B2"  # dark blue
         negative_color: "#D55E00"  # red
         max_at_least: 1
-        min_at_least: 0
+        fixed_min: -3  # specify either `min_at_least` or `fixed_min`
         init_min_value: -10  # initial min value in slider
   title: Mutation effects across assays
   legend: |

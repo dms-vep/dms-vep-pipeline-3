@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.4.7
+- In `summary` plots you can now specify **either** `max_at_least` or `fixed_max` and `min_at_least` or `fixed_min` for heatmaps.
+
 #### version 3.4.6
 - Order antibodies in `summary` plots as ordered in config. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/66).
 

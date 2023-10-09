@@ -1,5 +1,14 @@
 # CHANGELOG
 
+#### version 3.4.8
+- Update versions of some software in `conda` env:
+  - `altair` -> 5.1.2
+  - `matplotlib` -> 3.8
+  - `papermill` -> 2.4
+  - `snakemake` -> 7.32
+  - `dmslogo` -> added version 0.6.3
+  - `neutcurve` -> added version 0.5.7
+
 #### version 3.4.7
 - In `summary` plots you can now specify **either** `max_at_least` or `fixed_max` and `min_at_least` or `fixed_min` for heatmaps.
 

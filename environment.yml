@@ -6,7 +6,7 @@ channels:
   - defaults
 
 dependencies:
-  - altair=5.0.1
+  - altair=5.1.2
   - biopython=1.81
   - black-jupyter
   - bs4=4.12
@@ -17,13 +17,13 @@ dependencies:
   - jupyterlab
   - mafft=7.520
   - markdown=3.4
-  - matplotlib=3.7
+  - matplotlib=3.8
   - minimap2=2.26
   - nbstripout
   - nbqa
   - openpyxl
   - pandas=2.0
-  - papermill=2.3
+  - papermill=2.4
   - pip
   - plotnine=0.12
   - python=3.11
@@ -31,10 +31,12 @@ dependencies:
   - ruff
   - seaborn=0.12
   - snakefmt
-  - snakemake=7.30
+  - snakemake=7.32
   - upsetplot=0.8
   - pip:
     - alignparse==0.6.2
     - dms_variants==1.4.3
+    - dmslogo==0.6.3
     - multidms==0.2.1
+    - neutcurve==0.5.7
     - polyclonal==6.7

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.4.9
+- Update to `dmslogo` 0.7.0, which fixes [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/74)
+
 #### version 3.4.8
 - Update versions of some software in `conda` env:
   - `altair` -> 5.1.2

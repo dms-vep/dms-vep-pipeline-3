@@ -36,7 +36,7 @@ dependencies:
   - pip:
     - alignparse==0.6.2
     - dms_variants==1.4.3
-    - dmslogo==0.6.3
+    - dmslogo==0.7.0
     - multidms==0.2.1
     - neutcurve==0.5.7
     - polyclonal==6.7

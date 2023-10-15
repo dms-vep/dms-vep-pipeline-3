@@ -35,6 +35,7 @@ dependencies:
   - upsetplot=0.8
   - pip:
     - alignparse==0.6.2
+    - baltic==0.2.2
     - dms_variants==1.4.3
     - dmslogo==0.7.0
     - multidms==0.2.1

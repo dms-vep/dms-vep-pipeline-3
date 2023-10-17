@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.5.0
+- Updated to `polyclonal` 6.8
+
 #### version 3.4.10
 - Added `baltic` to the environment.
 

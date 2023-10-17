@@ -40,4 +40,4 @@ dependencies:
     - dmslogo==0.7.0
     - multidms==0.2.1
     - neutcurve==0.5.7
-    - polyclonal==6.7
+    - polyclonal==6.8

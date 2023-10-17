@@ -88,6 +88,8 @@ avg_func_effects_default: &avg_func_effects_default
   plot_kwargs:
     addtl_slider_stats:
       times_seen: 3
+      effect_std: 2
+    addtl_slider_stats_as_max: [effect_std]
     heatmap_max_at_least: 1
     heatmap_min_at_least: -1
     init_floor_at_zero: false

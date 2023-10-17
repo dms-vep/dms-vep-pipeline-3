@@ -2,6 +2,10 @@
 
 ### version 3.5.0
 - Updated to `polyclonal` 6.8
+- Add options to filter average measurements based on excessive variability in measurements across replicates:
+  - `func_effects_config.yaml` now allows you to specify `effect_std: <value>` under `plot_kwargs: addtl_slider_stats`, remember to also add `addtl_slider_stats_as_max: [effect_std]`.
+  - `avg_func_effects.ipynb` now makes plots with `effect_std` slider and also plots distribution of effect standard deviations to help you choose a good initial value for this filter.
+  - the results files with the average functional effects now include the `effect_std` column
 
 #### version 3.4.10
 - Added `baltic` to the environment.

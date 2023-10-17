@@ -6,6 +6,9 @@
   - `func_effects_config.yaml` now allows you to specify `effect_std: <value>` under `plot_kwargs: addtl_slider_stats`, remember to also add `addtl_slider_stats_as_max: [effect_std]`.
   - `avg_func_effects.ipynb` now makes plots with `effect_std` slider and also plots distribution of effect standard deviations to help you choose a good initial value for this filter.
   - the results files with the average functional effects now include the `effect_std` column
+  - `antibody_escape_config.yaml` now allows you to specify `escape_std: <value>` under `plot_kwargs: addtl_slider_stats`, remember to also add `addtl_slider_stats_as_max: [escape_std]`.
+  - `avg_antibody_escape.ipynb` now makes plots with `escape_std` slider and also plots distribution of escape standard deviations to help you choose a good initial value for this filter.
+  - the results files with the average antibody escape now include the `escape_std` column
 
 #### version 3.4.10
 - Added `baltic` to the environment.

@@ -259,14 +259,21 @@ receptor_selections:
 #   - `title`: title of plots
 #   - `legend`: legend added to plots
 
+avg_escape_plot_kwargs_default: &avg_escape_plot_kwargs_default
+  <<: *escape_plot_kwargs_default
+  addtl_slider_stats:
+    times_seen: 3
+    escape_std: 2
+  addtl_slider_stats_as_max: [escape_std]
+  avg_type: median
+  per_model_tooltip: true
+
 # Define defaults for each antibody/serum, used via the merge (<<) operator
 avg_antibody_escape_default: &avg_antibody_escape_default
   icXX: 90  # IC90
   show_icXX_in_docs: false  # Do we link ICXX plots/CSVs in docs? Missing equates to false.
   escape_plot_kwargs:
-    <<: *escape_plot_kwargs_default
-    avg_type: median
-    per_model_tooltip: true
+    <<: *avg_escape_plot_kwargs_default
   plot_hide_stats: *plot_hide_stats_default
   legend: |
     Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary statistic indicating a summary of the mutation effects at each site. The heat map shows effects for individual mutations, with parental amino-acid identities indicated by x and gray indicating non-measured mutations. Mouse over points for details.

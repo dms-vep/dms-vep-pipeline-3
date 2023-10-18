@@ -18,6 +18,8 @@ summary:
       negative_color: "#E69F00"  # orange, negative heatmap color
       max_at_least: 1  # make heatmap max at least
       min_at_least: -1  # make heatmap min at least this
+      le_filters:  # only keep entries with indicated column is <= indicated value
+        escape_std: 2
       antibody_list:  # antibodies to include: keys name used for `avg_escape`, values name for plot
         S2M11: S2M-11
         REGN10933: REGN10933
@@ -30,6 +32,8 @@ summary:
       fixed_max: 2  # specify either `max_at_least` or `fixed_max`
       min_at_least: 0
       init_min_value: -3  # initial min value in slider
+      le_filters:  # only keep entries with indicated column is <= indicated value
+        effect_std: 2
   other_assays:  # other assays that we show, empty dict if no assays being shown
     receptor_affinity:  # assay type
       mock receptor affinity:  # name of particular assay condition
@@ -40,6 +44,8 @@ summary:
         max_at_least: 1
         fixed_min: -3  # specify either `min_at_least` or `fixed_min`
         init_min_value: -10  # initial min value in slider
+        le_filters:  # only keep entries with indicated column is <= indicated value
+          receptor affinity_std: 2
   title: Mutation effects across assays
   legend: |
     This is is an interactive chart. Mouseover points on the top line plots that

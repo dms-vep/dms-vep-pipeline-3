@@ -16,6 +16,11 @@
 #    - `prob_escape_scale`: the scale used for the y-axis when plotting prob escape as
 #      a function of concentration. Typically symlog if all values close to zero, linear
 #      otherwise. Should be in the form of keyword arguments to `altair.Scale`.
+#    - `concentration_scale`: the scale used for the x-axis when plotting prob escape
+#      as a function of concentration. Is optional. Should be in the form of keyword
+#      arguments to `altair.Scale`.
+#    - `concentration_title`: the title used for the x-axis when plotting prob escape
+#      as a function of concentration. Is optional.
 #    - `scale_stat`: scale the statistic being estimated for mutation effects by this
 #      number. Typically is 1 (no scaling) unless you want negative values to indicate a
 #      favorable effect (as for soluble receptor selections), in which case use -1.
@@ -37,6 +42,9 @@ assays:
     averages: avg_receptor_affinity
     prob_escape_scale:
       type: linear
+    concentration_scale:
+      type: linear
+    concentration_title: concentration of receptor
     scale_stat: -1
     stat_name: receptor affinity
 

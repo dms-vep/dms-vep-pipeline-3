@@ -2,7 +2,7 @@
 
 ### version 3.5.0
 - Updated to `polyclonal` 6.9
-- Add options to filter average measurements based on excessive variability in measurements across replicates:
+- Add options to filter average measurements based on excessive variability in measurements across replicates (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/78)):
   - `func_effects_config.yaml` now allows you to specify `effect_std: <value>` under `plot_kwargs: addtl_slider_stats`, remember to also add `addtl_slider_stats_as_max: [effect_std]`. You can also specify `floor_for_effect_std` under `avg_func_effects` to floor before computing the standard deviation.
   - `avg_func_effects.ipynb` now makes plots with `effect_std` slider and also plots distribution of effect standard deviations to help you choose a good initial value for this filter.
   - the results files with the average functional effects now include the `effect_std` column
@@ -10,6 +10,7 @@
   - `avg_antibody_escape.ipynb` now makes plots with `escape_std` slider and also plots distribution of escape standard deviations to help you choose a good initial value for this filter.
   - the results files with the average antibody escape now include the `escape_std` column
   - `summaries_config.yml` now provides a `le_filter` option which can be used to set a filter on the standard deviations.
+- Customize scales in probability escape plots by adding `concentration_scale` and `concentration_title` to assay configuration in `antibody_escape_config.yaml`. See [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/72).
 
 #### version 3.4.10
 - Added `baltic` to the environment.

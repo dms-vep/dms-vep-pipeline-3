@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.5.2
+- Fix bug introduced in `summary` when no antibodies in version 3.5.1
+
 #### version 3.5.1
 - Fix tooltips in std chart in averaging notebooks when column has a `.` in the name (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/81)).
 - `summary` rule now creates a per-antibody escape CSV file.

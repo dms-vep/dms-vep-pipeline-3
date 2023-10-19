@@ -39,6 +39,7 @@ rule summary:
         chart_overlaid="results/summaries/summary_overlaid_nolegend.html",
         chart_faceted="results/summaries/summary_faceted_nolegend.html",
         csv="results/summaries/summary.csv",
+        per_antibody_escape_csv="results/summaries/per_antibody_escape.csv",
         nb="results/notebooks/summary.ipynb",
     params:
         yaml=lambda _, input: yaml.round_trip_dump(
@@ -62,6 +63,7 @@ rule summary:
             -p chart_faceted {output.chart_faceted} \
             -p chart_overlaid {output.chart_overlaid} \
             -p output_csv_file {output.csv} \
+            -p per_antibody_escape_csv {output.per_antibody_escape_csv} \
             -y "{params.yaml}" \
             &> {log}
         """
@@ -78,6 +80,7 @@ docs["Summary of results across assays"] = {
         else {"Summary of assays": "results/summaries/summary_overlaid.html"}
     ),
     "Data files": {
-        "CSV summarizing results": rules.summary.output.csv,
+        "CSV summarizing overall results": rules.summary.output.csv,
+        "CSV summarizing per-antibody results": rules.summary.output.per_antibody_escape_csv,
     },
 }

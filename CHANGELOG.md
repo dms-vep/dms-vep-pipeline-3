@@ -2,6 +2,7 @@
 
 #### version 3.5.1
 - Fix tooltips in std chart in averaging notebooks when column has a `.` in the name (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/81)).
+- `summary` rule now creates a per-antibody escape CSV file.
 
 ### version 3.5.0
 - Updated to `polyclonal` 6.9

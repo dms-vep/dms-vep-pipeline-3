@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.5.1
+- Fix tooltips in std chart in averaging notebooks when column has a `.` in the name (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/81)).
+
 ### version 3.5.0
 - Updated to `polyclonal` 6.9
 - Add options to filter average measurements based on excessive variability in measurements across replicates (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/78)):

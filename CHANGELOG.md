@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.5.3
+- Fix bug in `per_antibody_escape.csv` production in `summary` introduced in version 3.5.1.
+
 #### version 3.5.2
 - Fix bug introduced in `summary` when no antibodies in version 3.5.1
 

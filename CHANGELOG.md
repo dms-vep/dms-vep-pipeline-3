@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.5.4
+- Fix bug in reporting pre-selection counts cutoff in `func_scores`. See [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/87). The cutoff was applied correctly before and that has not changed, this just fixes reporting of it in plots in `analyze_func_scores`.
+
 #### version 3.5.3
 - Fix bug in `per_antibody_escape.csv` production in `summary` introduced in version 3.5.1.
 

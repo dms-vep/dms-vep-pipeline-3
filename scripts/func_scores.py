@@ -87,7 +87,7 @@ counts_summary_d = {
     "post_selection_sample": snakemake.params.samples["post_selection_sample"],
     "pre_selection_date": snakemake.params.dates["pre_selection_sample"],
     "post_selection_date": snakemake.params.dates["post_selection_sample"],
-    "min_pre_selection_count": func_score_params["min_pre_selection_count"],
+    "min_pre_selection_count": min_pre,
 }
 for ctype in ["pre_count", "post_count"]:
     counts_summary_d[f"{ctype}_median"] = func_scores[ctype].median()

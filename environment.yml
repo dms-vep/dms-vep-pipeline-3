@@ -37,6 +37,6 @@ dependencies:
     - baltic==0.2.2
     - dms_variants==1.4.3
     - dmslogo==0.7.0
-    - multidms==0.2.1
+    - multidms==0.3.1
     - neutcurve==0.5.7
     - polyclonal==6.9

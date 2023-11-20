@@ -19,8 +19,28 @@ func_scores_params_default: &func_scores_params_default
   # !!! Make min_pre_selection_frac LARGER for larger libraries, such 0.1 / (library size) !!!
   min_pre_selection_frac: 0.00005  # drop variants that are < this fraction of all counts
 
+# For a full list of parameters, see 
+# https://matsengrp.github.io/multidms/multidms.model_collection.html#multidms.model_collection.fit_one_model
+multidms_fit_kwargs: &multidms_fit_kwargs_default
+
+  ## GENERAL FITTING PARAMETERS
+  # it is a scaling coefficient for the ridge regularization (L2) 
+  # on beta parameters to help with fitting stability. 
+  # This will become the default for multidms in the future.
+  # currently (0.3.1), default is 0.
+  # Note the value must able a float (or able to be casted as such)
+  scale_coeff_ridge_beta: 1e-7
+
+
+  ## MULTI-CONDITION FITTING PARAMETERS
+  # Ridge (L2) regularization on latent_offset
+  # Note the value must able a float (or able to be casted as such)
+  # recommend 0.0001, as used in manuscript, will become default in future
+  # currently (0.3.1), default is 0.
+  scale_coeff_ridge_alpha_d: 0.
+
 # Define default parameters for fitting global epistasis models to each
-# individual selection to get mutationo effects.
+# individual selection to get mutation effects.
 global_epistasis_params: &global_epistasis_params
   # How to clip functional scores at upper / lower bounds. Allowable values:
   #  - median_stop: median func score of all variants with stop codons
@@ -28,8 +48,20 @@ global_epistasis_params: &global_epistasis_params
   #  - a number: clip at this number
   clip_lower: median_stop
   clip_upper: null
+
+  # clip predictions to same lower bound as functional scores?
+  # if true, the model uses a Softplus activation function to clip predictions
+  # to the same lower bound as functional scores.
+  # see https://matsengrp.github.io/multidms/biophysical_model.html#Optional-truncation-of-predicted-functional-scores
+  # for more details about the Softplus activation function, and the motivation for clipping model predictions.
+  # note that the following parameter only has an effect if the clip_lower param above is not null.
+  clip_predictions: false
+
   # Do we collapse barcodes with same variant?
   collapse_identical_variants: false  # {false, mean, median}
+
+  # Define default parameters for fitting global epistasis models to each
+  fit_kwargs: *multidms_fit_kwargs_default
 
 # Define how to compute functional scores. Each key is a selection experiment.
 # A global epistasis model is used to get mutational effects for each selection.
@@ -160,13 +192,23 @@ func_effect_shifts_default: &func_effect_shifts_default
   #  - a number: clip at this number
   clip_lower: median_stop
   clip_upper: null
+  # note that the following parameter only has an effect if the clip_lower param above is not null.
+  # clip predictions to same lower bound as functional scores?
+  # if true, the model uses a Softplus activation function to clip predictions
+  # to the same lower bound as functional scores.
+  # see https://matsengrp.github.io/multidms/biophysical_model.html#Optional-truncation-of-predicted-functional-scores
+  # for more details about the Softplus activation function, and the motivation for clipping model predictions.
+  clip_predictions: false
   # Do we collapse barcodes with same variant?
   collapse_identical_variants: false  # {false, mean, median}
   # Do we have offset in latent effects for different conditions? `alpha_d` in `multidms`
+  # TODO inform jesse this parameter was never passed to the model instantiation before
   latent_offset: true
   # Strength of lasso regularization on shifts in `multidms`. You can try a range of
   # values and then pick a best one at the averaging step. 
+  # TODO inform jesse there was a bug here with refitting the same parameters
   lasso_shifts: [0.00001, 0.00005, 0.0001, 0.0002, 0.001]
+  fit_kwargs: *multidms_fit_kwargs_default
 
 func_effect_shifts:
  LibA-date_comparison-1:

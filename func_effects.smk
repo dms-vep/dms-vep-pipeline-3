@@ -232,12 +232,13 @@ rule func_effect_shifts:
         nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_shifts.ipynb"),
     output:
         shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
+        fit_collection="results/func_effect_shifts/by_comparison/{comparison}_fit_collection.pkl",
         nb="results/notebooks/func_effect_shifts_{comparison}.ipynb",
     params:
         params_yaml=lambda wc: yaml.round_trip_dump(
             {"params": func_effect_shifts[wc.comparison]}
         ),
-    threads: 1
+    threads: 4  # the different lasso strength values are run in parallel
     conda:
         "environment.yml"
     log:
@@ -247,6 +248,7 @@ rule func_effect_shifts:
         papermill {input.nb} {output.nb} \
             -y "{params.params_yaml}" \
             -p shifts_csv {output.shifts} \
+            -p fit_collection_pkl {output.fit_collection} \
             -p threads {threads} \
             &> {log}
         """

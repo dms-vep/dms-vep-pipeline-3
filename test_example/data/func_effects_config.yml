@@ -28,6 +28,8 @@ global_epistasis_params: &global_epistasis_params
   #  - a number: clip at this number
   clip_lower: median_stop
   clip_upper: null
+  # clip predictions to same lower bound as functional scores?
+  clip_predictions: true
   # Do we collapse barcodes with same variant?
   collapse_identical_variants: false  # {false, mean, median}
 

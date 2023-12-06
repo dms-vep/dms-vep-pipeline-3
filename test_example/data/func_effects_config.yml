@@ -28,8 +28,13 @@ global_epistasis_params: &global_epistasis_params
   #  - a number: clip at this number
   clip_lower: median_stop
   clip_upper: null
+  # note that the following parameter only has an effect if the clip_lower param above is not null.
   # clip predictions to same lower bound as functional scores?
-  clip_predictions: true
+  # if true, the model uses a Softplus activation function to clip predictions
+  # to the same lower bound as functional scores.
+  # see https://matsengrp.github.io/multidms/biophysical_model.html#Optional-truncation-of-predicted-functional-scores
+  # for more details about the Softplus activation function, and the motivation for clipping model predictions.
+  clip_predictions: false
   # Do we collapse barcodes with same variant?
   collapse_identical_variants: false  # {false, mean, median}
 
@@ -162,12 +167,24 @@ func_effect_shifts_default: &func_effect_shifts_default
   #  - a number: clip at this number
   clip_lower: median_stop
   clip_upper: null
+  # note that the following parameter only has an effect if the clip_lower param above is not null.
+  # clip predictions to same lower bound as functional scores?
+  # if true, the model uses a Softplus activation function to clip predictions
+  # to the same lower bound as functional scores.
+  # see https://matsengrp.github.io/multidms/biophysical_model.html#Optional-truncation-of-predicted-functional-scores
+  # for more details about the Softplus activation function, and the motivation for clipping model predictions.
+  clip_predictions: false
   # Do we collapse barcodes with same variant?
   collapse_identical_variants: false  # {false, mean, median}
   # Do we have offset in latent effects for different conditions? `alpha_d` in `multidms`
+  # TODO inform jesse this parameter was never passed to the model instantiation before
+  # but the default was always true.
   latent_offset: true
+  # if we do have a latent offet, what is the strength of ridge regularization on it?
+  ridge_latent_offset: 0  # 0.001 is the multidms default.
   # Strength of lasso regularization on shifts in `multidms`. You can try a range of
   # values and then pick a best one at the averaging step. 
+  # TODO inform jesse there was a bug here with refitting the same parameters
   lasso_shifts: [0.00001, 0.00005, 0.0001, 0.0002, 0.001]
 
 func_effect_shifts:

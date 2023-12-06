@@ -178,7 +178,6 @@ func_effect_shifts_default: &func_effect_shifts_default
   collapse_identical_variants: false  # {false, mean, median}
   # Do we have offset in latent effects for different conditions? `alpha_d` in `multidms`
   # TODO inform jesse this parameter was never passed to the model instantiation before
-  # but the default was always true.
   latent_offset: true
   # if we do have a latent offet, what is the strength of ridge regularization on it?
   ridge_latent_offset: 0  # 0.001 is the multidms default.

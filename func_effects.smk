@@ -238,7 +238,7 @@ rule func_effect_shifts:
         params_yaml=lambda wc: yaml.round_trip_dump(
             {"params": func_effect_shifts[wc.comparison]}
         ),
-    threads: 4 # the different lasso strength values are run in parallel
+    threads: 4  # the different lasso strength values are run in parallel
     conda:
         "environment.yml"
     log:

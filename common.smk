@@ -6,6 +6,8 @@ include: "common_funcs.smk"
 
 rule format_altair_html:
     """Format ``altair`` charts by adding title, legend, etc."""
+    wildcard_constraints:
+        chart="((?!nolegend).)*",  # do not match, https://stackoverflow.com/a/6259570
     input:
         html="results/{chart}_nolegend.html",
         pyscript=os.path.join(config["pipeline_path"], "scripts/format_altair_html.py"),

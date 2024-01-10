@@ -105,7 +105,7 @@ rule func_effects_global_epistasis:
         global_epistasis_params_yaml=lambda wc: yaml.round_trip_dump(
             {
                 "global_epistasis_params": func_scores[wc.selection][
-                "global_epistasis_params"
+                    "global_epistasis_params"
                 ],
             }
         ),

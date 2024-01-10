@@ -1,5 +1,9 @@
 # CHANGELOG
 
+#### version 3.5.5
+- Fix `PeriodicWildCardError` that was raised by `snakemake` for the `_nolegend` output HTML plots for certain wildcards.
+- Fix how notebook linting done with `ruff` in tests.
+
 #### version 3.5.4
 - Fix bug in reporting pre-selection counts cutoff in `func_scores`. See [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/87). The cutoff was applied correctly before and that has not changed, this just fixes reporting of it in plots in `analyze_func_scores`.
 

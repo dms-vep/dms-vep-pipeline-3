@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.5.6
+- Fit each lasso weight independently in `multidms` comparisons (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/92)).
+
 #### version 3.5.5
 - Fix `PeriodicWildCardError` that was raised by `snakemake` for the `_nolegend` output HTML plots for certain wildcards.
 - Fix how notebook linting done with `ruff` in tests.

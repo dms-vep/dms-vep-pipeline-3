@@ -13,6 +13,7 @@ dependencies:
   - entrez-direct=16.2
   - flatdict=4.0
   - git-lfs
+  - ipywidgets  # required because of https://github.com/matsengrp/multidms/issues/114
   - jupyterlab
   - mafft=7.520
   - markdown=3.4

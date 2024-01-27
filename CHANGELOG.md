@@ -1,5 +1,15 @@
 # CHANGELOG
 
+### version 3.6.0
+- Update environment:
+  - update `polyclonal` to 6.10 (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/96))
+  - update `neutcurve` to 1.1.2
+  - update `altair` to 5.2.0
+  - update `biopython` to 1.83
+  - update `pandas` to 2.2 and add `pyarrow`
+  - update to `seaborn` 0.13
+  - update to `snakemake` 8.3. **Note that this means the recommended usage now changes from `--use-conda` to `--software-deployment-method conda`.**
+
 #### version 3.5.6
 - Fit each lasso weight independently in `multidms` comparisons (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/92)).
 

@@ -55,10 +55,6 @@ jobs:
           && snakemake -s ../Snakefile -j 2
           && cd ..
 
-#      - name: run pipeline with no barcode runs
-#        shell: bash -el {0}
-#        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 --config barcode_runs=null && cd ..
-
       - name: run pipeline with prebuilt variants
         shell: bash -el {0}
         run: >

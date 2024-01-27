@@ -44,11 +44,11 @@ Running the `Snakefile` in [./test_example](test_example) performs the whole ana
 ## Running the pipeline
 You can run the pipeline from the top-level directory using:
 
-    snakemake -j <n_jobs> --use-conda -s dms-vep-pipeline-3/Snakefile
+    snakemake -j <n_jobs> --software-deployment-method conda -s dms-vep-pipeline-3/Snakefile
 
 Note that the `-s dms-vep-pipeline-3/Snakefile` flag specifies to use the Snakefile in the pipeline submodule.
 
-If have already built the `dms-vep-pipeline-3` [conda](https://docs.conda.io/) environment in [environment.yml](environment.yml), you can also just activate that environment and then run the above command without the `--use-conda` command.
+If have already built the `dms-vep-pipeline-3` [conda](https://docs.conda.io/) environment in [environment.yml](environment.yml), you can also just activate that environment and then run the above command without the `--software-deployment-method conda` command.
 
 Note that if the environment is updated, all rules will re-run.
 If you do not want to re-run rules if the environment is updated, specify `--rerun-triggers mtime params input code`---although if you do this, you are responsible for manually deleting any output that should be changed by the environment update.

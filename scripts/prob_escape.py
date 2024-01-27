@@ -74,7 +74,7 @@ prob_escape = prob_escape.rename(
 )
 
 # write output
-prob_escape[
+prob_escape.sort_values("barcode")[
     [
         "barcode",
         "aa_substitutions",

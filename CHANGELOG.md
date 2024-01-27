@@ -9,6 +9,7 @@
   - update `pandas` to 2.2 and add `pyarrow`
   - update to `seaborn` 0.13
   - update to `snakemake` 8.3. **Note that this means the recommended usage now changes from `--use-conda` to `--software-deployment-method conda`.**
+- sort rows in prob escape values for consistent output
 
 #### version 3.5.6
 - Fit each lasso weight independently in `multidms` comparisons (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/92)).

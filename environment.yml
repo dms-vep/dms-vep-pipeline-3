@@ -20,7 +20,7 @@ dependencies:
   - minimap2=2.26
   - nbstripout
   - openpyxl
-  - pandas=2.2
+  - pandas=2.1
   - papermill=2.4
   - pip
   - plotnine=0.12

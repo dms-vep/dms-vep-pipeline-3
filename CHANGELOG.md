@@ -6,10 +6,10 @@
   - update `neutcurve` to 1.1.2
   - update `altair` to 5.2.0
   - update `biopython` to 1.83
-  - update `pandas` to 2.2 and add `pyarrow`
+  - update `pandas` to 2.1 and add `pyarrow`. Did not update to `pandas` 2.2 due to [this issue](https://github.com/matsengrp/multidms/issues/128).
   - update to `seaborn` 0.13
   - update to `snakemake` 8.3. **Note that this means the recommended usage now changes from `--use-conda` to `--software-deployment-method conda`.**
-- sort rows in prob escape values for consistent output
+- sort rows in prob escape values for consistent output, may very slightly change some of the fit antibody-escape values
 
 #### version 3.5.6
 - Fit each lasso weight independently in `multidms` comparisons (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/92)).

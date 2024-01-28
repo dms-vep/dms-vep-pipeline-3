@@ -15,12 +15,12 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           lfs: true
 
       - name: build conda environment
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: dms-vep-pipeline-3
           environment-file: environment.yml
@@ -55,10 +55,6 @@ jobs:
           && snakemake -s ../Snakefile -j 2
           && cd ..
 
-#      - name: run pipeline with no barcode runs
-#        shell: bash -el {0}
-#        run: rm -rf docs && cd test_example && rm -rf results && snakemake --use-conda -j 2 --config barcode_runs=null && cd ..
-
       - name: run pipeline with prebuilt variants
         shell: bash -el {0}
         run: >
@@ -69,7 +65,7 @@ jobs:
           && cd ..
 
       - name: Upload log files in case of error
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: log-files

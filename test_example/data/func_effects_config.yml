@@ -137,6 +137,58 @@ avg_func_effects:
       - LibB-220302-293T_ACE2-1
 
 # --------------------------------------------------------------------------------------
+# Configuration for the simple difference of func effects from different conditions
+# --------------------------------------------------------------------------------------
+
+# Compute simple difference between average functional effects for different conditions.
+# The difference is condition_1 minus condition_2. If you do not want to do this comparison,
+# set `func_effect_diffs` to `null` or just leave it out altogether.
+#
+# Each key is a comparison. Under that name, you should have the following keys:
+#  - `condition_1`: first condition, keys are name and selection (which gives list of selections)
+#  - `condition_2`: second condition, keys are name and selection (which gives list of selections)
+#  - `avg_method`: how to average across selections for a condition, "median" or "mean"
+#  - `per_selection_tooltips`: whether to show per-selection tooltips
+#  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
+#  - `title`: title of plot
+#  - `legend`: legend of plot
+func_effect_diffs:
+  220210_vs_220302_comparison:
+    condition_1:
+      name: 220210
+      selections:
+        - LibA-220210-293T_ACE2-1
+        - LibA-220210-293T_ACE2-2
+    condition_2:
+      name: 220302
+      selections:
+        - LibA-220302-293T_ACE2-1
+        - LibA-220302-293T_ACE2-2
+    avg_method: median
+    per_selection_tooltips: true
+    plot_kwargs:
+      addtl_slider_stats:
+        times_seen: 3
+        difference_std: 2  # standard deviation difference across pairwise comparisons for mutation
+        fraction_pairs_w_mutation: 1  # fraction of all pairs between conditions w mutation
+        min_best_effect: -2  # effect must be >= for at least one condition
+      addtl_slider_stats_hide_not_filter: [min_best_effect]
+      addtl_slider_stats_as_max: [difference_std]
+      heatmap_max_at_least: 1
+      heatmap_min_at_least: -1
+      init_floor_at_zero: false
+      init_site_statistic: abs_mean
+      site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`
+      slider_binding_range_kwargs:
+        times_seen:
+          step: 1
+          min: 1
+          max: 25
+    title: Differences in mutation effects on 293T entry across days
+    legend: |
+      LEGEND
+
+# --------------------------------------------------------------------------------------
 # Configuration for func effect shifts from `multidms` models comparing conditions.
 # --------------------------------------------------------------------------------------
 
@@ -188,7 +240,6 @@ func_effect_shifts:
 
 # Define `func_effect_shifts` comparisons to average. `avg_func_effect_shifts` is keyed
 # by name of averaged comparisons. Keys within that are:
-#  - `title`: title of comparisons being averaged
 #  - `comparisons`: list of comparisons from `func_effect_shifts`, must have same
 #                   condition names, lasso shifts, and reference.
 #  - `lasso_shift`: the single lasso shift to use for the final averaged values.

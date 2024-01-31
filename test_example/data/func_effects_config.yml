@@ -171,7 +171,7 @@ func_effect_diffs:
         times_seen: 3
         difference_std: 2  # standard deviation difference across pairwise comparisons for mutation
         fraction_pairs_w_mutation: 1  # fraction of all pairs between conditions w mutation
-        min_best_effect: -2  # effect must be >= for at least one condition
+        best_effect: -2  # effect must be >= for at least one condition
       addtl_slider_stats_hide_not_filter: [min_best_effect]
       addtl_slider_stats_as_max: [difference_std]
       heatmap_max_at_least: 1

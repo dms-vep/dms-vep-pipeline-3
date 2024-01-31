@@ -2,7 +2,7 @@
 
 ### version 3.6.0
 - Update environment:
-  - update `polyclonal` to 6.10 (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/96))
+  - update `polyclonal` to 6.11 (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/96))
   - update `neutcurve` to 1.1.2
   - update `altair` to 5.2.0
   - update `biopython` to 1.83

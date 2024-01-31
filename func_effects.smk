@@ -261,12 +261,12 @@ if func_effect_diffs:
         c: rules.func_effect_diffs.output.diffs.format(comparison=c)
         for c in func_effect_diffs
     }
-#    func_effects_docs["Final summary plots"][
-#        "Interactive plots of differences in functional effects between conditions"
-#    ] = {
-#        c: "results/func_effect_diffs/{comparison}_diffs.html".format(comparison=c)
-#        for c in func_effect_diffs
-#    }
+    func_effects_docs["Final summary plots"][
+        "Interactive plots of differences in functional effects between conditions"
+    ] = {
+        c: "results/func_effect_diffs/{comparison}_diffs.html".format(comparison=c)
+        for c in func_effect_diffs
+    }
 
 
 # are we doing func_effect_shifts comparisons?

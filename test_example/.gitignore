@@ -44,6 +44,10 @@ results/func_effect_shifts/by_comparison/*
 results/func_effect_shifts/averages/*
 !results/func_effect_shifts/averages/*_shifts.csv
 
+!results/func_effect_diffs
+results/func_effect_diffs/*
+!results/func_effect_diffs/*_comparison_diffs.csv
+
 !results/antibody_escape
 results/antibody_escape/*
 !results/antibody_escape/by_selection

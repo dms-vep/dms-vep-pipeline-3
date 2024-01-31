@@ -172,21 +172,35 @@ func_effect_diffs:
         difference_std: 2  # standard deviation difference across pairwise comparisons for mutation
         fraction_pairs_w_mutation: 1  # fraction of all pairs between conditions w mutation
         best_effect: -2  # effect must be >= for at least one condition
-      addtl_slider_stats_hide_not_filter: [min_best_effect]
+      addtl_slider_stats_hide_not_filter: [best_effect]
       addtl_slider_stats_as_max: [difference_std]
       heatmap_max_at_least: 1
       heatmap_min_at_least: -1
       init_floor_at_zero: false
-      init_site_statistic: abs_mean
+      init_site_statistic: mean_abs
       site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`
       slider_binding_range_kwargs:
         times_seen:
           step: 1
           min: 1
           max: 25
-    title: Differences in mutation effects on 293T entry across days
+    title: Differences in mutation effects on 293T entry across days.
     legend: |
-      LEGEND
+      Interactive plot of the difference of effects of mutations between two conditions.
+
+      Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary
+      statistic indicating the typical effects of mutations at each site. The heat map shows the effects of
+      individual mutations, with parental amino-acid identities indicated by x, dark gray indicating
+      mutations that fail a slider filter, and light gray indicating non-measured mutations.
+
+      You can mouse over points to get details about individual measurements, including measurements
+      in individual selection experiments.
+
+      The options at the bottom of the plot let you modify the display, such as by selecting how
+      many different variants a mutation must be seen in to be shown (*minimum times_seen*),
+      the fraction of different pairwise comparisons the mutation was measured in, the maximum
+      standard deviation for the difference among pairwise comparison, or its
+      best effect in any condition.
 
 # --------------------------------------------------------------------------------------
 # Configuration for func effect shifts from `multidms` models comparing conditions.

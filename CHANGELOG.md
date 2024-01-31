@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ### version 3.6.0
+- Add `func_effect_diffs` option to compare differences among functional effects.
 - Update environment:
   - update `polyclonal` to 6.11 (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/96))
   - update `neutcurve` to 1.1.2

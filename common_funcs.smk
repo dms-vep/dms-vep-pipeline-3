@@ -25,6 +25,10 @@ def format_altair_html_chart_params(wc):
         comparison = m.group("comparison")
         title = avg_func_effect_shifts[comparison]["title"]
         legend = avg_func_effect_shifts[comparison]["legend"]
+    elif m := re.fullmatch("func_effect_diffs/(?P<comparison>.+)_diffs", chart):
+        comparison = m.group("comparison")
+        title = func_effect_diffs[comparison]["title"]
+        legend = func_effect_diffs[comparison]["legend"]
     elif m := re.fullmatch(
         f"(?P<assay>{'|'.join(assays)})/"
         + "averages/(?P<antibody>.+)_mut_(?:effect|icXX)",

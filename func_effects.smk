@@ -206,6 +206,69 @@ func_effects_docs["Final summary plots"][
     for c in func_effects_config["avg_func_effects"]
 }
 
+# are we doing func_effect_diffs?
+if ("func_effect_diffs" in func_effects_config) and (
+    func_effects_config["func_effect_diffs"] is not None
+):
+    func_effect_diffs = func_effects_config["func_effect_diffs"]
+else:
+    func_effect_diffs = {}
+
+
+rule func_effect_diffs:
+    """Simple differences in functional effects between two conditions."""
+    input:
+        lambda wc: [
+            rules.func_effects_global_epistasis.output.func_effects.format(
+                selection=sel
+            )
+            for c in ["condition_1", "condition_2"]
+            for sel in func_effect_diffs[wc.comparison][c]["selections"]
+        ],
+        site_numbering_map_csv=config["site_numbering_map"],
+        nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_diffs.ipynb"),
+    output:
+        diffs="results/func_effect_diffs/{comparison}_diffs.csv",
+        chart="results/func_effect_diffs/{comparison}_diffs_nolegend.html",
+        nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
+    params:
+        params_yaml=lambda wc: yaml.round_trip_dump(
+            {"params": func_effect_diffs[wc.comparison]}
+        ),
+    conda:
+        "environment.yml"
+    log:
+        "results/logs/func_effect_diffs_{comparison}.txt",
+    shell:
+        """
+        papermill {input.nb} {output.nb} \
+            -p site_numbering_map_csv {input.site_numbering_map_csv} \
+            -p diffs_csv {output.diffs} \
+            -p chart_html {output.chart} \
+            -y '{params.params_yaml}' \
+            &> {log}
+        """
+
+
+if func_effect_diffs:
+    func_effects_docs["Analysis notebooks"][
+        "Notebooks taking differences in functional effects between conditions"
+    ] = {
+        c: rules.func_effect_diffs.output.nb.format(comparison=c)
+        for c in func_effect_diffs
+    }
+    func_effects_docs["Data files"]["Differences in functional effects (CSV files)"] = {
+        c: rules.func_effect_diffs.output.diffs.format(comparison=c)
+        for c in func_effect_diffs
+    }
+    func_effects_docs["Final summary plots"][
+        "Interactive plots of differences in functional effects between conditions"
+    ] = {
+        c: "results/func_effect_diffs/{comparison}_diffs.html".format(comparison=c)
+        for c in func_effect_diffs
+    }
+
+
 # are we doing func_effect_shifts comparisons?
 if ("func_effect_shifts" in func_effects_config) and (
     func_effects_config["func_effect_shifts"] is not None

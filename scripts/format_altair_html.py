@@ -4,7 +4,6 @@ You can either use function in module or run as command-line tool.
 
 """
 
-
 import argparse
 
 from bs4 import BeautifulSoup as bs

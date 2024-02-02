@@ -1,6 +1,5 @@
 """``snakemake`` files with rules for building variants."""
 
-
 build_variants_docs = {}
 
 

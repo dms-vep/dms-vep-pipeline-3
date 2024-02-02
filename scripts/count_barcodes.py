@@ -1,6 +1,5 @@
 """Count variants from Illumina barcodes."""
 
-
 import os
 import sys
 

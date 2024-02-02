@@ -1,6 +1,5 @@
 """Get functional scores from barcode counts."""
 
-
 import sys
 
 import alignparse.utils

@@ -5,7 +5,6 @@ Note that these rules can analyze arbitrary assays. Throughout the workflow, the
 
 """
 
-
 # read the config for antibody escape
 with open(config["antibody_escape_config"]) as f:
     antibody_escape_config = yaml.safe_load(f)

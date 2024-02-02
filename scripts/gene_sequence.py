@@ -1,6 +1,5 @@
 """Implements ``snakemake`` rule to get gene sequence."""
 
-
 import sys
 
 import Bio.SeqIO

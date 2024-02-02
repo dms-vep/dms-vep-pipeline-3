@@ -1,6 +1,5 @@
 """``snakemake`` files with rules for calculating functional effects."""
 
-
 # read the config for func effects
 with open(config["func_effects_config"]) as f:
     func_effects_config = yaml.safe_load(f)

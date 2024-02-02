@@ -1,6 +1,5 @@
 """Implements ``snakemake`` rule `spatial_distances`"""
 
-
 import sys
 import urllib
 

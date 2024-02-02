@@ -1,6 +1,5 @@
 """Get probabilities (fraction) of antibody escape from variant counts."""
 
-
 import sys
 
 import Bio.SeqIO

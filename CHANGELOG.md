@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.6.1
+- Better error messages with problems with `barcode_runs`
+
 ### version 3.6.0
 - Add `func_effect_diffs` option to compare differences among functional effects.
 - Update environment:

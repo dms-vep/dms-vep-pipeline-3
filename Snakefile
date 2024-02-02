@@ -27,8 +27,13 @@ else:
     )
     if not set(barcode_run_req_cols).issubset(barcode_runs.columns):
         raise ValueError(f"{barcode_runs.columns=} missing {barcode_run_req_cols=}")
-assert len(barcode_runs) == barcode_runs["sample"].nunique()
-assert barcode_runs[barcode_run_req_cols].notnull().all().all()
+if len(barcode_runs) != barcode_runs["sample"].nunique():
+    raise ValueError(
+        "`barcode_runs` contains duplicated (non-unique) samples:\n"
+        + str(barcode_runs.groupby("sample").size().sort_values(ascending=False))
+    )
+if not barcode_runs[barcode_run_req_cols].notnull().all().all():
+    raise ValueError(f"{barcode_run_req_cols=} not all non-null")
 
 # check no FASTQ assigned to multiple samples
 dup_fastq_R1 = (

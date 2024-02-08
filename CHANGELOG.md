@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.6.2
+- Pipeline can run correctly when `antibody_escape_config` is null (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/102)).
+
 #### version 3.6.1
 - Better error messages with problems with `barcode_runs`
 

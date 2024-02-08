@@ -92,6 +92,8 @@ other_target_files = []
 include: "build_variants.smk"
 
 
+assays = []  # no assays initially, maybe defined in `antibody_escape_config` below
+
 if len(barcode_runs) > 0:
 
     include: "count_variants.smk"

@@ -21,7 +21,7 @@ dependencies:
   - minimap2=2.26
   - nbstripout
   - openpyxl
-  - pandas=2.1
+  - pandas=2.1  # required because of https://github.com/matsengrp/multidms/issues/128
   - papermill=2.4
   - pip
   - plotnine=0.12

@@ -4,3 +4,5 @@ builtins = [
     "snakemake",  # may appear undefined as passed to scripts via `Snakefile`
     "display",  # builtin of Jupyter notebooks
 ]
+
+extend-include = ["*.ipynb"]

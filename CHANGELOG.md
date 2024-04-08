@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.7.0
+- Lint Jupyter notebooks by fixing `ruff.toml` (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/111)).
+
 #### version 3.6.3
 - Enable `func_effect_diffs` heat map to be filtered by mutation effects on each individual type of functional effect (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/108)). This change actually just updates the `func_effects_config.yml` for the test example, not the actual code.
 

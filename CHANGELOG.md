@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ### version 3.7.0
+- Allow multiple summaries to be specified in `summaries_config.yaml`. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/110). Note that the name of the output files in `./results/summaries` has slightly changed, and as a result you will need to update the `.gitignore` slightly. When migrating to this new version, full delete your old `./results/summaries` subdirectory to remove obsolete naming, then re-run. Also, the table of contents in the output HTML for GitHub pages now labels the summaries slightly differently.
 - Lint Jupyter notebooks by fixing `ruff.toml` (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/111)).
 
 #### version 3.6.3

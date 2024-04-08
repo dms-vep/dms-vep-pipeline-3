@@ -40,7 +40,7 @@ In order to make the example contained in the pipeline, the organization is a bi
 Therefore, your `config.yaml` will have different values for `pipeline_path` and `docs` as indicated in the comments in [./test_example/config.yaml](test_example/config.yaml).
 
 Despite these differences, [./test_example](test_example) provides an example of how to set up your repo.
-Running the `Snakefile` in [./test_example](test_example) performs the whole analysis for the test example and creates the sphinx rendering in [./docs](docs) which can be displayed via GitHub pages as here: [https://dms-vep.github.io/dms-vep-pipeline-3](https://dms-vep.github.io/dms-vep-pipeline-3).
+Running the analysis in [./test_example](test_example) performs the whole analysis for the test example and creates the sphinx rendering in [./docs](docs) which can be displayed via GitHub pages as here: [https://dms-vep.github.io/dms-vep-pipeline-3](https://dms-vep.github.io/dms-vep-pipeline-3).
 
 ## Running the pipeline
 You can run the pipeline from the top-level directory using:

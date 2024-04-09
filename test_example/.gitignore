@@ -70,5 +70,4 @@ results/receptor_affinity/averages/*
 
 !results/summaries
 results/summaries/*
-!results/summaries/summary.csv
-!results/summaries/per_antibody_escape.csv
+!results/summaries/*.csv

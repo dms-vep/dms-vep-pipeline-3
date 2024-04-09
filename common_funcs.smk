@@ -38,9 +38,10 @@ def format_altair_html_chart_params(wc):
         antibody = m.group("antibody")
         title = avg_assay_config[assay][antibody]["title"]
         legend = avg_assay_config[assay][antibody]["legend"]
-    elif m != re.fullmatch("summaries/summary_(?:overlaid|faceted)", chart):
-        title = summary_config["title"]
-        legend = summary_config["legend"]
+    elif m := re.fullmatch("summaries/(?P<summary>.+)_(?:overlaid|faceted)", chart):
+        summary = m.group("summary")
+        title = summaries_config[summary]["title"]
+        legend = summaries_config[summary]["legend"]
     else:
         raise ValueError(f"could not get formatting params for {chart=}")
     return {"title": title, "legend": legend}

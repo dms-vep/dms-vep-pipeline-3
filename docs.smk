@@ -69,3 +69,26 @@ rule build_docs:
         "results/logs/build_docs.txt",
     script:
         "scripts/build_docs.py"
+
+
+rule build_vitepress_homepage:
+    """Copy all files from the docs directory to the VitePress homepage directory"""
+    input:
+        html=os.path.join(config["docs"], "index.html"),
+    output:
+        html=os.path.join(config["homepage"], "docs.html"),
+    params:
+        docs=os.path.join(config["docs"]),
+        homepage=os.path.join(config["homepage"]),
+    shell:
+        """
+        # Copy /docs/ to /homepage/public/
+        cp -r {params.docs}/* {params.homepage}
+        # Rename index.html to docs.html
+        mv {input.html} {output.html}
+        """
+
+
+# If the homepage is specified in the config, add the homepage to the list of targets
+if config["build_vitepress_homepage"]:
+    other_target_files.append(rules.build_homepage.output.html)

@@ -85,7 +85,7 @@ rule build_vitepress_homepage:
         # Copy docs/ to homepage/public/
         cp -r {params.docs}/* {params.homepage}
         # Remove the index.html file
-        rm {params.homepage}/index.html
+        rm -f {params.homepage}/index.html
         # Copy the index.html file to the homepage directory
         cp {input.html} {output.html}
         """

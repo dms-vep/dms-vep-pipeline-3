@@ -14,6 +14,7 @@ export default defineConfig({
       { text: "Cell Entry", link: "/cell_entry" },
       { text: "Antibody Escape", link: "/antibody_escape" },
       { text: "Pipeline Information", link: "/pipeline_information" },
+      { text: "Appendix", link: "/appendix", target: "_self" },
     ],
 
     socialLinks: [{ icon: "github", link: "https://github.com/dms-vep" }],

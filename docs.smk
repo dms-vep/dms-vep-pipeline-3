@@ -76,7 +76,7 @@ rule build_vitepress_homepage:
     input:
         html=os.path.join(config["docs"], "index.html"),
     output:
-        html=os.path.join(config["homepage"], "docs.html"),
+        html=os.path.join(config["homepage"], "appendix.html"),
     params:
         docs=os.path.join(config["docs"]),
         homepage=os.path.join(config["homepage"]),

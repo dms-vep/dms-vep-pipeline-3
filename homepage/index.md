@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "My Favorite Virus' Receptor DMS"
   tagline: "A collection of data, figures, and information for DMS of my favorite viral receptor protein"
-
+  image: your-receptor.png
 features:
   - title: Antibody Escape
     details: Example link to antibody escape data

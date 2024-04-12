@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: "en-US",
-  title: "My Favorite Virus' Receptor DMS",
+  title: "Homepage for my favorite viral receptor",
   description:
     "Data, figures, and analysis for DMS of my favorite viral receptor.",
   base: "/my_virus_dms/",
@@ -11,12 +11,11 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Cell Entry", link: "/cell_entry" },
-      { text: "Antibody Escape", link: "/antibody_escape" },
-      { text: "Pipeline Information", link: "/pipeline_information" },
       { text: "Appendix", link: "/appendix", target: "_self" },
     ],
-
     socialLinks: [{ icon: "github", link: "https://github.com/dms-vep" }],
+    footer: {
+      message: "Copyright © 2024-present Me and Jesse Bloom",
+    },
   },
 });

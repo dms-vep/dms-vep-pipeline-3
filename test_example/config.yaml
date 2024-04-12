@@ -9,7 +9,7 @@
 # ----------------------------------------------------------------------------
 pipeline_path: ../ # typically will be `dms-vep-pipeline-3` for real pipelines
 docs: ../docs # typically will be `docs` for real pipelines
-homepage: ../ # typically will be `.` for real pipelines
+homepage: ../homepage/public # typically will start with `.` for real pipelines
 
 # ----------------------------------------------------------------------------
 # Details on repo, used for docs. Change this to details for your project.

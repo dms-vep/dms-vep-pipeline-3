@@ -82,11 +82,11 @@ rule build_vitepress_homepage:
         homepage=os.path.join(config["homepage"]),
     shell:
         """
-        # Copy docs/ to homepage/public/
+        # Copy contents of docs/ to homepage/public/
         cp -r {params.docs}/* {params.homepage}
         # Remove the index.html file
         rm -f {params.homepage}/index.html
-        # Copy the index.html file to the homepage directory
+        # Copy and rename the index.html file
         cp {input.html} {output.html}
         """
 

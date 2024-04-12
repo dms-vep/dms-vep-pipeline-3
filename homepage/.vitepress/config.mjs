@@ -3,7 +3,6 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: "en-US",
-  title: "Nipah RBP DMS",
   title: "My Favorite Virus' Receptor DMS",
   description:
     "Data, figures, and analysis for DMS of my favorite viral receptor.",

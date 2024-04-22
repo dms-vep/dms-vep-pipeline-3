@@ -55,7 +55,7 @@ homepage
     │   ├── ...
     ├── notebooks
     │   ├── ...
-    └── your-receptor.png
+    └── your-vep.png
 ```
 
 There might be some additional files – don't worry about these. The key is that you have a directory called `homepage/` at the top of your project repo with this file organization.
@@ -167,7 +167,7 @@ layout: home
 hero:
   name: "My Favorite Virus' Receptor DMS"
   tagline: "A collection of data, figures, and information for DMS of my favorite viral receptor protein"
-  image: your-receptor.png
+  image: your-vep.png
 features:
   - title: Antibody Escape
     details: Example link to antibody escape data

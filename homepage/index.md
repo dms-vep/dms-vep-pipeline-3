@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "My Favorite Viral Entry Protein DMS"
   tagline: "A collection of data, figures, and information for DMS of my favorite viral entry protein"
-  image: your-receptor.png
+  image: your-vep.png
 features:
   - title: Antibody Escape
     details: Example link to antibody escape data

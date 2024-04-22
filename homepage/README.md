@@ -138,9 +138,9 @@ You'll need to replace the default content in the [VitePress](https://vitepress.
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: "en-US",
-  title: "Homepage for my favorite viral receptor",
+  title: "Homepage for my favorite viral entry protein",
   description:
-    "Data, figures, and analysis for DMS of my favorite viral receptor.",
+    "Data, figures, and analysis for DMS of my favorite viral entry protein.",
   base: "/my_virus_dms/",
   themeConfig: {
     nav: [
@@ -159,14 +159,14 @@ Replace the `title` and `description` with content that suits your project. Add 
 
 ### Configuring the landing page
 
-The landing page for your [VitePress](https://vitepress.dev/) site is determined by the `index.md` file. Edit this file to change the title add an image of your viral receptor and link to pages describing your results.
+The landing page for your [VitePress](https://vitepress.dev/) site is determined by the `index.md` file. Edit this file to change the title add an image of your viral entry protein and link to pages describing your results.
 
 ```yml
 layout: home
 
 hero:
   name: "My Favorite Virus' Receptor DMS"
-  tagline: "A collection of data, figures, and information for DMS of my favorite viral receptor protein"
+  tagline: "A collection of data, figures, and information for DMS of my favorite viral entry protein"
   image: your-vep.png
 features:
   - title: Antibody Escape

@@ -3,9 +3,9 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: "en-US",
-  title: "Homepage for my favorite viral receptor",
+  title: "Homepage for my favorite viral entry protein",
   description:
-    "Data, figures, and analysis for DMS of my favorite viral receptor.",
+    "Data, figures, and analysis for DMS of my favorite viral entry protein.",
   base: "/my_virus_dms/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

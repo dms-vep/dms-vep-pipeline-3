@@ -92,4 +92,4 @@ if config["build_vitepress_homepage"]:
             cp {input.html} {output.html}
             """
 
-    other_target_files.append(rules.build_homepage.output.html)
+    other_target_files.append(rules.build_vitepress_homepage.output.html)

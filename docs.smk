@@ -71,26 +71,25 @@ rule build_docs:
         "scripts/build_docs.py"
 
 
-rule build_vitepress_homepage:
-    """Copy all files from the docs directory to the VitePress homepage directory"""
-    input:
-        html=os.path.join(config["docs"], "index.html"),
-    output:
-        html=os.path.join(config["homepage"], "appendix.html"),
-    params:
-        docs=os.path.join(config["docs"]),
-        homepage=os.path.join(config["homepage"]),
-    shell:
-        """
-        # Copy contents of docs/ to homepage/public/
-        cp -r {params.docs}/* {params.homepage}
-        # Remove the index.html file
-        rm -f {params.homepage}/index.html
-        # Copy and rename the index.html file
-        cp {input.html} {output.html}
-        """
-
-
-# If the homepage is specified in the config, add the homepage to the list of targets
 if config["build_vitepress_homepage"]:
+
+    rule build_vitepress_homepage:
+        """Copy all files from the docs directory to the VitePress homepage directory"""
+        input:
+            html=os.path.join(config["docs"], "index.html"),
+        output:
+            html=os.path.join(config["homepage"], "appendix.html"),
+        params:
+            docs=os.path.join(config["docs"]),
+            homepage=os.path.join(config["homepage"]),
+        shell:
+            """
+            # Copy contents of docs/ to homepage/public/
+            cp -r {params.docs}/* {params.homepage}
+            # Remove the index.html file
+            rm -f {params.homepage}/index.html
+            # Copy and rename the index.html file
+            cp {input.html} {output.html}
+            """
+
     other_target_files.append(rules.build_homepage.output.html)

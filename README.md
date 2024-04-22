@@ -125,3 +125,7 @@ The large data files for the test example in [./test_example/sequencing_data/](t
 Note the first time you set up the repo, you have to run:
 
     git lfs install
+
+## Configuring a custom homepage
+
+You can configure a custom homepage for your project with the static site generator [VitePress](https://vitepress.dev/). Check out Brendan Larsen's [nicely styled homepage](https://dms-vep.org/Nipah_Malaysia_RBP_DMS/) as an example. Detailed instructions for adding a homepage to your project are located [here](homepage/README.md).

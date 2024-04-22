@@ -3,7 +3,7 @@
     "docs:dev": "vitepress dev homepage",
     "docs:build": "vitepress build homepage",
     "docs:preview": "vitepress preview homepage",
-    "remote:docs:dev": "vitepress dev docs --host 0.0.0.0 --port $(fhfreeport)"
+    "remote:docs:dev": "vitepress dev homepage --host 0.0.0.0 --port $(fhfreeport)"
   },
   "devDependencies": {
     "vitepress": "^1.1.0"

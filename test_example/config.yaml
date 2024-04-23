@@ -7,8 +7,8 @@
 # Snakefile will be in the root directory and paths will be `dms-vep-pipeline`
 # and `./`, but in this example they are upstream from this subdirectory.
 # ----------------------------------------------------------------------------
-pipeline_path: ../  # typically will be `dms-vep-pipeline-3` for real pipelines
-docs: ../docs  # typically will be `docs` for real pipelines
+pipeline_path: ../ # typically will be `dms-vep-pipeline-3` for real pipelines
+docs: ../docs # typically will be `docs` for real pipelines
 
 # ----------------------------------------------------------------------------
 # Details on repo, used for docs. Change this to details for your project.
@@ -45,8 +45,8 @@ site_numbering_map: data/site_numbering_map.csv
 # named "mutation_type", "amino_acid" or "mutant_aa", and either
 # "reference_site" or "sequential_site" as specified by `site_col` key.
 mutation_design_classification:
-  csv: data/mutation_design_classification.csv  # CSV with data
-  site_col: sequential_site  # site column, should be reference_site or sequential_site
+  csv: data/mutation_design_classification.csv # CSV with data
+  site_col: sequential_site # site column, should be reference_site or sequential_site
 
 # Neutralization standard barcodes. Should have columns "barcode" and "name"
 # (giving name of this neutralization standard set). Can be empty CSV with
@@ -58,7 +58,7 @@ neut_standard_barcodes: data/neutralization_standard_barcodes.csv
 # ----------------------------------------------------------------------------
 
 # There are two ways you can get the codon variants: download a pre-built codon
-# variant table, or build them from PacBio CCSs yourself. 
+# variant table, or build them from PacBio CCSs yourself.
 
 # If using pre-built variants specify URL for pre-built codon-variant table and
 # gene (codon) sequence (beginning with "http" or "ftp") or just path to file.
@@ -69,10 +69,10 @@ prebuilt_geneseq: null
 
 # Parameters for building variants from PacBio sequencing, only needed if
 # not using pre-built variants.
-pacbio_runs: data/PacBio_runs.csv  # PacBio sequencing data
-pacbio_amplicon: data/PacBio_amplicon.gb  # Genbank file with PacBio amplicon
-pacbio_amplicon_specs: data/PacBio_feature_parse_specs.yaml  # alignparse feature parsing
-variant_tags:  # variant tags in PacBio amplicon, or "null" if no tags
+pacbio_runs: data/PacBio_runs.csv # PacBio sequencing data
+pacbio_amplicon: data/PacBio_amplicon.gb # Genbank file with PacBio amplicon
+pacbio_amplicon_specs: data/PacBio_feature_parse_specs.yaml # alignparse feature parsing
+variant_tags: # variant tags in PacBio amplicon, or "null" if no tags
   variant_tag5:
     variant_1: G
     variant_2: C
@@ -81,8 +81,8 @@ variant_tags:  # variant tags in PacBio amplicon, or "null" if no tags
     variant_1: G
     variant_2: C
     wildtype: A
-max_ccs_error_rate: 1.0e-4  # only keep CCS if gene/barcode error rate <= this
-consensus_params:  # parameters for building PacBio consensus sequences
+max_ccs_error_rate: 1.0e-4 # only keep CCS if gene/barcode error rate <= this
+consensus_params: # parameters for building PacBio consensus sequences
   max_sub_diffs: null
   max_indel_diffs: null
   max_minor_sub_frac: 0.2
@@ -100,13 +100,13 @@ codon_variants: results/variants/codon_variants.csv
 # Parameters related to counting the variants from barcode sequencing
 # ----------------------------------------------------------------------------
 
-barcode_runs: data/barcode_runs.csv  # Illumina barcode runs, set to null if no runs
+barcode_runs: data/barcode_runs.csv # Illumina barcode runs, set to null if no runs
 
 # keyword parameters for `dms_variants.illuminabarcodeparser.IlluminaBarcodeParser`
 # https://jbloomlab.github.io/dms_variants/dms_variants.illuminabarcodeparser.html#dms_variants.illuminabarcodeparser.IlluminaBarcodeParser
 illumina_barcode_parser_params:
   upstream: AACTCCACTAGGAACATTTCTCTCTCGAATCTAGA
-  downstream: ''
+  downstream: ""
   minq: 20
   upstream_mismatch: 2
 
@@ -117,6 +117,19 @@ illumina_barcode_parser_params:
 # For each variable, set to "null" or just don't provide if you aren't doing that type
 # of analysis. Otherwise provide path to configuration for that analysis.
 
-func_effects_config: data/func_effects_config.yml  # Functional effects of mutations
-antibody_escape_config: data/antibody_escape_config.yml  # escape assays (eg, antibodies)
-summaries_config: data/summaries_config.yml  # Summaries across assays
+func_effects_config: data/func_effects_config.yml # Functional effects of mutations
+antibody_escape_config: data/antibody_escape_config.yml # escape assays (eg, antibodies)
+summaries_config: data/summaries_config.yml # Summaries across assays
+
+# ----------------------------------------------------------------------------
+# Configuration if you're going to build a custom VitePress Homepage
+# ----------------------------------------------------------------------------
+
+# Everything in this section can be ommitted unless you want to build a VitePress
+# homepage that is nicely styled for the GitHub Pages.
+
+# For details on building a VitePress homepage, see:
+# https://github.com/dms-vep/dms-vep-pipeline-3/blob/add-vitepress-homepage/homepage/README.md
+
+build_vitepress_homepage: true
+homepage: ../homepage/public # typically will be `homepage/public` for real pipelines

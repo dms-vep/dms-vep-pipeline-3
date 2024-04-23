@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "docs:dev": "vitepress dev homepage",
+    "docs:build": "vitepress build homepage",
+    "docs:preview": "vitepress preview homepage",
+    "remote:docs:dev": "vitepress dev homepage --host 0.0.0.0 --port $(fhfreeport)"
+  },
+  "devDependencies": {
+    "vitepress": "^1.1.0"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.11.3",
+    "vega": "^5.27.0",
+    "vega-embed": "^6.24.0",
+    "vega-lite": "^5.16.3",
+    "vue": "^3.4.5"
+  }
+}

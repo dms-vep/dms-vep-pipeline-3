@@ -13,15 +13,15 @@ dependencies:
   - entrez-direct=16.2
   - flatdict=4.0
   - git-lfs
-  - ipywidgets  # required because of https://github.com/matsengrp/multidms/issues/114
+  - ipywidgets # required because of https://github.com/matsengrp/multidms/issues/114
   - jupyterlab
-  - mafft=7.520
+  - mafft=7.525
   - markdown=3.4
   - matplotlib=3.8
   - minimap2=2.26
   - nbstripout
   - openpyxl
-  - pandas=2.1  # required because of https://github.com/matsengrp/multidms/issues/128
+  - pandas=2.1 # required because of https://github.com/matsengrp/multidms/issues/128
   - papermill=2.4
   - pip
   - plotnine=0.12
@@ -34,10 +34,10 @@ dependencies:
   - snakemake=8.3
   - upsetplot=0.8
   - pip:
-    - alignparse==0.6.2
-    - baltic==0.2.2
-    - dms_variants==1.4.3
-    - dmslogo==0.7.0
-    - multidms==0.2.1
-    - neutcurve==1.1.2
-    - polyclonal==6.11
+      - alignparse==0.6.2
+      - baltic==0.2.2
+      - dms_variants==1.4.3
+      - dmslogo==0.7.0
+      - multidms==0.2.1
+      - neutcurve==1.1.2
+      - polyclonal==6.11

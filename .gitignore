@@ -8,3 +8,9 @@ _*
 !.gitmodules
 
 SARS-CoV-2_XBB.1.5_RBD_DMS
+
+node_modules/
+!homepage/.vitepress/
+homepage/.vitepress/cache/
+homepage/.vitepress/dist/
+!homepage/public/

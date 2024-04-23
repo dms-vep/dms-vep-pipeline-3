@@ -69,3 +69,31 @@ rule build_docs:
         "results/logs/build_docs.txt",
     script:
         "scripts/build_docs.py"
+
+
+if config["build_vitepress_homepage"]:
+
+    rule build_vitepress_homepage:
+        """Copy all files from the docs directory to the VitePress homepage directory"""
+        input:
+            html=os.path.join(config["docs"], "index.html"),
+        output:
+            html=os.path.join(config["homepage"], "appendix.html"),
+        params:
+            docs=lambda _, input: os.path.dirname(input.html),
+            homepage=lambda _, output: os.path.dirname(output.html),
+        log:
+            "results/logs/build_vitepress_homepage.txt",
+        conda:
+            "environment.yml"
+        shell:
+            """
+            # Copy contents of docs/ to homepage/public/
+            cp -r {params.docs}/* {params.homepage}
+            # Remove the index.html file
+            rm -f {params.homepage}/index.html
+            # Copy and rename the index.html file
+            cp {input.html} {output.html}
+            """
+
+    other_target_files.append(rules.build_vitepress_homepage.output.html)

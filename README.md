@@ -40,7 +40,7 @@ In order to make the example contained in the pipeline, the organization is a bi
 Therefore, your `config.yaml` will have different values for `pipeline_path` and `docs` as indicated in the comments in [./test_example/config.yaml](test_example/config.yaml).
 
 Despite these differences, [./test_example](test_example) provides an example of how to set up your repo.
-Running the analysis in [./test_example](test_example) performs the whole analysis for the test example and creates the sphinx rendering in [./docs](docs) which can be displayed via GitHub pages as here: [https://dms-vep.github.io/dms-vep-pipeline-3](https://dms-vep.github.io/dms-vep-pipeline-3).
+Running the analysis in [./test_example](test_example) performs the whole analysis for the test example and creates the sphinx rendering in [./docs](docs) which can be displayed via GitHub Pages as here: [https://dms-vep.github.io/dms-vep-pipeline-3](https://dms-vep.github.io/dms-vep-pipeline-3).
 
 ## Running the pipeline
 You can run the pipeline from the top-level directory using:
@@ -55,7 +55,7 @@ Note that if the environment is updated, all rules will re-run.
 If you do not want to re-run rules if the environment is updated, specify `--rerun-triggers mtime params input code`---although if you do this, you are responsible for manually deleting any output that should be changed by the environment update.
 
 Running the pipeline will put results in `./results/` and the HTML documentation in `./docs/`.
-To display the HTML documentation via GitHub pages, set up your repo to serve documentation via GitHub pages from the `/docs` folder of the main (or master) branch [as described here](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+To display the auto-built HTML documentation via GitHub Pages, set up your repo to serve documentation via GitHub pages from the `/docs` folder of the main (or master) branch [as described here](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 The documentation will then be at `https://dms-vep.github.io/<my_dms_repo>` (assuming you are using the [https://github.com/dms-vep](https://github.com/dms-vep) organization; otherwise replace `dms-vep` with whatever account contains your repo).
 
 ## Configuring and customizing the pipeline
@@ -125,3 +125,8 @@ The large data files for the test example in [./test_example/sequencing_data/](t
 Note the first time you set up the repo, you have to run:
 
     git lfs install
+
+## Configuring a custom homepage
+
+You can configure a custom homepage for your project with the static site generator [VitePress](https://vitepress.dev/). Check out Brendan Larsen's [nicely styled homepage](https://dms-vep.org/Nipah_Malaysia_RBP_DMS/) as an example. Detailed instructions for adding a homepage to your project are located [here](homepage/README.md).
+Note if you use this option you will need to manually edit the relevant markdown files as described in the instructions, and set GitHub Pages to serve from the `gh-pages` branch rather than from the `docs` folder (which has the automatically built documentation).

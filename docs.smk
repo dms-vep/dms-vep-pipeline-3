@@ -80,8 +80,8 @@ if config["build_vitepress_homepage"]:
         output:
             html=os.path.join(config["homepage"], "appendix.html"),
         params:
-            docs=config["docs"],
-            homepage=config["homepage"],
+            docs=lambda _, input: os.path.dirname(input.html),
+            homepage=lambda _, output: os.path.dirname(output.html),
         log:
             "results/logs/build_vitepress_homepage.txt",
         conda:

@@ -80,8 +80,12 @@ if config["build_vitepress_homepage"]:
         output:
             html=os.path.join(config["homepage"], "appendix.html"),
         params:
-            docs=os.path.join(config["docs"]),
-            homepage=os.path.join(config["homepage"]),
+            docs=config["docs"],
+            homepage=config["homepage"],
+        log:
+            "results/logs/build_vitepress_homepage.txt",
+        conda:
+            "environment.yml"
         shell:
             """
             # Copy contents of docs/ to homepage/public/

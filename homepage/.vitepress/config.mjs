@@ -3,10 +3,10 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: "en-US",
-  title: "Homepage for my favorite viral receptor",
+  title: "Homepage for `dms-vep-pipeline-3` test example",
   description:
-    "Data, figures, and analysis for DMS of my favorite viral receptor.",
-  base: "/my_virus_dms/",
+    "Data, figures, and analysis for `dms-vep-pipeline-3` test example.",
+  base: "/dms-vep-pipeline-3/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -15,7 +15,7 @@ export default defineConfig({
     ],
     socialLinks: [{ icon: "github", link: "https://github.com/dms-vep" }],
     footer: {
-      message: "Copyright © 2024-present Me and Jesse Bloom",
+      message: "Copyright © 2024-present Will Hannon and Jesse Bloom",
     },
   },
 });

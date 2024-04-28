@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.8.1
+- Fix change to add VitePress homepage backward-compatible as originally intended by not building homepage (versus raising error) in VitePress related data totally ommitted from config.
+
 ### version 3.8.0
 - Add code and instructions on how to optionally build a nicer and more customized documentation using VitePress for hosting on GitHub Pages.
 - Update the version of `mafft` from `7.520` to `7.525` to avoid channel priority issues.

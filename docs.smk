@@ -71,7 +71,7 @@ rule build_docs:
         "scripts/build_docs.py"
 
 
-if config["build_vitepress_homepage"]:
+if "build_vitepress_homepage" in config and config["build_vitepress_homepage"]:
 
     rule build_vitepress_homepage:
         """Copy all files from the docs directory to the VitePress homepage directory"""

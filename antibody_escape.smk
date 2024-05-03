@@ -209,13 +209,11 @@ rule avg_escape:
                 "pickles": list(input.pickles),
                 "site_numbering_map_csv": input.site_numbering_map_csv,
                 "assay_config": assays[wc.assay],
-            }
-            | {
                 "mutation_annotations_csv": (
                     input.mutation_annotations_csv
                     if input.get("mutation_annotations_csv")
                     else None
-                )
+                ),
             }
         ),
     conda:

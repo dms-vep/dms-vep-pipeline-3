@@ -157,8 +157,15 @@ rule avg_func_effects:
         functional_html="results/func_effects/averages/{condition}_func_effects_nolegend.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects_nolegend.html",
     params:
-        params_yaml=lambda wc: yaml.round_trip_dump(
-            {"params": func_effects_config["avg_func_effects"][wc.condition]}
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
+            {
+                "params": func_effects_config["avg_func_effects"][wc.condition],
+                "mutation_annotations_csv": (
+                    input.mutation_annotations_csv
+                    if input.get("mutation_annotations_csv")
+                    else None
+                ),
+            }
         ),
     conda:
         "environment.yml"
@@ -241,8 +248,15 @@ rule func_effect_diffs:
         chart="results/func_effect_diffs/{comparison}_diffs_nolegend.html",
         nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.round_trip_dump(
-            {"params": func_effect_diffs[wc.comparison]}
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
+            {
+                "params": func_effect_diffs[wc.comparison],
+                "mutation_annotations_csv": (
+                    input.mutation_annotations_csv
+                    if input.get("mutation_annotations_csv")
+                    else None
+                ),
+            }
         ),
     conda:
         "environment.yml"
@@ -359,8 +373,15 @@ rule avg_func_effect_shifts:
         shifts_html="results/func_effect_shifts/averages/{comparison}_shifts_nolegend.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.round_trip_dump(
-            {"params": avg_func_effect_shifts[wc.comparison]}
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
+            {
+                "params": avg_func_effect_shifts[wc.comparison],
+                "mutation_annotations_csv": (
+                    input.mutation_annotations_csv
+                    if input.get("mutation_annotations_csv")
+                    else None
+                ),
+            }
         ),
     conda:
         "environment.yml"

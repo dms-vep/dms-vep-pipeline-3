@@ -91,7 +91,8 @@ avg_func_effects_default: &avg_func_effects_default
     addtl_slider_stats:
       times_seen: 3
       effect_std: 2
-    addtl_slider_stats_as_max: [effect_std]
+      nt changes to codon: 3
+    addtl_slider_stats_as_max: [effect_std, nt changes to codon]
     heatmap_max_at_least: 1
     heatmap_min_at_least: -1
     init_floor_at_zero: false
@@ -104,6 +105,10 @@ avg_func_effects_default: &avg_func_effects_default
         max: 25
       n_selections:
         step: 1
+      nt changes to codon:
+        step: 1
+        min: 1
+        max: 3
   legend: |
     Interactive plot of the effects of mutations. Negative values indicated deleterious mutations,
     positive values indicate beneficial mutations for the measured phenotype.
@@ -174,8 +179,9 @@ func_effect_diffs:
         best_effect: -2  # effect must be >= for at least one condition
         220210 effect: null  # slider on effect in this condition, but no initial value
         220302 effect: null  # slider on effect in this condition, but no initial value
+        nt changes to codon: 3
       addtl_slider_stats_hide_not_filter: [best_effect, 220210 effect, 220302 effect]
-      addtl_slider_stats_as_max: [difference_std]
+      addtl_slider_stats_as_max: [difference_std, nt changes to codon]
       heatmap_max_at_least: 1
       heatmap_min_at_least: -1
       init_floor_at_zero: false
@@ -186,6 +192,10 @@ func_effect_diffs:
           step: 1
           min: 1
           max: 25
+        nt changes to codon:
+          step: 1
+          min: 1
+          max: 3
     title: Differences in mutation effects on 293T entry across days.
     legend: |
       Interactive plot of the difference of effects of mutations between two conditions.
@@ -271,6 +281,8 @@ avg_func_effect_shifts_default: &avg_func_effect_shifts_default
   plot_kwargs:
     addtl_slider_stats:
       times_seen: 3
+      nt changes to codon: 3
+    addtl_slider_stats_as_max: [nt changes to codon]
     heatmap_max_at_least: 0.5
     heatmap_min_at_least: -0.5
     init_floor_at_zero: false
@@ -283,6 +295,10 @@ avg_func_effect_shifts_default: &avg_func_effect_shifts_default
         max: 25
       n_comparisons:
         step: 1
+      nt changes to codon:
+        step: 1
+        min: 1
+        max: 3
   legend: |
     Interactive plot of shifts in effects of mutations. Negative values indicate mutations that
     have shifted to become more deleterious; positive values indicate mutations shifted to

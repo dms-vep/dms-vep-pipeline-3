@@ -137,6 +137,11 @@ for s in func_scores:
 rule avg_func_effects:
     """Average and plot the functional effects for a condition."""
     input:
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         site_numbering_map_csv=config["site_numbering_map"],
         selections=lambda wc: [
             f"results/func_effects/by_selection/{s}_func_effects.csv"
@@ -224,6 +229,11 @@ rule func_effect_diffs:
             for c in ["condition_1", "condition_2"]
             for sel in func_effect_diffs[wc.comparison][c]["selections"]
         ],
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_diffs.ipynb"),
     output:
@@ -334,6 +344,11 @@ rule avg_func_effect_shifts:
             rules.func_effect_shifts.output.shifts.format(comparison=c)
             for c in avg_func_effect_shifts[wc.comparison]["comparisons"]
         ],
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(
             config["pipeline_path"],

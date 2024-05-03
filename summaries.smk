@@ -39,6 +39,11 @@ rule summary:
                 for condition_d in assay_d.values()
             }
         ),
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/summary.ipynb"),
     output:

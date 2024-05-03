@@ -171,6 +171,11 @@ for assay, sels in assay_selections.items():
 rule avg_escape:
     """Average antibody escape or receptor affinity across several selections."""
     input:
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         plot_hide_stats=lambda wc: [
             d["csv"]
             for d in avg_assay_config[wc.assay][wc.antibody][

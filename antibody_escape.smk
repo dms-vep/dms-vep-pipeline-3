@@ -207,7 +207,15 @@ rule avg_escape:
                 "params": avg_assay_config[wc.assay][wc.antibody],
                 "prob_escape_mean_csvs": list(input.prob_escape_means),
                 "pickles": list(input.pickles),
+                "site_numbering_map_csv": input.site_numbering_map_csv,
                 "assay_config": assays[wc.assay],
+            }
+            | {
+                "mutation_annotations_csv": (
+                    input.mutation_annotations_csv
+                    if input.get("mutation_annotations_csv")
+                    else None
+                )
             }
         ),
     conda:
@@ -218,7 +226,6 @@ rule avg_escape:
         """
         papermill {input.nb} {output.nb} \
             -p assay {wildcards.assay} \
-            -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p avg_pickle_file {output.pickle} \
             -p effect_csv {output.effect_csv} \
             -p icXX_csv {output.icXX_csv} \

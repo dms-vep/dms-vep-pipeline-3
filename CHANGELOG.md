@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.9.0
+- Allow `mutation_annotations` file that provides annotations for specific mutations, such as how many nucleotide mutations are required to generate them (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/105)).
+
 #### version 3.8.1
 - Fix change to add VitePress homepage backward-compatible as originally intended by not building homepage (versus raising error) in VitePress related data totally ommitted from config.
 

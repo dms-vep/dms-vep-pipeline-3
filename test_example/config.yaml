@@ -42,7 +42,10 @@ site_numbering_map: data/site_numbering_map.csv
 # such as "nt changes to codon" for how many nucleotide changes are needed
 # to the codon to access a mutation. Should have columns named "site" (the
 # reference site number) and "mutant" (the amino-acid in question). All
-# other columns represent the annotations.
+# other columns represent the annotations. If you provide this, annotations in
+# this file can be shown in the summary and average escape / functional effects
+# plots by specifying the relevant column as an additional slider stat in the
+# configuration for those plots.
 mutation_annotations: data/mutation_annotations.csv
 
 # Classify mutations into different categories, such as which ones are

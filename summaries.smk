@@ -39,7 +39,12 @@ rule summary:
                 for condition_d in assay_d.values()
             }
         ),
-        site_numbering_map_csv=config["site_numbering_map"],
+        **(
+            {"mutation_annotations": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
+        site_numbering_map=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/summary.ipynb"),
     output:
         chart_overlaid="results/summaries/{summary}_overlaid_nolegend.html",
@@ -65,7 +70,6 @@ rule summary:
     shell:
         """
         papermill {input.nb} {output.nb} \
-            -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p chart_faceted {output.chart_faceted} \
             -p chart_overlaid {output.chart_overlaid} \
             -p output_csv_file {output.csv} \

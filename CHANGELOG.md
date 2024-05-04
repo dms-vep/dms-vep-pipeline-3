@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### version 3.9.0
+- Allow `mutation_annotations` file that provides annotations for specific mutations, such as how many nucleotide mutations are required to generate them (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/105)). In the test example, this is implemented by specifying `nt changes to codon`. These annotations can then be used as filters by specifying the indicated columns in the configuration for the average across replicates plots for antibody escape and functional effects, as well as in the summaries.
+- Bug fix to alignment of line plot and scale bar and some filtering bugs in summary plots
+
 #### version 3.8.1
 - Fix change to add VitePress homepage backward-compatible as originally intended by not building homepage (versus raising error) in VitePress related data totally ommitted from config.
 

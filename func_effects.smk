@@ -137,6 +137,11 @@ for s in func_scores:
 rule avg_func_effects:
     """Average and plot the functional effects for a condition."""
     input:
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         site_numbering_map_csv=config["site_numbering_map"],
         selections=lambda wc: [
             f"results/func_effects/by_selection/{s}_func_effects.csv"
@@ -152,8 +157,15 @@ rule avg_func_effects:
         functional_html="results/func_effects/averages/{condition}_func_effects_nolegend.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects_nolegend.html",
     params:
-        params_yaml=lambda wc: yaml.round_trip_dump(
-            {"params": func_effects_config["avg_func_effects"][wc.condition]}
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
+            {
+                "params": func_effects_config["avg_func_effects"][wc.condition],
+                "mutation_annotations_csv": (
+                    input.mutation_annotations_csv
+                    if input.get("mutation_annotations_csv")
+                    else None
+                ),
+            }
         ),
     conda:
         "environment.yml"
@@ -224,6 +236,11 @@ rule func_effect_diffs:
             for c in ["condition_1", "condition_2"]
             for sel in func_effect_diffs[wc.comparison][c]["selections"]
         ],
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_diffs.ipynb"),
     output:
@@ -231,8 +248,15 @@ rule func_effect_diffs:
         chart="results/func_effect_diffs/{comparison}_diffs_nolegend.html",
         nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.round_trip_dump(
-            {"params": func_effect_diffs[wc.comparison]}
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
+            {
+                "params": func_effect_diffs[wc.comparison],
+                "mutation_annotations_csv": (
+                    input.mutation_annotations_csv
+                    if input.get("mutation_annotations_csv")
+                    else None
+                ),
+            }
         ),
     conda:
         "environment.yml"
@@ -334,6 +358,11 @@ rule avg_func_effect_shifts:
             rules.func_effect_shifts.output.shifts.format(comparison=c)
             for c in avg_func_effect_shifts[wc.comparison]["comparisons"]
         ],
+        **(
+            {"mutation_annotations_csv": config["mutation_annotations"]}
+            if "mutation_annotations" in config
+            else {}
+        ),
         site_numbering_map_csv=config["site_numbering_map"],
         nb=os.path.join(
             config["pipeline_path"],
@@ -344,8 +373,15 @@ rule avg_func_effect_shifts:
         shifts_html="results/func_effect_shifts/averages/{comparison}_shifts_nolegend.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.round_trip_dump(
-            {"params": avg_func_effect_shifts[wc.comparison]}
+        params_yaml=lambda wc, input: yaml.round_trip_dump(
+            {
+                "params": avg_func_effect_shifts[wc.comparison],
+                "mutation_annotations_csv": (
+                    input.mutation_annotations_csv
+                    if input.get("mutation_annotations_csv")
+                    else None
+                ),
+            }
         ),
     conda:
         "environment.yml"

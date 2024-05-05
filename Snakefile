@@ -106,10 +106,6 @@ if len(barcode_runs) > 0:
             include: f"{rule_set}.smk"
 
 
-# common rules
-include: "common.smk"
-
-
 # add any custom rules
 custom_rules = "custom_rules.smk"
 if os.path.isfile(custom_rules):

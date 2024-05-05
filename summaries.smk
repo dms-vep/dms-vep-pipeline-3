@@ -47,8 +47,8 @@ rule summary:
         site_numbering_map=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/summary.ipynb"),
     output:
-        chart_overlaid="results/summaries/{summary}_overlaid_nolegend.html",
-        chart_faceted="results/summaries/{summary}_faceted_nolegend.html",
+        chart_overlaid="results/summaries/{summary}_overlaid.html",
+        chart_faceted="results/summaries/{summary}_faceted.html",
         csv="results/summaries/{summary}.csv",
         per_antibody_escape_csv="results/summaries/{summary}_per_antibody_escape.csv",
         nb="results/notebooks/summary_{summary}.ipynb",
@@ -58,7 +58,6 @@ rule summary:
                 "config": {
                     key: val
                     for (key, val) in summaries_config[wc.summary].items()
-                    if key not in ["title", "legend"]
                 },
                 "input_csvs": dict(input),
             }
@@ -84,11 +83,11 @@ docs["Integrated summary plots"] = {
     summary.replace("_", " "): {
         **(
             {
-                "Summary plot (escape overlaid)": f"results/summaries/{summary}_overlaid.html",
-                "Summary plot (escape faceted)": f"results/summaries/{summary}_faceted.html",
+                "Summary plot (escape overlaid)": rules.summary.output.chart_overlaid.format(summary=summary),
+                "Summary plot (escape faceted)": rules.summary.output.chart_faceted.format(summary=summary),
             }
             if summaries_config[summary]["antibody_escape"]
-            else {"Summary plot": f"results/summaries/{summary}_overlaid.html"}
+            else {"Summary plot": rules.summary.output.chart_overlaid.format(summary=summary)}
         ),
         "CSV summarizing results": rules.summary.output.csv.format(summary=summary),
         **(

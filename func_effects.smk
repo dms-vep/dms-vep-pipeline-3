@@ -154,8 +154,8 @@ rule avg_func_effects:
         nb="results/notebooks/avg_func_effects_{condition}.ipynb",
         func_effects_csv="results/func_effects/averages/{condition}_func_effects.csv",
         latent_effects_csv="results/func_effects/averages/{condition}_latent_effects.csv",
-        functional_html="results/func_effects/averages/{condition}_func_effects_nolegend.html",
-        latent_html="results/func_effects/averages/{condition}_latent_effects_nolegend.html",
+        functional_html="results/func_effects/averages/{condition}_func_effects.html",
+        latent_html="results/func_effects/averages/{condition}_latent_effects.html",
     params:
         params_yaml=lambda wc, input: yaml.round_trip_dump(
             {
@@ -206,14 +206,14 @@ func_effects_docs["Data files"][
 func_effects_docs["Final summary plots"][
     "Interactive plots of average mutation functional effects"
 ] = {
-    c: f"results/func_effects/averages/{c}_func_effects.html"
+    c: rules.avg_func_effects.output.functional_html.format(condition=c)
     for c in func_effects_config["avg_func_effects"]
 }
 
 func_effects_docs["Final summary plots"][
     "Interactive plots of average mutation latent-phenotype effects"
 ] = {
-    c: f"results/func_effects/averages/{c}_latent_effects.html"
+    c: rules.avg_func_effects.output.latent_html.format(condition=c)
     for c in func_effects_config["avg_func_effects"]
 }
 
@@ -245,7 +245,7 @@ rule func_effect_diffs:
         nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_diffs.ipynb"),
     output:
         diffs="results/func_effect_diffs/{comparison}_diffs.csv",
-        chart="results/func_effect_diffs/{comparison}_diffs_nolegend.html",
+        chart="results/func_effect_diffs/{comparison}_diffs.html",
         nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
     params:
         params_yaml=lambda wc, input: yaml.round_trip_dump(
@@ -287,7 +287,7 @@ if func_effect_diffs:
     func_effects_docs["Final summary plots"][
         "Interactive plots of differences in functional effects between conditions"
     ] = {
-        c: "results/func_effect_diffs/{comparison}_diffs.html".format(comparison=c)
+        c: rules.func_effect_diffs.output.chart.format(comparison=c)
         for c in func_effect_diffs
     }
 
@@ -370,7 +370,7 @@ rule avg_func_effect_shifts:
         ),
     output:
         shifts_csv="results/func_effect_shifts/averages/{comparison}_shifts.csv",
-        shifts_html="results/func_effect_shifts/averages/{comparison}_shifts_nolegend.html",
+        shifts_html="results/func_effect_shifts/averages/{comparison}_shifts.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
     params:
         params_yaml=lambda wc, input: yaml.round_trip_dump(
@@ -414,9 +414,7 @@ if avg_func_effect_shifts:
     func_effects_docs["Final summary plots"][
         "Interactive plots of average shifts in functional effects"
     ] = {
-        c: "results/func_effect_shifts/averages/{comparison}_shifts.html".format(
-            comparison=c
-        )
+        c: rules.avg_func_effect_shifts.output.shifts_html.format(comparison=c)
         for c in avg_func_effect_shifts
     }
 

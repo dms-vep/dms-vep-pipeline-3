@@ -1,5 +1,14 @@
 # CHANGELOG
 
+### version 3.10.0
+- Remove the titles and legends from interactive figures (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/121)). These were not really being used, and with the new VitePress option that is a better way to provide detailed information around figures. This change:
+  - removes the `title` and `legend` keys associated with various figures and plots in the configuration YAMLs.
+  - the pipeline no longer makes the `<path>_nolegend.html` versions of files as the final version (`<path>.html`) now does not have a legend, so corresponding remove the `format_altair_html` rule. This removes the following files:
+    - `common.smk`
+    - `common_funcs.smk`
+    - `scripts/format_altair_html.py`
+  - Remove `bs4` from `environment.yml` as it is no longer needed.
+
 ### version 3.9.0
 - Allow `mutation_annotations` file that provides annotations for specific mutations, such as how many nucleotide mutations are required to generate them (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/105)). In the test example, this is implemented by specifying `nt changes to codon`. These annotations can then be used as filters by specifying the indicated columns in the configuration for the average across replicates plots for antibody escape and functional effects, as well as in the summaries.
 - Bug fix to alignment of line plot and scale bar and some filtering bugs in summary plots

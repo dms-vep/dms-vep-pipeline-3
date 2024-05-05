@@ -198,8 +198,8 @@ rule avg_escape:
         pickle="results/{assay}/averages/{antibody}_polyclonal_model.pickle",
         effect_csv="results/{assay}/averages/{antibody}_mut_effect.csv",
         icXX_csv="results/{assay}/averages/{antibody}_mut_icXX.csv",
-        effect_html="results/{assay}/averages/{antibody}_mut_effect_nolegend.html",
-        icXX_html="results/{assay}/averages/{antibody}_mut_icXX_nolegend.html",
+        effect_html="results/{assay}/averages/{antibody}_mut_effect.html",
+        icXX_html="results/{assay}/averages/{antibody}_mut_icXX.html",
         nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
     params:
         params_yaml=lambda wc, input: yaml.round_trip_dump(
@@ -253,13 +253,13 @@ for assay in avg_assay_config:
         (
             f"{assay_str} mutation effect plots",
             "Final summary plots",
-            "results/{assay}/averages/{antibody}_mut_effect.html",
+            rules.avg_escape.output.effect_html,
             False,
         ),
         (
             f"{assay_str} mutation ICXX plots",
             "Final summary plots",
-            "results/{assay}/averages/{antibody}_mut_icXX.html",
+            rules.avg_escape.output.icXX_html,
             True,
         ),
     ]:

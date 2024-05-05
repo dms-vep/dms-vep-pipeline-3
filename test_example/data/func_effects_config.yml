@@ -79,8 +79,6 @@ func_scores:
 #  - `per_selection_tooltips`: whether to show per-selection effects via tooltips
 #  - `floor_for_effect_std`: before computing effect std, floor effects at this value.
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
-#  - `title`: title of plot. Will be suffixed with "(latent phenotype)" or ("functional score)"
-#  - `legend`: legend added to plot
 
 # Define some defaults for each condition, used via the merge (<<) operator.
 avg_func_effects_default: &avg_func_effects_default
@@ -93,6 +91,7 @@ avg_func_effects_default: &avg_func_effects_default
       effect_std: 2
       nt changes to codon: 3
     addtl_slider_stats_as_max: [effect_std, nt changes to codon]
+    addtl_slider_stats_hide_not_filter: [nt changes to codon]
     heatmap_max_at_least: 1
     heatmap_min_at_least: -1
     init_floor_at_zero: false
@@ -109,31 +108,11 @@ avg_func_effects_default: &avg_func_effects_default
         step: 1
         min: 1
         max: 3
-  legend: |
-    Interactive plot of the effects of mutations. Negative values indicated deleterious mutations,
-    positive values indicate beneficial mutations for the measured phenotype.
-
-    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary
-    statistic indicating the effects of mutations at each site. The heat map shows the effects of
-    individual mutations, with parental amino-acid identities indicated by x and gray
-    indicating non-measured mutations.
-
-    You can mouse over points to get details about individual measurements, including measurements
-    in individual selection experiments.
-
-    The options at the bottom of the plot let you modify the display, such as by selecting how
-    many different variants a mutation must be seen in to be shown (*minimum times_seen*),
-    how many different experimental selections the mutation was measured in
-    (*minimum n_selections*), what site summary statistic to show, etc.
-
-    The *minimum max of effect* at site is useful to select the sites where mutations have
-    the most positive functional effects.
 
 # Define the functional effect conditions to average
 avg_func_effects:
   293T_ACE2_entry:
     <<: *avg_func_effects_default
-    title: Mutation effects on entry into 293T-ACE2 cells
     selections:
       - LibA-220210-293T_ACE2-1
       - LibA-220210-293T_ACE2-2
@@ -155,8 +134,6 @@ avg_func_effects:
 #  - `avg_method`: how to average across selections for a condition, "median" or "mean"
 #  - `per_selection_tooltips`: whether to show per-selection tooltips
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
-#  - `title`: title of plot
-#  - `legend`: legend of plot
 func_effect_diffs:
   220210_vs_220302_comparison:
     condition_1:
@@ -180,7 +157,7 @@ func_effect_diffs:
         220210 effect: null  # slider on effect in this condition, but no initial value
         220302 effect: null  # slider on effect in this condition, but no initial value
         nt changes to codon: 3
-      addtl_slider_stats_hide_not_filter: [best_effect, 220210 effect, 220302 effect]
+      addtl_slider_stats_hide_not_filter: [best_effect, 220210 effect, 220302 effect, nt changes to codon]
       addtl_slider_stats_as_max: [difference_std, nt changes to codon]
       heatmap_max_at_least: 1
       heatmap_min_at_least: -1
@@ -196,23 +173,6 @@ func_effect_diffs:
           step: 1
           min: 1
           max: 3
-    title: Differences in mutation effects on 293T entry across days.
-    legend: |
-      Interactive plot of the difference of effects of mutations between two conditions.
-
-      Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary
-      statistic indicating the typical effects of mutations at each site. The heat map shows the effects of
-      individual mutations, with parental amino-acid identities indicated by x, dark gray indicating
-      mutations that fail a slider filter, and light gray indicating non-measured mutations.
-
-      You can mouse over points to get details about individual measurements, including measurements
-      in individual selection experiments.
-
-      The options at the bottom of the plot let you modify the display, such as by selecting how
-      many different variants a mutation must be seen in to be shown (*minimum times_seen*),
-      the fraction of different pairwise comparisons the mutation was measured in, the maximum
-      standard deviation for the difference among pairwise comparison, or its
-      best effect in any condition.
 
 # --------------------------------------------------------------------------------------
 # Configuration for func effect shifts from `multidms` models comparing conditions.
@@ -271,8 +231,6 @@ func_effect_shifts:
 #  - `lasso_shift`: the single lasso shift to use for the final averaged values.
 #  - `avg_method`: how to average across the selections, options are "median" and "mean"
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
-#  - `title`: title of plot. Will be suffixed with "(latent phenotype)" or ("functional score)"
-#  - `legend`: legend added to plot
 
 # Define some defaults for each condition, used via the merge (<<) operator.
 avg_func_effect_shifts_default: &avg_func_effect_shifts_default
@@ -283,6 +241,7 @@ avg_func_effect_shifts_default: &avg_func_effect_shifts_default
       times_seen: 3
       nt changes to codon: 3
     addtl_slider_stats_as_max: [nt changes to codon]
+    addtl_slider_stats_hide_not_filter: [nt changes to codon]
     heatmap_max_at_least: 0.5
     heatmap_min_at_least: -0.5
     init_floor_at_zero: false
@@ -299,29 +258,11 @@ avg_func_effect_shifts_default: &avg_func_effect_shifts_default
         step: 1
         min: 1
         max: 3
-  legend: |
-    Interactive plot of shifts in effects of mutations. Negative values indicate mutations that
-    have shifted to become more deleterious; positive values indicate mutations shifted to
-    be more beneficial.
-
-    Use the site zoom bar at the top to zoom in on specific sites. The line plot shows a summary
-    statistic indicating the effects of mutations at each site. The heat map shows the effects of
-    individual mutations, with parental amino-acid identities indicated by x and gray
-    indicating non-measured mutations.
-
-    You can mouse over points to get details about individual measurements, including measurements
-    in individual comparisons.
-
-    The options at the bottom of the plot let you modify the display, such as by selecting how
-    many different variants a mutation must be seen in to be shown (*minimum times_seen*),
-    how many different experimental comparisons the mutation was measured in
-    (*minimum n_comparisons*), what site summary statistic to show, etc.
 
 # Define the functional effect conditions to average
 avg_func_effect_shifts:
   date_comparison:
     <<: *avg_func_effect_shifts_default
-    title: Comparison of functional effects from different dates (just a toy example)
     comparisons:
       - LibA-date_comparison-1
       - LibA-date_comparison-2

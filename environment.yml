@@ -9,7 +9,6 @@ dependencies:
   - altair=5.2.0
   - biopython=1.83
   - black-jupyter
-  - bs4=4.12
   - entrez-direct=16.2
   - flatdict=4.0
   - git-lfs

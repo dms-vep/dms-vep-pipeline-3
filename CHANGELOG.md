@@ -7,7 +7,7 @@
     - `common.smk`
     - `common_funcs.smk`
     - `scripts/format_altair_html.py`
-  - Remove `bs4` and `markdown` from `environment.yml` as they are no longer needed.
+  - Remove `bs4` from `environment.yml` as it is no longer needed.
 
 ### version 3.9.0
 - Allow `mutation_annotations` file that provides annotations for specific mutations, such as how many nucleotide mutations are required to generate them (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/105)). In the test example, this is implemented by specifying `nt changes to codon`. These annotations can then be used as filters by specifying the indicated columns in the configuration for the average across replicates plots for antibody escape and functional effects, as well as in the summaries.

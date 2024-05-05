@@ -56,8 +56,7 @@ rule summary:
         yaml=lambda wc, input: yaml.round_trip_dump(
             {
                 "config": {
-                    key: val
-                    for (key, val) in summaries_config[wc.summary].items()
+                    key: val for (key, val) in summaries_config[wc.summary].items()
                 },
                 "input_csvs": dict(input),
             }
@@ -83,11 +82,19 @@ docs["Integrated summary plots"] = {
     summary.replace("_", " "): {
         **(
             {
-                "Summary plot (escape overlaid)": rules.summary.output.chart_overlaid.format(summary=summary),
-                "Summary plot (escape faceted)": rules.summary.output.chart_faceted.format(summary=summary),
+                "Summary plot (escape overlaid)": rules.summary.output.chart_overlaid.format(
+                    summary=summary
+                ),
+                "Summary plot (escape faceted)": rules.summary.output.chart_faceted.format(
+                    summary=summary
+                ),
             }
             if summaries_config[summary]["antibody_escape"]
-            else {"Summary plot": rules.summary.output.chart_overlaid.format(summary=summary)}
+            else {
+                "Summary plot": rules.summary.output.chart_overlaid.format(
+                    summary=summary
+                )
+            }
         ),
         "CSV summarizing results": rules.summary.output.csv.format(summary=summary),
         **(

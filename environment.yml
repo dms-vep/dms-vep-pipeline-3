@@ -15,6 +15,7 @@ dependencies:
   - ipywidgets # required because of https://github.com/matsengrp/multidms/issues/114
   - jupyterlab
   - mafft=7.525
+  - markdown=3.4
   - matplotlib=3.8
   - minimap2=2.26
   - nbstripout

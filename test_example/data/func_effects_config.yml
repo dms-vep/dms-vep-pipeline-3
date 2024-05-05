@@ -91,6 +91,7 @@ avg_func_effects_default: &avg_func_effects_default
       effect_std: 2
       nt changes to codon: 3
     addtl_slider_stats_as_max: [effect_std, nt changes to codon]
+    addtl_slider_stats_hide_not_filter: [nt changes to codon]
     heatmap_max_at_least: 1
     heatmap_min_at_least: -1
     init_floor_at_zero: false
@@ -156,7 +157,7 @@ func_effect_diffs:
         220210 effect: null  # slider on effect in this condition, but no initial value
         220302 effect: null  # slider on effect in this condition, but no initial value
         nt changes to codon: 3
-      addtl_slider_stats_hide_not_filter: [best_effect, 220210 effect, 220302 effect]
+      addtl_slider_stats_hide_not_filter: [best_effect, 220210 effect, 220302 effect, nt changes to codon]
       addtl_slider_stats_as_max: [difference_std, nt changes to codon]
       heatmap_max_at_least: 1
       heatmap_min_at_least: -1
@@ -240,6 +241,7 @@ avg_func_effect_shifts_default: &avg_func_effect_shifts_default
       times_seen: 3
       nt changes to codon: 3
     addtl_slider_stats_as_max: [nt changes to codon]
+    addtl_slider_stats_hide_not_filter: [nt changes to codon]
     heatmap_max_at_least: 0.5
     heatmap_min_at_least: -0.5
     init_floor_at_zero: false

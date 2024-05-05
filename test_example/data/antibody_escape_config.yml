@@ -272,6 +272,7 @@ avg_escape_plot_kwargs_default: &avg_escape_plot_kwargs_default
     escape_std: 2
     nt changes to codon: 3
   addtl_slider_stats_as_max: [escape_std, nt changes to codon]
+  addtl_slider_stats_hide_not_filter: [nt changes to codon]
   slider_binding_range_kwargs:
     nt changes to codon:
       min: 1

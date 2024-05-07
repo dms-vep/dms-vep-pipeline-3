@@ -19,7 +19,7 @@ summary_of_all_phenotypes:
       positive_color: "#56B4E9"  # light blue, positive heatmap color
       negative_color: "#E69F00"  # orange, negative heatmap color
       max_at_least: 1  # make heatmap max at least
-      min_at_least: -1  # make heatmap min at least this
+      min_at_least: -1  # make heatmap min at least this small
       le_filters:  # only keep entries with indicated column is <= indicated value
         escape_std: 2
       antibody_list:  # antibody name followed by CSV with data for antibody

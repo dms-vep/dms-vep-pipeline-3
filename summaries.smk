@@ -8,41 +8,23 @@ with open(config["summaries_config"]) as f:
 rule summary:
     """Summary across different assays."""
     input:
-        unpack(
-            lambda wc: {
-                f"antibody_escape {antibody}": rules.avg_escape.output.effect_csv.format(
-                    assay="antibody_escape",
-                    antibody=antibody,
-                )
-                for antibody_set_d in summaries_config[wc.summary][
-                    "antibody_escape"
-                ].values()
-                for antibody in antibody_set_d["antibody_list"]
-            }
-            | {
-                f"func_effects {condition_d['condition']}": os.path.join(
-                    "results/func_effects/averages",
-                        f"{condition_d['condition']}_{condition_d['effect_type']}.csv",
-                    )
-                    for condition_d in summaries_config[wc.summary][
-                    "func_effects"
-                ].values()
-            }
-            | {
-                f"{assay} {condition_d['condition']}": rules.avg_escape.output.effect_csv.format(
-                    assay=assay,
-                    antibody=condition_d["condition"],
-                )
-                for (assay, assay_d) in summaries_config[wc.summary][
-                    "other_assays"
-                ].items()
-                for condition_d in assay_d.values()
-            }
-        ),
         **(
             {"mutation_annotations": config["mutation_annotations"]}
             if "mutation_annotations" in config
             else {}
+        ),
+        input_csvs=lambda wc: (
+            [
+                csv
+                for key, val in summaries_config[wc.summary]["antibody_escape"].items()
+                for csv in val["antibody_list"].values()
+            ]
+            + [
+                val["csv"]
+                for key, val in summaries_config[wc.summary][
+                    "other_phenotypes"
+                ].items()
+            ]
         ),
         site_numbering_map=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/summary.ipynb"),
@@ -55,10 +37,13 @@ rule summary:
     params:
         yaml=lambda wc, input: yaml.round_trip_dump(
             {
-                "config": {
-                    key: val for (key, val) in summaries_config[wc.summary].items()
-                },
-                "input_csvs": dict(input),
+                "config": (
+                    summaries_config[wc.summary]
+                    | {
+                        key: list(val) if key == "input_csvs" else val
+                        for key, val in dict(input).items()
+                    }
+                )
             }
         ),
     conda:

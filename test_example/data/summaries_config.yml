@@ -15,20 +15,20 @@ summary_of_all_phenotypes:
   init_site_escape_stat: mean  # initially show site escape as this statistic
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
-      stat: escape_median  # statistic to use for escape
+      stat: escape_median  # columin in CSV with value
       positive_color: "#56B4E9"  # light blue, positive heatmap color
       negative_color: "#E69F00"  # orange, negative heatmap color
       max_at_least: 1  # make heatmap max at least
-      min_at_least: -1  # make heatmap min at least this
+      min_at_least: -1  # make heatmap min at least this small
       le_filters:  # only keep entries with indicated column is <= indicated value
         escape_std: 2
-      antibody_list:  # antibodies to include: keys name used for `avg_escape`, values name for plot
-        S2M11: S2M-11
-        REGN10933: REGN10933
-  func_effects:  # effects of mutations on function
-    spike mediated entry:  # name of functional selection
-      condition: 293T_ACE2_entry  # condition specified in `avg_func_effects`
-      effect_type: func_effects  # "func_effects" or "latent_effects"
+      antibody_list:  # antibody name followed by CSV with data for antibody
+        S2M-11: results/antibody_escape/averages/S2M11_mut_effect.csv
+        REGN10933: results/antibody_escape/averages/REGN10933_mut_effect.csv
+  other_phenotypes:  # list other phenotypes to plot, empty dict if no other phenotypes
+    spike mediated entry:
+      csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
+      stat: effect  # column in CSV with value
       positive_color: "#009E73"  # green
       negative_color: "#F0E442"  # yellow
       fixed_max: 2  # specify either `max_at_least` or `fixed_max`
@@ -36,18 +36,16 @@ summary_of_all_phenotypes:
       init_min_value: -3  # initial min value in slider
       le_filters:  # only keep entries with indicated column is <= indicated value
         effect_std: 2
-  other_assays:  # other assays that we show, empty dict if no assays being shown
-    receptor_affinity:  # assay type
-      mock receptor affinity:  # name of particular assay condition
-        condition: pretending_S2M11_is_receptor  # condition specified in `avg_escape`
-        stat: receptor affinity_median  # statisti used for mutation effects
-        positive_color: "#0072B2"  # dark blue
-        negative_color: "#D55E00"  # red
-        max_at_least: 1
-        fixed_min: -3  # specify either `min_at_least` or `fixed_min`
-        init_min_value: -10  # initial min value in slider
-        le_filters:  # only keep entries with indicated column is <= indicated value
-          receptor affinity_std: 2
+    mock receptor affinity:
+      csv: results/receptor_affinity/averages/pretending_S2M11_is_receptor_mut_effect.csv
+      stat: receptor affinity_median
+      positive_color: "#0072B2"  # dark blue
+      negative_color: "#D55E00"  # red
+      max_at_least: 1
+      fixed_min: -3  # specify either `min_at_least` or `fixed_min`
+      init_min_value: -10  # initial min value in slider
+      le_filters:  # only keep entries with indicated column is <= indicated value
+        receptor affinity_std: 2
   mutation_annotation_sliders:  # optional key
     # sliders based on mutation annotations (also added as tooltips)
     nt changes to codon:
@@ -65,10 +63,10 @@ summary_of_just_entry_and_binding:
   init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
   init_site_escape_stat: mean  # initially show site escape as this statistic
   antibody_escape: {}
-  func_effects:  # effects of mutations on function
-    spike mediated entry:  # name of functional selection
-      condition: 293T_ACE2_entry  # condition specified in `avg_func_effects`
-      effect_type: func_effects  # "func_effects" or "latent_effects"
+  other_phenotypes:
+    spike mediated entry:
+      csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
+      stat: effect  # column in CSV with value
       positive_color: "#009E73"  # green
       negative_color: "#F0E442"  # yellow
       fixed_max: 2  # specify either `max_at_least` or `fixed_max`
@@ -76,15 +74,13 @@ summary_of_just_entry_and_binding:
       init_min_value: -3  # initial min value in slider
       le_filters:  # only keep entries with indicated column is <= indicated value
         effect_std: 2
-  other_assays:  # other assays that we show, empty dict if no assays being shown
-    receptor_affinity:  # assay type
-      mock receptor affinity:  # name of particular assay condition
-        condition: pretending_S2M11_is_receptor  # condition specified in `avg_escape`
-        stat: receptor affinity_median  # statisti used for mutation effects
-        positive_color: "#0072B2"  # dark blue
-        negative_color: "#D55E00"  # red
-        max_at_least: 1
-        fixed_min: -3  # specify either `min_at_least` or `fixed_min`
-        init_min_value: -10  # initial min value in slider
-        le_filters:  # only keep entries with indicated column is <= indicated value
-          receptor affinity_std: 2
+    mock receptor affinity:  # name of particular assay condition
+      csv: results/receptor_affinity/averages/pretending_S2M11_is_receptor_mut_effect.csv
+      stat: receptor affinity_median  # statisti used for mutation effects
+      positive_color: "#0072B2"  # dark blue
+      negative_color: "#D55E00"  # red
+      max_at_least: 1
+      fixed_min: -3  # specify either `min_at_least` or `fixed_min`
+      init_min_value: -10  # initial min value in slider
+      le_filters:  # only keep entries with indicated column is <= indicated value
+        receptor affinity_std: 2

@@ -1,7 +1,9 @@
 # CHANGELOG
 
-#### version 3.10.1
+#### version 3.11.0
+- Allow more customization of summary plots, such as by specifying CSVs explicitly. This is a **backward-incompatible** change in how specify the YAML configuration for the summary plots, in that now the CSV file is specified and all non-escape phenotypes are grouped together rather than as separate keys.
 - Fix bug in summary plot line plot zooming. Now sites in line plot are always aligned with overlay bar prior to zooming, and missing sites are shown empty. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/124).
+- Fix bug in setting of limits in summary plots with `min_at_least`.
 
 ### version 3.10.0
 - Remove the titles and legends from interactive figures (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/121)). These were not really being used, and with the new VitePress option that is a better way to provide detailed information around figures. This change:

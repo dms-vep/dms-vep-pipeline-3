@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.10.1
+- Fix bug in summary plot line plot zooming. Now sites in line plot are always aligned with overlay bar prior to zooming, and missing sites are shown empty. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/124).
+
 ### version 3.10.0
 - Remove the titles and legends from interactive figures (see [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/121)). These were not really being used, and with the new VitePress option that is a better way to provide detailed information around figures. This change:
   - removes the `title` and `legend` keys associated with various figures and plots in the configuration YAMLs.

@@ -22,6 +22,12 @@ You'll need to install the Javascript packages used to build and develop the [Vi
 conda install -c conda-forge nodejs
 ```
 
+Alternatively, if you're working on `Rhino` at FHCC, you can load node as a module:
+
+```bash
+ml nodejs/20.9.0-GCCcore-13.2.0
+```
+
 You'll need to make a `package.json` file to tell `npm` which packages to install. Copy the `package.json` file from `dms-vep-pipeline-3` into the root (top level) of your project directory and run the following command to install the necessary Javascript packages:
 
 ```bash

@@ -1,6 +1,9 @@
 # Building a Custom Homepage
 
-If you're a fancy person who likes pretty things, you might feel the urge to improve the [default documentation](https://dms-vep.org/dms-vep-pipeline-3/). Below, you'll find instructions for building and deploying your own custom [VitePress](https://vitepress.dev/) website to give your documentation some [pizazz](https://dms-vep.org/Nipah_Malaysia_RBP_DMS/)! The default documentation will still be available at a different URL ([see details below](#overview)).
+To make the results more accessible, you can improve the [default documentation](https://dms-vep.org/dms-vep-pipeline-3/) of the pipeline.
+Below, you'll find instructions for building and deploying your own custom [VitePress](https://vitepress.dev/) website where you can customize the display and show key plots and data more clearly.
+[Here is an example](https://dms-vep.org/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS) of such a page.
+The default documentation will still be available at a different URL ([see details below](#overview)).
 
 ## Overview
 
@@ -217,3 +220,24 @@ The code above will render the `Altair` plot `htmls/REGN10933_mut_effect.html` i
 ## Switching the GitHub Pages source
 
 Now that you're happy with the content of your new [VitePress](https://vitepress.dev/) site, you can make it public and show the world. Currently, GitHub Pages is still hosting the original documentation located in the `docs/` directory. However, your [VitePress](https://vitepress.dev/) site is being built in a `gh-pages` branch by GitHub Actions each time you push to the `main` branch. By switching the GitHub Pages *source* from the `docs/` directory to the `gh-pages` branch, GitHub Pages will begin serving the [VitePress](https://vitepress.dev/)site instead of the original documentation. But don't worry! Your original documentation will still be available on the new [VitePress](https://vitepress.dev/) site in a tab on the top of the page called `appendix`.
+
+## Adding Google Analytics
+If you want to add Google Analytics to your site, you can do this to see how many people have visited it.
+To do this, first you need to use your Google account to create a Google Analytics tag.
+Once you have done that, you can add it to the `.vitepress/config.mts` file as indicated below (in that example, `G-P7HL8Q4F41` is the Google Analytics tag; you will get a different tag when you create yours:
+
+      head: [
+        [
+          "script",
+          { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-P7HL8Q4F41" }
+        ],
+        [
+          "script",
+          {},
+          `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag("js", new Date());
+          gtag("config", "G-P7HL8Q4F41");`
+        ]
+      ],
+  themeConfig: {

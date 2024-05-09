@@ -128,5 +128,7 @@ Note the first time you set up the repo, you have to run:
 
 ## Configuring a custom homepage
 
-You can configure a custom homepage for your project with the static site generator [VitePress](https://vitepress.dev/). Check out Brendan Larsen's [nicely styled homepage](https://dms-vep.org/Nipah_Malaysia_RBP_DMS/) as an example. Detailed instructions for adding a homepage to your project are located [here](homepage/README.md).
+You can configure a custom homepage for your project with the static site generator [VitePress](https://vitepress.dev/), which can allow you to make a much nicer looking homepage.
+Check out this [nicely styled homepage](https://dms-vep.org/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS) as an example.
+Detailed instructions for adding a homepage to your project are located [here](homepage/README.md).
 Note if you use this option you will need to manually edit the relevant markdown files as described in the instructions, and set GitHub Pages to serve from the `gh-pages` branch rather than from the `docs` folder (which has the automatically built documentation).

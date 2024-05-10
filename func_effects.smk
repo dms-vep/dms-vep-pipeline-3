@@ -246,6 +246,7 @@ rule func_effect_diffs:
     output:
         diffs="results/func_effect_diffs/{comparison}_diffs.csv",
         chart="results/func_effect_diffs/{comparison}_diffs.html",
+        corr_chart="results/func_effect_diffs/{comparison}_diffs_corr.html",
         nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
     params:
         params_yaml=lambda wc, input: yaml.round_trip_dump(
@@ -268,6 +269,7 @@ rule func_effect_diffs:
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p diffs_csv {output.diffs} \
             -p chart_html {output.chart} \
+            -p corr_chart_html {output.corr_chart} \
             -y '{params.params_yaml}' \
             &> {log}
         """
@@ -288,6 +290,11 @@ if func_effect_diffs:
         "Interactive plots of differences in functional effects between conditions"
     ] = {
         c: rules.func_effect_diffs.output.chart.format(comparison=c)
+        for c in func_effect_diffs
+    } | {
+        f"{c} correlation chart": rules.func_effect_diffs.output.corr_chart.format(
+            comparison=c
+        )
         for c in func_effect_diffs
     }
 

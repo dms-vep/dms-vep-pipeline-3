@@ -311,3 +311,9 @@
   --vp-font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+/* Make the default content larger when there is no sidebar */
+
+.VPDoc:not(.has-sidebar) .content {
+  max-width: 1200px !important;
+}

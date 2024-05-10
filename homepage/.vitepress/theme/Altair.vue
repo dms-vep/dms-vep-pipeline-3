@@ -24,8 +24,8 @@ export default {
         };
     },
 
-    mounted() {
-        this.loadChart(this.specUrl);
+    async mounted() {
+        await this.loadChart(this.specUrl);
     },
 
     methods: {
@@ -79,7 +79,7 @@ export default {
                 vegaLite,
                 actions: false,
             }).then((result) => {
-                // Handle the rendered view here (optional)
+                console.log('Chart rendered successfully');
             }).catch(console.error);
         },
         // Toggle the expanded view
@@ -141,5 +141,23 @@ export default {
 
 .bi {
     font-size: 20px;
+}
+
+/* Form container */
+.vega-bindings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.vega-bind-name {
+    flex-basis: 20%;
+    text-align: left;
+    font-weight: bold;
+}
+
+input[type="radio"] {
+    margin: 5px 5px 0px 10px;
 }
 </style>

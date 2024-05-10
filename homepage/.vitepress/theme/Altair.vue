@@ -160,4 +160,15 @@ export default {
 input[type="radio"] {
     margin: 5px 5px 0px 10px;
 }
+
+input[type="select"] {
+    margin: 5px 5px 0px 10px;
+    border: 2px solid #aaa !important;
+    border-radius: 10px;
+}
+
+input[type="select"] option {
+    text-align: center;
+    font-size: 14px;
+}
 </style>

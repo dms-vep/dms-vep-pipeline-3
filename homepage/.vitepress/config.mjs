@@ -7,6 +7,7 @@ export default defineConfig({
   description:
     "Data, figures, and analysis for `dms-vep-pipeline-3` test example.",
   base: "/dms-vep-pipeline-3/",
+  appearance: false,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [

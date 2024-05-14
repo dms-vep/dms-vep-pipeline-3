@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.13.0
+- Add replicate scatter plots in the notebooks that average mutation effects. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/137).
+
 ### version 3.12.0
 - Make nicer version of the scatter plot produced by `func_effect_diffs` that compares the functional effects in the two conditions, and save it to the default docs.
 

@@ -109,6 +109,7 @@ export default {
     padding: 20px;
     position: relative;
     background-color: white;
+    line-height: 0%;
 }
 
 .vega-chart-container:not(.no-box-shadow) {

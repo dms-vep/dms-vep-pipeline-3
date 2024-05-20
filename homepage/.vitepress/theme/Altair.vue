@@ -109,6 +109,7 @@ export default {
     padding: 20px;
     position: relative;
     background-color: white;
+    line-height: 0%;
 }
 
 .vega-chart-container:not(.no-box-shadow) {
@@ -155,20 +156,22 @@ export default {
     flex-basis: 20%;
     text-align: left;
     font-weight: bold;
+    margin-right: 5px;
 }
 
-input[type="radio"] {
-    margin: 5px 5px 0px 10px;
+.vega-bindings select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    text-align: center;
 }
 
-input[type="select"] {
-    margin: 5px 5px 0px 10px;
-    border: 2px solid #aaa !important;
-    border-radius: 10px;
-}
-
-input[type="select"] option {
+.vega-bindings input[type="select"] option {
     text-align: center;
     font-size: 14px;
+}
+
+.vega-bindings input[type="radio"] {
+    margin: 5px 5px 0px 10px;
 }
 </style>

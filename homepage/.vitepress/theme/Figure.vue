@@ -14,15 +14,13 @@ export default {
 </script>
 
 <template>
-    <p>
     <figure>
         <img v-if="imageSrc" :src="imageSrc" :alt="caption" />
         <slot v-else></slot>
         <figcaption>{{ caption }}</figcaption>
     </figure>
-    </p>
 </template>
-  
+
 <style scoped>
 figcaption {
     color: grey;

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.14.0
+- Add option to use pre-computed barcode counts (`use_precomputed_barcode_counts`) so pipeline can be entirely run from pre-calculated barcode-variant table and barcode counts within repo. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/141).
+
 ### version 3.13.0
 - Add replicate scatter plots in the notebooks that average mutation effects. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/137).
 

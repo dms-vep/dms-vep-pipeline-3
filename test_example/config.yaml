@@ -112,6 +112,11 @@ codon_variants: results/variants/codon_variants.csv
 
 barcode_runs: data/barcode_runs.csv # Illumina barcode runs, set to null if no runs
 
+# If the repo already includes the barcode counts tracked, and you just want to use
+# those and **not** recompute by processing the FASTQ files in `barcode_runs`, set
+# this to `true`.
+use_precomputed_barcode_counts: false
+
 # keyword parameters for `dms_variants.illuminabarcodeparser.IlluminaBarcodeParser`
 # https://jbloomlab.github.io/dms_variants/dms_variants.illuminabarcodeparser.html#dms_variants.illuminabarcodeparser.IlluminaBarcodeParser
 illumina_barcode_parser_params:

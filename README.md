@@ -65,7 +65,7 @@ Note in order for things to work properly you need to correctly set the `pipelin
 
 The `config.yaml` must then contain additional keys as explained in [test_example/config.yaml](test_example/config.yaml).
 The pipeline can in principle perform many types of analyses, including building codon-variant tables from PacBio sequencing, counting barcodes from experiments,  analyzing the functional effects of mutations, analyzing antibody escape, etc. Each of these steps is included in a separate file (eg, [build_variants.smk](build_variants.smk), [count_variants.smk](count_variants.smk), etc) that are included in the main [Snakefile](Snakefile).
-As detailed in [config.yaml](config.yaml), you do not have to perform all of these depending on how you structure the configuration.
+As detailed in [test_example/config.yaml](test_example/config.yaml), you do not have to perform all of these depending on how you structure the configuration.
 Analyses other than the codon-variant building and barcode counting each have their own YAML configuration which you should place in your `./data/` subdirectory.
 For examples, see [test_example/data/func_effects_config.yml](test_example/data/func_effects_config.yml), [test_example/data/antibody_escape_config.yml](test_example/data/antibody_escape_config.yml), etc.
 Note that these files will be easier to understand if you first familiarize yourself with the YAML language including the merge (`<<`), alias (`&`), and anchor (`*`) operators.
@@ -77,6 +77,22 @@ So if you want other files or outputs for any of your custom rules to be rendere
 
 Your top-level repo also needs to have an appropriate `.gitignore` file that specifies which results to include and which not to include (we don't include them all or it would be too much to track).
 A template `.gitignore` file is at [test_example/.gitignore](test_example/.gitignore).
+
+## Re-running the pipeline without the FASTQ files
+The pipeline can perform the entire analysis starting with the FASTQ files holding the results of the PacBio sequencing (used to build the barcode-variant lookup table) and the Illumina sequencing (used to count the barcodes) to the final processed results.
+However, these FASTQ files are typically very large and so are **not** tracked in the GitHub repo but need to be stored somewhere else like on a computing cluster, either at the locations they were originally generated or (for secondary use) where they were downloaded from the NCB Sequence Read Archive (SRA).
+The locations of those files are specifed in the `pacbio_runs` and `barcode_runs` CSV files indicated in the `config.yaml`, and will be specific to the configuration of the computing cluster for which the pipeline is being run since the files are too large to store within a GitHub repo.
+
+However, for many re-use purposes, secondary users do not really need to re-process the FASTQ files are the barcode counting and barcode-variant lookup table construction are fairly simple, and secondary users may just be happy to use the lookup table and counts generated from prior processing of the FASTQ files.
+If you are using a repo where these counts and the barcode-variant lookup table are already computed and stored in the repo, you can then just start with those and avoid having to handle the FASTQ files at all.
+To do that, you set the following options in the configuration YAML (`config.yaml`) as follows:
+
+    prebuilt_variants: results/variants/codon_variants.csv  # use codon-variant table already in repo
+    prebuilt_geneseq: results/gene_sequence/codon.fasta  # use gene sequence already in repo
+    ...
+    use_precomputed_barcode_counts: false  # use barcode counts already in repo
+
+Then running the repo will no longer require any FASTQ files, and will juse utilize the precomputed variants and counts from those files stored in the repo.
 
 ## Setting up the pipeline as a submodule
 To add [dms-vep-pipeline-3](https://github.com/dms-vep/dms-vep-pipeline-3) as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) in your repo (`<my_dms_repo>`), do as follows.

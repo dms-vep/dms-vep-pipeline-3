@@ -55,13 +55,16 @@ jobs:
           && snakemake -s ../Snakefile -j 2
           && cd ..
 
-      - name: run pipeline with prebuilt variants
+      - name: run pipeline with prebuilt variants and counts
         shell: bash -el {0}
         run: >
           rm -rf docs
           && cd test_example
-          && rm -rf results
-          && snakemake -s ../Snakefile -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/gene_sequence/codon.fasta
+          && cd results
+          && rm -rf antibody_escape func_effect_diffs func_effect_shifts summaries func_effects func_scores receptor_affinity
+          && cd ..
+          && rm -rf sequencing_data
+          && snakemake -s ../Snakefile -j 2 --config prebuilt_variants=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/variants/codon_variants.csv prebuilt_geneseq=https://raw.githubusercontent.com/dms-vep/dms-vep-pipeline-3/main/test_example/results/gene_sequence/codon.fasta use_precomputed_barcode_counts=true
           && cd ..
 
       - name: Upload log files in case of error

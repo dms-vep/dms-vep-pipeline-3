@@ -7,24 +7,36 @@ count_variants_docs = {
 }
 
 
-rule count_barcodes:
-    """Count barcodes for each sample."""
-    input:
-        fastq_R1=lambda wc: barcode_runs.set_index("sample").at[wc.sample, "fastq_R1"],
-        variants=config["codon_variants"],
-    output:
-        counts="results/barcode_counts/{sample}_counts.csv",
-        invalid="results/barcode_counts/{sample}_invalid.csv",
-        fates="results/barcode_counts/{sample}_fates.csv",
-    params:
-        parser_params=config["illumina_barcode_parser_params"],
-        library=lambda wc: sample_to_library[wc.sample],
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/count_barcodes_{sample}.txt",
-    script:
-        "scripts/count_barcodes.py"
+if config["use_precomputed_barcode_counts"]:
+    for sample in barcode_runs["sample"]:
+        countsfile = f"results/barcode_counts/{sample}_counts.csv"
+        if not os.path.isfile(countsfile):
+            raise OSError(
+                f"`use_precomputed_barcode_counts` is True, but no file {countsfile}"
+            )
+
+else:
+
+    rule count_barcodes:
+        """Count barcodes for each sample."""
+        input:
+            fastq_R1=lambda wc: barcode_runs.set_index("sample").at[
+                wc.sample, "fastq_R1"
+            ],
+            variants=config["codon_variants"],
+        output:
+            counts="results/barcode_counts/{sample}_counts.csv",
+            invalid="results/barcode_counts/{sample}_invalid.csv",
+            fates="results/barcode_counts/{sample}_fates.csv",
+        params:
+            parser_params=config["illumina_barcode_parser_params"],
+            library=lambda wc: sample_to_library[wc.sample],
+        conda:
+            "environment.yml"
+        log:
+            "results/logs/count_barcodes_{sample}.txt",
+        script:
+            "scripts/count_barcodes.py"
 
 
 for sample in barcode_runs["sample"]:
@@ -37,9 +49,16 @@ for sample in barcode_runs["sample"]:
 rule analyze_variant_counts:
     """Analysis of the counts of variants."""
     input:
-        expand(rules.count_barcodes.output.counts, sample=barcode_runs["sample"]),
-        expand(rules.count_barcodes.output.invalid, sample=barcode_runs["sample"]),
-        expand(rules.count_barcodes.output.fates, sample=barcode_runs["sample"]),
+        expand(
+            "results/barcode_counts/{sample}_counts.csv", sample=barcode_runs["sample"]
+        ),
+        expand(
+            "results/barcode_counts/{sample}_invalid.csv",
+            sample=barcode_runs["sample"],
+        ),
+        expand(
+            "results/barcode_counts/{sample}_fates.csv", sample=barcode_runs["sample"]
+        ),
         config["gene_sequence_codon"],
         config["codon_variants"],
         config["site_numbering_map"],
@@ -58,9 +77,10 @@ rule analyze_variant_counts:
         "papermill {input.nb} {output.nb} &> {log}"
 
 
-count_variants_docs["Analysis notebooks"][
-    "Analysis of variant counts"
-] = rules.analyze_variant_counts.output.nb
+if not config["use_precomputed_barcode_counts"]:
+    count_variants_docs["Analysis notebooks"][
+        "Analysis of variant counts"
+    ] = rules.analyze_variant_counts.output.nb
 
 
 docs["Count barcodes for variants"] = count_variants_docs

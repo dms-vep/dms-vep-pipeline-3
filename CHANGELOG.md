@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.14.1
+- Make change in version 3.14.0 backward compatible by assuming `use_precomputed_barcode_counts` is `False` if not specified.
+
 ### version 3.14.0
 - Add option to use pre-computed barcode counts (`use_precomputed_barcode_counts`) so pipeline can be entirely run from pre-calculated barcode-variant table and barcode counts within repo. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/141).
 

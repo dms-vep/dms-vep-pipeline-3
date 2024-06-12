@@ -7,7 +7,10 @@ count_variants_docs = {
 }
 
 
-if config["use_precomputed_barcode_counts"]:
+if (
+    "use_precomputed_barcode_counts" in config
+    and config["use_precomputed_barcode_counts"]
+):
     for sample in barcode_runs["sample"]:
         countsfile = f"results/barcode_counts/{sample}_counts.csv"
         if not os.path.isfile(countsfile):
@@ -77,7 +80,10 @@ rule analyze_variant_counts:
         "papermill {input.nb} {output.nb} &> {log}"
 
 
-if not config["use_precomputed_barcode_counts"]:
+if (
+    "use_precomputed_barcode_counts" in config
+    and not config["use_precomputed_barcode_counts"]
+):
     count_variants_docs["Analysis notebooks"][
         "Analysis of variant counts"
     ] = rules.analyze_variant_counts.output.nb

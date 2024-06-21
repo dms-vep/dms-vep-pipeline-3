@@ -20,7 +20,7 @@ dependencies:
   - minimap2=2.26
   - nbstripout
   - openpyxl
-  - pandas=2.1 # required because of https://github.com/matsengrp/multidms/issues/128
+  - pandas
   - papermill=2.4
   - pip
   - plotnine=0.12
@@ -37,6 +37,6 @@ dependencies:
       - baltic==0.2.2
       - dms_variants==1.4.3
       - dmslogo==0.7.0
-      - multidms==0.2.1
+      - multidms==0.3.3
       - neutcurve==1.1.2
       - polyclonal==6.11

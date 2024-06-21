@@ -55,6 +55,13 @@ jobs:
           && snakemake -s ../Snakefile -j 2
           && cd ..
 
+      - name: compare results to expected
+        shell: bash -el {0}
+        run: >
+          cd test_example
+          && python compare_results_to_expected.py
+          && cd ..
+
       - name: run pipeline with prebuilt variants and counts
         shell: bash -el {0}
         run: >

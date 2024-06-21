@@ -18,10 +18,10 @@ dependencies:
   - matplotlib=3.8
   - minimap2=2.26
   - nbstripout
-  - numpy<2  # can be removed after this fixed https://github.com/nteract/papermill/issues/800
+  - numpy<2  # pinned due to this issue: https://github.com/nteract/papermill/issues/800
   - openpyxl
   - pandas=2.2
-  - papermill=2.4
+  - papermill=2.6
   - pip
   - plotnine=0.12
   - pyarrow

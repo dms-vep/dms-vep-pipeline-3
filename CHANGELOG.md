@@ -1,5 +1,15 @@
 # CHANGELOG
 
+### version 3.15.0
+- Update some packages in `conda` env (fixes [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/144)):
+  - `pandas` to 2.2
+  - `multidms` to 0.3.3
+  - `altair` to 5.3
+  - `snakemake` to 8.14
+  - `neutcurve` to 2.1
+  - `papermill` to 2.6
+- Added test that compares actual results to expected ones for `test_example` better testing of pipeline updates.
+
 #### version 3.14.1
 - Make change in version 3.14.0 backward compatible by assuming `use_precomputed_barcode_counts` is `False` if not specified.
 

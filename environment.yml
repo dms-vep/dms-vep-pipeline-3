@@ -6,21 +6,21 @@ channels:
   - defaults
 
 dependencies:
-  - altair=5.2.0
+  - altair=5.3
   - biopython=1.83
   - black-jupyter
   - entrez-direct=16.2
   - flatdict=4.0
   - git-lfs
-  - ipywidgets # required because of https://github.com/matsengrp/multidms/issues/114
   - jupyterlab
   - mafft=7.525
   - markdown=3.4
   - matplotlib=3.8
   - minimap2=2.26
   - nbstripout
+  - numpy<2  # can be removed after this fixed https://github.com/nteract/papermill/issues/800
   - openpyxl
-  - pandas
+  - pandas=2.2
   - papermill=2.4
   - pip
   - plotnine=0.12
@@ -30,7 +30,7 @@ dependencies:
   - ruff
   - seaborn=0.13
   - snakefmt
-  - snakemake=8.3
+  - snakemake=8.14
   - upsetplot=0.8
   - pip:
       - alignparse==0.6.2
@@ -38,5 +38,5 @@ dependencies:
       - dms_variants==1.4.3
       - dmslogo==0.7.0
       - multidms==0.3.3
-      - neutcurve==1.1.2
+      - neutcurve==2.1
       - polyclonal==6.11

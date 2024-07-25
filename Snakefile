@@ -45,18 +45,14 @@ dup_fastq_R1 = (
     )
     .query("n_samples > 1")
 )
-if "duplicate_fastq_R1" in config:
-    duplicate_fastq_R1 = config["duplicate_fastq_R1"]
-else:
-    duplicate_fastq_R1 = "raise"
-if duplicate_fastq_R1 == "raise":
+if ("duplicate_fastq_R1" not in config) or (config["duplicate_fastq_R1"] == "error"):
     if len(dup_fastq_R1):
         raise ValueError(f"Some FASTQs assigned to multiple samples:\n{dup_fastq_R1}")
-elif duplicate_fastq_R1 == "warn":
+elif config["duplicate_fastq_R1"] == "warn":
     if len(dup_fastq_R1):
         warnings.warn(f"Some FASTQs assigned to multiple samples:\n{dup_fastq_R1}")
-elif duplicate_fastq_R1 != "ignore":
-    raise ValueError(f"invalid {duplicate_fastq_R1=}")
+elif config["duplicate_fastq_R1"] != "ignore":
+    raise ValueError(f"invalid {config['duplicate_fastq_R1']=}")
 
 if len(barcode_runs) > 0:
     # make sure barcode run samples start with <library>-<YYMMDD>-

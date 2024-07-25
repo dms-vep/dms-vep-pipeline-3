@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.16.0
+- Add `duplicate_fastq_R1` flag to `config.yaml` to allow the user to specify what happens if a FASTQ is duplicated among samples. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/147).
+
 ### version 3.15.0
 - Update some packages in `conda` env (fixes [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/144)):
   - `pandas` to 2.2

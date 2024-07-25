@@ -112,6 +112,11 @@ codon_variants: results/variants/codon_variants.csv
 
 barcode_runs: data/barcode_runs.csv # Illumina barcode runs, set to null if no runs
 
+# `duplicate_fastq_R1` specifies what to do if the same FASTQ is specified for multiple
+# samples in `barcode_runs`. Options are "error", "warn", or "ignore". If you
+# do not specifying `duplicate_fastq_R1` in this configuration, it defaults to "error".
+duplicate_fastq_R1: error
+
 # If the repo already includes the barcode counts tracked, and you just want to use
 # those and **not** recompute by processing the FASTQ files in `barcode_runs`, set
 # this to `true`.

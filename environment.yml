@@ -3,7 +3,6 @@ name: dms-vep-pipeline-3
 channels:
   - conda-forge
   - bioconda
-  - defaults
 
 dependencies:
   - altair=5.3

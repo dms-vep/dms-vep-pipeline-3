@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.16.2
+- Remove `defaults` channel from `environment.yml`. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/151).
+
 #### version 3.16.1
 - Update to `polyclonal` 6.12 in order to work with latest `binarymap`; otherwise the update to the newest `binarymap` version caused error.
 

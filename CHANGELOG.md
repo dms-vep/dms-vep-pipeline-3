@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.16.3
+- Update `snakemake`, `altair`, and `upsetplot` versions in `environment.yml`.
+
 #### version 3.16.2
 - Remove `defaults` channel from `environment.yml`. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/151).
 

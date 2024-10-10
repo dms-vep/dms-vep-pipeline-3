@@ -5,7 +5,7 @@ channels:
   - bioconda
 
 dependencies:
-  - altair=5.3
+  - altair=5.4
   - biopython=1.83
   - black-jupyter
   - entrez-direct=16.2
@@ -29,8 +29,8 @@ dependencies:
   - ruff
   - seaborn=0.13
   - snakefmt
-  - snakemake=8.14
-  - upsetplot=0.8
+  - snakemake=8.20.6
+  - upsetplot=0.9
   - pip:
       - alignparse==0.6.2
       - baltic==0.2.2

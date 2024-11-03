@@ -37,7 +37,7 @@ def process_nested_docs_dict(d, github_blob_url):
             elif ext == ".html" and not gz:
                 d_links[key] = f"htmls/{base}.html"
                 processed_f = os.path.join(config["docs"], d_links[key])
-            elif ext in [".csv", ".fasta", ".fa"]:
+            elif ext in [".csv", ".fasta", ".fa", ".json"]:
                 d_links[key] = os.path.join(github_blob_url, val)
             else:
                 raise ValueError(

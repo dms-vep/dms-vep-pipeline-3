@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.17.0
+- Allow JSON (`*.json`) files to be listed in the auto-rendered DOCS in the same way CSV and FASTA files can. Useful for linking to `dms-viz` JSONs.
+
 #### version 3.16.3
 - Update `snakemake`, `altair`, and `upsetplot` versions in `environment.yml`.
 

@@ -25,6 +25,7 @@ summary_of_all_phenotypes:
       antibody_list:  # antibody name followed by CSV with data for antibody
         S2M-11: results/antibody_escape/averages/S2M11_mut_effect.csv
         REGN10933: results/antibody_escape/averages/REGN10933_mut_effect.csv
+      no_heatmap: True  # optional argument, do not show heatmap for this antibody set
   other_phenotypes:  # list other phenotypes to plot, empty dict if no other phenotypes
     spike mediated entry:
       csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
@@ -36,6 +37,7 @@ summary_of_all_phenotypes:
       init_min_value: -3  # initial min value in slider
       le_filters:  # only keep entries with indicated column is <= indicated value
         effect_std: 2
+      no_heatmap: True  # optional argument, do not show heatmap for this phenotype
     mock receptor affinity:
       csv: results/receptor_affinity/averages/pretending_S2M11_is_receptor_mut_effect.csv
       stat: receptor affinity_median

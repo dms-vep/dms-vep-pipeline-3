@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.18.0
+- Add `no_heatmap` option to `summaries_config` to not show some heatmaps. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/155).
+
 ### version 3.17.0
 - Allow JSON (`*.json`) files to be listed in the auto-rendered DOCS in the same way CSV and FASTA files can. Useful for linking to `dms-viz` JSONs.
 

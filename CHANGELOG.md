@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.19.0
+- The `func_effects_global_epistasis` notebooks now make plots showing correlation between mutation effects inferred for mutations by the global epistasis model versus the average effects of these mutations among all single-mutant variants. This helps with evaluating questions like [this](https://github.com/dms-vep/dms-vep-pipeline-3/issues/158) about whether single mutant estimates are being affected by the global epistasis model.
+
 ### version 3.18.0
 - Add `no_heatmap` option to `summaries_config` to not show some heatmaps. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/155).
 

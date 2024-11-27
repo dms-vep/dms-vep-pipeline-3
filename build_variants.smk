@@ -87,8 +87,9 @@ else:
                 rules.align_parse_PacBio_ccs.output.outdir,
                 pacbioRun=pacbio_runs["run"],
             ),
-            config["pacbio_amplicon"],
-            config["pacbio_amplicon_specs"],
+            pacbio_amplicon=config["pacbio_amplicon"],
+            pacbio_amplicon_specs=config["pacbio_amplicon_specs"],
+            pacbio_runs_csv=config["pacbio_runs"],
             nb=os.path.join(
                 config["pipeline_path"], "notebooks/analyze_pacbio_ccs.ipynb"
             ),
@@ -100,13 +101,19 @@ else:
         log:
             "results/logs/analyze_pacbio_ccs.txt",
         shell:
-            "papermill {input.nb} {output.nb} &> {log}"
+            """
+            papermill {input.nb} {output.nb} \
+                -p pacbio_amplicon {input.pacbio_amplicon} \
+                -p pacbio_amplicon_specs {input.pacbio_amplicon_specs} \
+                -p pacbio_runs_csv {input.pacbio_runs_csv} \
+                &> {log}
+            """
 
     rule build_pacbio_consensus:
         """Build PacBio consensus sequences for barcodes."""
         input:
             rules.analyze_pacbio_ccs.output.csv,
-            config["gene_sequence_codon"],
+            gene_sequence_codon=config["gene_sequence_codon"],
             nb=os.path.join(
                 config["pipeline_path"], "notebooks/build_pacbio_consensus.ipynb"
             ),
@@ -114,38 +121,59 @@ else:
             nt_variants="results/variants/nt_variants.csv",
             nb="results/notebooks/build_pacbio_consensus.ipynb",
         params:
-            config["max_ccs_error_rate"],
-            config["consensus_params"],
+            max_error_rate=config["max_ccs_error_rate"],
+            params_yaml=yaml_str(
+                {
+                    "consensus_params": config["consensus_params"],
+                    "variant_tags": config["variant_tags"],
+                }
+            ),
         conda:
             "environment.yml"
         log:
             "results/logs/build_pacbio_consensus.txt",
         shell:
-            "papermill {input.nb} {output.nb} &> {log}"
+            """
+            papermill {input.nb} {output.nb} \
+                -p gene_sequence_codon {input.gene_sequence_codon} \
+                -p max_error_rate {params.max_error_rate} \
+                -y "{params.params_yaml}" \
+                &> {log}
+            """
 
     rule build_codon_variants:
         """Build codon-variant table."""
         input:
             rules.build_pacbio_consensus.output.nt_variants,
-            config["gene_sequence_codon"],
-            config["gene_sequence_protein"],
-            config["site_numbering_map"],
-            config["mutation_design_classification"]["csv"],
-            config["neut_standard_barcodes"],
+            gene_sequence_codon=config["gene_sequence_codon"],
+            gene_sequence_protein=config["gene_sequence_protein"],
+            site_numbering_map_csv=config["site_numbering_map"],
+            neut_standard_barcodes=config["neut_standard_barcodes"],
+            mutation_design_classification_csv=config["mutation_design_classification"]["csv"],
             nb=os.path.join(
                 config["pipeline_path"], "notebooks/build_codon_variants.ipynb"
             ),
         output:
-            config["codon_variants"],
+            codon_variants=config["codon_variants"],
             nb="results/notebooks/build_codon_variants.ipynb",
         params:
-            config["mutation_design_classification"],
+            mutation_design_classification_site_col=config["mutation_design_classification"]["site_col"],
         conda:
             "environment.yml"
         log:
             "results/logs/build_codon_variants.txt",
         shell:
-            "papermill {input.nb} {output.nb} &> {log}"
+            """
+            papermill {input.nb} {output.nb} \
+                -p gene_sequence_codon {input.gene_sequence_codon} \
+                -p gene_sequence_protein {input.gene_sequence_protein} \
+                -p site_numbering_map_csv {input.site_numbering_map_csv} \
+                -p neut_standard_barcodes {input.neut_standard_barcodes} \
+                -p mutation_design_classification_csv {input.mutation_design_classification_csv} \
+                -p mutation_design_classification_site_col {params.mutation_design_classification_site_col} \
+                -p codon_variants {output.codon_variants} \
+                &> {log}
+            """
 
     build_variants_docs["Analysis notebooks"] = {
         "Analysis of PacBio CCSs": rules.analyze_pacbio_ccs.output.nb,

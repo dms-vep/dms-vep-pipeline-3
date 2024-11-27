@@ -62,10 +62,10 @@ rule analyze_variant_counts:
         expand(
             "results/barcode_counts/{sample}_fates.csv", sample=barcode_runs["sample"]
         ),
-        config["gene_sequence_codon"],
-        config["codon_variants"],
-        config["site_numbering_map"],
-        config["barcode_runs"],
+        gene_sequence_codon=config["gene_sequence_codon"],
+        codon_variants=config["codon_variants"],
+        site_numbering_map_csv=config["site_numbering_map"],
+        barcode_runs_csv=config["barcode_runs"],
         nb=os.path.join(
             config["pipeline_path"],
             "notebooks/analyze_variant_counts.ipynb",
@@ -77,7 +77,14 @@ rule analyze_variant_counts:
     log:
         "results/logs/analyze_variant_counts.txt",
     shell:
-        "papermill {input.nb} {output.nb} &> {log}"
+        """
+        papermill {input.nb} {output.nb} \
+            -p barcode_runs_csv {input.barcode_runs_csv} \
+            -p site_numbering_map_csv {input.site_numbering_map_csv} \
+            -p codon_variants {input.codon_variants} \
+            -p gene_sequence_codon {input.gene_sequence_codon} \
+            &> {log}
+        """
 
 
 if (

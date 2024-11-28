@@ -7538,8 +7538,6 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">numpy</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="kn">import</span> <span class="nn">yaml</span>
 </pre></div>
 </div>
 </div>
@@ -7567,11 +7565,11 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Read configuration:</p>
+<p>The next cell is tagged as <code>parameters</code> for <code>papermill</code> parameterization:</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6aa10c89-ae3b-43da-a707-a6bef3d454d6">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_parameters" id="cell-id=6aa10c89-ae3b-43da-a707-a6bef3d454d6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7579,11 +7577,28 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># If you are running notebook interactively rather than in pipeline that handles</span>
-<span class="c1"># working directories, you may have to first `os.chdir` to appropriate directory.</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"config.yaml"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">barcode_runs_csv</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">site_numbering_map_csv</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">codon_variants</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">gene_sequence_codon</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=ee1a9d9a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">barcode_runs_csv</span> <span class="o">=</span> <span class="s2">"data/barcode_runs.csv"</span>
+<span class="n">site_numbering_map_csv</span> <span class="o">=</span> <span class="s2">"data/site_numbering_map.csv"</span>
+<span class="n">codon_variants</span> <span class="o">=</span> <span class="s2">"results/variants/codon_variants.csv"</span>
+<span class="n">gene_sequence_codon</span> <span class="o">=</span> <span class="s2">"results/gene_sequence/codon.fasta"</span>
 </pre></div>
 </div>
 </div>
@@ -7605,14 +7620,12 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># read the barcode runs and get the samples</span>
 <span class="n">barcode_runs</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"barcode_runs"</span><span class="p">],</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"date"</span><span class="p">])[</span>
-        <span class="p">[</span><span class="s2">"sample"</span><span class="p">,</span> <span class="s2">"library"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">]</span>
-    <span class="p">]</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">barcode_runs_csv</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"date"</span><span class="p">])[[</span><span class="s2">"sample"</span><span class="p">,</span> <span class="s2">"library"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">]]</span>
     <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"date"</span><span class="p">,</span> <span class="s2">"sample"</span><span class="p">])</span>
     <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">))</span>
 <span class="p">)</span>
@@ -7632,12 +7645,12 @@ a.anchor-link {
     <span class="p">)</span>
 
 <span class="c1"># read the site numbering map</span>
-<span class="n">site_numbering_map</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"site_numbering_map"</span><span class="p">])</span>
+<span class="n">site_numbering_map</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">site_numbering_map_csv</span><span class="p">)</span>
 
 <span class="c1"># create the codon-variant table</span>
 <span class="n">variants</span> <span class="o">=</span> <span class="n">dms_variants</span><span class="o">.</span><span class="n">codonvarianttable</span><span class="o">.</span><span class="n">CodonVariantTable</span><span class="p">(</span>
-    <span class="n">barcode_variant_file</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s2">"codon_variants"</span><span class="p">],</span>
-    <span class="n">geneseq</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">Bio</span><span class="o">.</span><span class="n">SeqIO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"gene_sequence_codon"</span><span class="p">],</span> <span class="s2">"fasta"</span><span class="p">)</span><span class="o">.</span><span class="n">seq</span><span class="p">),</span>
+    <span class="n">barcode_variant_file</span><span class="o">=</span><span class="n">codon_variants</span><span class="p">,</span>
+    <span class="n">geneseq</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">Bio</span><span class="o">.</span><span class="n">SeqIO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">gene_sequence_codon</span><span class="p">,</span> <span class="s2">"fasta"</span><span class="p">)</span><span class="o">.</span><span class="n">seq</span><span class="p">),</span>
     <span class="n">allowgaps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">substitutions_are_codon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">primary_target</span><span class="o">=</span><span class="s2">"gene"</span><span class="p">,</span>
@@ -7660,7 +7673,7 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_73369/1611673446.py:3: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+<pre>/tmp/ipykernel_23994/3779474405.py:3: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
 </pre>
 </div>
 </div>
@@ -7682,7 +7695,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span>
@@ -7740,23 +7753,23 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-8454c680db294cf9a0bf697dbcbb90bf.vega-embed {
+  #altair-viz-711c408a731149d4af3e73a2c6b7ea72.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-8454c680db294cf9a0bf697dbcbb90bf.vega-embed details,
-  #altair-viz-8454c680db294cf9a0bf697dbcbb90bf.vega-embed details summary {
+  #altair-viz-711c408a731149d4af3e73a2c6b7ea72.vega-embed details,
+  #altair-viz-711c408a731149d4af3e73a2c6b7ea72.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-8454c680db294cf9a0bf697dbcbb90bf"></div>
+<div id="altair-viz-711c408a731149d4af3e73a2c6b7ea72"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-8454c680db294cf9a0bf697dbcbb90bf") {
-      outputDiv = document.getElementById("altair-viz-8454c680db294cf9a0bf697dbcbb90bf");
+    if (outputDiv.id !== "altair-viz-711c408a731149d4af3e73a2c6b7ea72") {
+      outputDiv = document.getElementById("altair-viz-711c408a731149d4af3e73a2c6b7ea72");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -7825,7 +7838,7 @@ Invalid counts mean parseable barcodes that nonetheless don't map to our library
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># merge valid and invalid counts</span>
@@ -7882,26 +7895,26 @@ Invalid counts mean parseable barcodes that nonetheless don't map to our library
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-f5926980ddf8452da2f1c8f4de54c726.vega-embed {
+  #altair-viz-f5c9fe96ebe7462994caa27610e3fd0e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-f5926980ddf8452da2f1c8f4de54c726.vega-embed details,
-  #altair-viz-f5926980ddf8452da2f1c8f4de54c726.vega-embed details summary {
+  #altair-viz-f5c9fe96ebe7462994caa27610e3fd0e.vega-embed details,
+  #altair-viz-f5c9fe96ebe7462994caa27610e3fd0e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-f5926980ddf8452da2f1c8f4de54c726"></div>
+<div id="altair-viz-f5c9fe96ebe7462994caa27610e3fd0e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f5926980ddf8452da2f1c8f4de54c726") {
-      outputDiv = document.getElementById("altair-viz-f5926980ddf8452da2f1c8f4de54c726");
+    if (outputDiv.id !== "altair-viz-f5c9fe96ebe7462994caa27610e3fd0e") {
+      outputDiv = document.getElementById("altair-viz-f5c9fe96ebe7462994caa27610e3fd0e");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -7970,7 +7983,7 @@ If so, that is a likely sign of contamination.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">invalid_rank</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span>
@@ -8030,23 +8043,23 @@ If so, that is a likely sign of contamination.</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-3ea4eb7feed045a68144bd0fc0409676.vega-embed {
+  #altair-viz-d430bf4278454faf9ef9d3e84398af9a.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-3ea4eb7feed045a68144bd0fc0409676.vega-embed details,
-  #altair-viz-3ea4eb7feed045a68144bd0fc0409676.vega-embed details summary {
+  #altair-viz-d430bf4278454faf9ef9d3e84398af9a.vega-embed details,
+  #altair-viz-d430bf4278454faf9ef9d3e84398af9a.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-3ea4eb7feed045a68144bd0fc0409676"></div>
+<div id="altair-viz-d430bf4278454faf9ef9d3e84398af9a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3ea4eb7feed045a68144bd0fc0409676") {
-      outputDiv = document.getElementById("altair-viz-3ea4eb7feed045a68144bd0fc0409676");
+    if (outputDiv.id !== "altair-viz-d430bf4278454faf9ef9d3e84398af9a") {
+      outputDiv = document.getElementById("altair-viz-d430bf4278454faf9ef9d3e84398af9a");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8105,7 +8118,7 @@ Here are top invalid barcodes:
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8157,7 +8170,7 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">avg_counts_by_target</span> <span class="o">=</span> <span class="n">variants</span><span class="o">.</span><span class="n">avgCountsPerVariant</span><span class="p">(</span><span class="n">libraries</span><span class="o">=</span><span class="n">variants</span><span class="o">.</span><span class="n">libraries</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
@@ -8202,26 +8215,26 @@ Plot the average counts per variant of each target type:</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-50447998cd8440a4b13a703bb37df8a5.vega-embed {
+  #altair-viz-ee1d42e247dc423d94eb7072f3b4f1db.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-50447998cd8440a4b13a703bb37df8a5.vega-embed details,
-  #altair-viz-50447998cd8440a4b13a703bb37df8a5.vega-embed details summary {
+  #altair-viz-ee1d42e247dc423d94eb7072f3b4f1db.vega-embed details,
+  #altair-viz-ee1d42e247dc423d94eb7072f3b4f1db.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-50447998cd8440a4b13a703bb37df8a5"></div>
+<div id="altair-viz-ee1d42e247dc423d94eb7072f3b4f1db"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-50447998cd8440a4b13a703bb37df8a5") {
-      outputDiv = document.getElementById("altair-viz-50447998cd8440a4b13a703bb37df8a5");
+    if (outputDiv.id !== "altair-viz-ee1d42e247dc423d94eb7072f3b4f1db") {
+      outputDiv = document.getElementById("altair-viz-ee1d42e247dc423d94eb7072f3b4f1db");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8289,7 +8302,7 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">target_fracs</span> <span class="o">=</span> <span class="p">(</span>
@@ -8345,32 +8358,32 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_73369/2559734165.py:2: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
-/tmp/ipykernel_73369/2559734165.py:7: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+<pre>/tmp/ipykernel_23994/2559734165.py:2: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+/tmp/ipykernel_23994/2559734165.py:7: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-82e0110a00bb43928eba58c4be49ebac.vega-embed {
+  #altair-viz-56531506c28b4347a2898755806bdbce.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-82e0110a00bb43928eba58c4be49ebac.vega-embed details,
-  #altair-viz-82e0110a00bb43928eba58c4be49ebac.vega-embed details summary {
+  #altair-viz-56531506c28b4347a2898755806bdbce.vega-embed details,
+  #altair-viz-56531506c28b4347a2898755806bdbce.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-82e0110a00bb43928eba58c4be49ebac"></div>
+<div id="altair-viz-56531506c28b4347a2898755806bdbce"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-82e0110a00bb43928eba58c4be49ebac") {
-      outputDiv = document.getElementById("altair-viz-82e0110a00bb43928eba58c4be49ebac");
+    if (outputDiv.id !== "altair-viz-56531506c28b4347a2898755806bdbce") {
+      outputDiv = document.getElementById("altair-viz-56531506c28b4347a2898755806bdbce");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8445,7 +8458,7 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">diversity_measures</span> <span class="o">=</span> <span class="p">{</span>
@@ -8512,31 +8525,31 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_73369/3311838074.py:10: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+<pre>/tmp/ipykernel_23994/3311838074.py:10: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-991ed80a13f14a05856bfb609990b9b9.vega-embed {
+  #altair-viz-115011bd888a4ad18a3d9a02873f9d1f.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-991ed80a13f14a05856bfb609990b9b9.vega-embed details,
-  #altair-viz-991ed80a13f14a05856bfb609990b9b9.vega-embed details summary {
+  #altair-viz-115011bd888a4ad18a3d9a02873f9d1f.vega-embed details,
+  #altair-viz-115011bd888a4ad18a3d9a02873f9d1f.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-991ed80a13f14a05856bfb609990b9b9"></div>
+<div id="altair-viz-115011bd888a4ad18a3d9a02873f9d1f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-991ed80a13f14a05856bfb609990b9b9") {
-      outputDiv = document.getElementById("altair-viz-991ed80a13f14a05856bfb609990b9b9");
+    if (outputDiv.id !== "altair-viz-115011bd888a4ad18a3d9a02873f9d1f") {
+      outputDiv = document.getElementById("altair-viz-115011bd888a4ad18a3d9a02873f9d1f");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8604,7 +8617,7 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">avg_muts</span> <span class="o">=</span> <span class="p">(</span>
@@ -8655,26 +8668,26 @@ Plot the average counts per variant of each target type:</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-3c9a7b1e20d046f595e44e9e85ea3a53.vega-embed {
+  #altair-viz-29f3fbd7ffb040759d7bcfe72a362823.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-3c9a7b1e20d046f595e44e9e85ea3a53.vega-embed details,
-  #altair-viz-3c9a7b1e20d046f595e44e9e85ea3a53.vega-embed details summary {
+  #altair-viz-29f3fbd7ffb040759d7bcfe72a362823.vega-embed details,
+  #altair-viz-29f3fbd7ffb040759d7bcfe72a362823.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-3c9a7b1e20d046f595e44e9e85ea3a53"></div>
+<div id="altair-viz-29f3fbd7ffb040759d7bcfe72a362823"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-3c9a7b1e20d046f595e44e9e85ea3a53") {
-      outputDiv = document.getElementById("altair-viz-3c9a7b1e20d046f595e44e9e85ea3a53");
+    if (outputDiv.id !== "altair-viz-29f3fbd7ffb040759d7bcfe72a362823") {
+      outputDiv = document.getElementById("altair-viz-29f3fbd7ffb040759d7bcfe72a362823");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8742,7 +8755,7 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Get site mutation frequencies in wide form to make it as compact as possible.</span>
@@ -8789,14 +8802,14 @@ Plot the average counts per variant of each target type:</p>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_73369/2757082629.py:9: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+<pre>/tmp/ipykernel_23994/2757082629.py:9: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_73369/2757082629.py:17: FutureWarning: The default value of observed=False is deprecated and will change to observed=True in a future version of pandas. Specify observed=False to silence this warning and retain the current behavior
+<pre>/tmp/ipykernel_23994/2757082629.py:17: FutureWarning: The default value of observed=False is deprecated and will change to observed=True in a future version of pandas. Specify observed=False to silence this warning and retain the current behavior
 </pre>
 </div>
 </div>
@@ -8819,7 +8832,7 @@ Note that you can select which libraries or dates to show with the dropdown box 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">site_freqs_chart</span> <span class="o">=</span> <span class="p">(</span>
@@ -8882,26 +8895,26 @@ Note that you can select which libraries or dates to show with the dropdown box 
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-d66624b9620d4b19b8c7ab1c590a6b6a.vega-embed {
+  #altair-viz-e34242603cdb4661bf6ee319ad65b76f.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d66624b9620d4b19b8c7ab1c590a6b6a.vega-embed details,
-  #altair-viz-d66624b9620d4b19b8c7ab1c590a6b6a.vega-embed details summary {
+  #altair-viz-e34242603cdb4661bf6ee319ad65b76f.vega-embed details,
+  #altair-viz-e34242603cdb4661bf6ee319ad65b76f.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d66624b9620d4b19b8c7ab1c590a6b6a"></div>
+<div id="altair-viz-e34242603cdb4661bf6ee319ad65b76f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d66624b9620d4b19b8c7ab1c590a6b6a") {
-      outputDiv = document.getElementById("altair-viz-d66624b9620d4b19b8c7ab1c590a6b6a");
+    if (outputDiv.id !== "altair-viz-e34242603cdb4661bf6ee319ad65b76f") {
+      outputDiv = document.getElementById("altair-viz-e34242603cdb4661bf6ee319ad65b76f");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",

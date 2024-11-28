@@ -149,7 +149,9 @@ else:
             gene_sequence_protein=config["gene_sequence_protein"],
             site_numbering_map_csv=config["site_numbering_map"],
             neut_standard_barcodes=config["neut_standard_barcodes"],
-            mutation_design_classification_csv=config["mutation_design_classification"]["csv"],
+            mutation_design_classification_csv=config[
+                "mutation_design_classification"
+            ]["csv"],
             nb=os.path.join(
                 config["pipeline_path"], "notebooks/build_codon_variants.ipynb"
             ),
@@ -157,7 +159,9 @@ else:
             codon_variants=config["codon_variants"],
             nb="results/notebooks/build_codon_variants.ipynb",
         params:
-            mutation_design_classification_site_col=config["mutation_design_classification"]["site_col"],
+            mutation_design_classification_site_col=config[
+                "mutation_design_classification"
+            ]["site_col"],
         conda:
             "environment.yml"
         log:

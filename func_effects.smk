@@ -77,9 +77,7 @@ rule analyze_func_scores:
     output:
         nb="results/notebooks/analyze_func_scores.ipynb",
     params:
-        func_scores=yaml_str(
-            {"selections": func_effects_config["func_scores"]}
-        ),
+        func_scores=yaml_str({"selections": func_effects_config["func_scores"]}),
     conda:
         "environment.yml"
     log:
@@ -333,9 +331,7 @@ rule func_effect_shifts:
         shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
         nb="results/notebooks/func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml_str(
-            {"params": func_effect_shifts[wc.comparison]}
-        ),
+        params_yaml=lambda wc: yaml_str({"params": func_effect_shifts[wc.comparison]}),
     threads: 1
     conda:
         "environment.yml"

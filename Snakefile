@@ -16,6 +16,10 @@ import ruamel.yaml as yaml
 configfile: "config.yaml"
 
 
+# include utility functions
+include: "funcs.smk"
+
+
 # Read the barcode runs
 barcode_run_req_cols = ["sample", "library", "date", "fastq_R1"]
 if config["barcode_runs"] is None:

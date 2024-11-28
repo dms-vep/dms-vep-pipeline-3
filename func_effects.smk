@@ -2,7 +2,7 @@
 
 # read the config for func effects
 with open(config["func_effects_config"]) as f:
-    func_effects_config = yaml.safe_load(f)
+    func_effects_config = yaml.YAML(typ="safe", pure=True).load(f)
 
 # get configuration for functional scores and make sure all samples defined
 func_scores = func_effects_config["func_scores"]
@@ -76,12 +76,16 @@ rule analyze_func_scores:
         nb=os.path.join(config["pipeline_path"], "notebooks/analyze_func_scores.ipynb"),
     output:
         nb="results/notebooks/analyze_func_scores.ipynb",
+    params:
+        func_scores=yaml_str({"selections": func_effects_config["func_scores"]}),
     conda:
         "environment.yml"
     log:
         "results/logs/analyze_func_scores.txt",
     shell:
-        "papermill {input.nb} {output.nb} &> {log}"
+        """
+        papermill {input.nb} {output.nb} -y "{params.func_scores}" &> {log}
+        """
 
 
 func_effects_docs["Analysis notebooks"][
@@ -101,7 +105,7 @@ rule func_effects_global_epistasis:
         func_effects="results/func_effects/by_selection/{selection}_func_effects.csv",
         nb="results/notebooks/func_effects_global_epistasis_{selection}.ipynb",
     params:
-        global_epistasis_params_yaml=lambda wc: yaml.round_trip_dump(
+        global_epistasis_params_yaml=lambda wc: yaml_str(
             {
                 "global_epistasis_params": func_scores[wc.selection][
                     "global_epistasis_params"
@@ -157,7 +161,7 @@ rule avg_func_effects:
         functional_html="results/func_effects/averages/{condition}_func_effects.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects.html",
     params:
-        params_yaml=lambda wc, input: yaml.round_trip_dump(
+        params_yaml=lambda wc, input: yaml_str(
             {
                 "params": func_effects_config["avg_func_effects"][wc.condition],
                 "mutation_annotations_csv": (
@@ -249,7 +253,7 @@ rule func_effect_diffs:
         corr_chart="results/func_effect_diffs/{comparison}_diffs_corr.html",
         nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml.round_trip_dump(
+        params_yaml=lambda wc, input: yaml_str(
             {
                 "params": func_effect_diffs[wc.comparison],
                 "mutation_annotations_csv": (
@@ -327,9 +331,7 @@ rule func_effect_shifts:
         shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
         nb="results/notebooks/func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc: yaml.round_trip_dump(
-            {"params": func_effect_shifts[wc.comparison]}
-        ),
+        params_yaml=lambda wc: yaml_str({"params": func_effect_shifts[wc.comparison]}),
     threads: 1
     conda:
         "environment.yml"
@@ -380,7 +382,7 @@ rule avg_func_effect_shifts:
         shifts_html="results/func_effect_shifts/averages/{comparison}_shifts.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml.round_trip_dump(
+        params_yaml=lambda wc, input: yaml_str(
             {
                 "params": avg_func_effect_shifts[wc.comparison],
                 "mutation_annotations_csv": (

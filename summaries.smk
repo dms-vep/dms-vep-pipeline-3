@@ -2,7 +2,7 @@
 
 # read the config for the summaries
 with open(config["summaries_config"]) as f:
-    summaries_config = yaml.safe_load(f)
+    summaries_config = yaml.YAML(typ="safe", pure=True).load(f)
 
 
 rule summary:
@@ -35,7 +35,7 @@ rule summary:
         per_antibody_escape_csv="results/summaries/{summary}_per_antibody_escape.csv",
         nb="results/notebooks/summary_{summary}.ipynb",
     params:
-        yaml=lambda wc, input: yaml.round_trip_dump(
+        yaml=lambda wc, input: yaml_str(
             {
                 "config": (
                     summaries_config[wc.summary]

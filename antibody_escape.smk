@@ -7,7 +7,7 @@ Note that these rules can analyze arbitrary assays. Throughout the workflow, the
 
 # read the config for antibody escape
 with open(config["antibody_escape_config"]) as f:
-    antibody_escape_config = yaml.safe_load(f)
+    antibody_escape_config = yaml.YAML(typ="safe", pure=True).load(f)
 
 # get configuration for any antibody escape or receptor affinity selections
 assays = antibody_escape_config["assays"]
@@ -126,7 +126,7 @@ rule fit_escape:
         pickle="results/{assay}/by_selection/{selection}_polyclonal_model.pickle",
         nb="results/notebooks/fit_escape_{assay}_{selection}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml.round_trip_dump(
+        params_yaml=lambda wc, input: yaml_str(
             {
                 "params": assay_selections[wc.assay][wc.selection],
                 "neut_standard_frac_csvs": list(input.neut_standard_fracs),
@@ -202,7 +202,7 @@ rule avg_escape:
         icXX_html="results/{assay}/averages/{antibody}_mut_icXX.html",
         nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml.round_trip_dump(
+        params_yaml=lambda wc, input: yaml_str(
             {
                 "params": avg_assay_config[wc.assay][wc.antibody],
                 "prob_escape_mean_csvs": list(input.prob_escape_means),

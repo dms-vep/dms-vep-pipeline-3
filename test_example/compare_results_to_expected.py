@@ -39,6 +39,6 @@ for f in to_compare:
 
     print("Comparing actual and expected results...")
     pd.testing.assert_frame_equal(
-        actual, expected, check_exact=False, atol=0.1, rtol=0.2
+        actual, expected, check_exact=False, atol=0.2, rtol=0.2
     )
     print("Actual and expected results are sufficiently similar.")

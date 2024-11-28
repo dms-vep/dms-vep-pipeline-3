@@ -7546,8 +7546,6 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">import</span> <span class="nn">scipy.stats</span>
-
-<span class="kn">import</span> <span class="nn">yaml</span>
 </pre></div>
 </div>
 </div>
@@ -7574,11 +7572,11 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Get configuration information:</p>
+<p>The next cell is tagged <code>parameters</code> for <code>papermill</code> parameterization:</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=67f63ece-f250-4e81-bdde-e03b8ce6b072">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_parameters" id="cell-id=67f63ece-f250-4e81-bdde-e03b8ce6b072">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7586,11 +7584,37 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># If you are running notebook interactively rather than in pipeline that handles</span>
-<span class="c1"># working directories, you may have to first `os.chdir` to appropriate directory.</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"config.yaml"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">gene_sequence_codon</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">max_error_rate</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">consensus_params</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">variant_tags</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=5aca5ba3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">consensus_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"max_sub_diffs"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"max_indel_diffs"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"max_minor_sub_frac"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s2">"max_minor_indel_frac"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s2">"min_support"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">variant_tags</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"variant_tag5"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"variant_1"</span><span class="p">:</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"variant_2"</span><span class="p">:</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"wildtype"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">},</span>
+    <span class="s2">"variant_tag3"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"variant_1"</span><span class="p">:</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"variant_2"</span><span class="p">:</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"wildtype"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="n">gene_sequence_codon</span> <span class="o">=</span> <span class="s2">"results/gene_sequence/codon.fasta"</span>
+<span class="n">max_error_rate</span> <span class="o">=</span> <span class="mf">0.0001</span>
 </pre></div>
 </div>
 </div>
@@ -7612,7 +7636,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">aligned_ccs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
@@ -7640,10 +7664,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">geneseq</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Bio</span><span class="o">.</span><span class="n">SeqIO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">"gene_sequence_codon"</span><span class="p">],</span> <span class="s2">"fasta"</span><span class="p">)</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">geneseq</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Bio</span><span class="o">.</span><span class="n">SeqIO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">gene_sequence_codon</span><span class="p">,</span> <span class="s2">"fasta"</span><span class="p">)</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Read gene of length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">geneseq</span><span class="p">)</span><span class="si">}</span><span class="s2"> nucleotides"</span><span class="p">)</span>
 </pre></div>
@@ -7680,12 +7704,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">variant_tags</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"variant_tags"</span><span class="p">]</span>
-
-<span class="k">if</span> <span class="ow">not</span> <span class="n">variant_tags</span><span class="p">:</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">variant_tags</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"No variant tags specified, so cannot look for strand exchange"</span><span class="p">)</span>
 
 <span class="k">else</span><span class="p">:</span>
@@ -7810,23 +7832,23 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-4068e99fcd214b4880a29b9ccb0de115.vega-embed {
+  #altair-viz-535c7693b55e427a84fbcfb63f4f66e1.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-4068e99fcd214b4880a29b9ccb0de115.vega-embed details,
-  #altair-viz-4068e99fcd214b4880a29b9ccb0de115.vega-embed details summary {
+  #altair-viz-535c7693b55e427a84fbcfb63f4f66e1.vega-embed details,
+  #altair-viz-535c7693b55e427a84fbcfb63f4f66e1.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-4068e99fcd214b4880a29b9ccb0de115"></div>
+<div id="altair-viz-535c7693b55e427a84fbcfb63f4f66e1"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4068e99fcd214b4880a29b9ccb0de115") {
-      outputDiv = document.getElementById("altair-viz-4068e99fcd214b4880a29b9ccb0de115");
+    if (outputDiv.id !== "altair-viz-535c7693b55e427a84fbcfb63f4f66e1") {
+      outputDiv = document.getElementById("altair-viz-535c7693b55e427a84fbcfb63f4f66e1");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -7902,12 +7924,10 @@ There are 110245 after filtering.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">max_error_rate</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"max_ccs_error_rate"</span><span class="p">]</span>  <span class="c1"># require error rate &lt;= this to keep CCS</span>
-
-<span class="n">log10_error_floor</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7</span>  <span class="c1"># error rates less than this set to this for plotting</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">log10_error_floor</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7</span>  <span class="c1"># error rates less than this set to this for plotting</span>
 <span class="n">log10_error_ceil</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>  <span class="c1"># error rates greater than this set to this for plotting</span>
 <span class="n">nbins</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># bins for cumulative fraction plot</span>
 
@@ -7981,7 +8001,7 @@ There are 110245 after filtering.
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_68136/2211512034.py:22: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+<pre>/tmp/ipykernel_15192/3008351338.py:20: DeprecationWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
   .apply(
 </pre>
 </div>
@@ -7990,23 +8010,23 @@ There are 110245 after filtering.
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-fed90bfbfa78474ca857efdd114d6a4a.vega-embed {
+  #altair-viz-e9f21e70ee57421181a7730ca1a4d745.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-fed90bfbfa78474ca857efdd114d6a4a.vega-embed details,
-  #altair-viz-fed90bfbfa78474ca857efdd114d6a4a.vega-embed details summary {
+  #altair-viz-e9f21e70ee57421181a7730ca1a4d745.vega-embed details,
+  #altair-viz-e9f21e70ee57421181a7730ca1a4d745.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-fed90bfbfa78474ca857efdd114d6a4a"></div>
+<div id="altair-viz-e9f21e70ee57421181a7730ca1a4d745"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fed90bfbfa78474ca857efdd114d6a4a") {
-      outputDiv = document.getElementById("altair-viz-fed90bfbfa78474ca857efdd114d6a4a");
+    if (outputDiv.id !== "altair-viz-e9f21e70ee57421181a7730ca1a4d745") {
+      outputDiv = document.getElementById("altair-viz-e9f21e70ee57421181a7730ca1a4d745");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8074,7 +8094,7 @@ There are 110245 after filtering.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">aligned_ccs</span><span class="p">)</span><span class="si">}</span><span class="s2"> CCSs before accuracy filtering."</span><span class="p">)</span>
@@ -8117,7 +8137,7 @@ After filtering 69089 CCSs remain.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">deltosubs</span> <span class="o">=</span> <span class="n">alignparse</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">InFrameDeletionsToSubs</span><span class="p">(</span><span class="n">geneseq</span><span class="p">)</span>
@@ -8151,7 +8171,7 @@ After filtering 69089 CCSs remain.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Number of CCSs with in-frame deletions:"</span><span class="p">)</span>
@@ -8242,7 +8262,7 @@ After filtering 69089 CCSs remain.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">aligned_ccs</span> <span class="o">=</span> <span class="n">alignparse</span><span class="o">.</span><span class="n">consensus</span><span class="o">.</span><span class="n">add_mut_info_cols</span><span class="p">(</span>
@@ -8274,7 +8294,7 @@ The empirical accuracy is the estimated accuracy of each <strong>individual</str
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># compute empirical accuracies</span>
@@ -8344,23 +8364,23 @@ The empirical accuracy is the estimated accuracy of each <strong>individual</str
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-eed5b124dd454075b33f1980034c92ba.vega-embed {
+  #altair-viz-3da1950e48994747a27bd74f52baa395.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-eed5b124dd454075b33f1980034c92ba.vega-embed details,
-  #altair-viz-eed5b124dd454075b33f1980034c92ba.vega-embed details summary {
+  #altair-viz-3da1950e48994747a27bd74f52baa395.vega-embed details,
+  #altair-viz-3da1950e48994747a27bd74f52baa395.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-eed5b124dd454075b33f1980034c92ba"></div>
+<div id="altair-viz-3da1950e48994747a27bd74f52baa395"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-eed5b124dd454075b33f1980034c92ba") {
-      outputDiv = document.getElementById("altair-viz-eed5b124dd454075b33f1980034c92ba");
+    if (outputDiv.id !== "altair-viz-3da1950e48994747a27bd74f52baa395") {
+      outputDiv = document.getElementById("altair-viz-3da1950e48994747a27bd74f52baa395");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8406,7 +8426,7 @@ The empirical accuracy is the estimated accuracy of each <strong>individual</str
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-b62275eddd38b05a10a7fae012fd5aae"}, "mark": {"type": "point", "filled": true, "size": 75}, "encoding": {"facet": {"columns": 2, "field": "pacbioRun", "title": null, "type": "nominal"}, "tooltip": [{"field": "accuracy", "format": ".3f", "type": "quantitative"}], "x": {"field": "accuracy", "scale": {"domain": [0, 1]}, "type": "quantitative"}, "y": {"axis": {"title": null}, "field": "label", "type": "nominal"}}, "height": 65, "width": 225, "$schema": "https://vega.github.io/schema/vega-lite/v5.15.1.json", "datasets": {"data-b62275eddd38b05a10a7fae012fd5aae": [{"accuracy": 0.6191715830117281, "label": "allow indels, 10x accuracy", "pacbioRun": "LibA-211105"}, {"accuracy": 0.611883114637495, "label": "allow indels, 10x accuracy", "pacbioRun": "LibA-220124"}, {"accuracy": 0.629204776505031, "label": "allow indels, 10x accuracy", "pacbioRun": "LibB-211105"}, {"accuracy": 0.6258557729249916, "label": "allow indels, 10x accuracy", "pacbioRun": "LibB-220124"}, {"accuracy": 0.5684094929967887, "label": "allow indels", "pacbioRun": "LibA-211105"}, {"accuracy": 0.5768001456984069, "label": "allow indels", "pacbioRun": "LibA-220124"}, {"accuracy": 0.579847037250383, "label": "allow indels", "pacbioRun": "LibB-211105"}, {"accuracy": 0.5872083946255138, "label": "allow indels", "pacbioRun": "LibB-220124"}, {"accuracy": 0.6763188707671077, "label": "no indels, 10x accuracy", "pacbioRun": "LibA-211105"}, {"accuracy": 0.6694914381512977, "label": "no indels, 10x accuracy", "pacbioRun": "LibA-220124"}, {"accuracy": 0.692679314794901, "label": "no indels, 10x accuracy", "pacbioRun": "LibB-211105"}, {"accuracy": 0.685658624661104, "label": "no indels, 10x accuracy", "pacbioRun": "LibB-220124"}, {"accuracy": 0.672779341667269, "label": "no indels", "pacbioRun": "LibA-211105"}, {"accuracy": 0.6691727524474641, "label": "no indels", "pacbioRun": "LibA-220124"}, {"accuracy": 0.6875171962723595, "label": "no indels", "pacbioRun": "LibB-211105"}, {"accuracy": 0.6838693397002019, "label": "no indels", "pacbioRun": "LibB-220124"}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "data": {"name": "data-da2ee145a034013af32675fe6cc27c8e"}, "mark": {"type": "point", "filled": true, "size": 75}, "encoding": {"facet": {"columns": 2, "field": "pacbioRun", "title": null, "type": "nominal"}, "tooltip": [{"field": "accuracy", "format": ".3f", "type": "quantitative"}], "x": {"field": "accuracy", "scale": {"domain": [0, 1]}, "type": "quantitative"}, "y": {"axis": {"title": null}, "field": "label", "type": "nominal"}}, "height": 65, "width": 225, "$schema": "https://vega.github.io/schema/vega-lite/v5.15.1.json", "datasets": {"data-da2ee145a034013af32675fe6cc27c8e": [{"accuracy": 0.6191715830118556, "label": "allow indels, 10x accuracy", "pacbioRun": "LibA-211105"}, {"accuracy": 0.6118831146374941, "label": "allow indels, 10x accuracy", "pacbioRun": "LibA-220124"}, {"accuracy": 0.629204776505444, "label": "allow indels, 10x accuracy", "pacbioRun": "LibB-211105"}, {"accuracy": 0.6258557729249776, "label": "allow indels, 10x accuracy", "pacbioRun": "LibB-220124"}, {"accuracy": 0.56840949299676, "label": "allow indels", "pacbioRun": "LibA-211105"}, {"accuracy": 0.5768001456984069, "label": "allow indels", "pacbioRun": "LibA-220124"}, {"accuracy": 0.5798470372503519, "label": "allow indels", "pacbioRun": "LibB-211105"}, {"accuracy": 0.5872083946259969, "label": "allow indels", "pacbioRun": "LibB-220124"}, {"accuracy": 0.6763188707673501, "label": "no indels, 10x accuracy", "pacbioRun": "LibA-211105"}, {"accuracy": 0.6694914381513499, "label": "no indels, 10x accuracy", "pacbioRun": "LibA-220124"}, {"accuracy": 0.6926793147947425, "label": "no indels, 10x accuracy", "pacbioRun": "LibB-211105"}, {"accuracy": 0.685658624660989, "label": "no indels, 10x accuracy", "pacbioRun": "LibB-220124"}, {"accuracy": 0.6727793416673498, "label": "no indels", "pacbioRun": "LibA-211105"}, {"accuracy": 0.669172752447564, "label": "no indels", "pacbioRun": "LibA-220124"}, {"accuracy": 0.6875171962725048, "label": "no indels", "pacbioRun": "LibB-211105"}, {"accuracy": 0.683869339700143, "label": "no indels", "pacbioRun": "LibB-220124"}]}}, {"mode": "vega-lite"});
 </script>
 </div>
 </div>
@@ -8433,11 +8453,11 @@ We also compute a few other metrics of diversity:</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># required CCSs per barcode to call consensus below</span>
-<span class="n">min_support</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"consensus_params"</span><span class="p">][</span><span class="s2">"min_support"</span><span class="p">]</span>
+<span class="n">min_support</span> <span class="o">=</span> <span class="n">consensus_params</span><span class="p">[</span><span class="s2">"min_support"</span><span class="p">]</span>
 
 
 <span class="c1"># number of counts for each library / barcode</span>
@@ -8519,23 +8539,23 @@ We also compute a few other metrics of diversity:</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-43ec5108975a42c6bb57f1f27a9ac660.vega-embed {
+  #altair-viz-9bf80539464d4abf8773fce0a96e5004.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-43ec5108975a42c6bb57f1f27a9ac660.vega-embed details,
-  #altair-viz-43ec5108975a42c6bb57f1f27a9ac660.vega-embed details summary {
+  #altair-viz-9bf80539464d4abf8773fce0a96e5004.vega-embed details,
+  #altair-viz-9bf80539464d4abf8773fce0a96e5004.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-43ec5108975a42c6bb57f1f27a9ac660"></div>
+<div id="altair-viz-9bf80539464d4abf8773fce0a96e5004"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-43ec5108975a42c6bb57f1f27a9ac660") {
-      outputDiv = document.getElementById("altair-viz-43ec5108975a42c6bb57f1f27a9ac660");
+    if (outputDiv.id !== "altair-viz-9bf80539464d4abf8773fce0a96e5004") {
+      outputDiv = document.getElementById("altair-viz-9bf80539464d4abf8773fce0a96e5004");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8589,23 +8609,23 @@ We also compute a few other metrics of diversity:</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-c1a686ce14ca4332acd3bb4e588a8303.vega-embed {
+  #altair-viz-75277a14f2cd4bd891f5f017e8d5e1f0.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-c1a686ce14ca4332acd3bb4e588a8303.vega-embed details,
-  #altair-viz-c1a686ce14ca4332acd3bb4e588a8303.vega-embed details summary {
+  #altair-viz-75277a14f2cd4bd891f5f017e8d5e1f0.vega-embed details,
+  #altair-viz-75277a14f2cd4bd891f5f017e8d5e1f0.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-c1a686ce14ca4332acd3bb4e588a8303"></div>
+<div id="altair-viz-75277a14f2cd4bd891f5f017e8d5e1f0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-c1a686ce14ca4332acd3bb4e588a8303") {
-      outputDiv = document.getElementById("altair-viz-c1a686ce14ca4332acd3bb4e588a8303");
+    if (outputDiv.id !== "altair-viz-75277a14f2cd4bd891f5f017e8d5e1f0") {
+      outputDiv = document.getElementById("altair-viz-75277a14f2cd4bd891f5f017e8d5e1f0");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8674,11 +8694,10 @@ Note the stats for barcodes and CCSs look different, because there are uneven nu
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># get parameters for building consensus</span>
-<span class="n">consensus_params</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"consensus_params"</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="s2">"Building consensus sequences with following settings</span><span class="se">\n</span><span class="s2">  "</span>
     <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">  "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">consensus_params</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
@@ -8779,23 +8798,23 @@ Note the stats for barcodes and CCSs look different, because there are uneven nu
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-58599de2da4e422781207f4d2eeae8c6.vega-embed {
+  #altair-viz-c479d9ca5ab649158084e35020ecee66.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-58599de2da4e422781207f4d2eeae8c6.vega-embed details,
-  #altair-viz-58599de2da4e422781207f4d2eeae8c6.vega-embed details summary {
+  #altair-viz-c479d9ca5ab649158084e35020ecee66.vega-embed details,
+  #altair-viz-c479d9ca5ab649158084e35020ecee66.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-58599de2da4e422781207f4d2eeae8c6"></div>
+<div id="altair-viz-c479d9ca5ab649158084e35020ecee66"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-58599de2da4e422781207f4d2eeae8c6") {
-      outputDiv = document.getElementById("altair-viz-58599de2da4e422781207f4d2eeae8c6");
+    if (outputDiv.id !== "altair-viz-c479d9ca5ab649158084e35020ecee66") {
+      outputDiv = document.getElementById("altair-viz-c479d9ca5ab649158084e35020ecee66");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
@@ -8863,7 +8882,7 @@ Note the stats for barcodes and CCSs look different, because there are uneven nu
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># annotate with information on mutation types</span>
@@ -8930,23 +8949,23 @@ Note the stats for barcodes and CCSs look different, because there are uneven nu
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-24fd7fcefe294361820847845d963f39.vega-embed {
+  #altair-viz-ec0bb01415884d85a4ef3334ebcf93a5.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-24fd7fcefe294361820847845d963f39.vega-embed details,
-  #altair-viz-24fd7fcefe294361820847845d963f39.vega-embed details summary {
+  #altair-viz-ec0bb01415884d85a4ef3334ebcf93a5.vega-embed details,
+  #altair-viz-ec0bb01415884d85a4ef3334ebcf93a5.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-24fd7fcefe294361820847845d963f39"></div>
+<div id="altair-viz-ec0bb01415884d85a4ef3334ebcf93a5"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-24fd7fcefe294361820847845d963f39") {
-      outputDiv = document.getElementById("altair-viz-24fd7fcefe294361820847845d963f39");
+    if (outputDiv.id !== "altair-viz-ec0bb01415884d85a4ef3334ebcf93a5") {
+      outputDiv = document.getElementById("altair-viz-ec0bb01415884d85a4ef3334ebcf93a5");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",

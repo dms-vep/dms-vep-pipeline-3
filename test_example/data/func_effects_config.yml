@@ -75,6 +75,11 @@ func_scores:
 # Average/plot mutation functional effects from different selections w `avg_func_effects`
 # Each key is a condition which has the following values:
 #  - `selections`: list of selections for which we average mutation functional effects
+#                  or if you only want to average some sites for a given selection then
+#                  a dict keyed by the selection name and with the value being the sites
+#                  to include from this selection. Sites should be specified as sequential
+#                  sites as a list of site numbers or lists of inclusive ranges (so
+#                  [1, [3, 5]] means [1, 3, 4, 5])
 #  - `avg_method`: how to average across the selections, options are "median" and "mean"
 #  - `per_selection_tooltips`: whether to show per-selection effects via tooltips
 #  - `floor_for_effect_std`: before computing effect std, floor effects at this value.
@@ -119,6 +124,15 @@ avg_func_effects:
       - LibA-220302-293T_ACE2-1
       - LibA-220302-293T_ACE2-2
       - LibB-220302-293T_ACE2-1
+  293T_ACE2_entry_by_region:
+    <<: *avg_func_effects_default
+    selections:  # keep different regions for libA and libB
+      LibA-220210-293T_ACE2-1: [[1, 539]]
+      LibA-220210-293T_ACE2-2: [[1, 539]]
+      LibA-220302-293T_ACE2-1: [[1, 539]]
+      LibA-220302-293T_ACE2-2: [[1, 539]]
+      LibB-220302-293T_ACE2-1: [540, 541, [542, 1251]]  # specified like this rather than [540, 1251] just for testing
+
 
 # --------------------------------------------------------------------------------------
 # Configuration for the simple difference of func effects from different conditions
@@ -129,13 +143,45 @@ avg_func_effects:
 # set `func_effect_diffs` to `null` or just leave it out altogether.
 #
 # Each key is a comparison. Under that name, you should have the following keys:
-#  - `condition_1`: first condition, keys are name and selection (which gives list of selections)
+#  - `condition_1`: first condition, keys are name and selection (which gives list of selections,
+#                   or if you want to take specific regions for a selection then a dict with values
+#                   giving the sequential-site regions as for `avg_func_effects`)
 #  - `condition_2`: second condition, keys are name and selection (which gives list of selections)
 #  - `avg_method`: how to average across selections for a condition, "median" or "mean"
 #  - `per_selection_tooltips`: whether to show per-selection tooltips
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
+func_effect_diffs_default: &func_effect_diffs_default
+  avg_method: median
+  per_selection_tooltips: true
+  plot_kwargs:
+    addtl_slider_stats:
+      times_seen: 3
+      difference_std: 2  # standard deviation difference across pairwise comparisons for mutation
+      fraction_pairs_w_mutation: 1  # fraction of all pairs between conditions w mutation
+      best_effect: -2  # effect must be >= for at least one condition
+      220210 effect: null  # slider on effect in this condition, but no initial value
+      220302 effect: null  # slider on effect in this condition, but no initial value
+      nt changes to codon: 3
+    addtl_slider_stats_hide_not_filter: [best_effect, 220210 effect, 220302 effect, nt changes to codon]
+    addtl_slider_stats_as_max: [difference_std, nt changes to codon]
+    heatmap_max_at_least: 1
+    heatmap_min_at_least: -1
+    init_floor_at_zero: false
+    init_site_statistic: mean_abs
+    site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`
+    slider_binding_range_kwargs:
+      times_seen:
+        step: 1
+        min: 1
+        max: 25
+      nt changes to codon:
+        step: 1
+        min: 1
+        max: 3
+
 func_effect_diffs:
   220210_vs_220302_comparison:
+    <<: *func_effect_diffs_default
     condition_1:
       name: 220210
       selections:
@@ -146,33 +192,19 @@ func_effect_diffs:
       selections:
         - LibA-220302-293T_ACE2-1
         - LibA-220302-293T_ACE2-2
-    avg_method: median
-    per_selection_tooltips: true
-    plot_kwargs:
-      addtl_slider_stats:
-        times_seen: 3
-        difference_std: 2  # standard deviation difference across pairwise comparisons for mutation
-        fraction_pairs_w_mutation: 1  # fraction of all pairs between conditions w mutation
-        best_effect: -2  # effect must be >= for at least one condition
-        220210 effect: null  # slider on effect in this condition, but no initial value
-        220302 effect: null  # slider on effect in this condition, but no initial value
-        nt changes to codon: 3
-      addtl_slider_stats_hide_not_filter: [best_effect, 220210 effect, 220302 effect, nt changes to codon]
-      addtl_slider_stats_as_max: [difference_std, nt changes to codon]
-      heatmap_max_at_least: 1
-      heatmap_min_at_least: -1
-      init_floor_at_zero: false
-      init_site_statistic: mean_abs
-      site_zoom_bar_color_col: region  # supplied in the `site_numbering_map`
-      slider_binding_range_kwargs:
-        times_seen:
-          step: 1
-          min: 1
-          max: 25
-        nt changes to codon:
-          step: 1
-          min: 1
-          max: 3
+
+func_effect_diffs_by_region:
+    <<: *func_effect_diffs_default
+    condition_1:
+      name: 220210
+      selections:
+        LibA-220210-293T_ACE2-1: [[1, 539]]
+        LibA-220210-293T_ACE2-2: [540, 541, [542, 1251]]  # specified like this rather than [540, 1251] just for testing
+    condition_2:
+      name: 220302
+      selections:
+        LibA-220302-293T_ACE2-1: [[1, 539]]
+        LibA-220302-293T_ACE2-2: [540, 541, [542, 1251]]  # specified like this rather than [540, 1251] just for testing
 
 # --------------------------------------------------------------------------------------
 # Configuration for func effect shifts from `multidms` models comparing conditions.
@@ -227,7 +259,10 @@ func_effect_shifts:
 # Define `func_effect_shifts` comparisons to average. `avg_func_effect_shifts` is keyed
 # by name of averaged comparisons. Keys within that are:
 #  - `comparisons`: list of comparisons from `func_effect_shifts`, must have same
-#                   condition names, lasso shifts, and reference.
+#                   condition names, lasso shifts, and reference. If you want to take
+#                   only specific regions from a comparison in the averages, then
+#                   make this a dict with values the sequential site regions as
+#                   for `avg_func_effects`.
 #  - `lasso_shift`: the single lasso shift to use for the final averaged values.
 #  - `avg_method`: how to average across the selections, options are "median" and "mean"
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
@@ -261,9 +296,17 @@ avg_func_effect_shifts_default: &avg_func_effect_shifts_default
 
 # Define the functional effect conditions to average
 avg_func_effect_shifts:
+
   date_comparison:
     <<: *avg_func_effect_shifts_default
     comparisons:
       - LibA-date_comparison-1
       - LibA-date_comparison-2
+    lasso_shift: 0.0001
+
+  date_comparison_by_region:
+    <<: *avg_func_effect_shifts_default
+    comparisons:  # keep different regions for each comparison
+      LibA-date_comparison-1: [[1, 539]]
+      LibA-date_comparison-2: [540, 541, [542, 1251]]  # specified like this rather than [540, 1251] just for testing
     lasso_shift: 0.0001

@@ -194,7 +194,7 @@ func_effect_diffs:
         - LibA-220302-293T_ACE2-1
         - LibA-220302-293T_ACE2-2
 
-func_effect_diffs_by_region:
+  220210_vs_220302_comparison_by_region:  # only consider specific regions of each condition comparison
     <<: *func_effect_diffs_default
     condition_1:
       name: 220210

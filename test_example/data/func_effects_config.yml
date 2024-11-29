@@ -95,6 +95,7 @@ avg_func_effects_default: &avg_func_effects_default
       times_seen: 3
       effect_std: 2
       nt changes to codon: 3
+      n_selections: 1
     addtl_slider_stats_as_max: [effect_std, nt changes to codon]
     addtl_slider_stats_hide_not_filter: [nt changes to codon]
     heatmap_max_at_least: 1

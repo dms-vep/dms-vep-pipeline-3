@@ -22,7 +22,7 @@ In the following sections, I'll walk you through each of these steps.
 You'll need to install the Javascript packages used to build and develop the [VitePress](https://vitepress.dev/) site. We'll use the 'node package manager' (`npm`) to install these packages. You can install `npm` in your existing `conda` environment by running:
 
 ```bash
-conda install -c conda-forge nodejs
+conda install -c conda-forge nodejs=20
 ```
 
 Alternatively, if you're working on `Rhino` at FHCC, you can load node as a module:
@@ -38,6 +38,16 @@ npm install
 ```
 
 You should see that a `package-lock.json` file has been added to your repo.
+
+**Note**, it's important that the major version of node (i.e. `20.x`) that generates `package-lock.json` (with `npm install`) is same version used in [`deploy.yml`](.github/workflows/deploy.yaml):
+
+```yaml
+strategy:
+  matrix:
+    node-version: [20.x]
+```
+
+If you local version of node is greater than `20.x`, update [`deploy.yml`](.github/workflows/deploy.yaml) to the same major version you're using locally.
 
 ## Creating a `homepage/` directory
 

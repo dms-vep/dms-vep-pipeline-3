@@ -39,6 +39,16 @@ npm install
 
 You should see that a `package-lock.json` file has been added to your repo.
 
+**Note**, it's important that the major version of node that generates `package-lock.json` (with `npm install`) is same version used in [`deploy.yml`](.github/workflows/deploy.yaml), i.e.
+
+```yaml
+strategy:
+  matrix:
+    node-version: [22.x]
+```
+
+Check your version of node with `node -v`. If the local version of node is different than [`deploy.yml`](.github/workflows/deploy.yaml) either upgrade your local version or upgrade the version in [`deploy.yml`](.github/workflows/deploy.yaml). It may also be necessary to run `npm audit fix` to fix your `package-lock.json`.
+
 ## Creating a `homepage/` directory
 
 Next, you'll need to add the code for your [VitePress](https://vitepress.dev/) site. This code will live in a new `homepage/` directory at the root of your project. Copy the example `homepage/` directory from the `dms-vep-pipeline-3` repo into your project. It should have the following structure:

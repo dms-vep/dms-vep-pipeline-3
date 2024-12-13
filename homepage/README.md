@@ -47,7 +47,7 @@ strategy:
     node-version: [22.x]
 ```
 
-Check your version of node with `node -v`. If the local version of node if different than [`deploy.yml`](.github/workflows/deploy.yaml), either upgrade your local version or upgrade the version in [`deploy.yml`](.github/workflows/deploy.yaml).
+Check your version of node with `node -v`. If the local version of node is different than [`deploy.yml`](.github/workflows/deploy.yaml) either upgrade your local version or upgrade the version in [`deploy.yml`](.github/workflows/deploy.yaml). It may also be necessary to run `npm audit fix` to fix your `package-lock.json`.
 
 ## Creating a `homepage/` directory
 

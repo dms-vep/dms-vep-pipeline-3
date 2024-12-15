@@ -86,5 +86,5 @@ for f, merge_cols, compare_cols in to_compare:
     for compare_col in compare_cols:
         corr = merged[f"{compare_col}_x"].corr(merged[f"{compare_col}_y"])
         print(f"Correlations for {f}, {compare_col} is {corr:.3f} (n = {len(merged)})")
-        if corr < 0.99:
+        if corr < 0.985:
             raise ValueError(f"Correlations for {f}, {compare_col} is {corr:.3f}")

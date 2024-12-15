@@ -36,6 +36,6 @@ dependencies:
       - alignparse==0.6.3
       - dms_variants==1.4.3
       - dmslogo==0.7.0
-      - multidms==0.4.0
+      - multidms==0.4.2
       - neutcurve==2.1
       - polyclonal==6.13

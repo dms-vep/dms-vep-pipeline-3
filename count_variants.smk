@@ -87,9 +87,8 @@ rule analyze_variant_counts:
         """
 
 
-if (
-    "use_precomputed_barcode_counts" in config
-    and not config["use_precomputed_barcode_counts"]
+if ("use_precomputed_barcode_counts" not in config) or (
+    not config["use_precomputed_barcode_counts"]
 ):
     count_variants_docs["Analysis notebooks"][
         "Analysis of variant counts"

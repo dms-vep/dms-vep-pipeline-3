@@ -26,6 +26,36 @@ to_compare = [
         ["site", "mutant"],
         ["spike mediated entry", "mock receptor affinity"],
     ),
+    (
+        "antibody_escape/averages/REGN10933_mut_effect.csv",
+        ["epitope", "site", "mutant"],
+        ["escape_mean", "escape_median", "n_models", "times_seen", "frac_models"],
+    ),
+    (
+        "antibody_escape/averages/REGN10933_by_region_mut_effect.csv",
+        ["epitope", "site", "mutant"],
+        ["escape_mean", "escape_median", "n_models", "times_seen", "frac_models"],
+    ),
+    (
+        "func_effects/averages/293T_ACE2_entry_func_effects.csv",
+        ["site", "mutant"],
+        ["effect", "effect_std", "times_seen", "n_selections"],
+    ),
+    (
+        "func_effects/averages/293T_ACE2_entry_by_region_func_effects.csv",
+        ["site", "mutant"],
+        ["effect", "effect_std", "times_seen", "n_selections"],
+    ),
+    (
+        "func_effect_diffs/220210_vs_220302_comparison_diffs.csv",
+        ["site", "mutant"],
+        ["difference", "times_seen", "fraction_pairs_w_mutation"],
+    ),
+    (
+        "func_effect_diffs/220210_vs_220302_comparison_by_region_diffs.csv",
+        ["site", "mutant"],
+        ["difference", "times_seen", "fraction_pairs_w_mutation"],
+    ),
 ]
 
 for f, merge_cols, compare_cols in to_compare:
@@ -55,6 +85,6 @@ for f, merge_cols, compare_cols in to_compare:
 
     for compare_col in compare_cols:
         corr = merged[f"{compare_col}_x"].corr(merged[f"{compare_col}_y"])
-        print(f"Correlations for {f}, {compare_col} is {corr:.3f}")
+        print(f"Correlations for {f}, {compare_col} is {corr:.3f} (n = {len(merged)})")
         if corr < 0.99:
             raise ValueError(f"Correlations for {f}, {compare_col} is {corr:.3f}")

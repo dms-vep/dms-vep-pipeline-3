@@ -260,7 +260,12 @@ receptor_selections:
 
 # Average/plot escape values from different selections for an assay using `<assay>_escape`.
 # Each key is the name of the average being taken with the following values:
-#   - `selections`: list of antibody selections for which we average escape
+#   - `selections`: list of selections for which we average mutation functional effects
+#                  or if you only want to average some sites for a given selection then
+#                  a dict keyed by the selection name and with the value being the sites
+#                  to include from this selection. Sites should be specified as *sequential*
+#                  sites as a list of site numbers or lists of inclusive ranges (so
+#                  [1, [3, 5]] means [1, 3, 4, 5])
 #   - `icXX`: for the plot showing fold-change in ICXX (eg, IC90), what is XX (eg, 90)
 #   - `escape_plot_kwargs`: keyword arguments for `PolyclonalAverage.mut_escape_plot`
 #   - `plot_hide_stats`: dict giving data frames with stats for slider to hide mutations
@@ -302,6 +307,12 @@ avg_antibody_escape:
     selections:
       - LibA-220302-S2M11-1
       - LibA-220302-S2M11-2
+  REGN10933_by_region:
+    <<: *avg_antibody_escape_default
+    selections:
+      LibA-220210-REGN10933-1: [[1, 539]]
+      LibA-220210-REGN10933-2: [[1, 539]]
+      LibB-220302-REGN10933-1: [540, 541, [542, 1251]]  # specified like this rather than [540, 1251] just for testing
 
 # Define the receptor affinity experiments to average
 avg_receptor_affinity_default: &avg_receptor_affinity_default

@@ -263,7 +263,7 @@ receptor_selections:
 #   - `selections`: list of selections for which we average mutation functional effects
 #                  or if you only want to average some sites for a given selection then
 #                  a dict keyed by the selection name and with the value being the sites
-#                  to include from this selection. Sites should be specified as sequential
+#                  to include from this selection. Sites should be specified as *sequential*
 #                  sites as a list of site numbers or lists of inclusive ranges (so
 #                  [1, [3, 5]] means [1, 3, 4, 5])
 #   - `icXX`: for the plot showing fold-change in ICXX (eg, IC90), what is XX (eg, 90)

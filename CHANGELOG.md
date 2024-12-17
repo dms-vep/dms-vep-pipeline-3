@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.19.1
+- Fixed [bug](https://github.com/dms-vep/dms-vep-pipeline-3/issues/163) introduced in version 3.19.0 that causes pip installation of `alignparse==0.6.3` to fail.
+
 ### version 3.19.0
 - Added the ability to average results (functional effects, functional effect shifts, antibody escape) for different experiments keeping only different regions (sites) for each selection. This is useful if the experiments are done on different halves of a gene. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/160).
 - The `func_effects_global_epistasis` notebooks now make plots showing correlation between mutation effects inferred for mutations by the global epistasis model versus the average effects of these mutations among all single-mutant variants. This helps with evaluating questions like [this](https://github.com/dms-vep/dms-vep-pipeline-3/issues/158) about whether single mutant estimates are being affected by the global epistasis model.

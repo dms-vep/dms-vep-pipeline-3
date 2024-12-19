@@ -149,11 +149,9 @@ avg_func_effects:
 #                   giving the sequential-site regions as for `avg_func_effects`)
 #  - `condition_2`: second condition, keys are name and selection (which gives list of selections)
 #  - `avg_method`: how to average across selections for a condition, "median" or "mean"
-#  - `per_selection_tooltips`: whether to show per-selection tooltips
 #  - `plot_kwargs`: keyword arguments passed to `polyclonal.plot.lineplot_and_heatmap`
 func_effect_diffs_default: &func_effect_diffs_default
   avg_method: median
-  per_selection_tooltips: true
   plot_kwargs:
     addtl_slider_stats:
       times_seen: 3

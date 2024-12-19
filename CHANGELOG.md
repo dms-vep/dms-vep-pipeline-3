@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ### version 3.19.2
-- Make `func_effect_diffs` work when there are many selections by making correlation heatmap rather than many scatters, and showing tooltips as list of per-selection values. Also makes `per_selection_tooltips` not needed in config for `avg_func_effect_diffs`.
+- Make `func_effect_diffs` work when there are many selections by making correlation heatmap rather than many scatters, and showing tooltips as list of per-selection values. Also makes `per_selection_tooltips` not needed in config for `func_effect_diffs`.
 
 ### version 3.19.1
 - Fixed [bug](https://github.com/dms-vep/dms-vep-pipeline-3/issues/163) introduced in version 3.19.0 that causes pip installation of `alignparse==0.6.3` to fail.

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### version 3.19.3
+- Fix bug in `func_effect_diffs` tooltips introduced in 3.19.2.
+
 ### version 3.19.2
 - Make `func_effect_diffs` work when there are many selections by making correlation heatmap rather than many scatters, and showing tooltips as list of per-selection values. Also makes `per_selection_tooltips` not needed in config for `func_effect_diffs`.
 

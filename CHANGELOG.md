@@ -1,12 +1,15 @@
 # CHANGELOG
 
-### version 3.19.3
+### version 3.20.0
+- Add option `no_mean_lineplot` to summaries to not show antibody-escape mean lineplot (see [this issue](https://github.com/dms-vep/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS/issues/136)).
+
+#### version 3.19.3
 - Fix bug in `func_effect_diffs` tooltips introduced in 3.19.2.
 
-### version 3.19.2
+#### version 3.19.2
 - Make `func_effect_diffs` work when there are many selections by making correlation heatmap rather than many scatters, and showing tooltips as list of per-selection values. Also makes `per_selection_tooltips` not needed in config for `func_effect_diffs`.
 
-### version 3.19.1
+#### version 3.19.1
 - Fixed [bug](https://github.com/dms-vep/dms-vep-pipeline-3/issues/163) introduced in version 3.19.0 that causes pip installation of `alignparse==0.6.3` to fail.
 
 ### version 3.19.0

@@ -1,8 +1,10 @@
 # CHANGELOG
 
 ### version 3.20.0
-- Add option `no_mean_lineplot` to summaries to not show antibody-escape mean lineplot (see [this issue](https://github.com/dms-vep/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS/issues/136)).
-- Add option `lineplot_antibody_label_loc` ("right" or "top") for labels on antibody-escape lineplots ((see [this issue](https://github.com/dms-vep/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS/issues/136)).
+- Various updates to the `summary` plots:
+  + Add option `no_mean_lineplot` to not show antibody-escape mean lineplot (see [this issue](https://github.com/dms-vep/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS/issues/136)).
+  + Add option `lineplot_antibody_label_loc` ("right" or "top") for labels on antibody-escape lineplots ((see [this issue](https://github.com/dms-vep/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS/issues/136)).
+  + Add site labels to lineplots when only one antibody per group (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/177))
 
 #### version 3.19.3
 - Fix bug in `func_effect_diffs` tooltips introduced in 3.19.2.

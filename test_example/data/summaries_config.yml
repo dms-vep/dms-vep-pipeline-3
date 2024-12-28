@@ -14,6 +14,7 @@ summary_of_all_phenotypes:
   init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
   init_site_escape_stat: mean  # initially show site escape as this statistic
   lineplot_antibody_label_loc: right  # can be right or top
+  no_mean_lineplot: False  # do not show lineplot with mean of antibody escape
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # columin in CSV with value
@@ -27,7 +28,6 @@ summary_of_all_phenotypes:
         S2M-11: results/antibody_escape/averages/S2M11_mut_effect.csv
         REGN10933: results/antibody_escape/averages/REGN10933_mut_effect.csv
       no_heatmap: True  # optional argument, do not show heatmap for this antibody set
-      no_mean_lineplot: False  # do not show lineplot with mean of antibody escape
   other_phenotypes:  # list other phenotypes to plot, empty dict if no other phenotypes
     spike mediated entry:
       csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
@@ -67,6 +67,7 @@ summary_of_just_antibodies:
   init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
   init_site_escape_stat: mean  # initially show site escape as this statistic
   lineplot_antibody_label_loc: top  # can be right or top
+  no_mean_lineplot: True  # do not show lineplot with mean of antibody escape
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # columin in CSV with value
@@ -80,7 +81,6 @@ summary_of_just_antibodies:
         S2M-11: results/antibody_escape/averages/S2M11_mut_effect.csv
         REGN10933: results/antibody_escape/averages/REGN10933_mut_effect.csv
       no_heatmap: True  # optional argument, do not show heatmap for this antibody set
-      no_mean_lineplot: True  # do not show lineplot with mean of antibody escape
   other_phenotypes:  # list other phenotypes to plot, empty dict if no other phenotypes
     spike mediated entry:
       csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data

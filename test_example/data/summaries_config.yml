@@ -15,6 +15,7 @@ summary_of_all_phenotypes:
   init_site_escape_stat: mean  # initially show site escape as this statistic
   lineplot_antibody_label_loc: right  # can be right or top
   no_mean_lineplot: False  # do not show lineplot with mean of antibody escape
+  scale_lineplot_height: 1  # scale height of escape lineplots by this factor
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # columin in CSV with value
@@ -68,6 +69,7 @@ summary_of_just_antibodies:
   init_site_escape_stat: mean  # initially show site escape as this statistic
   lineplot_antibody_label_loc: top  # can be right or top
   no_mean_lineplot: True  # do not show lineplot with mean of antibody escape
+  scale_lineplot_height: 1.3  # scale height of escape lineplots by this factor
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # columin in CSV with value

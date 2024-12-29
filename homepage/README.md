@@ -39,7 +39,7 @@ npm install
 
 You should see that a `package-lock.json` file has been added to your repo.
 
-**Note**, it's important that the major version of node that generates `package-lock.json` (with `npm install`) is same version used in [`deploy.yml`](.github/workflows/deploy.yaml), i.e.
+**Note**, it's important that the major version of node that generates `package-lock.json` (with `npm install`) is same version used in [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yaml) (if you don't have this file, continue to read below; you need to create it to deploy your homepage), i.e.
 
 ```yaml
 strategy:
@@ -47,7 +47,7 @@ strategy:
     node-version: [22.x]
 ```
 
-Check your version of node with `node -v`. If the local version of node is different than [`deploy.yml`](.github/workflows/deploy.yaml) either upgrade your local version or upgrade the version in [`deploy.yml`](.github/workflows/deploy.yaml). It may also be necessary to run `npm audit fix` to fix your `package-lock.json`.
+Check your version of node with `node -v`. If the local version of node is different than [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yaml) either upgrade your local version or upgrade the version in [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yaml). It may also be necessary to run `npm audit fix` to fix your `package-lock.json`.
 
 ## Creating a `homepage/` directory
 
@@ -137,7 +137,7 @@ build_vitepress_homepage: true
 
 ### Add a deployment workflow
 
-You'll need to add a GitHub Actions workflow to automatically build your site when you push changes to the `main` branch of your GitHub repo. Copy the `deploy.yaml` file from `.github/workflows/deploy.yaml` in the `dms-vep-pipeline-3` repo into your `.github/workflows` directory.
+You'll need to add a GitHub Actions workflow to automatically build your site when you push changes to the `main` branch of your GitHub repo. Copy the file [`.github/workflows/deploy.yaml`](../.github/workflows/deploy.yaml) in the `dms-vep-pipeline-3` repo into your `.github/workflows` directory in your repository (you may have to create this directory).
 
 ### Run the pipeline
 

@@ -13,6 +13,10 @@ summary_of_all_phenotypes:
   alphabet: [A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y, -]  # amino acids to include
   init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
   init_site_escape_stat: mean  # initially show site escape as this statistic
+  lineplot_antibody_label_loc: right  # can be right or top
+  no_mean_lineplot: False  # do not show lineplot with mean of antibody escape
+  scale_lineplot_height: 1  # scale height of escape lineplots by this factor
+  selectable_per_antibody_heatmap: False  # does heatmap allow per-antibody selection?
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # columin in CSV with value
@@ -25,7 +29,7 @@ summary_of_all_phenotypes:
       antibody_list:  # antibody name followed by CSV with data for antibody
         S2M-11: results/antibody_escape/averages/S2M11_mut_effect.csv
         REGN10933: results/antibody_escape/averages/REGN10933_mut_effect.csv
-      no_heatmap: True  # optional argument, do not show heatmap for this antibody set
+      no_heatmap: False  # optional argument, do not show heatmap for this antibody set
   other_phenotypes:  # list other phenotypes to plot, empty dict if no other phenotypes
     spike mediated entry:
       csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
@@ -57,6 +61,40 @@ summary_of_all_phenotypes:
         min: 1
         max: 3
         step: 1
+
+summary_of_just_antibodies:
+  min_times_seen: 3  # only include mutations with times_seen >= this
+  min_frac_models: 1  # only include mutations in >= this fraction of models
+  alphabet: [A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y, -]  # amino acids to include
+  init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
+  init_site_escape_stat: mean  # initially show site escape as this statistic
+  lineplot_antibody_label_loc: top  # can be right or top
+  no_mean_lineplot: True  # do not show lineplot with mean of antibody escape
+  scale_lineplot_height: 1.3  # scale height of escape lineplots by this factor
+  selectable_per_antibody_heatmap: True  # antibody escape heatmap allows you to select which antibody shown
+  antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
+    monoclonal antibodies:  # name each set of antibodies
+      stat: escape_median  # columin in CSV with value
+      positive_color: "#56B4E9"  # light blue, positive heatmap color
+      negative_color: "#E69F00"  # orange, negative heatmap color
+      max_at_least: 1  # make heatmap max at least
+      min_at_least: -1  # make heatmap min at least this small
+      le_filters:  # only keep entries with indicated column is <= indicated value
+        escape_std: 2
+      antibody_list:  # antibody name followed by CSV with data for antibody
+        S2M-11: results/antibody_escape/averages/S2M11_mut_effect.csv
+        REGN10933: results/antibody_escape/averages/REGN10933_mut_effect.csv
+      no_heatmap: False  # optional argument, do not show heatmap for this antibody set
+  other_phenotypes:  # list other phenotypes to plot, empty dict if no other phenotypes
+    spike mediated entry:
+      csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
+      stat: effect  # column in CSV with value
+      positive_color: "#009E73"  # green
+      negative_color: "#F0E442"  # yellow
+      fixed_max: 2  # specify either `max_at_least` or `fixed_max`
+      min_at_least: 0
+      init_min_value: -3  # initial min value in slider
+      no_heatmap: True  # optional argument, do not show heatmap for this antibody set
 
 summary_of_just_entry_and_binding:
   min_times_seen: 3  # only include mutations with times_seen >= this

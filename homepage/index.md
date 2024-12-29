@@ -21,4 +21,4 @@ features:
 Building this homepage requires some manual customization of the Markdown files in the `./homepage` subdirectory of your repo.
 See [the instructions on building a VitePress homepage](https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/homepage/README.md) for more details.
 
-To see the less fancy documentation automatically build by the pipeline, see the [Appendix](/appendix){target="_self"}.
+To see the less fancy documentation automatically build by the pipeline, see the [Appendix](appendix.html){target="_self"}.

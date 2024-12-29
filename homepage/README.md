@@ -131,7 +131,7 @@ homepage/.vitepress/dist/
 The pipeline will automatically populate your `homepage/public` directory with the contents of your `docs/` directory. This has two benefits; it adds the default documentation as part of your new [VitePress](https://vitepress.dev/) site, and it lets you include your notebooks and `Altair` plots on the site. To tell the pipeline to do this, you'll need to update the pipeline's `config.yaml` file with the following lines:
 
 ```yaml
-homepage: ./homepage/public
+homepage: homepage/public
 build_vitepress_homepage: true
 ```
 
@@ -141,7 +141,7 @@ You'll need to add a GitHub Actions workflow to automatically build your site wh
 
 ### Run the pipeline
 
-Finally, you can run the pipeline to populate the `/homepage/public` with the contents of your default documentation.
+Finally, you can run the pipeline to populate the `homepage/public` with the contents of your default documentation.
 
 ## Developing your site
 

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### version 3.20.1
+- Fix [minor issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/176) w embedding Altair plots in VitePress homepage.
+
 ### version 3.20.0
 - Various updates to the `summary` plots:
   + Add option `no_mean_lineplot` to not show antibody-escape mean lineplot (see [this issue](https://github.com/dms-vep/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS/issues/136)).

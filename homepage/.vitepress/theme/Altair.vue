@@ -164,6 +164,7 @@ export default {
     border-radius: 4px;
     background-color: #fff;
     text-align: center;
+    -webkit-appearance: auto;
 }
 
 .vega-bindings input[type="select"] option {

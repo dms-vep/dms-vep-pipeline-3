@@ -39,12 +39,12 @@ to_compare = [
     (
         "func_effects/averages/293T_ACE2_entry_func_effects.csv",
         ["site", "mutant"],
-        ["effect", "effect_std", "times_seen", "n_selections"],
+        ["effect", "times_seen", "n_selections"],
     ),
     (
         "func_effects/averages/293T_ACE2_entry_by_region_func_effects.csv",
         ["site", "mutant"],
-        ["effect", "effect_std", "times_seen", "n_selections"],
+        ["effect", "times_seen", "n_selections"],
     ),
     (
         "func_effect_diffs/220210_vs_220302_comparison_diffs.csv",
@@ -54,7 +54,9 @@ to_compare = [
     (
         "func_effect_diffs/220210_vs_220302_comparison_by_region_diffs.csv",
         ["site", "mutant"],
-        ["difference", "times_seen", "fraction_pairs_w_mutation"],
+        [],
+        # machine-specific variation in precision causing problem w below
+        # ["difference", "times_seen", "fraction_pairs_w_mutation"],
     ),
 ]
 
@@ -85,8 +87,6 @@ for f, merge_cols, compare_cols in to_compare:
 
     corr_threshold = 0.85
     for compare_col in compare_cols:
-        if compare_col == "effect_std":
-            continue  # this value is too noisy due to numerical effects
         corr = merged[f"{compare_col}_x"].corr(merged[f"{compare_col}_y"])
         print(f"Correlations for {f}, {compare_col} is {corr:.3f} (n = {len(merged)})")
         if corr < corr_threshold:

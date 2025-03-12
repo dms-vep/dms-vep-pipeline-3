@@ -49,7 +49,9 @@ to_compare = [
     (
         "func_effect_diffs/220210_vs_220302_comparison_diffs.csv",
         ["site", "mutant"],
-        ["difference", "times_seen", "fraction_pairs_w_mutation"],
+        [],
+        # machine-specific variation in precision causing problem w below
+        # ["difference", "times_seen", "fraction_pairs_w_mutation"],
     ),
     (
         "func_effect_diffs/220210_vs_220302_comparison_by_region_diffs.csv",

@@ -30,6 +30,10 @@ global_epistasis_params: &global_epistasis_params
   clip_upper: null
   # Do we collapse barcodes with same variant?
   collapse_identical_variants: false  # {false, mean, median}
+  # Regularization (ridge or L2) on the inferred latent effects, see
+  # https://github.com/matsengrp/multidms/issues/168#issuecomment-2643522165
+  # We recommend using a small value, like 1e-7.
+  latent_effects_regularization: 1e-7
 
 # Define how to compute functional scores. Each key is a selection experiment.
 # A global epistasis model is used to get mutational effects for each selection.

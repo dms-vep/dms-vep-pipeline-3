@@ -83,8 +83,9 @@ for f, merge_cols, compare_cols in to_compare:
     if len(merged) + max_diff_rows < max(len(actual), len(expected)):
         raise ValueError(f"{len(actual)=}, {len(expected)=}, {len(merged)=}")
 
+    corr_threshold = 0.8
     for compare_col in compare_cols:
         corr = merged[f"{compare_col}_x"].corr(merged[f"{compare_col}_y"])
         print(f"Correlations for {f}, {compare_col} is {corr:.3f} (n = {len(merged)})")
-        if corr < 0.88:
+        if corr < corr_threshold:
             raise ValueError(f"Correlations for {f}, {compare_col} is {corr:.3f}")

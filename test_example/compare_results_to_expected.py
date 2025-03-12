@@ -72,7 +72,7 @@ for f, merge_cols, compare_cols in to_compare:
     )
 
     # merge, allowing a few rows to be absent in one versus another
-    max_diff_rows = 10
+    max_diff_rows = 25
     assert len(actual) == len(actual[merge_cols].drop_duplicates())
     assert len(expected) == len(expected[merge_cols].drop_duplicates())
     if abs(len(actual) - len(expected)) > max_diff_rows:

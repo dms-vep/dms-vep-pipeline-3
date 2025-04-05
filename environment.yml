@@ -34,7 +34,7 @@ dependencies:
   - upsetplot=0.9
   - xz # XZ Utils needs to be pre-installed for alignparse, see issue: https://github.com/dms-vep/dms-vep-pipeline-3/issues/163
   - pip:
-      - alignparse==0.7.0
+      - alignparse==0.7.1
       - dms_variants==1.4.3
       - dmslogo==0.7.0
       - multidms==0.4.2

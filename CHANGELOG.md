@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ### 3.22.0
-- Allow arbitrary strings as site numbers:
+- Allow arbitrary strings as site numbers (eg, `57(E2)`):
   - Updated `alignparse` to 0.7.0 which enables the use of arbitrary strings as site numbers (eg, `57(E2)` for instance).
   - Made other modifications to code to allow arbitrary numbers. This changes the sorting of the output for some files (eg, the mutation functional effects).
 

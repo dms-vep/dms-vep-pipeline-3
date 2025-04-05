@@ -328,6 +328,7 @@ rule func_effect_shifts:
             rules.func_scores.output.func_scores.format(selection=sel)
             for sel in func_effect_shifts[wc.comparison]["conditions"].values()
         ],
+        site_numbering_map=config["site_numbering_map"],
         nb=os.path.join(config["pipeline_path"], "notebooks/func_effect_shifts.ipynb"),
     output:
         shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
@@ -343,6 +344,7 @@ rule func_effect_shifts:
         """
         papermill {input.nb} {output.nb} \
             -y "{params.params_yaml}" \
+            -p site_numbering_map {input.site_numbering_map} \
             -p shifts_csv {output.shifts} \
             -p threads {threads} \
             &> {log}

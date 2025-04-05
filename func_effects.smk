@@ -97,6 +97,7 @@ rule func_effects_global_epistasis:
     """Fit global epistasis model to func scores to get mutation functional effects."""
     input:
         func_scores="results/func_scores/{selection}_func_scores.csv",
+        site_numbering_map=config["site_numbering_map"],
         nb=os.path.join(
             config["pipeline_path"],
             "notebooks/func_effects_global_epistasis.ipynb",
@@ -123,6 +124,7 @@ rule func_effects_global_epistasis:
             -p selection {wildcards.selection} \
             -p func_scores {input.func_scores} \
             -p func_effects {output.func_effects} \
+            -p site_numbering_map {input.site_numbering_map} \
             -p threads {threads} \
             -y "{params.global_epistasis_params_yaml}" \
             &> {log}

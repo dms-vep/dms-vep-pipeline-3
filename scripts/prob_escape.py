@@ -62,7 +62,7 @@ renumber = alignparse.utils.MutationRenumber(
     old_num_col="sequential_site",
     new_num_col="reference_site",
     wt_nt_col=None,
-    allow_letter_suffixed_numbers=True,
+    allow_arbitrary_numbers=True,
 )
 prob_escape = prob_escape.rename(
     columns={"aa_substitutions": "aa_substitutions_sequential"}

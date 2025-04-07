@@ -7312,6 +7312,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7529,23 +7530,23 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">Bio.SeqIO</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">Bio.SeqIO</span>
 
-<span class="kn">import</span> <span class="nn">alignparse.consensus</span>
-<span class="kn">import</span> <span class="nn">alignparse.utils</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">alignparse.consensus</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">alignparse.utils</span>
 
-<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">altair</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">alt</span>
 
-<span class="kn">import</span> <span class="nn">dms_variants.barcodes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dms_variants.barcodes</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span>
 </pre></div>
 </div>
 </div>
@@ -7593,7 +7594,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=7889653b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=6bb30b21">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7724,7 +7725,7 @@ a.anchor-link {
     <span class="p">)</span>
 
     <span class="c1"># function to assign strand exchange status</span>
-    <span class="k">def</span> <span class="nf">classify_strand_exchange</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">classify_strand_exchange</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
         <span class="n">tags</span> <span class="o">=</span> <span class="nb">list</span><span class="p">({</span><span class="n">row</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">variant_tags</span><span class="p">})</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">tags</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -7832,23 +7833,23 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-38aa626a9faa4d318b244437fb045f55.vega-embed {
+  #altair-viz-7304fcb474d54220860816947ccc51d3.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-38aa626a9faa4d318b244437fb045f55.vega-embed details,
-  #altair-viz-38aa626a9faa4d318b244437fb045f55.vega-embed details summary {
+  #altair-viz-7304fcb474d54220860816947ccc51d3.vega-embed details,
+  #altair-viz-7304fcb474d54220860816947ccc51d3.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-38aa626a9faa4d318b244437fb045f55"></div>
+<div id="altair-viz-7304fcb474d54220860816947ccc51d3"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-38aa626a9faa4d318b244437fb045f55") {
-      outputDiv = document.getElementById("altair-viz-38aa626a9faa4d318b244437fb045f55");
+    if (outputDiv.id !== "altair-viz-7304fcb474d54220860816947ccc51d3") {
+      outputDiv = document.getElementById("altair-viz-7304fcb474d54220860816947ccc51d3");
     }
 
     const paths = {
@@ -8005,23 +8006,23 @@ There are 110245 after filtering.
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-e913dd6821694c8080f913f63bf6c9e3.vega-embed {
+  #altair-viz-913586b17b834b0ea7d1f3982953a839.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-e913dd6821694c8080f913f63bf6c9e3.vega-embed details,
-  #altair-viz-e913dd6821694c8080f913f63bf6c9e3.vega-embed details summary {
+  #altair-viz-913586b17b834b0ea7d1f3982953a839.vega-embed details,
+  #altair-viz-913586b17b834b0ea7d1f3982953a839.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-e913dd6821694c8080f913f63bf6c9e3"></div>
+<div id="altair-viz-913586b17b834b0ea7d1f3982953a839"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-e913dd6821694c8080f913f63bf6c9e3") {
-      outputDiv = document.getElementById("altair-viz-e913dd6821694c8080f913f63bf6c9e3");
+    if (outputDiv.id !== "altair-viz-913586b17b834b0ea7d1f3982953a839") {
+      outputDiv = document.getElementById("altair-viz-913586b17b834b0ea7d1f3982953a839");
     }
 
     const paths = {
@@ -8361,23 +8362,23 @@ The empirical accuracy is the estimated accuracy of each <strong>individual</str
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-2dc91a5bae31405c92867dc01b38c462.vega-embed {
+  #altair-viz-56db7d5da7b34619b9e863e224abc54e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2dc91a5bae31405c92867dc01b38c462.vega-embed details,
-  #altair-viz-2dc91a5bae31405c92867dc01b38c462.vega-embed details summary {
+  #altair-viz-56db7d5da7b34619b9e863e224abc54e.vega-embed details,
+  #altair-viz-56db7d5da7b34619b9e863e224abc54e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2dc91a5bae31405c92867dc01b38c462"></div>
+<div id="altair-viz-56db7d5da7b34619b9e863e224abc54e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2dc91a5bae31405c92867dc01b38c462") {
-      outputDiv = document.getElementById("altair-viz-2dc91a5bae31405c92867dc01b38c462");
+    if (outputDiv.id !== "altair-viz-56db7d5da7b34619b9e863e224abc54e") {
+      outputDiv = document.getElementById("altair-viz-56db7d5da7b34619b9e863e224abc54e");
     }
 
     const paths = {
@@ -8538,23 +8539,23 @@ We also compute a few other metrics of diversity:</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-d2b511843e6b46649dc56b9d5706c433.vega-embed {
+  #altair-viz-5a44e5896a494ac698f8809cd719d604.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-d2b511843e6b46649dc56b9d5706c433.vega-embed details,
-  #altair-viz-d2b511843e6b46649dc56b9d5706c433.vega-embed details summary {
+  #altair-viz-5a44e5896a494ac698f8809cd719d604.vega-embed details,
+  #altair-viz-5a44e5896a494ac698f8809cd719d604.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-d2b511843e6b46649dc56b9d5706c433"></div>
+<div id="altair-viz-5a44e5896a494ac698f8809cd719d604"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d2b511843e6b46649dc56b9d5706c433") {
-      outputDiv = document.getElementById("altair-viz-d2b511843e6b46649dc56b9d5706c433");
+    if (outputDiv.id !== "altair-viz-5a44e5896a494ac698f8809cd719d604") {
+      outputDiv = document.getElementById("altair-viz-5a44e5896a494ac698f8809cd719d604");
     }
 
     const paths = {
@@ -8610,23 +8611,23 @@ We also compute a few other metrics of diversity:</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-2e8826bbce364fe2ae026c32498e51ee.vega-embed {
+  #altair-viz-9a191df164b5464d8cc8066b31218b75.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-2e8826bbce364fe2ae026c32498e51ee.vega-embed details,
-  #altair-viz-2e8826bbce364fe2ae026c32498e51ee.vega-embed details summary {
+  #altair-viz-9a191df164b5464d8cc8066b31218b75.vega-embed details,
+  #altair-viz-9a191df164b5464d8cc8066b31218b75.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-2e8826bbce364fe2ae026c32498e51ee"></div>
+<div id="altair-viz-9a191df164b5464d8cc8066b31218b75"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-2e8826bbce364fe2ae026c32498e51ee") {
-      outputDiv = document.getElementById("altair-viz-2e8826bbce364fe2ae026c32498e51ee");
+    if (outputDiv.id !== "altair-viz-9a191df164b5464d8cc8066b31218b75") {
+      outputDiv = document.getElementById("altair-viz-9a191df164b5464d8cc8066b31218b75");
     }
 
     const paths = {
@@ -8801,23 +8802,23 @@ Note the stats for barcodes and CCSs look different, because there are uneven nu
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-12fde09730184897ab4b02456504b3d1.vega-embed {
+  #altair-viz-8a0272dcbbc048b0b1f78d353ffc118d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-12fde09730184897ab4b02456504b3d1.vega-embed details,
-  #altair-viz-12fde09730184897ab4b02456504b3d1.vega-embed details summary {
+  #altair-viz-8a0272dcbbc048b0b1f78d353ffc118d.vega-embed details,
+  #altair-viz-8a0272dcbbc048b0b1f78d353ffc118d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-12fde09730184897ab4b02456504b3d1"></div>
+<div id="altair-viz-8a0272dcbbc048b0b1f78d353ffc118d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-12fde09730184897ab4b02456504b3d1") {
-      outputDiv = document.getElementById("altair-viz-12fde09730184897ab4b02456504b3d1");
+    if (outputDiv.id !== "altair-viz-8a0272dcbbc048b0b1f78d353ffc118d") {
+      outputDiv = document.getElementById("altair-viz-8a0272dcbbc048b0b1f78d353ffc118d");
     }
 
     const paths = {
@@ -8954,23 +8955,23 @@ Note the stats for barcodes and CCSs look different, because there are uneven nu
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-db957c5fd6c9417ca754774c0a3d3c57.vega-embed {
+  #altair-viz-6d0165040fda4239bbc0d799a85ef240.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-db957c5fd6c9417ca754774c0a3d3c57.vega-embed details,
-  #altair-viz-db957c5fd6c9417ca754774c0a3d3c57.vega-embed details summary {
+  #altair-viz-6d0165040fda4239bbc0d799a85ef240.vega-embed details,
+  #altair-viz-6d0165040fda4239bbc0d799a85ef240.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-db957c5fd6c9417ca754774c0a3d3c57"></div>
+<div id="altair-viz-6d0165040fda4239bbc0d799a85ef240"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-db957c5fd6c9417ca754774c0a3d3c57") {
-      outputDiv = document.getElementById("altair-viz-db957c5fd6c9417ca754774c0a3d3c57");
+    if (outputDiv.id !== "altair-viz-6d0165040fda4239bbc0d799a85ef240") {
+      outputDiv = document.getElementById("altair-viz-6d0165040fda4239bbc0d799a85ef240");
     }
 
     const paths = {

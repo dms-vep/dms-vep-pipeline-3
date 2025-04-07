@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### 3.23.0
+- Upgrade to `polyclonal` 6.16 which integrates [this change](https://github.com/jbloomlab/polyclonal/pull/189) which computes standard deviation of escape values when average models as the population rather than sample standard deviation. This fixes a bug that was causing plots to fail when just one model was being averaged. Now when there is just one model, the standard deviation is 0 rather than NaN. Also, other standard deviations will tend to be a bit smaller.
+
 ### 3.22.0
 - Allow arbitrary strings as site numbers (eg, `57(E2)`):
   - Updated `alignparse` to 0.7.0 which enables the use of arbitrary strings as site numbers (eg, `57(E2)` for instance).

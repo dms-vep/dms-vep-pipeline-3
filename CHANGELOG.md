@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.23.1
+- Address [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/187) by making per-replicate line plots render in `avg_escape` notebook when initial site statistic is *sum_abs* or *mean_abs*.
+
 ### 3.23.0
 - Upgrade to `polyclonal` 6.16 which integrates [this change](https://github.com/jbloomlab/polyclonal/pull/189) which computes standard deviation of escape values when average models as the population rather than sample standard deviation. This fixes a bug that was causing plots to fail when just one model was being averaged. Now when there is just one model, the standard deviation is 0 rather than NaN. Also, other standard deviations will tend to be a bit smaller.
 

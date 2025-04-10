@@ -7,10 +7,16 @@
 # Provide a different key with the name of each set of summaries
 # --------------------------------------------------------------------------------------
 
-summary_of_all_phenotypes:
+# You can use YAML anchor and merge keys to define values used for all summaries.
+# In order to enable this, any top-level key that ends with "_default" is **not**
+# used to generate a summary.
+summary_default: &summary_default
   min_times_seen: 3  # only include mutations with times_seen >= this
   min_frac_models: 1  # only include mutations in >= this fraction of models
   alphabet: [A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y, -]  # amino acids to include
+
+summary_of_all_phenotypes:
+  <<: *summary_default
   init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
   init_site_escape_stat: mean  # initially show site escape as this statistic
   lineplot_antibody_label_loc: right  # can be right or top
@@ -97,9 +103,7 @@ summary_of_just_antibodies:
       no_heatmap: True  # optional argument, do not show heatmap for this antibody set
 
 summary_of_just_entry_and_binding:
-  min_times_seen: 3  # only include mutations with times_seen >= this
-  min_frac_models: 1  # only include mutations in >= this fraction of models
-  alphabet: [A, C, D, E, F, G, H, I, K, L, M, N, P, Q, R, S, T, V, W, Y, -]  # amino acids to include
+  <<: *summary_default
   init_floor_escape_at_zero: true  # initially floor site escape to be >= 0?
   init_site_escape_stat: mean  # initially show site escape as this statistic
   antibody_escape: {}

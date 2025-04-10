@@ -2,7 +2,11 @@
 
 # read the config for the summaries
 with open(config["summaries_config"]) as f:
-    summaries_config = yaml.YAML(typ="safe", pure=True).load(f)
+    summaries_config = {
+        key: val
+        for (key, val) in yaml.YAML(typ="safe", pure=True).load(f).items()
+        if not key.endswith("_default")
+    }
 
 
 rule summary:

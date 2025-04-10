@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### 3.24.0
+- Enable use of anchor and merge keys in the YAML configuration for the summaries by **not** making summary plots for any top-level key that ends with `_default`. This enables keys like `summary_default` to be defined on `summaries_config.yaml` and then used to define defaults that are merged into other summaries.
+
 #### 3.23.1
 - Address [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/187) by making per-replicate line plots render in `avg_escape` notebook when initial site statistic is *sum_abs* or *mean_abs*.
 

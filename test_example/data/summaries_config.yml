@@ -26,6 +26,10 @@ summary_of_all_phenotypes:
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # columin in CSV with value
+      # you can either specify a Vega color scheme 
+      # (https://vega.github.io/vega/docs/schemes/#redblue)
+      # as `color_scheme`, or specify `positive_color` and `negative_color`
+      # color_scheme: redblue
       positive_color: "#56B4E9"  # light blue, positive heatmap color
       negative_color: "#E69F00"  # orange, negative heatmap color
       max_at_least: 1  # make heatmap max at least
@@ -40,11 +44,13 @@ summary_of_all_phenotypes:
     spike mediated entry:
       csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
       stat: effect  # column in CSV with value
-      positive_color: "#009E73"  # green
-      negative_color: "#F0E442"  # yellow
+      # you can either specify a Vega color scheme 
+      # (https://vega.github.io/vega/docs/schemes/#redblue)
+      # as `color_scheme`, or specify `positive_color` and `negative_color`
+      color_scheme: redblue
       fixed_max: 2  # specify either `max_at_least` or `fixed_max`
       min_at_least: 0
-      init_min_value: -3  # initial min value in slider
+      init_min_value: null  # initial min value in slider, set to null to make minimum value of data
       le_filters:  # only keep entries with indicated column is <= indicated value
         effect_std: 2
       no_heatmap: True  # optional argument, do not show heatmap for this phenotype
@@ -81,8 +87,7 @@ summary_of_just_antibodies:
   antibody_escape:  # show effects on antibody escape, empty dict if no antibodies being shown
     monoclonal antibodies:  # name each set of antibodies
       stat: escape_median  # columin in CSV with value
-      positive_color: "#56B4E9"  # light blue, positive heatmap color
-      negative_color: "#E69F00"  # orange, negative heatmap color
+      color_scheme: pinkyellowgreen
       max_at_least: 1  # make heatmap max at least
       min_at_least: -1  # make heatmap min at least this small
       le_filters:  # only keep entries with indicated column is <= indicated value
@@ -95,8 +100,7 @@ summary_of_just_antibodies:
     spike mediated entry:
       csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
       stat: effect  # column in CSV with value
-      positive_color: "#009E73"  # green
-      negative_color: "#F0E442"  # yellow
+      color_scheme: redblue
       fixed_max: 2  # specify either `max_at_least` or `fixed_max`
       min_at_least: 0
       init_min_value: -3  # initial min value in slider
@@ -111,8 +115,7 @@ summary_of_just_entry_and_binding:
     spike mediated entry:
       csv: results/func_effects/averages/293T_ACE2_entry_func_effects.csv  # CSV with data
       stat: effect  # column in CSV with value
-      positive_color: "#009E73"  # green
-      negative_color: "#F0E442"  # yellow
+      color_scheme: redblue
       fixed_max: 2  # specify either `max_at_least` or `fixed_max`
       min_at_least: 0
       init_min_value: -3  # initial min value in slider

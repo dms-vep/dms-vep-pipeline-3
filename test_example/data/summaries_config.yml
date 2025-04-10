@@ -50,7 +50,7 @@ summary_of_all_phenotypes:
       color_scheme: redblue
       fixed_max: 2  # specify either `max_at_least` or `fixed_max`
       min_at_least: 0
-      init_min_value: -3  # initial min value in slider
+      init_min_value: null  # initial min value in slider, set to null to make minimum value of data
       le_filters:  # only keep entries with indicated column is <= indicated value
         effect_std: 2
       no_heatmap: True  # optional argument, do not show heatmap for this phenotype

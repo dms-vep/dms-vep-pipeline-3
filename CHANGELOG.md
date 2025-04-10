@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### 3.25.0
+- Enable use of `color_scheme` in summary plots.
+
 ### 3.24.0
 - Enable use of anchor and merge keys in the YAML configuration for the summaries by **not** making summary plots for any top-level key that ends with `_default`. This enables keys like `summary_default` to be defined on `summaries_config.yaml` and then used to define defaults that are merged into other summaries.
 

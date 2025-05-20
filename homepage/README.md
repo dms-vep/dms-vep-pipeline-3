@@ -176,6 +176,8 @@ export default defineConfig({
 
 Replace the `title` and `description` with content that suits your project. Add your name to the copyright message in the `footer`. Change the `link` under `socialLinks` to your project's GitHub repo. Finally, replace the `base` path with the name of your repository. Setting the `base` path correctly is essential for hosting your site.
 
+To add links to the header for easier navigation, modify the `nav` section in the config file above with the appropriate names and links. For more information, click [here](https://vitepress.dev/reference/default-theme-nav#navigation-links). 
+
 ### Configuring the landing page
 
 The landing page for your [VitePress](https://vitepress.dev/) site is determined by the `index.md` file. Edit this file to change the title add an image of your viral entry protein and link to pages describing your results.

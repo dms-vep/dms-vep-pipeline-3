@@ -7312,7 +7312,6 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
-                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7530,16 +7529,16 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">altair</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">alt</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">dms_variants.codonvarianttable</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">dms_variants.utils</span>
+<span class="kn">import</span> <span class="nn">dms_variants.codonvarianttable</span>
+<span class="kn">import</span> <span class="nn">dms_variants.utils</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -7585,7 +7584,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=513b9400">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_injected-parameters" id="cell-id=63167962">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7610,6 +7609,7 @@ a.anchor-link {
             <span class="s2">"clip_upper"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s2">"collapse_identical_variants"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s2">"latent_effects_regularization"</span><span class="p">:</span> <span class="s2">"1e-07"</span><span class="p">,</span>
+            <span class="s2">"fit_kwargs"</span><span class="p">:</span> <span class="p">{},</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s2">"LibA-220210-293T_ACE2-2"</span><span class="p">:</span> <span class="p">{</span>
@@ -7627,6 +7627,7 @@ a.anchor-link {
             <span class="s2">"clip_upper"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s2">"collapse_identical_variants"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s2">"latent_effects_regularization"</span><span class="p">:</span> <span class="s2">"1e-07"</span><span class="p">,</span>
+            <span class="s2">"fit_kwargs"</span><span class="p">:</span> <span class="p">{},</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s2">"LibA-220302-293T_ACE2-1"</span><span class="p">:</span> <span class="p">{</span>
@@ -7644,6 +7645,7 @@ a.anchor-link {
             <span class="s2">"clip_upper"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s2">"collapse_identical_variants"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s2">"latent_effects_regularization"</span><span class="p">:</span> <span class="s2">"1e-07"</span><span class="p">,</span>
+            <span class="s2">"fit_kwargs"</span><span class="p">:</span> <span class="p">{},</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s2">"LibA-220302-293T_ACE2-2"</span><span class="p">:</span> <span class="p">{</span>
@@ -7661,6 +7663,7 @@ a.anchor-link {
             <span class="s2">"clip_upper"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s2">"collapse_identical_variants"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s2">"latent_effects_regularization"</span><span class="p">:</span> <span class="s2">"1e-07"</span><span class="p">,</span>
+            <span class="s2">"fit_kwargs"</span><span class="p">:</span> <span class="p">{},</span>
         <span class="p">},</span>
     <span class="p">},</span>
     <span class="s2">"LibB-220302-293T_ACE2-1"</span><span class="p">:</span> <span class="p">{</span>
@@ -7678,6 +7681,7 @@ a.anchor-link {
             <span class="s2">"clip_upper"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s2">"collapse_identical_variants"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s2">"latent_effects_regularization"</span><span class="p">:</span> <span class="s2">"1e-07"</span><span class="p">,</span>
+            <span class="s2">"fit_kwargs"</span><span class="p">:</span> <span class="p">{},</span>
         <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">}</span>
@@ -7824,23 +7828,23 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-ccac5b1865b34b9fa4b00dda9b21270a.vega-embed {
+  #altair-viz-0aee08fd391b406484b4116855570aae.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-ccac5b1865b34b9fa4b00dda9b21270a.vega-embed details,
-  #altair-viz-ccac5b1865b34b9fa4b00dda9b21270a.vega-embed details summary {
+  #altair-viz-0aee08fd391b406484b4116855570aae.vega-embed details,
+  #altair-viz-0aee08fd391b406484b4116855570aae.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-ccac5b1865b34b9fa4b00dda9b21270a"></div>
+<div id="altair-viz-0aee08fd391b406484b4116855570aae"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ccac5b1865b34b9fa4b00dda9b21270a") {
-      outputDiv = document.getElementById("altair-viz-ccac5b1865b34b9fa4b00dda9b21270a");
+    if (outputDiv.id !== "altair-viz-0aee08fd391b406484b4116855570aae") {
+      outputDiv = document.getElementById("altair-viz-0aee08fd391b406484b4116855570aae");
     }
 
     const paths = {
@@ -7920,7 +7924,7 @@ a.anchor-link {
 <span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">ridgeplot</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">ridgeplot</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">variant_classes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
         <span class="nb">reversed</span><span class="p">(</span>
             <span class="p">[</span>
@@ -8060,23 +8064,23 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-fdc057b8fed24564b04ee8f70e5fb467.vega-embed {
+  #altair-viz-7787888c4d884fae8d4f1a2b0af4686a.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-fdc057b8fed24564b04ee8f70e5fb467.vega-embed details,
-  #altair-viz-fdc057b8fed24564b04ee8f70e5fb467.vega-embed details summary {
+  #altair-viz-7787888c4d884fae8d4f1a2b0af4686a.vega-embed details,
+  #altair-viz-7787888c4d884fae8d4f1a2b0af4686a.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-fdc057b8fed24564b04ee8f70e5fb467"></div>
+<div id="altair-viz-7787888c4d884fae8d4f1a2b0af4686a"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fdc057b8fed24564b04ee8f70e5fb467") {
-      outputDiv = document.getElementById("altair-viz-fdc057b8fed24564b04ee8f70e5fb467");
+    if (outputDiv.id !== "altair-viz-7787888c4d884fae8d4f1a2b0af4686a") {
+      outputDiv = document.getElementById("altair-viz-7787888c4d884fae8d4f1a2b0af4686a");
     }
 
     const paths = {
@@ -8221,23 +8225,23 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-87c6125b1d344e8fb9b85aae5b582d37.vega-embed {
+  #altair-viz-f092df54b5f440c28b548ba25327fd0d.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-87c6125b1d344e8fb9b85aae5b582d37.vega-embed details,
-  #altair-viz-87c6125b1d344e8fb9b85aae5b582d37.vega-embed details summary {
+  #altair-viz-f092df54b5f440c28b548ba25327fd0d.vega-embed details,
+  #altair-viz-f092df54b5f440c28b548ba25327fd0d.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-87c6125b1d344e8fb9b85aae5b582d37"></div>
+<div id="altair-viz-f092df54b5f440c28b548ba25327fd0d"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-87c6125b1d344e8fb9b85aae5b582d37") {
-      outputDiv = document.getElementById("altair-viz-87c6125b1d344e8fb9b85aae5b582d37");
+    if (outputDiv.id !== "altair-viz-f092df54b5f440c28b548ba25327fd0d") {
+      outputDiv = document.getElementById("altair-viz-f092df54b5f440c28b548ba25327fd0d");
     }
 
     const paths = {
@@ -8293,23 +8297,23 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <style>
-  #altair-viz-96c1810ef45248d1a5d0baaa40b223ad.vega-embed {
+  #altair-viz-30e3c94e88624b139f5a930f31074c62.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-96c1810ef45248d1a5d0baaa40b223ad.vega-embed details,
-  #altair-viz-96c1810ef45248d1a5d0baaa40b223ad.vega-embed details summary {
+  #altair-viz-30e3c94e88624b139f5a930f31074c62.vega-embed details,
+  #altair-viz-30e3c94e88624b139f5a930f31074c62.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-96c1810ef45248d1a5d0baaa40b223ad"></div>
+<div id="altair-viz-30e3c94e88624b139f5a930f31074c62"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-96c1810ef45248d1a5d0baaa40b223ad") {
-      outputDiv = document.getElementById("altair-viz-96c1810ef45248d1a5d0baaa40b223ad");
+    if (outputDiv.id !== "altair-viz-30e3c94e88624b139f5a930f31074c62") {
+      outputDiv = document.getElementById("altair-viz-30e3c94e88624b139f5a930f31074c62");
     }
 
     const paths = {

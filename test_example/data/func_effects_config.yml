@@ -34,6 +34,8 @@ global_epistasis_params: &global_epistasis_params
   # https://github.com/matsengrp/multidms/issues/168#issuecomment-2643522165
   # We recommend using a small value, like 1e-7.
   latent_effects_regularization: 1e-7
+  # arbitrary kwargs to `multidms.Model.fit`, leaving out this key corresponds to no kwargs
+  fit_kwargs: {}
 
 # Define how to compute functional scores. Each key is a selection experiment.
 # A global epistasis model is used to get mutational effects for each selection.

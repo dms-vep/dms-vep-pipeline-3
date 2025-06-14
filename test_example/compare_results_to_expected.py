@@ -52,7 +52,19 @@ to_compare = [
         ["effect", "times_seen", "n_selections"],
     ),
     (
+        "func_effects/averages/293T_ACE2_entry_by_region_func_effects_singlemut.csv",
+        ["site", "mutant"],
+        ["effect", "times_seen", "n_selections"],
+    ),
+    (
         "func_effect_diffs/220210_vs_220302_comparison_diffs.csv",
+        ["site", "mutant"],
+        [],
+        # machine-specific variation in precision causing problem w below
+        # ["difference", "times_seen", "fraction_pairs_w_mutation"],
+    ),
+    (
+        "func_effect_diffs/220210_vs_220302_singlemut_comparison_diffs.csv",
         ["site", "mutant"],
         [],
         # machine-specific variation in precision causing problem w below

@@ -275,7 +275,7 @@ rule func_effect_diffs:
     params:
         params_yaml=lambda wc, input: yaml_str(
             {
-                "params": func_effect_diffs[wc.comparison],
+                "params": {"singlemut": False} | func_effect_diffs[wc.comparison],
                 "mutation_annotations_csv": (
                     input.mutation_annotations_csv
                     if input.get("mutation_annotations_csv")

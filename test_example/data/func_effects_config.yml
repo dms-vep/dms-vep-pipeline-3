@@ -98,7 +98,7 @@ avg_func_effects_default: &avg_func_effects_default
   floor_for_effect_std: -3
   plot_kwargs:
     addtl_slider_stats:
-      times_seen: 3
+      times_seen: 2
       effect_std: 2
       nt changes to codon: 3
       n_selections: 1
@@ -160,7 +160,7 @@ func_effect_diffs_default: &func_effect_diffs_default
   avg_method: median
   plot_kwargs:
     addtl_slider_stats:
-      times_seen: 3
+      times_seen: 2
       difference_std: 2  # standard deviation difference across pairwise comparisons for mutation
       fraction_pairs_w_mutation: 1  # fraction of all pairs between conditions w mutation
       best_effect: -2  # effect must be >= for at least one condition
@@ -187,6 +187,20 @@ func_effect_diffs_default: &func_effect_diffs_default
 func_effect_diffs:
   220210_vs_220302_comparison:
     <<: *func_effect_diffs_default
+    condition_1:
+      name: 220210
+      selections:
+        - LibA-220210-293T_ACE2-1
+        - LibA-220210-293T_ACE2-2
+    condition_2:
+      name: 220302
+      selections:
+        - LibA-220302-293T_ACE2-1
+        - LibA-220302-293T_ACE2-2
+
+  220210_vs_220302_singlemut_comparison:
+    <<: *func_effect_diffs_default
+    singlemut: true  # use the single-mutant variant only func effects
     condition_1:
       name: 220210
       selections:

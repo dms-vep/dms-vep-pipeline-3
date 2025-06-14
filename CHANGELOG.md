@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 3.27.0
+- The standard deviation of the functional effects (*effect_std*) is now calculated as the population rather than sample standard deviation. This makes all standard deviations a bit smaller, and when there is just one measurement the *effect_std* is now 0 rather than *NaN*.
+- The analysis of functional effects (eg, cell entry) now allows easy reporting of the average of effects of single-mutant-only variants in addition to the effects reported by the global epistasis models applied to all variants. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/193). Note however that other parts of the pipeline (eg, antibody escape) still use measurements calculated from all variants, so if you are using single mutant cell entry to filter those measurements at a given *times_seen* you may have null cell entry which leads to no filter for a mutation. Specific changes:
+  + `results/func_effects/by_selection/{selection}_func_effects.csv` now includes the new columns *functional_effect_singlemut* (median of mutation effect across single mutants) and *times_seen_singlemut*.
+  + `avg_func_effects` rule now creates `results/func_effects/averages/{condition}_func_effects_singlemut.csv` and `results/func_effects/averages/{condition}_func_effects_singlemut.html` giving average effects from single-mutant only variants; these are also linked in HTML docs. Note that you need add this line to the `.gitignore` to track this new file: `!results/func_effects/averages/*_func_effects_singlemut.csv`.
+
 ### 3.26.0
 - Add option to provide `fit_kwargs` under `global_epistasis_params`. This enables addressing of [this issue](https://github.com/dms-vep/Flu_H5_American-Wigeon_South-Carolina_2021-H5N1_DMS/issues/147#issuecomment-2961104107) by allowing the fitting to use parameters that were the default in older pipeline versions. For instance, to use the fitting that was in place prior to version 3.19.0, you would use `fit_kwargs: {maxiter: 1000, tol: 0.000001}`
 

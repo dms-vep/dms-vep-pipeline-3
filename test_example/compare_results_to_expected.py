@@ -42,6 +42,11 @@ to_compare = [
         ["effect", "times_seen", "n_selections"],
     ),
     (
+        "func_effects/averages/293T_ACE2_entry_func_effects_singlemut.csv",
+        ["site", "mutant"],
+        ["effect", "times_seen", "n_selections"],
+    ),
+    (
         "func_effects/averages/293T_ACE2_entry_by_region_func_effects.csv",
         ["site", "mutant"],
         ["effect", "times_seen", "n_selections"],

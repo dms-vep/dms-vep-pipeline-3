@@ -159,8 +159,10 @@ rule avg_func_effects:
     output:
         nb="results/notebooks/avg_func_effects_{condition}.ipynb",
         func_effects_csv="results/func_effects/averages/{condition}_func_effects.csv",
+        func_effects_singlemut_csv="results/func_effects/averages/{condition}_func_effects_singlemut.csv",
         latent_effects_csv="results/func_effects/averages/{condition}_latent_effects.csv",
         functional_html="results/func_effects/averages/{condition}_func_effects.html",
+        functional_singlemut_html="results/func_effects/averages/{condition}_func_effects_singlemut.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects.html",
     params:
         params_yaml=lambda wc, input: yaml_str(
@@ -182,8 +184,10 @@ rule avg_func_effects:
         papermill {input.nb} {output.nb} \
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p func_effects_csv {output.func_effects_csv} \
+            -p func_effects_singlemut_csv {output.func_effects_singlemut_csv} \
             -p latent_effects_csv {output.latent_effects_csv} \
             -p functional_html {output.functional_html} \
+            -p functional_singlemut_html {output.functional_singlemut_html} \
             -p latent_html {output.latent_html} \
             -y '{params.params_yaml}' \
             &> {log}
@@ -203,6 +207,13 @@ func_effects_docs["Data files"]["Average mutation functional effects (CSV files)
 }
 
 func_effects_docs["Data files"][
+    "Average mutation functional effects from single-mutant variants only (CSV files)"
+] = {
+    c: f"results/func_effects/averages/{c}_func_effects_singlemut.csv"
+    for c in func_effects_config["avg_func_effects"]
+}
+
+func_effects_docs["Data files"][
     "Average mutation latent-phenotype effects (CSV files)"
 ] = {
     c: f"results/func_effects/averages/{c}_func_effects.csv"
@@ -213,6 +224,13 @@ func_effects_docs["Final summary plots"][
     "Interactive plots of average mutation functional effects"
 ] = {
     c: rules.avg_func_effects.output.functional_html.format(condition=c)
+    for c in func_effects_config["avg_func_effects"]
+}
+
+func_effects_docs["Final summary plots"][
+    "Interactive plots of average mutation functional effects from single-mutant variants only"
+] = {
+    c: rules.avg_func_effects.output.functional_singlemut_html.format(condition=c)
     for c in func_effects_config["avg_func_effects"]
 }
 

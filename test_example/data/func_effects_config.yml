@@ -93,6 +93,7 @@ func_scores:
 
 # Define some defaults for each condition, used via the merge (<<) operator.
 avg_func_effects_default: &avg_func_effects_default
+  plot_latent: false  # do not plot latent-phenotype effects; missing equals false
   avg_method: median
   per_selection_tooltips: true
   floor_for_effect_std: -3
@@ -133,6 +134,7 @@ avg_func_effects:
       - LibB-220302-293T_ACE2-1
   293T_ACE2_entry_by_region:
     <<: *avg_func_effects_default
+    plot_latent: true  # do plot latent-phenotype effects for this experiment
     selections:  # keep different regions for libA and libB
       LibA-220210-293T_ACE2-1: [[1, 539]]
       LibA-220210-293T_ACE2-2: [[1, 539]]

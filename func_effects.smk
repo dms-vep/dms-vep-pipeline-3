@@ -175,6 +175,20 @@ rule avg_func_effects:
                 ),
             }
         ),
+        # if `plot_latent` is not true, we need to make `latent_html` as empty file
+        plot_latent_cmd=lambda wc, output: (
+            f"touch {output.latent_html}"
+            if (
+                (
+                    "plot_latent"
+                    not in func_effects_config["avg_func_effects"][wc.condition]
+                )
+                or not func_effects_config["avg_func_effects"][wc.condition][
+                    "plot_latent"
+                ]
+            )
+            else ""
+        ),
     conda:
         "environment.yml"
     log:
@@ -191,6 +205,7 @@ rule avg_func_effects:
             -p latent_html {output.latent_html} \
             -y '{params.params_yaml}' \
             &> {log}
+        {params.plot_latent_cmd}
         """
 
 
@@ -234,12 +249,23 @@ func_effects_docs["Final summary plots"][
     for c in func_effects_config["avg_func_effects"]
 }
 
+# only show latent-phenotype effects if plotting them
 func_effects_docs["Final summary plots"][
     "Interactive plots of average mutation latent-phenotype effects"
 ] = {
     c: rules.avg_func_effects.output.latent_html.format(condition=c)
     for c in func_effects_config["avg_func_effects"]
+    if (
+        ("plot_latent" in func_effects_config["avg_func_effects"][c])
+        and func_effects_config["avg_func_effects"][c]["plot_latent"]
+    )
 }
+if not func_effects_docs["Final summary plots"][
+    "Interactive plots of average mutation latent-phenotype effects"
+]:
+    del func_effects_docs["Final summary plots"][
+        "Interactive plots of average mutation latent-phenotype effects"
+    ]
 
 # are we doing func_effect_diffs?
 if ("func_effect_diffs" in func_effects_config) and (

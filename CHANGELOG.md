@@ -1,5 +1,12 @@
 # CHANGELOG
 
+### 3.28.0
+- Add option to not plot latent-phenotype effects in `avg_func_effects` via adding the *plot_latent* key to *avg_func_effects* in `avg_func_effects_config.yml`; a missing value means do not plot. This is useful because in most cases we do not really use or analyze these, so not plotting by default simplifies and shrinks output. They can still be added if you want by setting *plot_latent: true*.
+- Some improvements to `avg_func_effects` in how correlation scatters are plotted:
+  + do not plot empty scatters
+  + structure plots better to yield smaller output file sizes
+  + easier explanation of plots by mousing over them to highlight mutations
+
 ### 3.27.0
 - The standard deviation of the functional effects (*effect_std*) is now calculated as the population rather than sample standard deviation. This makes all standard deviations a bit smaller, and when there is just one measurement the *effect_std* is now 0 rather than *NaN*.
 - The analysis of functional effects (eg, cell entry) now allows easy reporting of the average of effects of single-mutant-only variants in addition to the effects reported by the global epistasis models applied to all variants. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/193). Note however that other parts of the pipeline (eg, antibody escape) still use measurements calculated from all variants, so if you are using single mutant cell entry to filter those measurements at a given *times_seen* you may have null cell entry which leads to no filter for a mutation (see [here](https://github.com/dms-vep/dms-vep-pipeline-3/issues/193#issuecomment-2973308087) for more discussion). Specific changes:

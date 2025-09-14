@@ -1,0 +1,25 @@
+sample,concentration,use_in_fit,n_substitutions,n_variants,censored,probability escape
+LibB-220302-REGN10933-0.15-1,0.15,True,0,814,"censored to [0, 1]",0.2953
+LibB-220302-REGN10933-0.15-1,0.15,True,1,1217,"censored to [0, 1]",0.3096
+LibB-220302-REGN10933-0.15-1,0.15,True,2,1098,"censored to [0, 1]",0.3245
+LibB-220302-REGN10933-0.15-1,0.15,True,>2,1030,"censored to [0, 1]",0.3451
+LibB-220302-REGN10933-1.39-1,1.39,True,0,814,"censored to [0, 1]",0.03175
+LibB-220302-REGN10933-1.39-1,1.39,True,1,1217,"censored to [0, 1]",0.04449
+LibB-220302-REGN10933-1.39-1,1.39,True,2,1098,"censored to [0, 1]",0.05961
+LibB-220302-REGN10933-1.39-1,1.39,True,>2,1030,"censored to [0, 1]",0.07403
+LibB-220302-REGN10933-5.58-1,5.58,True,0,814,"censored to [0, 1]",0.003772
+LibB-220302-REGN10933-5.58-1,5.58,True,1,1217,"censored to [0, 1]",0.004549
+LibB-220302-REGN10933-5.58-1,5.58,True,2,1098,"censored to [0, 1]",0.006342
+LibB-220302-REGN10933-5.58-1,5.58,True,>2,1031,"censored to [0, 1]",0.01089
+LibB-220302-REGN10933-0.15-1,0.15,True,0,814,not censored,0.2958
+LibB-220302-REGN10933-0.15-1,0.15,True,1,1217,not censored,0.3119
+LibB-220302-REGN10933-0.15-1,0.15,True,2,1098,not censored,0.3281
+LibB-220302-REGN10933-0.15-1,0.15,True,>2,1030,not censored,0.3543
+LibB-220302-REGN10933-1.39-1,1.39,True,0,814,not censored,0.03175
+LibB-220302-REGN10933-1.39-1,1.39,True,1,1217,not censored,0.04467
+LibB-220302-REGN10933-1.39-1,1.39,True,2,1098,not censored,0.06017
+LibB-220302-REGN10933-1.39-1,1.39,True,>2,1030,not censored,0.07867
+LibB-220302-REGN10933-5.58-1,5.58,True,0,814,not censored,0.003772
+LibB-220302-REGN10933-5.58-1,5.58,True,1,1217,not censored,0.004549
+LibB-220302-REGN10933-5.58-1,5.58,True,2,1098,not censored,0.006342
+LibB-220302-REGN10933-5.58-1,5.58,True,>2,1031,not censored,0.01089

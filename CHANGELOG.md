@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.28.1
+- Fixed an error message in summary plots to better explain problem for variables with invalid names.
+
 ### 3.28.0
 - Add option to not plot latent-phenotype effects in `avg_func_effects` via adding the *plot_latent* key to *avg_func_effects* in `avg_func_effects_config.yml`; a missing value means do not plot. This is useful because in most cases we do not really use or analyze these, so not plotting by default simplifies and shrinks output. They can still be added if you want by setting *plot_latent: true*.
 - Some improvements to `avg_func_effects` in how correlation scatters are plotted:

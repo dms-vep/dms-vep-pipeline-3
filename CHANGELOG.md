@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.28.2
+- Fixed bug in summary plot region zoom bar when *region* is null (now make it "none" in such cases)
+
 #### 3.28.1
 - Fixed an error message in summary plots to better explain problem for variables with invalid names.
 

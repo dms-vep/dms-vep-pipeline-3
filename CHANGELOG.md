@@ -2,6 +2,7 @@
 
 ### 3.29.0
 - Created `pyproject.toml` file that tracks version and other information, this replaces `ruff.toml`.
+- Update packages in `conda` environment.
 
 #### 3.28.2
 - Fixed bug in summary plot region zoom bar when *region* is null (now make it "none" in such cases)

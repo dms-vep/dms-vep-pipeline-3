@@ -7,20 +7,20 @@ channels:
 dependencies:
   - altair=5.5
   - baltic=0.3
-  - biopython=1.84
+  - biopython=1.86
   - black-jupyter
-  - entrez-direct=22.4
+  - entrez-direct=24
   - flatdict=4.0
   - git-lfs
   - jupyterlab
   - mafft=7.525
-  - markdown=3.6
-  - matplotlib=3.9
+  - markdown=3.9
+  - matplotlib=3.10
   - minimap2=2.28
   - nbstripout
   - numpy<2  # pinned due to this issue: https://github.com/nteract/papermill/issues/800
   - openpyxl
-  - pandas=2.2
+  - pandas=2.3
   - papermill=2.6
   - pip
   - plotnine=0.14
@@ -30,11 +30,11 @@ dependencies:
   - ruff
   - seaborn=0.13
   - snakefmt
-  - snakemake=8.25.3
+  - snakemake=9.13
   - upsetplot=0.9
   - xz # XZ Utils needs to be pre-installed for alignparse, see issue: https://github.com/dms-vep/dms-vep-pipeline-3/issues/163
   - pip:
-      - alignparse==0.7.1
+      - alignparse==0.8.0
       - dms_variants==1.4.3
       - dmslogo==0.7.0
       - multidms==0.4.2

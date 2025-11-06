@@ -13,7 +13,7 @@
     - All of this also involved some simplification of how the docs themselves are built in the internal files ([docs.smk](docs.smk) and [docs_funcs.smk](docs_funcs.smk) that build the docs.
   + Migration plan from earlier versions of pipeline:
     1. Remove *docs* and *homepage* keys from your `config.yaml`, they are no longer needed.
-    2. Remove all the following directories / files if they exist in your repo: `./docs`, `homepage/public/appendix.html`, `homepage/public/htmls`, homepage/public/notebooks`, `package.json`, `package-lock.json`, `.github/workflows/deploy.yaml`.
+    2. Remove all the following directories / files if they exist in your repo: `./docs`, `homepage/public/appendix.html`, `homepage/public/htmls`, `homepage/public/notebooks`, `package.json`, `package-lock.json`, `.github/workflows/deploy.yaml`.
     3. If you already have a `./homepage/` directory in your repo (you are building a VitePress homepage), then copy into this directory the following from [test_example/homepage](test_example/homepage): `.gitignore`, `.github` (a directory), `package.json`.
     4. Anytime you want to commit the current docs, run `./dms-vep-pipeline-3/publish_docs_gh-pages.sh`. The documentation does not auto-update when you make a change to the master or main branch on GitHub; you have to run this script whenever you want to update it.
     5. On your GitHub Repository, go to *Settings* then *Pages* on the left toolbar and set GitHub Pages to serve from the *gh-pages* branch and the `/root` directory.

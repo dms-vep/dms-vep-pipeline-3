@@ -8,5 +8,3 @@ _*
 !.gitmodules
 
 node_modules/
-
-!homepage/.vitepress/

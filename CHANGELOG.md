@@ -1,7 +1,16 @@
 # CHANGELOG
 
 ### 3.29.0
+- Migrate
+  + Migration plans:
+    1. Remove *docs* and *homepage* keys from your `config.yaml`, they are no longer needed.
+    2. Remove all the following directories / files if they exist in your repo: `./docs`, `homepage/public/appendix.html`, `homepage/public/htmls`, homepage/public/notebooks`, `package.json`, `package-lock.json`, `.github/workflows/deploy.yaml`.
+    3. If you already have a `./homepage/` directory in your repo (you are building a VitePress homepage), then copy into this directory the following from [test_example/homepage](test_example/homepage): `.gitignore`, `.github` (a directory), `package.json`.
+    4. Anytime you want to commit the current docs, run `./dms-vep-pipeline-3/publish_docs_gh-pages.sh`.
+    5. On your GitHub Repository, go to *Settings* then *Pages* on the left toolbar and set GitHub Pages to serve from the *gh-pages* branch and the `/root` directory.
+
 - Created `pyproject.toml` file that tracks version and other information, this replaces `ruff.toml`.
+
 - Update packages in `conda` environment.
 
 #### 3.28.2

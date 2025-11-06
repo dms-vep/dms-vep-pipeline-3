@@ -1,0 +1,5 @@
+!.github
+!.vitepress
+
+package-lock.json
+node_modules

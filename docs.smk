@@ -17,49 +17,30 @@ docs_links, docs_processed_files = process_nested_docs_dict(
 
 
 rule notebook_html:
-    """Convert a Jupyter notebook into a HTML for docs."""
+    """Convert a Jupyter notebook to HTML in its results directory."""
     input:
-        nb=lambda wc: docs_processed_files[
-            os.path.join(config["docs"], f"notebooks/{wc.notebook}.html")
-        ],
+        nb="results/notebooks/{notebook}.ipynb",
     output:
-        html=os.path.join(config["docs"], "notebooks/{notebook}.html"),
-    params:
-        subdir=lambda _, output: os.path.dirname(output.html),
+        html="results/notebooks/{notebook}.html",
     conda:
         "environment.yml"
     log:
         "results/logs/notebook_html_{notebook}.txt",
     shell:
-        "jupyter nbconvert --to html --output-dir {params.subdir} {input.nb} &> {log}"
-
-
-rule cp_html:
-    """Copy a HTML file for docs."""
-    input:
-        html=lambda wc: docs_processed_files[
-            os.path.join(config["docs"], f"htmls/{wc.html}.html")
-        ],
-    output:
-        html=os.path.join(config["docs"], "htmls/{html}.html"),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/cp_html_{html}.txt",
-    shell:
-        "cp {input.html} {output.html}"
+        "jupyter nbconvert --to html {input.nb} &> {log}"
 
 
 rule build_docs:
     """Build the HTML documentation."""
     input:
-        flatdict.FlatDict(docs).values(),
-        docs_processed_files.keys(),
+        docs_processed_files.values(),
     output:
+        docs_dir=directory(config["docs"]),
         html=os.path.join(config["docs"], "index.html"),
     params:
         github_repo_url=config["github_repo_url"],
         docs_links=docs_links,
+        docs_processed_files=docs_processed_files,
         description=config["description"],
         year=config["year"],
         authors=config["authors"],

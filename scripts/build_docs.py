@@ -1,13 +1,42 @@
-"""Implements ``snakemake`` rule to translate gene sequence."""
+"""Implements ``snakemake`` rule to build documentation."""
 
 import os
+import shutil
 import sys
+import time
 
 import markdown
 import markdown.extensions.toc
 
 
 sys.stderr = sys.stdout = log = open(snakemake.log[0], "w")
+
+# Clean and prepare the docs directory
+docs_dir = snakemake.params.docs_dir
+print(f"Cleaning docs directory: {docs_dir}")
+
+# Remove docs directory if it exists
+if os.path.exists(docs_dir):
+    shutil.rmtree(docs_dir)
+    print(f"Removed existing {docs_dir}")
+
+os.makedirs(docs_dir)
+print(f"Created docs directory: {docs_dir}")
+
+# Create subdirectories
+os.makedirs(os.path.join(docs_dir, "notebooks"), exist_ok=True)
+os.makedirs(os.path.join(docs_dir, "htmls"), exist_ok=True)
+print("Created subdirectories: notebooks/ and htmls/")
+
+# Copy HTML files from results to docs
+docs_processed_files = snakemake.params.docs_processed_files
+print(f"\nCopying {len(docs_processed_files)} HTML files to docs directory:")
+for dest, source in docs_processed_files.items():
+    print(f"  {source} -> {dest}")
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    shutil.copy2(source, dest)
+
+print("\nGenerating index.html...")
 
 repo_url = snakemake.params.github_repo_url
 
@@ -16,6 +45,8 @@ md_text = [
     f"Analysis by {snakemake.params.authors} ({snakemake.params.year})",
     "",
     f"See [{repo_url}]({repo_url}) for full code.",
+    "",
+    f"Documentation of results rendered as of {time.asctime()}",
     "",
     # table of contents: https://python-markdown.github.io/extensions/toc/
     "[TOC]",
@@ -102,7 +133,7 @@ if collapse_nested_lists:
         )
         html = html.replace(to_replace, replace_with)
 
-if os.path.dirname(snakemake.output.html):
-    os.makedirs(os.path.dirname(snakemake.output.html), exist_ok=True)
 with open(snakemake.output.html, "w") as f:
     f.write(html)
+
+print(f"\nSuccessfully built documentation in {docs_dir}")

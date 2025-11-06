@@ -8,7 +8,6 @@
 # and `./`, but in this example they are upstream from this subdirectory.
 # ----------------------------------------------------------------------------
 pipeline_path: ../ # typically will be `dms-vep-pipeline-3` for real pipelines
-docs: ../docs # typically will be `docs` for real pipelines
 
 # ----------------------------------------------------------------------------
 # Details on repo, used for docs. Change this to details for your project.
@@ -152,4 +151,3 @@ summaries_config: data/summaries_config.yml # Summaries across assays
 # https://github.com/dms-vep/dms-vep-pipeline-3/blob/add-vitepress-homepage/homepage/README.md
 
 build_vitepress_homepage: true
-homepage: ../homepage/public # typically will be `homepage/public` for real pipelines

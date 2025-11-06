@@ -34,12 +34,12 @@ def process_nested_docs_dict(d, github_blob_url):
             source_f = None
             if ext == ".ipynb" and not gz:
                 d_links[key] = f"notebooks/{base}.html"
-                processed_f = os.path.join(config["docs"], d_links[key])
+                processed_f = os.path.join("results/docs", d_links[key])
                 # Source is the HTML version in results, not the ipynb
                 source_f = os.path.join(os.path.dirname(val), f"{base}.html")
             elif ext == ".html" and not gz:
                 d_links[key] = f"htmls/{base}.html"
-                processed_f = os.path.join(config["docs"], d_links[key])
+                processed_f = os.path.join("results/docs", d_links[key])
                 source_f = val
             elif ext in [".csv", ".fasta", ".fa", ".json"]:
                 d_links[key] = os.path.join(github_blob_url, val)

@@ -117,6 +117,11 @@ if len(barcode_runs) > 0:
             include: f"{rule_set}.smk"
 
 
+# do we build vitepress homepage?
+build_vitepress_homepage = (
+    "build_vitepress_homepage" in config and config["build_vitepress_homepage"]
+)
+
 # add any custom rules
 custom_rules = "custom_rules.smk"
 if os.path.isfile(custom_rules):
@@ -131,6 +136,5 @@ include: "docs.smk"
 # target rule with everything specified in `docs` plus the actual docs directory
 rule all:
     input:
-        rules.build_docs.input,
-        os.path.join(config["docs"], "index.html"),
+        rules.build_publish_docs.output,
         *other_target_files,

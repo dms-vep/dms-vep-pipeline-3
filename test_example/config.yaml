@@ -148,6 +148,6 @@ summaries_config: data/summaries_config.yml # Summaries across assays
 # homepage that is nicely styled for the GitHub Pages.
 
 # For details on building a VitePress homepage, see:
-# https://github.com/dms-vep/dms-vep-pipeline-3/blob/add-vitepress-homepage/homepage/README.md
+# https://github.com/dms-vep/dms-vep-pipeline-3/blob/main/test_example/homepage/README.md
 
 build_vitepress_homepage: true

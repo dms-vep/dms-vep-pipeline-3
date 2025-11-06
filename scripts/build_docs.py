@@ -12,7 +12,7 @@ import markdown.extensions.toc
 sys.stderr = sys.stdout = log = open(snakemake.log[0], "w")
 
 # Clean and prepare the docs directory
-docs_dir = snakemake.params.docs_dir
+docs_dir = snakemake.output.docs_dir
 print(f"Cleaning docs directory: {docs_dir}")
 
 # Remove docs directory if it exists

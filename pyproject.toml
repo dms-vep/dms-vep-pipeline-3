@@ -1,0 +1,21 @@
+[project]
+name = "dms-vep-pipeline-3"
+version = "3.29.0"
+description = "Pipeline for analyzing deep mutational scanning (DMS) of viral entry proteins (VEPs)"
+readme = "README.md"
+authors = [
+    {name = "Bloom Lab", email = "jbloom@fredhutch.org"}
+]
+requires-python = ">=3.12"
+
+[project.urls]
+Homepage = "https://github.com/dms-vep/dms-vep-pipeline-3"
+Repository = "https://github.com/dms-vep/dms-vep-pipeline-3"
+Issues = "https://github.com/dms-vep/dms-vep-pipeline-3/issues"
+
+[tool.ruff]
+builtins = [
+    "snakemake",  # may appear undefined as passed to scripts via `Snakefile`
+    "display",  # builtin of Jupyter notebooks
+]
+extend-include = ["*.ipynb"]

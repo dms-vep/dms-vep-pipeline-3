@@ -1,5 +1,29 @@
 # CHANGELOG
 
+### 3.29.0
+- Completely changed the way the HTML documentation of the results are rendered on GitHub.
+  + Summary of changes:
+    - Previously the entire HTML documentation was tracked on the main branch in `./docs` and potentially in duplicate in `./homepage` if you were also making a custom homepage. This led to huge bloat of the repositories due to tracking of lots of large HTML files and plots, that both makes the repositories very large and makes it almost impossible to use git diff to see what actually changed in the code / configuration / results (since even a minor change there could lead to uninterpretable line-by-line changes in the HTML documentation).  See [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/159).
+    - Now the HTML documentation is no longer part of the main repo, and can just be pushed separately to a *gh-pages* branch that is used to render the documentation without cluttering the repository.
+    - Specifically, the pipeline no longer creates `./docs`. Instead, the automatic HTML documentation is written by the pipeline to `./results/docs`, which you can look at locally in a web browers but is not tracked in the repository.
+    - Similarly, if you have a custom VitePress homepage at `./homepage`, the results of the pipeline are no longer copied into `./homepage/public`. Instead, `./homepage` just has the configuration and Markdown you have written, and a version of this with the pipeline output HTML is written to `./results/homepage`. See [test_example/homepage/README.md](test_example/homepage/README.md) for instructions on viewing that homepage locally and writing the custom text.
+    - The version of the documentation to be published (either the auto-generated docs or the homepage if you have made one and set *build_vitepress_homepage: true* in `config.yaml`) is then copied into `./results/publish_docs` by the pipeline.
+    - Anytime you want to display the current documentation on GitHub Pages, you just run `./dms-vep-pipeline-3/publish_docs_gh-pages.sh` and it pushes it to a branch (no history tracked) called *gh-pages*. Just make sure you have configured GitHub Pages to render the documentation from the *gh-pages* branch and the `/root` directory (on your GitHub Repository, go to *Settings* then *Pages* on the left toolbar to set this).
+    - This means that the documentation is not automatically synced to the main branch of the repo, but rather is determined by the state of your local repo when you last ran `./dms-vep-pipeline-3/publish_docs_gh-pages.sh`.
+    - All of this also involved some simplification of how the docs themselves are built in the internal files ([docs.smk](docs.smk) and [docs_funcs.smk](docs_funcs.smk) that build the docs.
+  + Migration plan from earlier versions of pipeline:
+    1. Make sure you have the new version (3.29.0 or greater) of `dms-vep-pipeline-3` in your repo.
+    2. Remove *docs* and *homepage* keys from your `config.yaml`, they are no longer needed.
+    3. Remove all the following directories / files if they exist in your repo: `./docs`, `homepage/public/appendix.html`, `homepage/public/htmls`, `homepage/public/notebooks`, `package.json`, `package-lock.json`, `.github/workflows/deploy.yaml`.
+    4. If you already have a `./homepage/` directory in your repo (you are building a VitePress homepage), then copy into this directory the following from [test_example/homepage](test_example/homepage): `.gitignore`, `.github` (a directory), `package.json`.
+    5. Run the pipeline.
+    6. Anytime you want to commit the current docs, run `./dms-vep-pipeline-3/publish_docs_gh-pages.sh`. The documentation does not auto-update when you make a change to the master or main branch on GitHub; you have to run this script whenever you want to update it.
+    7. On your GitHub Repository, go to *Settings* then *Pages* on the left toolbar and set GitHub Pages to serve from the *gh-pages* branch and the `/root` directory.
+
+- Created `pyproject.toml` file that tracks version and other information, this replaces `ruff.toml`.
+
+- Update packages in `conda` environment.
+
 #### 3.28.2
 - Fixed bug in summary plot region zoom bar when *region* is null (now make it "none" in such cases)
 

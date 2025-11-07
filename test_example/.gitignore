@@ -2,9 +2,7 @@
 _*
 *.out
 
-!.gitignore
-!.gitignore
-!.gitmodules
+!.git*
 
 results/*
 

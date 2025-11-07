@@ -31,12 +31,16 @@ def process_nested_docs_dict(d, github_blob_url):
                 gz = False
             base = os.path.basename(path)
             processed_f = None
+            source_f = None
             if ext == ".ipynb" and not gz:
                 d_links[key] = f"notebooks/{base}.html"
-                processed_f = os.path.join(config["docs"], d_links[key])
+                processed_f = os.path.join("results/docs", d_links[key])
+                # Source is the HTML version in results, not the ipynb
+                source_f = os.path.join(os.path.dirname(val), f"{base}.html")
             elif ext == ".html" and not gz:
                 d_links[key] = f"htmls/{base}.html"
-                processed_f = os.path.join(config["docs"], d_links[key])
+                processed_f = os.path.join("results/docs", d_links[key])
+                source_f = val
             elif ext in [".csv", ".fasta", ".fa", ".json"]:
                 d_links[key] = os.path.join(github_blob_url, val)
             else:
@@ -47,7 +51,8 @@ def process_nested_docs_dict(d, github_blob_url):
                 assert (
                     processed_f not in processed_files
                 ), f"duplicate {processed_f}\n{d}"
-                processed_files[processed_f] = val
+                assert source_f is not None
+                processed_files[processed_f] = str(source_f)
         elif isinstance(val, dict):
             d_links[key], pfiles = process_nested_docs_dict(val, github_blob_url)
             dup_files = set(processed_files).intersection(pfiles)

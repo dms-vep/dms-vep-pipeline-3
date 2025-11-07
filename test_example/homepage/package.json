@@ -1,0 +1,21 @@
+{
+  "name": "dms-vep-pipeline-3-homepage",
+  "version": "1.0.0",
+  "description": "VitePress homepage for dms-vep-pipeline-3 results",
+  "scripts": {
+    "docs:dev": "vitepress dev .",
+    "docs:build": "vitepress build .",
+    "docs:preview": "vitepress preview .",
+    "remote:docs:dev": "vitepress dev . --host 0.0.0.0 --port $(fhfreeport)"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1",
+    "vega": "^6.2.0",
+    "vega-embed": "^7.0.2",
+    "vega-lite": "^6.4.1",
+    "vue": "^3.5.22"
+  }
+}

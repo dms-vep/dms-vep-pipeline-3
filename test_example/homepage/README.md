@@ -71,7 +71,7 @@ You can now preview the current documentation by running the following command o
 ```bash
 npm run remote:docs:dev
 ```
-Or if you're not on the Hutch server, rop the `remote:` part of the command:
+Or if you're not on the Hutch server, drop the `remote:` part of the command:
 
 ```bash
 npm run docs:dev

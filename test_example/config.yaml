@@ -3,7 +3,7 @@
 # ----------------------------------------------------------------------------
 # Relative paths from this directory containing the configuration (and where
 # you will run the pipeline) to the subdirectory where the pipeline submodule
-# is cloned, and where you build the docs. Typically your top-level
+# is cloned. Typically your top-level
 # Snakefile will be in the root directory and paths will be `dms-vep-pipeline`
 # and `./`, but in this example they are upstream from this subdirectory.
 # ----------------------------------------------------------------------------

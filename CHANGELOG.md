@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.29.1
+- Fixed the target rule in the `Snakefile`; previously it only depended on the docs so would not trigger a re-run in certain cases if just params changed or files were missing in results but not docs folder.
+
 ### 3.29.0
 - Completely changed the way the HTML documentation of the results are rendered on GitHub.
   + Summary of changes:

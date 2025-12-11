@@ -136,5 +136,6 @@ include: "docs.smk"
 # target rule with everything specified in `docs` plus the actual docs directory
 rule all:
     input:
+        rules.build_docs.input,
         rules.build_publish_docs.output,
         *other_target_files,

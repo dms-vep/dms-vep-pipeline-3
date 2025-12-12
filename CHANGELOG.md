@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.29.2
+- Updated `polyclonal` to version 6.17 which is a minor bug fix update that addresses an issue with averaging models when using sequential integer sites (see [here](https://github.com/dms-vep/MERS-Spike-EMC2012-DMS/issues/21) and [here](https://github.com/jbloomlab/polyclonal/pull/190)).
+
 #### 3.29.1
 - Fixed the target rule in the `Snakefile`; previously it only depended on the docs so would not trigger a re-run in certain cases if just params changed or files were missing in results but not docs folder.
 

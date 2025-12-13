@@ -13,14 +13,16 @@ def process_nested_docs_dict(d, github_blob_url):
 
     Returns
     -------
-    (d_links, processed_files)
+    (d_links, processed_files, results_files)
         `d_links` is a copy of `d` where final values have appropriate paths for docs.
         `processed_files` is a dict keyed by names of files as they are processed and
-        copied to docs, with values original file name.
+        copied to docs, with values original file name. `results_files` is a list of
+        results files listed in the docs.
 
     """
     d_links = {}
     processed_files = {}
+    results_files = []
     for key, val in d.items():
         if isinstance(val, str):
             path, ext = os.path.splitext(val)
@@ -41,8 +43,9 @@ def process_nested_docs_dict(d, github_blob_url):
                 d_links[key] = f"htmls/{base}.html"
                 processed_f = os.path.join("results/docs", d_links[key])
                 source_f = val
-            elif ext in [".csv", ".fasta", ".fa", ".json"]:
+            elif ext in [".csv", ".tsv", ".fasta", ".fa", ".json"]:
                 d_links[key] = os.path.join(github_blob_url, val)
+                results_files.append(val)
             else:
                 raise ValueError(
                     f"cannot handle file extension {ext=} and {gz=} as for {val=}"
@@ -54,12 +57,13 @@ def process_nested_docs_dict(d, github_blob_url):
                 assert source_f is not None
                 processed_files[processed_f] = str(source_f)
         elif isinstance(val, dict):
-            d_links[key], pfiles = process_nested_docs_dict(val, github_blob_url)
+            d_links[key], pfiles, rfiles = process_nested_docs_dict(val, github_blob_url)
             dup_files = set(processed_files).intersection(pfiles)
             if dup_files:
                 raise f"duplicate processed file names {dup_files}"
             processed_files.update(pfiles)
+            results_files += rfiles
         else:
             raise ValueError(f"value for {key=} is invalid type {type(val)}\n{val=}")
 
-    return d_links, processed_files
+    return d_links, processed_files, results_files

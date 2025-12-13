@@ -10,7 +10,7 @@ the structure of the documentation to build.
 include: "docs_funcs.smk"
 
 
-docs_links, docs_processed_files = process_nested_docs_dict(
+docs_links, docs_processed_files, results_files = process_nested_docs_dict(
     docs,
     config["github_blob_url"],
 )
@@ -34,6 +34,7 @@ rule build_docs:
     """Build the HTML documentation."""
     input:
         docs_processed_files.values(),
+        results_files,
     output:
         html="results/docs/index.html",
     params:

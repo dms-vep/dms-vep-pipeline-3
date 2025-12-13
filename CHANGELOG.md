@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.29.3
+- Add to target rule input in `Snakefile` to run rules to create data files (eg, CSVs) linked in docs. Previously these were not target rule input, and so sometimes were not triggered to build.
+
 #### 3.29.2
 - Updated `polyclonal` to version 6.17 which is a minor bug fix update that addresses an issue with averaging models when using sequential integer sites (see [here](https://github.com/dms-vep/MERS-Spike-EMC2012-DMS/issues/21) and [here](https://github.com/jbloomlab/polyclonal/pull/190)).
 

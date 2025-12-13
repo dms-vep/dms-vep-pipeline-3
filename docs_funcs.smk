@@ -57,7 +57,9 @@ def process_nested_docs_dict(d, github_blob_url):
                 assert source_f is not None
                 processed_files[processed_f] = str(source_f)
         elif isinstance(val, dict):
-            d_links[key], pfiles, rfiles = process_nested_docs_dict(val, github_blob_url)
+            d_links[key], pfiles, rfiles = process_nested_docs_dict(
+                val, github_blob_url
+            )
             dup_files = set(processed_files).intersection(pfiles)
             if dup_files:
                 raise f"duplicate processed file names {dup_files}"

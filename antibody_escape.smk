@@ -126,12 +126,16 @@ rule fit_escape:
         pickle="results/{assay}/by_selection/{selection}_polyclonal_model.pickle",
         nb="results/notebooks/fit_escape_{assay}_{selection}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml_str(
+        config_params_yaml=lambda wc: yaml_str(
             {
                 "params": assay_selections[wc.assay][wc.selection],
+                "assay_config": assays[wc.assay],
+            }
+        ),
+        input_params_yaml=lambda wc, input: yaml_str(
+            {
                 "neut_standard_frac_csvs": list(input.neut_standard_fracs),
                 "prob_escape_csvs": list(input.prob_escapes),
-                "assay_config": assays[wc.assay],
             }
         ),
     conda:
@@ -146,7 +150,8 @@ rule fit_escape:
             -p pickle_file {output.pickle} \
             -p assay {wildcards.assay} \
             -p selection {wildcards.selection} \
-            -y "{params.params_yaml}" \
+            -y "{params.config_params_yaml}" \
+            -y "{params.input_params_yaml}" \
             &> {log}
         """
 
@@ -202,13 +207,17 @@ rule avg_escape:
         icXX_html="results/{assay}/averages/{antibody}_mut_icXX.html",
         nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml_str(
+        config_params_yaml=lambda wc: yaml_str(
             {
                 "params": avg_assay_config[wc.assay][wc.antibody],
+                "assay_config": assays[wc.assay],
+            }
+        ),
+        input_params_yaml=lambda wc, input: yaml_str(
+            {
                 "prob_escape_mean_csvs": list(input.prob_escape_means),
                 "pickles": list(input.pickles),
                 "site_numbering_map_csv": input.site_numbering_map_csv,
-                "assay_config": assays[wc.assay],
                 "mutation_annotations_csv": (
                     input.mutation_annotations_csv
                     if input.get("mutation_annotations_csv")
@@ -229,7 +238,8 @@ rule avg_escape:
             -p icXX_csv {output.icXX_csv} \
             -p effect_html {output.effect_html} \
             -p icXX_html {output.icXX_html} \
-            -y '{params.params_yaml}' \
+            -y '{params.config_params_yaml}' \
+            -y '{params.input_params_yaml}' \
             &> {log}
         """
 

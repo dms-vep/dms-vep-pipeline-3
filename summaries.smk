@@ -39,15 +39,17 @@ rule summary:
         per_antibody_escape_csv="results/summaries/{summary}_per_antibody_escape.csv",
         nb="results/notebooks/summary_{summary}.ipynb",
     params:
-        yaml=lambda wc, input: yaml_str(
+        config_params_yaml=lambda wc: yaml_str(
             {
-                "config": (
-                    summaries_config[wc.summary]
-                    | {
-                        key: list(val) if key == "input_csvs" else val
-                        for key, val in dict(input).items()
-                    }
-                )
+                "config": summaries_config[wc.summary],
+            }
+        ),
+        input_params_yaml=lambda wc, input: yaml_str(
+            {
+                "input_config": {
+                    key: list(val) if key == "input_csvs" else val
+                    for key, val in dict(input).items()
+                }
             }
         ),
     conda:
@@ -61,7 +63,8 @@ rule summary:
             -p chart_overlaid {output.chart_overlaid} \
             -p output_csv_file {output.csv} \
             -p per_antibody_escape_csv {output.per_antibody_escape_csv} \
-            -y "{params.yaml}" \
+            -y "{params.config_params_yaml}" \
+            -y "{params.input_params_yaml}" \
             &> {log}
         """
 

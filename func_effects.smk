@@ -165,9 +165,13 @@ rule avg_func_effects:
         functional_singlemut_html="results/func_effects/averages/{condition}_func_effects_singlemut.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects.html",
     params:
-        params_yaml=lambda wc, input: yaml_str(
+        config_params_yaml=lambda wc: yaml_str(
             {
                 "params": func_effects_config["avg_func_effects"][wc.condition],
+            }
+        ),
+        input_params_yaml=lambda wc, input: yaml_str(
+            {
                 "mutation_annotations_csv": (
                     input.mutation_annotations_csv
                     if input.get("mutation_annotations_csv")
@@ -203,7 +207,8 @@ rule avg_func_effects:
             -p functional_html {output.functional_html} \
             -p functional_singlemut_html {output.functional_singlemut_html} \
             -p latent_html {output.latent_html} \
-            -y '{params.params_yaml}' \
+            -y '{params.config_params_yaml}' \
+            -y '{params.input_params_yaml}' \
             &> {log}
         {params.plot_latent_cmd}
         """
@@ -299,9 +304,13 @@ rule func_effect_diffs:
         corr_chart="results/func_effect_diffs/{comparison}_diffs_corr.html",
         nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml_str(
+        config_params_yaml=lambda wc: yaml_str(
             {
                 "params": {"singlemut": False} | func_effect_diffs[wc.comparison],
+            }
+        ),
+        input_params_yaml=lambda wc, input: yaml_str(
+            {
                 "mutation_annotations_csv": (
                     input.mutation_annotations_csv
                     if input.get("mutation_annotations_csv")
@@ -320,7 +329,8 @@ rule func_effect_diffs:
             -p diffs_csv {output.diffs} \
             -p chart_html {output.chart} \
             -p corr_chart_html {output.corr_chart} \
-            -y '{params.params_yaml}' \
+            -y '{params.config_params_yaml}' \
+            -y '{params.input_params_yaml}' \
             &> {log}
         """
 
@@ -430,9 +440,13 @@ rule avg_func_effect_shifts:
         shifts_html="results/func_effect_shifts/averages/{comparison}_shifts.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
     params:
-        params_yaml=lambda wc, input: yaml_str(
+        config_params_yaml=lambda wc: yaml_str(
             {
                 "params": avg_func_effect_shifts[wc.comparison],
+            }
+        ),
+        input_params_yaml=lambda wc, input: yaml_str(
+            {
                 "mutation_annotations_csv": (
                     input.mutation_annotations_csv
                     if input.get("mutation_annotations_csv")
@@ -450,7 +464,8 @@ rule avg_func_effect_shifts:
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p shifts_csv {output.shifts_csv} \
             -p shifts_html {output.shifts_html} \
-            -y '{params.params_yaml}' \
+            -y '{params.config_params_yaml}' \
+            -y '{params.input_params_yaml}' \
             &> {log}
         """
 

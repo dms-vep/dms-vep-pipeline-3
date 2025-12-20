@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 3.30.0
+- Fix so reruns properly triggered when params change. The underlying issue being fixed is described [here](https://github.com/dms-vep/dms-vep-pipeline-3/issues/204#issuecomment-3678040527), and was that when params were defined as a lambda function that depends on both a config variable **and** `input` it coud not be serialized. Note I also raised a `snakemake` issue [here](https://github.com/snakemake/snakemake/issues/3895).
+- Remove pin to `numpy<2` as that is no longer needed as newer `numpy` is now compatible with newer `pandas`.
+
 #### 3.29.3
 - Add to target rule input in `Snakefile` to run rules to create data files (eg, CSVs) linked in docs. Previously these were not target rule input, and so sometimes were not triggered to build.
 

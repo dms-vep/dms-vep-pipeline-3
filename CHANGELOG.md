@@ -2,6 +2,7 @@
 
 #### 3.30.1
 - Properly use *scale_stat* in plots of standard deviation in *avg_escape*; this means that for instance in receptor binding experiments the effects are now plotted with the correct sign. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/206).
+- Remove *show_counts=True* in UpsetPlots in `build_codon_variants` as this is causing error with new `pandas`, also suppress errors from the `upsetplot` package.
 
 ### 3.30.0
 - Fix so reruns properly triggered when params change. The underlying issue being fixed is described [here](https://github.com/dms-vep/dms-vep-pipeline-3/issues/204#issuecomment-3678040527), and was that when params were defined as a lambda function that depends on both a config variable **and** `input` it coud not be serialized. Note I also raised a `snakemake` issue [here](https://github.com/snakemake/snakemake/issues/3895).

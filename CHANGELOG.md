@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.30.1
+- Properly use *scale_stat* in plots of standard deviation in *avg_escape*; this means that for instance in receptor binding experiments the effects are now plotted with the correct sign. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/206).
+
 ### 3.30.0
 - Fix so reruns properly triggered when params change. The underlying issue being fixed is described [here](https://github.com/dms-vep/dms-vep-pipeline-3/issues/204#issuecomment-3678040527), and was that when params were defined as a lambda function that depends on both a config variable **and** `input` it coud not be serialized. Note I also raised a `snakemake` issue [here](https://github.com/snakemake/snakemake/issues/3895).
 - Remove pin to `numpy<2` as that is no longer needed as newer `numpy` is now compatible with newer `pandas`.

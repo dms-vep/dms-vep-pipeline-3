@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### 3.31.0
+- The summary plots can now accept CSVs with the column *fraction_pairs_w_mutation* that is used for the *min_frac_models* filter if there is no column in the CSV named *frac_models* or *n_selections* (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/208)).
+
 #### 3.30.1
 - Properly use *scale_stat* in plots of standard deviation in *avg_escape*; this means that for instance in receptor binding experiments the effects are now plotted with the correct sign. Addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/206).
 - Remove *show_counts=True* in UpsetPlots in `build_codon_variants` as this is causing error with new `pandas`, also suppress errors from the `upsetplot` package.

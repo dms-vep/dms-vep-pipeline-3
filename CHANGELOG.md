@@ -1,5 +1,18 @@
 # CHANGELOG
 
+### 3.32.0
+- Update `conda` environment in `environment.yml`:
+  + `altair` -> 6.0
+  + `mafft` -> 7.526
+  + `markdown` -> 3.10
+  + `marimo` -> added to environment at 0.19
+  + `pysam` -> added explicity at 0.23
+  + `plotnine` -> 0.15
+  + `ruamel.yaml` -> 0.19
+  + `snakemake` -> 9.16
+  + `xz` -> no longer explicitly added as `pysam` now explicit
+  + `neutcurve` -> 2.3
+
 ### 3.31.0
 - The summary plots can now accept CSVs with the column *fraction_pairs_w_mutation* that is used for the *min_frac_models* filter if there is no column in the CSV named *frac_models* or *n_selections* (addresses [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/208)).
 

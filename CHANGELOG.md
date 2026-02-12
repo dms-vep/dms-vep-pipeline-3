@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.32.1
+- Fix [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/212) with using `dmslogo` by updating to `dmslogo` 0.7.1 which removes deprecated `pkg_resources` package import per [this pull request](https://github.com/jbloomlab/dmslogo/pull/24).
+
 ### 3.32.0
 - Update `conda` environment in `environment.yml`:
   + `altair` -> 6.0

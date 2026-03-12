@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.32.2
+- Fix issue with summary plots with multiple line plots causing the lines from last row to be plotted in all rows; is a workaround for [this bug](https://github.com/vega/altair/issues/3981) in `altair` itself.
+
 #### 3.32.1
 - Fix [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/212) with using `dmslogo` by updating to `dmslogo` 0.7.1 which removes deprecated `pkg_resources` package import per [this pull request](https://github.com/jbloomlab/dmslogo/pull/24).
 

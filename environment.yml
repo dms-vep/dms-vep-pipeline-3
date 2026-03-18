@@ -5,7 +5,7 @@ channels:
   - bioconda
 
 dependencies:
-  - altair=6.0
+  - altair=5.5
   - baltic=0.3
   - biopython=1.86
   - black-jupyter

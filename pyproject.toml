@@ -1,6 +1,6 @@
 [project]
 name = "dms-vep-pipeline-3"
-version = "3.32.2"
+version = "3.33.0"
 description = "Pipeline for analyzing deep mutational scanning (DMS) of viral entry proteins (VEPs)"
 readme = "README.md"
 authors = [

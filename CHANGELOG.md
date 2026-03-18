@@ -1,5 +1,14 @@
 # CHANGELOG
 
+### 3.33.0
+- Fixes to `altair` summary plots (downgrade `altair`):
+  + In version 3.32.0, `altair` was upgraded from 5.5 to 6.0
+  + That causes an issue in summary plots that is ultimately due to an [altair bug](https://github.com/vega/altair/issues/3981) that will hopefully be fixed in version 6.1.
+  + In `dms-vep-pipeline-3` version 3.32.2 I changed the summary plots to make a workaround for that bug (see [here](https://github.com/dms-vep/dms-vep-pipeline-3/pull/214).
+  + However, that fix then causes an issues so that the faceted summary plots (for instance, for `CHIKV-181-25-E-DMS-mAbs-sera`) where not rendering properly.
+  + So here I have both reverted the change made in version 3.32.0 (this [pull request](https://github.com/dms-vep/dms-vep-pipeline-3/pull/214)) and just downgraded `altair` back to 5.5 in the environment. That is a fix for now.
+  + Hopefully if `altair` 6.1 resolves the underlying [altair bug](https://github.com/vega/altair/issues/3981) then we can upgrade to `altair` 6.1 when it is released.
+
 #### 3.32.2
 - Fix issue with summary plots with multiple line plots causing the lines from last row to be plotted in all rows; is a workaround for [this bug](https://github.com/vega/altair/issues/3981) in `altair` itself.
 

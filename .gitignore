@@ -1,0 +1,8 @@
+!.github
+
+package-lock.json
+node_modules
+
+!.vitepress
+.vitepress/cache
+.vitepress/dist

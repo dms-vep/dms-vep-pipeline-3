@@ -1,5 +1,17 @@
 # CHANGELOG
 
+### 3.34.0
+- Update `conda` environment:
+  + `altair`: 5.5 -> 6.2.1
+  + `biopython`: 1.86 -> 1.87
+  + `entrez-direct`: 24 -> 25
+  + `flatdict`: 4.0 -> 4.1
+  + `marimo`: 0.19 -> 0.23
+  + `minimap2`: 2.28 -> 2.31
+  + `papermill`: 2.6 -> 2.7
+  + `pysam`: 0.23 -> 0.24
+  + `snakemake`: 9.16 -> 9.22
+
 ### 3.33.0
 - Fixes to `altair` summary plots (downgrade `altair`):
   + In version 3.32.0, `altair` was upgraded from 5.5 to 6.0

@@ -11,6 +11,7 @@
   + `papermill`: 2.6 -> 2.7
   + `pysam`: 0.23 -> 0.24
   + `snakemake`: 9.16 -> 9.22
+- Modify `notebooks/summary.ipynb` in temporary workaround for [this bug](https://github.com/vega/altair/issues/3981) in `altair`.
 
 ### 3.33.0
 - Fixes to `altair` summary plots (downgrade `altair`):

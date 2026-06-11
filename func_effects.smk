@@ -36,6 +36,10 @@ rule func_scores:
     output:
         func_scores="results/func_scores/{selection}_func_scores.csv",
         count_summary="results/func_scores/{selection}_count_summary.csv",
+    log:
+        "results/logs/func_scores_{selection}.txt",
+    conda:
+        "environment.yml"
     params:
         func_score_params=lambda wc: func_scores[wc.selection]["func_score_params"],
         samples=lambda wc: {
@@ -51,10 +55,6 @@ rule func_scores:
             s: sample_to_library[func_scores[wc.selection][s]]
             for s in ["post_selection_sample", "pre_selection_sample"]
         },
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/func_scores_{selection}.txt",
     script:
         "scripts/func_scores.py"
 
@@ -76,15 +76,15 @@ rule analyze_func_scores:
         nb=os.path.join(config["pipeline_path"], "notebooks/analyze_func_scores.ipynb"),
     output:
         nb="results/notebooks/analyze_func_scores.ipynb",
-    params:
-        func_scores=yaml_str({"selections": func_effects_config["func_scores"]}),
-    conda:
-        "environment.yml"
     log:
         "results/logs/analyze_func_scores.txt",
+    conda:
+        "environment.yml"
+    params:
+        func_scores=yaml_str({"selections": func_effects_config["func_scores"]}),
     shell:
         """
-        papermill {input.nb} {output.nb} -y "{params.func_scores}" &> {log}
+        papermill {input.nb} {output.nb} -y "{params.func_scores}" &>{log}
         """
 
 
@@ -105,6 +105,11 @@ rule func_effects_global_epistasis:
     output:
         func_effects="results/func_effects/by_selection/{selection}_func_effects.csv",
         nb="results/notebooks/func_effects_global_epistasis_{selection}.ipynb",
+    log:
+        "results/logs/func_effects_global_epistasis_{selection}.txt",
+    conda:
+        "environment.yml"
+    threads: 1
     params:
         global_epistasis_params_yaml=lambda wc: yaml_str(
             {
@@ -113,11 +118,6 @@ rule func_effects_global_epistasis:
                 ],
             }
         ),
-    threads: 1
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/func_effects_global_epistasis_{selection}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -127,7 +127,7 @@ rule func_effects_global_epistasis:
             -p site_numbering_map {input.site_numbering_map} \
             -p threads {threads} \
             -y "{params.global_epistasis_params_yaml}" \
-            &> {log}
+            &>{log}
         """
 
 
@@ -164,6 +164,10 @@ rule avg_func_effects:
         functional_html="results/func_effects/averages/{condition}_func_effects.html",
         functional_singlemut_html="results/func_effects/averages/{condition}_func_effects_singlemut.html",
         latent_html="results/func_effects/averages/{condition}_latent_effects.html",
+    log:
+        "results/logs/avg_func_effects_{condition}.txt",
+    conda:
+        "environment.yml"
     params:
         config_params_yaml=lambda wc: yaml_str(
             {
@@ -193,10 +197,6 @@ rule avg_func_effects:
             )
             else ""
         ),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/avg_func_effects_{condition}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -209,7 +209,7 @@ rule avg_func_effects:
             -p latent_html {output.latent_html} \
             -y '{params.config_params_yaml}' \
             -y '{params.input_params_yaml}' \
-            &> {log}
+            &>{log}
         {params.plot_latent_cmd}
         """
 
@@ -303,6 +303,10 @@ rule func_effect_diffs:
         chart="results/func_effect_diffs/{comparison}_diffs.html",
         corr_chart="results/func_effect_diffs/{comparison}_diffs_corr.html",
         nb="results/notebooks/func_effect_diffs_{comparison}.ipynb",
+    log:
+        "results/logs/func_effect_diffs_{comparison}.txt",
+    conda:
+        "environment.yml"
     params:
         config_params_yaml=lambda wc: yaml_str(
             {
@@ -318,10 +322,6 @@ rule func_effect_diffs:
                 ),
             }
         ),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/func_effect_diffs_{comparison}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -331,7 +331,7 @@ rule func_effect_diffs:
             -p corr_chart_html {output.corr_chart} \
             -y '{params.config_params_yaml}' \
             -y '{params.input_params_yaml}' \
-            &> {log}
+            &>{log}
         """
 
 
@@ -387,13 +387,13 @@ rule func_effect_shifts:
     output:
         shifts="results/func_effect_shifts/by_comparison/{comparison}_shifts.csv",
         nb="results/notebooks/func_effect_shifts_{comparison}.ipynb",
-    params:
-        params_yaml=lambda wc: yaml_str({"params": func_effect_shifts[wc.comparison]}),
-    threads: 1
-    conda:
-        "environment.yml"
     log:
         "results/logs/func_effect_shifts_{comparison}.txt",
+    conda:
+        "environment.yml"
+    threads: 1
+    params:
+        params_yaml=lambda wc: yaml_str({"params": func_effect_shifts[wc.comparison]}),
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -401,7 +401,7 @@ rule func_effect_shifts:
             -p site_numbering_map {input.site_numbering_map} \
             -p shifts_csv {output.shifts} \
             -p threads {threads} \
-            &> {log}
+            &>{log}
         """
 
 
@@ -439,6 +439,10 @@ rule avg_func_effect_shifts:
         shifts_csv="results/func_effect_shifts/averages/{comparison}_shifts.csv",
         shifts_html="results/func_effect_shifts/averages/{comparison}_shifts.html",
         nb="results/notebooks/avg_func_effect_shifts_{comparison}.ipynb",
+    log:
+        "results/logs/avg_func_effect_shifts_{comparison}.txt",
+    conda:
+        "environment.yml"
     params:
         config_params_yaml=lambda wc: yaml_str(
             {
@@ -454,10 +458,6 @@ rule avg_func_effect_shifts:
                 ),
             }
         ),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/avg_func_effect_shifts_{comparison}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -466,7 +466,7 @@ rule avg_func_effect_shifts:
             -p shifts_html {output.shifts_html} \
             -y '{params.config_params_yaml}' \
             -y '{params.input_params_yaml}' \
-            &> {log}
+            &>{log}
         """
 
 

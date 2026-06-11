@@ -10,16 +10,16 @@ rule spatial_distances:
     output:
         csv="results/spatial_distances/7tov.csv",
         pdb="results/spatial_distances/7tov.pdb",
+    log:
+        log="results/logs/spatial_distances.txt",
+    conda:
+        os.path.join(config["pipeline_path"], "environment.yml")
     params:
         url=lambda _, output: os.path.join(
             "https://files.rcsb.org/download",
             os.path.basename(output.pdb),
         ),
         target_chains=["A", "B", "C"],
-    log:
-        log="results/logs/spatial_distances.txt",
-    conda:
-        os.path.join(config["pipeline_path"], "environment.yml")
     script:
         "scripts/spatial_distances.py"
 

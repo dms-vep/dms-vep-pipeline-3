@@ -4,7 +4,6 @@ import os
 
 import pandas as pd
 
-
 # specify CSVs, merge columns, compare columns
 to_compare = [
     (

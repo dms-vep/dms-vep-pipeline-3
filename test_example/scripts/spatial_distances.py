@@ -5,7 +5,6 @@ import urllib
 
 import polyclonal.pdb_utils
 
-
 sys.stderr = sys.stdout = open(snakemake.log[0], "w")
 
 print(f"Geting {snakemake.output.pdb=} from {snakemake.params.url=}")

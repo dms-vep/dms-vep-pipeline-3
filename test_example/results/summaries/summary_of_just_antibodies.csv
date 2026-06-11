@@ -1,6 +1,4 @@
 site,wildtype,mutant,REGN10933,S2M-11,mean monoclonal antibodies,spike mediated entry,sequential_site,dummy_site,region
-2,F,F,0,0,,0,2,2,other
-2,F,L,,,,1.228,2,2,other
 5,L,C,,-0.01289,-0.006445,1.226,5,5,other
 5,L,L,0,0,0,0,5,5,other
 5,L,M,,-0.01355,-0.006775,0.259,5,5,other

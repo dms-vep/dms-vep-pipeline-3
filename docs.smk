@@ -22,10 +22,10 @@ rule notebook_html:
         nb="results/notebooks/{notebook}.ipynb",
     output:
         html="results/notebooks/{notebook}.html",
-    conda:
-        "environment.yml"
     log:
         "results/logs/notebook_html_{notebook}.txt",
+    conda:
+        "environment.yml"
     shell:
         "jupyter nbconvert --to html {input.nb} &> {log}"
 
@@ -37,6 +37,10 @@ rule build_docs:
         results_files,
     output:
         html="results/docs/index.html",
+    log:
+        "results/logs/build_docs.txt",
+    conda:
+        "environment.yml"
     params:
         github_repo_url=config["github_repo_url"],
         docs_links=docs_links,
@@ -45,10 +49,6 @@ rule build_docs:
         year=config["year"],
         authors=config["authors"],
         docs_dir=lambda _, output: os.path.dirname(output.html),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/build_docs.txt",
     script:
         "scripts/build_docs.py"
 
@@ -62,14 +62,14 @@ if build_vitepress_homepage:
             homepage="homepage",
         output:
             html="results/homepage/public/appendix.html",
-        params:
-            docs=lambda _, input: os.path.dirname(input.html),
-            homepage_public=lambda _, output: os.path.dirname(output.html),
-            homepage=lambda _w, output: os.path.dirname(os.path.dirname(output.html)),
         log:
             "results/logs/build_vitepress_homepage.txt",
         conda:
             "environment.yml"
+        params:
+            docs=lambda _, input: os.path.dirname(input.html),
+            homepage_public=lambda _, output: os.path.dirname(output.html),
+            homepage=lambda _w, output: os.path.dirname(os.path.dirname(output.html)),
         shell:
             """
             rm -rf {params.homepage}
@@ -92,18 +92,18 @@ rule build_publish_docs:
         ),
     output:
         publish_docs=directory("results/publish_docs"),
+    log:
+        "results/logs/build_publish_docs.log",
+    conda:
+        "environment.yml"
     params:
         input_dir=lambda _, input: (
             os.path.dirname(os.path.dirname(input.html))
             if build_vitepress_homepage
             else os.path.dirname(input.html)
         ),
-    log:
-        "results/logs/build_publish_docs.log",
-    conda:
-        "environment.yml"
     shell:
         """
-        rm -rf {output.publish_docs} &> {log}
-        cp -r {params.input_dir} {output.publish_docs} &> {log}
+        rm -rf {output.publish_docs} &>{log}
+        cp -r {params.input_dir} {output.publish_docs} &>{log}
         """

@@ -10,7 +10,6 @@ import dms_variants.codonvarianttable
 
 import pandas as pd
 
-
 sys.stderr = sys.stdout = open(snakemake.log[0], "w")
 
 geneseq = str(Bio.SeqIO.read(snakemake.input.gene_sequence_codon, "fasta").seq)

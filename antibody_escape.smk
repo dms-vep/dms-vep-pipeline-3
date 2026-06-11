@@ -62,6 +62,10 @@ rule prob_escape:
             + ".csv"
             for metric in ["prob_escape", "neut_standard_fracs"]
         },
+    log:
+        "results/logs/prob_escape_{assay}_{selection}/{sample}.txt",
+    conda:
+        "environment.yml"
     params:
         neut_standard=lambda wc: assay_selections[wc.assay][wc.selection][
             "neut_standard_name"
@@ -79,10 +83,6 @@ rule prob_escape:
             ],
             "antibody_sample": sample_to_library[wc.sample],
         },
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/prob_escape_{assay}_{selection}/{sample}.txt",
     script:
         "scripts/prob_escape.py"
 
@@ -125,6 +125,10 @@ rule fit_escape:
         prob_escape_mean="results/{assay}/by_selection/{selection}_prob_escape_mean.csv",
         pickle="results/{assay}/by_selection/{selection}_polyclonal_model.pickle",
         nb="results/notebooks/fit_escape_{assay}_{selection}.ipynb",
+    log:
+        "results/logs/fit_escape_{assay}_{selection}.txt",
+    conda:
+        "environment.yml"
     params:
         config_params_yaml=lambda wc: yaml_str(
             {
@@ -138,10 +142,6 @@ rule fit_escape:
                 "prob_escape_csvs": list(input.prob_escapes),
             }
         ),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/fit_escape_{assay}_{selection}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -152,7 +152,7 @@ rule fit_escape:
             -p selection {wildcards.selection} \
             -y "{params.config_params_yaml}" \
             -y "{params.input_params_yaml}" \
-            &> {log}
+            &>{log}
         """
 
 
@@ -206,6 +206,10 @@ rule avg_escape:
         effect_html="results/{assay}/averages/{antibody}_mut_effect.html",
         icXX_html="results/{assay}/averages/{antibody}_mut_icXX.html",
         nb="results/notebooks/avg_escape_{assay}_{antibody}.ipynb",
+    log:
+        "results/logs/avg_escape_{assay}_{antibody}.txt",
+    conda:
+        "environment.yml"
     params:
         config_params_yaml=lambda wc: yaml_str(
             {
@@ -225,10 +229,6 @@ rule avg_escape:
                 ),
             }
         ),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/avg_escape_{assay}_{antibody}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -240,7 +240,7 @@ rule avg_escape:
             -p icXX_html {output.icXX_html} \
             -y '{params.config_params_yaml}' \
             -y '{params.input_params_yaml}' \
-            &> {log}
+            &>{log}
         """
 
 

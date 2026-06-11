@@ -8,7 +8,6 @@ import time
 import markdown
 import markdown.extensions.toc
 
-
 sys.stderr = sys.stdout = log = open(snakemake.log[0], "w")
 
 # Clean and prepare the docs directory

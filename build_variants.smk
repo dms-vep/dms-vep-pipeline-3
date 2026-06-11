@@ -9,10 +9,10 @@ rule translate_geneseq:
         gene=config["gene_sequence_codon"],
     output:
         prot=config["gene_sequence_protein"],
-    conda:
-        "environment.yml"
     log:
         "results/logs/translate_geneseq.txt",
+    conda:
+        "environment.yml"
     script:
         "scripts/translate_geneseq.py"
 
@@ -27,17 +27,17 @@ elif config["prebuilt_variants"] and config["prebuilt_geneseq"]:
         output:
             variants=config["codon_variants"],
             geneseq=config["gene_sequence_codon"],
+        log:
+            "results/logs/get_prebuilt_variants.txt",
+        conda:
+            "environment.yml"
         params:
             variants_url=config["prebuilt_variants"],
             geneseq_url=config["prebuilt_geneseq"],
-        conda:
-            "environment.yml"
-        log:
-            "results/logs/get_prebuilt_variants.txt",
         shell:
             """
-            curl -o {output.variants} {params.variants_url} &> {log}
-            curl -o {output.geneseq} {params.geneseq_url} &>> {log}
+            curl -o {output.variants} {params.variants_url} &>{log}
+            curl -o {output.geneseq} {params.geneseq_url} &>>{log}
             """
 
 else:
@@ -58,10 +58,10 @@ else:
             gb=config["pacbio_amplicon"],
         output:
             codon=config["gene_sequence_codon"],
-        conda:
-            "environment.yml"
         log:
             "results/logs/gene_sequence.txt",
+        conda:
+            "environment.yml"
         script:
             "scripts/gene_sequence.py"
 
@@ -73,10 +73,10 @@ else:
             specs=config["pacbio_amplicon_specs"],
         output:
             outdir=directory("results/process_ccs/{pacbioRun}"),
-        conda:
-            "environment.yml"
         log:
             "results/logs/align_parse_PacBio_ccs_{pacbioRun}.txt",
+        conda:
+            "environment.yml"
         script:
             "scripts/align_parse_PacBio_ccs.py"
 
@@ -96,17 +96,17 @@ else:
         output:
             csv="results/process_ccs/CCSs_aligned_to_amplicon.csv",
             nb="results/notebooks/analyze_pacbio_ccs.ipynb",
-        conda:
-            "environment.yml"
         log:
             "results/logs/analyze_pacbio_ccs.txt",
+        conda:
+            "environment.yml"
         shell:
             """
             papermill {input.nb} {output.nb} \
                 -p pacbio_amplicon {input.pacbio_amplicon} \
                 -p pacbio_amplicon_specs {input.pacbio_amplicon_specs} \
                 -p pacbio_runs_csv {input.pacbio_runs_csv} \
-                &> {log}
+                &>{log}
             """
 
     rule build_pacbio_consensus:
@@ -120,6 +120,10 @@ else:
         output:
             nt_variants="results/variants/nt_variants.csv",
             nb="results/notebooks/build_pacbio_consensus.ipynb",
+        log:
+            "results/logs/build_pacbio_consensus.txt",
+        conda:
+            "environment.yml"
         params:
             max_error_rate=config["max_ccs_error_rate"],
             params_yaml=yaml_str(
@@ -128,17 +132,13 @@ else:
                     "variant_tags": config["variant_tags"],
                 }
             ),
-        conda:
-            "environment.yml"
-        log:
-            "results/logs/build_pacbio_consensus.txt",
         shell:
             """
             papermill {input.nb} {output.nb} \
                 -p gene_sequence_codon {input.gene_sequence_codon} \
                 -p max_error_rate {params.max_error_rate} \
                 -y "{params.params_yaml}" \
-                &> {log}
+                &>{log}
             """
 
     rule build_codon_variants:
@@ -158,14 +158,14 @@ else:
         output:
             codon_variants=config["codon_variants"],
             nb="results/notebooks/build_codon_variants.ipynb",
+        log:
+            "results/logs/build_codon_variants.txt",
+        conda:
+            "environment.yml"
         params:
             mutation_design_classification_site_col=config[
                 "mutation_design_classification"
             ]["site_col"],
-        conda:
-            "environment.yml"
-        log:
-            "results/logs/build_codon_variants.txt",
         shell:
             """
             papermill {input.nb} {output.nb} \
@@ -176,7 +176,7 @@ else:
                 -p mutation_design_classification_csv {input.mutation_design_classification_csv} \
                 -p mutation_design_classification_site_col {params.mutation_design_classification_site_col} \
                 -p codon_variants {output.codon_variants} \
-                &> {log}
+                &>{log}
             """
 
     build_variants_docs["Analysis notebooks"] = {

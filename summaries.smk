@@ -38,6 +38,10 @@ rule summary:
         csv="results/summaries/{summary}.csv",
         per_antibody_escape_csv="results/summaries/{summary}_per_antibody_escape.csv",
         nb="results/notebooks/summary_{summary}.ipynb",
+    log:
+        "results/logs/summary_{summary}.txt",
+    conda:
+        "environment.yml"
     params:
         config_params_yaml=lambda wc: yaml_str(
             {
@@ -52,10 +56,6 @@ rule summary:
                 }
             }
         ),
-    conda:
-        "environment.yml"
-    log:
-        "results/logs/summary_{summary}.txt",
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -65,7 +65,7 @@ rule summary:
             -p per_antibody_escape_csv {output.per_antibody_escape_csv} \
             -y "{params.config_params_yaml}" \
             -y "{params.input_params_yaml}" \
-            &> {log}
+            &>{log}
         """
 
 

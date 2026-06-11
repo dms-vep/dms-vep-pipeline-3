@@ -8,7 +8,7 @@ dependencies:
   - altair=6.2.1
   - baltic=0.3
   - biopython=1.87
-  - black-jupyter
+  - black-jupyter=26
   - entrez-direct=25
   - flatdict=4.1
   - git-lfs
@@ -28,9 +28,9 @@ dependencies:
   - pyarrow
   - python=3.13
   - ruamel.yaml=0.19
-  - ruff
+  - ruff=0.15
   - seaborn=0.13
-  - snakefmt
+  - snakefmt=2.0
   - snakemake=9.22
   - upsetplot=0.9
   - pip:

@@ -4,7 +4,6 @@ import sys
 
 import Bio.SeqIO
 
-
 sys.stderr = sys.stdout = log = open(snakemake.log[0], "w")
 
 gene = Bio.SeqIO.read(snakemake.input.gene, "fasta").seq

@@ -31,13 +31,13 @@ else:
             counts="results/barcode_counts/{sample}_counts.csv",
             invalid="results/barcode_counts/{sample}_invalid.csv",
             fates="results/barcode_counts/{sample}_fates.csv",
+        log:
+            "results/logs/count_barcodes_{sample}.txt",
+        conda:
+            "environment.yml"
         params:
             parser_params=config["illumina_barcode_parser_params"],
             library=lambda wc: sample_to_library[wc.sample],
-        conda:
-            "environment.yml"
-        log:
-            "results/logs/count_barcodes_{sample}.txt",
         script:
             "scripts/count_barcodes.py"
 
@@ -72,10 +72,10 @@ rule analyze_variant_counts:
         ),
     output:
         nb="results/notebooks/analyze_variant_counts.ipynb",
-    conda:
-        "environment.yml"
     log:
         "results/logs/analyze_variant_counts.txt",
+    conda:
+        "environment.yml"
     shell:
         """
         papermill {input.nb} {output.nb} \
@@ -83,7 +83,7 @@ rule analyze_variant_counts:
             -p site_numbering_map_csv {input.site_numbering_map_csv} \
             -p codon_variants {input.codon_variants} \
             -p gene_sequence_codon {input.gene_sequence_codon} \
-            &> {log}
+            &>{log}
         """
 
 

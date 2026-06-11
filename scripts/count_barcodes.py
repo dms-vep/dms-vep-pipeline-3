@@ -7,7 +7,6 @@ import dms_variants.illuminabarcodeparser
 
 import pandas as pd
 
-
 sys.stderr = sys.stdout = log = open(snakemake.log[0], "w")
 
 # get variables from Snakemake

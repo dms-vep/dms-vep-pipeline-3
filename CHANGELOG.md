@@ -12,6 +12,7 @@
   + `pysam`: 0.23 -> 0.24
   + `snakemake`: 9.16 -> 9.22
 - Modify `notebooks/summary.ipynb` in temporary workaround for [this bug](https://github.com/vega/altair/issues/3981) in `altair`.
+- Add `sites_to_exclude` option in the summaries configuration to not show specific sites, addressing [this issue](https://github.com/dms-vep/dms-vep-pipeline-3/issues/216).
 
 ### 3.33.0
 - Fixes to `altair` summary plots (downgrade `altair`):

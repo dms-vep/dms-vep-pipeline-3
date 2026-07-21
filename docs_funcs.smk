@@ -43,7 +43,7 @@ def process_nested_docs_dict(d, github_blob_url):
                 d_links[key] = f"htmls/{base}.html"
                 processed_f = os.path.join("results/docs", d_links[key])
                 source_f = val
-            elif ext in [".csv", ".tsv", ".fasta", ".fa", ".json"]:
+            elif ext in [".csv", ".tsv", ".fasta", ".fa", ".json", ".svg"]:
                 d_links[key] = os.path.join(github_blob_url, val)
                 results_files.append(val)
             else:

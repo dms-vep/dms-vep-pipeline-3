@@ -5,7 +5,7 @@ channels:
   - bioconda
 
 dependencies:
-  - altair=6.2.1
+  - altair=6.2.2
   - baltic=0.3
   - biopython=1.87
   - black-jupyter=26
@@ -38,5 +38,5 @@ dependencies:
       - dms_variants==1.4.3
       - dmslogo==0.7.1
       - multidms==0.4.2
-      - neutcurve==2.3
+      - neutcurve==2.3.1
       - polyclonal==6.17

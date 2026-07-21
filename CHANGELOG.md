@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### 3.35.0
+- Update `conda` environment:
+  + `altair`: 6.2.1 -> 6.2.2
+  + `neutcurve`: 2.3.0 -> 2.3.1
+- Allow docs to link directly to SVG plots
+
 ### 3.34.0
 - Update `conda` environment:
   + `altair`: 5.5 -> 6.2.1

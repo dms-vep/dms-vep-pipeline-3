@@ -13,6 +13,8 @@ rule translate_geneseq:
         "results/logs/translate_geneseq.txt",
     conda:
         "environment.yml"
+    params:
+        allowed_internal_stop_codons=config.get("allowed_internal_stop_codons", []),
     script:
         "scripts/translate_geneseq.py"
 

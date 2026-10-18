@@ -1,6 +1,6 @@
 [project]
 name = "dms-vep-pipeline-3"
-version = "3.35.0"
+version = "3.35.1"
 description = "Pipeline for analyzing deep mutational scanning (DMS) of viral entry proteins (VEPs)"
 readme = "README.md"
 authors = [
@@ -19,3 +19,6 @@ builtins = [
     "display",  # builtin of Jupyter notebooks
 ]
 extend-include = ["*.ipynb"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

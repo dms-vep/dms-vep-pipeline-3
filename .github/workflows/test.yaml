@@ -42,6 +42,12 @@ jobs:
         shell: bash -el {0}
         run: snakefmt --check .
 
+      - name: test code with pytest
+        # `pytest` is installed here rather than in `environment.yml`, as changing that
+        # environment makes every rule that uses it rerun in projects using the pipeline
+        shell: bash -el {0}
+        run: pip install pytest && pytest
+
       - name: lint snakemake files with snakemake --lint
         shell: bash -el {0}
         run: cd test_example && snakemake -s ../Snakefile --lint && cd ..

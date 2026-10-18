@@ -1,5 +1,8 @@
 # CHANGELOG
 
+#### 3.35.1
+- Improved `publish_docs_gh-pages.sh`; see [this pull request](https://github.com/dms-vep/dms-vep-pipeline-3/pull/220) for details.
+
 ### 3.35.0
 - Update `conda` environment:
   + `altair`: 6.2.1 -> 6.2.2
